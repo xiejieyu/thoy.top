@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThoY Games - 海米尔文化下属开发团队</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #ff4e50;
+            --dark-color: #121212;
+            --light-color: #f5f5f7;
+            --gray-color: #3a3a3c;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 导航栏样式 */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--gray-color);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(106, 17, 203, 0.4);
+        }
+        
+        .brand-text h1 {
+            font-size: 28px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+        
+        .brand-text p {
+            font-size: 12px;
+            color: #aaa;
+            letter-spacing: 2px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-color);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* 英雄区域样式 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(106, 17, 203, 0.2), transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(37, 117, 252, 0.15), transparent 40%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-text h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text h2 span {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.6);
+        }
+        
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .game-card {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(145deg, rgba(58, 58, 60, 0.8), rgba(18, 18, 18, 0.9));
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: transform 0.5s;
+        }
+        
+        .game-card:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+        
+        .game-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+        
+        .card-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 28px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .card-subtitle {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .card-content {
+            color: #ddd;
+            margin-bottom: 25px;
+            font-size: 15px;
+        }
+        
+        .card-tag {
+            display: inline-block;
+            background: rgba(106, 17, 203, 0.2);
+            color: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        /* 关于我们区域样式 */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        
+        .haimier-badge {
+            background: linear-gradient(135deg, rgba(37, 117, 252, 0.1), rgba(106, 17, 203, 0.1));
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .haimier-badge h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .about-visual {
+            flex: 1;
+        }
+        
+        .team-icons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .team-icon {
+            background: linear-gradient(145deg, rgba(58, 58, 60, 0.8), rgba(18, 18, 18, 0.9));
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .team-icon:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* 项目展示区域样式 */
+        .projects-showcase {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 100px 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background: linear-gradient(145deg, rgba(58, 58, 60, 0.8), rgba(18, 18, 18, 0.9));
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .project-img {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .project-content p {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        .project-status {
+            display: inline-block;
+            background: rgba(255, 78, 80, 0.2);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        /* 联系区域样式 */
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            max-width: 300px;
+        }
+        
+        .contact-icon {
+            min-width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-item div {
+            text-align: left;
+        }
+        
+        .contact-item h4 {
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+        
+        .contact-item p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+            border-top: 1px solid var(--gray-color);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .copyright {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px);
+        }
+        
+        /* 备案信息样式 */
+        .beian-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .beian-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        
+        .beian-link:hover {
+            color: var(--secondary-color);
+        }
+        
+        .beian-link img {
+            width: 16px;
+            height: 16px;
+            object-fit: contain;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .game-card {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+            
+            .hero-text h2 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-color);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+                border-top: 1px solid var(--gray-color);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 25px;
+                align-items: flex-start;
+            }
+            
+            .team-icons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .beian-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .team-icons {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .contact-item div {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo-container">
+                    <div class="logo">TG</div>
+                    <div class="brand-text">
+                        <h1>ThoY Games</h1>
+                        <p>HAIMIER CULTURE</p>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#projects">项目展示</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>创造<span>沉浸式</span>游戏体验</h2>
+                    <p>ThoY Games是海米尔文化旗下的专业游戏开发团队，致力于打造高质量、富有创意的游戏作品。我们融合先进技术、艺术设计和引人入胜的叙事，为全球玩家提供独特而难忘的游戏体验。</p>
+                    <a href="#projects" class="cta-button">探索我们的项目</a>
+                </div>
+                <div class="hero-visual">
+                    <div class="game-card">
+                        <div class="card-logo">TG</div>
+                        <h3 class="card-title">ThoY Games</h3>
+                        <p class="card-subtitle">海米尔文化下属开发团队</p>
+                        <p class="card-content">我们专注于小型高质量游戏开发</p>
+                        <span class="card-tag">创新驱动</span>
+                        <span class="card-tag">品质至上</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们区域 -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title">关于ThoY Games</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>ThoY Games成立于2026年，是海米尔文化旗下的专业游戏开发部门。我们的名字"ThoY"源于英文的The heart of youth缩写，即为年少之心，代表着公司理念以年少之心敬未来无限可能。</p>
+                    <p>团队由海米尔文化成员组成。我们致力于打造能够触动人心的游戏作品，无论是在视觉艺术、玩法机制还是故事情节上，都力求创新与卓越。</p>
+                    <p>我们的开发理念是"技术服务于创意"，通过自身所学的全部技术，实现最具想象力的游戏概念。所有的目标开发游戏，我们都坚持同样的质量标准。</p>
+                    
+                    <div class="haimier-badge">
+                        <h3><i class="fas fa-building"></i> 海米尔文化下属团队</h3>
+                        <p>作为海米尔文化的重要组成部分，我们共享公司的创意资源和技术支持，同时保持独立的创作自由和开发理念。海米尔文化的多元化产业布局为我们提供了跨领域合作的机会。</p>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="team-icons">
+                        <div class="team-icon">
+                            <i class="fas fa-code"></i>
+                            <h4>技术开发</h4>
+                            <p>前沿游戏引擎与编程技术</p>
+                        </div>
+                        <div class="team-icon">
+                            <i class="fas fa-paint-brush"></i>
+                            <h4>艺术设计</h4>
+                            <p>视觉艺术与用户体验设计</p>
+                        </div>
+                        <div class="team-icon">
+                            <i class="fas fa-gamepad"></i>
+                            <h4>玩法设计</h4>
+                            <p>创新游戏机制与关卡设计</p>
+                        </div>
+                        <div class="team-icon">
+                            <i class="fas fa-music"></i>
+                            <h4>音频制作</h4>
+                            <p>原创音乐与音效设计</p>
+                        </div>
+                        <div class="team-icon">
+                            <i class="fas fa-book"></i>
+                            <h4>叙事设计</h4>
+                            <p>世界观构建与剧情创作</p>
+                        </div>
+                        <div class="team-icon">
+                            <i class="fas fa-users"></i>
+                            <h4>团队协作</h4>
+                            <p>敏捷开发与高效协作</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示区域 -->
+    <section class="section projects-showcase" id="projects">
+        <div class="container">
+            <h2 class="section-title">项目展示</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>老板真的生气了</h3>
+                        <p>一款视觉小说类游戏，游戏剧情丰富多彩，共三个结局与两个隐藏结局，欢迎探索！</p>
+                        <div class="project-status">正在开发中</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-content">
+                <p>如果您对我们的项目感兴趣，希望建立合作关系，或者想要加入我们的团队，欢迎通过以下方式与我们联系。</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>邮箱</h4>
+                            <p>us@haimier.top</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>地址</h4>
+                            <p>吉林省四平市伊通满族自治县靠山镇九龙村二组海米尔（吉林）文化传播有限公司</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>电话</h4>
+                            <p>16617152404</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo-container">
+                    <div class="logo">TG</div>
+                    <div class="brand-text">
+                        <h1>ThoY Games</h1>
+                        <p>海米尔文化下属开发团队</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-weibo"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-steam"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 备案信息 -->
+            <div class="beian-links">
+                <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+                    <img src="../ICP.png" alt="ICP图标">
+                    吉ICP备2026000319号
+                </a>    
+                
+                <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank">
+                    <img src="../备案图标.png" alt="备案图标">
+                    吉公网安备22032302000081号
+                </a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 ThoY Games - 海米尔文化旗下团队. 保留所有权利.</p>
+                <p>致力于创造卓越的游戏体验</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                if (this.getAttribute('href') === '#') return;
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    navLinks.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 添加滚动效果
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.backgroundColor = 'rgba(18, 18, 18, 0.98)';
+            } else {
+                header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
