@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>科赛帝尔知产 · 版权代理专家 · 收费标准</title>
+  <!-- 指定 favicon 为 科赛帝尔.ico (放在网站根目录) -->
+  <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
+  <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
   <!-- 字体与图标库 (干净简洁) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +49,7 @@
       flex-wrap: wrap;
     }
 
-    /* 显式LOGO图片区 (保留之前风格) */
+    /* ★ 显式LOGO图片区 使用 科赛帝尔.png 作为 LOGO ★ */
     .explicit-logo {
       display: flex;
       align-items: center;
@@ -362,7 +365,7 @@
       color: #2273c2;
     }
 
-    /* 页脚 + 联系 (不变) */
+    /* 页脚 + 联系 (保留备案号代码风格) */
     .footer {
       background: #0b1f30;
       color: #dae9f8;
@@ -395,30 +398,11 @@
       color: #5194d4;
     }
 
-    .copyright {
-      text-align: center;
-      padding-top: 50px;
-      color: #7d9ec0;
-      font-size: 0.9rem;
-    }
-
-    .footer-logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: white;
-    }
-
-    .footer-logo span {
-      color: #68a9e7;
-    }
-
-    hr {
-      border: 0.5px solid #284b68;
-      margin: 30px 0;
-    }
+    /* 新的备案和版权区域 (依据要求保留) */
     .beian-links {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 30px;
+      margin-bottom: 15px;
     }
     .beian-link {
       color: #9bb9da;
@@ -435,6 +419,31 @@
       filter: brightness(0.8);
     }
 
+    .copyright {
+      text-align: center;
+      color: #7d9ec0;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .copyright p {
+      margin: 5px 0;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-logo span {
+      color: #68a9e7;
+    }
+
+    hr {
+      border: 0.5px solid #284b68;
+      margin: 30px 0;
+    }
+
     /* 小贴士：表格内分行显示 */
     .multiline {
       white-space: pre-line;
@@ -444,13 +453,12 @@
 </head>
 <body>
   <div class="container">
-    <!-- 导航栏 (完全保留之前新增的logo和总部跳转) -->
+    <!-- 导航栏 (LOGO图片已改为 科赛帝尔.png) -->
     <nav class="navbar">
       <div class="logo-area">
         <div class="explicit-logo">
-          <!-- 同样使用内嵌svg logo，与原风格一致 -->
-          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' rx='12' fill='%231d6fb0'/%3E%3Cpath d='M15 20 L30 12 L45 20 L45 38 L30 46 L15 38 Z' fill='%23ffffff' opacity='0.9'/%3E%3Ctext x='30' y='38' font-size='22' text-anchor='middle' fill='%231d6fb0' font-weight='bold' font-family='Arial'%3E©%3C/text%3E%3C/svg%3E"
-               alt="科赛帝尔LOGO" title="科赛帝尔知产">
+          <!-- ★ 使用 科赛帝尔.png 作为LOGO图片 (请确保该文件位于根目录) ★ -->
+          <img src="科赛帝尔.png" alt="科赛帝尔LOGO" title="科赛帝尔知产">
           <div class="logo-main">科赛帝尔<span>知产</span></div>
         </div>
         <div class="logo-short">版权代理</div>
@@ -518,7 +526,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- 严格按照docx表格逐行录入 (数据太多，但准确) -->
+          <!-- 严格按照docx表格逐行录入 -->
           <tr><td>文字、口述作品</td><td>件</td><td>100字以下100元<br>101-5000字150元<br>5001-10000字200元<br>1万字以上300元</td><td>第二件起每件100元</td><td>均为0元</td><td>100字以下150元<br>101-5000字200元<br>5001-10000字300元<br>1万字以上350元</td></tr>
           <tr><td>音乐作品</td><td>件</td><td>词曲300元，曲200元</td><td>第二件起每件100元</td><td>均为0元</td><td>词曲350元，曲240元</td></tr>
           <tr><td>戏剧作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
@@ -559,8 +567,6 @@
       </table>
     </div>
 
-    <!-- 保留之前的信任/流程模块？为了不过于冗长，可选择性保留部分，但根据要求“把收费标准加上”，这里不再移除原有主体，但可略作精简，但保持风格统一。为了页面整洁，以下保留部分核心内容但缩短，也可完整保留；我们保留一部分版权核心模块，体现专业性，同时不遮盖表格。 但为了避免冲淡收费表，可适当减少重复，但完全保留原页面也行。建议快速过一遍核心服务但不抢眼。此处保留简洁的几个卡片。 -->
-    
     <!-- 轻量服务概览 (快速瞥一眼) -->
     <section class="services" style="padding: 40px 0 20px;">
       <div class="section-header" style="margin-bottom: 30px;">
@@ -584,7 +590,7 @@
     </div>
   </div> <!-- 容器结束 -->
 
-  <!-- 页脚 (完全保留) -->
+  <!-- 页脚 (完全按照要求保留备案号代码) -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
@@ -612,23 +618,25 @@
         </div>
       </div>
       <hr>
-       <div class="beian-links">
-                <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-                    <img src="ICP.png" alt="ICP图标">
-                    吉ICP备2026000319号-2
-                </a>    
-                
-                <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank">
-                    <img src="备案图标.png" alt="备案图标">
-                    吉公网安备22032302000082号
-                </a>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2026 科赛帝尔知识产权 - 海米尔文化旗下团队. 保留所有权利.</p>
-                <p>致力于高效的版权服务</p>
-            </div>
-        </div>
-    </footer>
+      
+      <!-- ★ 保留的备案号代码 完全按照要求 ★ -->
+      <div class="beian-links">
+        <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+          <img src="ICP.png" alt="ICP图标">
+          吉ICP备2026000319号-2
+        </a>    
+        
+        <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000081" target="_blank">
+          <img src="备案图标.png" alt="备案图标">
+          吉公网安备22032302000082号
+        </a>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2026 科赛帝尔知识产权 - 海米尔文化旗下团队. 保留所有权利.</p>
+        <p>致力于高效的版权服务</p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
