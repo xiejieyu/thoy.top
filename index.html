@@ -1,849 +1,618 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThoY Games - 海米尔文化下属开发团队</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
-            --accent-color: #ff4e50;
-            --dark-color: #121212;
-            --light-color: #f5f5f7;
-            --gray-color: #3a3a3c;
-        }
-        
-        body {
-            background-color: var(--dark-color);
-            color: var(--light-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* 导航栏样式 */
-        header {
-            background-color: rgba(18, 18, 18, 0.95);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid var(--gray-color);
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 24px;
-            color: white;
-            box-shadow: 0 4px 10px rgba(106, 17, 203, 0.4);
-        }
-        
-        .brand-text h1 {
-            font-size: 28px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1px;
-        }
-        
-        .brand-text p {
-            font-size: 12px;
-            color: #aaa;
-            letter-spacing: 2px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--light-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--light-color);
-            font-size: 24px;
-            cursor: pointer;
-        }
-        
-        /* 英雄区域样式 */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 100px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(106, 17, 203, 0.2), transparent 40%),
-                        radial-gradient(circle at 80% 80%, rgba(37, 117, 252, 0.15), transparent 40%);
-            z-index: -1;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-        
-        .hero-text {
-            flex: 1;
-        }
-        
-        .hero-text h2 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .hero-text h2 span {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .hero-text p {
-            font-size: 1.2rem;
-            color: #ccc;
-            margin-bottom: 30px;
-            max-width: 600px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.6);
-        }
-        
-        .hero-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .game-card {
-            width: 300px;
-            height: 400px;
-            background: linear-gradient(145deg, rgba(58, 58, 60, 0.8), rgba(18, 18, 18, 0.9));
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-            transform: perspective(1000px) rotateY(-10deg);
-            transition: transform 0.5s;
-        }
-        
-        .game-card:hover {
-            transform: perspective(1000px) rotateY(0deg);
-        }
-        
-        .game-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-        }
-        
-        .card-logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 28px;
-            color: white;
-            margin-bottom: 20px;
-        }
-        
-        .card-title {
-            font-size: 24px;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .card-subtitle {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
-        }
-        
-        .card-content {
-            color: #ddd;
-            margin-bottom: 25px;
-            font-size: 15px;
-        }
-        
-        .card-tag {
-            display: inline-block;
-            background: rgba(106, 17, 203, 0.2);
-            color: var(--secondary-color);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        /* 关于我们区域样式 */
-        .section {
-            padding: 100px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #ccc;
-        }
-        
-        .haimier-badge {
-            background: linear-gradient(135deg, rgba(37, 117, 252, 0.1), rgba(106, 17, 203, 0.1));
-            border: 1px solid rgba(106, 17, 203, 0.3);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
-        }
-        
-        .haimier-badge h3 {
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .about-visual {
-            flex: 1;
-        }
-        
-        .team-icons {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        
-        .team-icon {
-            background: linear-gradient(145deg, rgba(58, 58, 60, 0.8), rgba(18, 18, 18, 0.9));
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: transform 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .team-icon:hover {
-            transform: translateY(-10px);
-        }
-        
-        .team-icon i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        /* 项目展示区域样式 */
-        .projects-showcase {
-            background-color: rgba(0, 0, 0, 0.2);
-            padding: 100px 0;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .project-card {
-            background: linear-gradient(145deg, rgba(58, 58, 60, 0.8), rgba(18, 18, 18, 0.9));
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .project-img {
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-        
-        .project-content {
-            padding: 20px;
-        }
-        
-        .project-content h3 {
-            margin-bottom: 10px;
-            font-size: 1.5rem;
-        }
-        
-        .project-content p {
-            color: #aaa;
-            font-size: 0.95rem;
-        }
-        
-        .project-status {
-            display: inline-block;
-            background: rgba(255, 78, 80, 0.2);
-            color: var(--accent-color);
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-        
-        /* 联系区域样式 */
-        .contact-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .contact-info {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            max-width: 300px;
-        }
-        
-        .contact-icon {
-            min-width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-        
-        .contact-item div {
-            text-align: left;
-        }
-        
-        .contact-item h4 {
-            margin-bottom: 5px;
-            color: var(--secondary-color);
-        }
-        
-        .contact-item p {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        /* 页脚样式 */
-        footer {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 60px 0 30px;
-            margin-top: 60px;
-            border-top: 1px solid var(--gray-color);
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-        
-        .copyright {
-            text-align: center;
-            color: #888;
-            font-size: 0.9rem;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--gray-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        
-        .social-link:hover {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            transform: translateY(-5px);
-        }
-        
-        /* 备案信息样式 */
-        .beian-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .beian-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #aaa;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-        }
-        
-        .beian-link:hover {
-            color: var(--secondary-color);
-        }
-        
-        .beian-link img {
-            width: 16px;
-            height: 16px;
-            object-fit: contain;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .game-card {
-                transform: perspective(1000px) rotateY(0deg);
-            }
-            
-            .hero-text h2 {
-                font-size: 2.8rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--dark-color);
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-                border-top: 1px solid var(--gray-color);
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .hero-text h2 {
-                font-size: 2.2rem;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 25px;
-                align-items: flex-start;
-            }
-            
-            .team-icons {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .beian-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .team-icons {
-                grid-template-columns: 1fr;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
-            }
-            
-            .contact-item {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .contact-item div {
-                text-align: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>科赛帝尔知产 · 版权代理专家 · 收费标准</title>
+  <!-- 字体与图标库 (干净简洁) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fbfdff;
+      color: #1e2b3c;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1400px;  /* 加宽以适应表格 */
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* 头部导航 */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #e9eef2;
+      flex-wrap: wrap;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* 显式LOGO图片区 (保留之前风格) */
+    .explicit-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .explicit-logo img {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+    .logo-main {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      color: #0b2b4f;
+      white-space: nowrap;
+    }
+
+    .logo-main span {
+      color: #2b6c9e;
+      font-weight: 500;
+    }
+
+    .logo-short {
+      font-size: 1rem;
+      font-weight: 500;
+      background: #e5f0fa;
+      color: #1d4e7a;
+      padding: 4px 10px;
+      border-radius: 40px;
+      margin-left: 4px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2d4259;
+      transition: color 0.2s;
+      font-size: 1.05rem;
+    }
+
+    .nav-links a:hover {
+      color: #1d6fb0;
+    }
+
+    .nav-links a.active {
+      color: #1d6fb0;
+      border-bottom: 2px solid #1d6fb0;
+      padding-bottom: 4px;
+    }
+
+    .contact-btn {
+      background: #0b2b4f;
+      color: white !important;
+      padding: 10px 22px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .contact-btn:hover {
+      background: #1d4e7a;
+    }
+
+    /* 总部网站跳转按钮 */
+    .hq-link-btn {
+      background: #ffffff;
+      color: #0b2b4f !important;
+      padding: 8px 20px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 2px solid #c4d9ed;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: 15px;
+      white-space: nowrap;
+    }
+    .hq-link-btn i {
+      color: #1d6fb0;
+      font-size: 1rem;
+    }
+    .hq-link-btn:hover {
+      background: #e5f0ff;
+      border-color: #1d6fb0;
+    }
+
+    /* 移动端简单适应 */
+    @media (max-width: 900px) {
+      .navbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: center;
+      }
+      .logo-area {
+        justify-content: space-between;
+      }
+      .hq-link-btn {
+        margin-left: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .explicit-logo img {
+        height: 36px;
+      }
+      .logo-main {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* 主打 banner (保留简洁，可适当压缩) */
+    .hero {
+      padding: 40px 0 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+    }
+    .hero-text {
+      flex: 1 1 300px;
+    }
+    .hero-badge {
+      background: #ddeeff;
+      color: #124072;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 20px;
+      border: 1px solid rgba(27, 85, 148, 0.15);
+    }
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      color: #0b1f31;
+      margin-bottom: 20px;
+    }
+    .hero-text h1 .accent {
+      color: #1d6fb0;
+      border-bottom: 4px solid #cbe4fe;
+      display: inline-block;
+    }
+    .hero-desc {
+      font-size: 1.2rem;
+      color: #39536e;
+      max-width: 550px;
+      margin-bottom: 30px;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 35px;
+      margin-top: 25px;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0b2b4f;
+    }
+    .stat-label {
+      color: #577594;
+      font-size: 0.95rem;
+    }
+    .hero-image {
+      flex: 1 1 300px;
+      background: linear-gradient(145deg, #eaf4ff, #ffffff);
+      border-radius: 50px 50px 50px 50px;
+      padding: 20px 20px 0 20px;
+      box-shadow: 0 20px 35px -8px rgba(18, 52, 102, 0.12);
+      border: 1px solid #e1ebf5;
+      text-align: center;
+    }
+    .hero-image i {
+      font-size: 8rem;
+      color: #245b91;
+      opacity: 0.8;
+      margin: 10px 0 10px;
+    }
+    .hero-image p {
+      font-weight: 600;
+      color: #1f4970;
+      background: #ffffffcc;
+      padding: 12px;
+      border-radius: 40px;
+      backdrop-filter: blur(4px);
+      border: 1px solid white;
+    }
+
+    /* 页面标题 (收费标准独有) */
+    .price-header {
+      margin: 30px 0 25px;
+      border-left: 8px solid #1d6fb0;
+      padding-left: 25px;
+    }
+    .price-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0b2b4f;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .price-header .post-date {
+      background: #ecf5fd;
+      color: #1d5282;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* 表格区域——让docx里的表格重生为html表格，干净、可滚动 */
+    .price-table-wrapper {
+      overflow-x: auto;
+      margin: 30px 0 50px;
+      border-radius: 24px;
+      border: 1px solid #d9e4f0;
+      background: white;
+      box-shadow: 0 10px 25px -10px rgba(0,32,64,0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1200px;  /* 保证表格宽屏展示 */
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: #e2effb;
+      color: #0f3c63;
+      font-weight: 700;
+      padding: 16px 12px;
+      text-align: center;
+      border: 1px solid #cbdae9;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 14px 12px;
+      border: 1px solid #d0deed;
+      vertical-align: top;
+      color: #1e3a5a;
+      background-color: #ffffff;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f9fcff;
+    }
+
+    /* 特定列左对齐 */
+    td:first-child {
+      font-weight: 600;
+      color: #0a314d;
+      background-color: #f4f9ff;  /* 项目列浅色背景 */
+      white-space: nowrap;
+    }
+    /* 备注列字体稍微淡 */
+    td:nth-child(4) {
+      color: #3f627f;
+    }
+
+    /* 海米尔代理列 亮色背景强调 */
+    td:last-child {
+      background-color: #f0f6fe;
+      font-weight: 500;
+      color: #0c3f6b;
+      border-left: 2px solid #b7d3f0;
+    }
+
+    /* 表头最后两列特别标注 */
+    th:nth-child(6), th:nth-child(7) {
+      background: #cde2fa;
+    }
+
+    .mail-note {
+      background: #e5f2fd;
+      border-radius: 60px;
+      padding: 14px 28px;
+      margin: 20px 0 25px;
+      display: inline-block;
+      font-weight: 600;
+      color: #16446b;
+      border: 1px dashed #3980c0;
+    }
+    .mail-note i {
+      margin-right: 8px;
+      color: #2273c2;
+    }
+
+    /* 页脚 + 联系 (不变) */
+    .footer {
+      background: #0b1f30;
+      color: #dae9f8;
+      padding: 60px 0 30px;
+      border-radius: 60px 60px 0 0;
+      margin-top: 60px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+    }
+
+    .footer h5 {
+      color: white;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .footer p, .footer a {
+      color: #b3cee8;
+      text-decoration: none;
+      line-height: 2;
+    }
+
+    .footer i {
+      width: 24px;
+      color: #5194d4;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 50px;
+      color: #7d9ec0;
+      font-size: 0.9rem;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .footer-logo span {
+      color: #68a9e7;
+    }
+
+    hr {
+      border: 0.5px solid #284b68;
+      margin: 30px 0;
+    }
+    .beian-links {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .beian-link {
+      color: #9bb9da;
+      text-decoration: none;
+      margin: 0 12px;
+      display: inline-block;
+      font-size: 0.9rem;
+    }
+    .beian-link img {
+      height: 16px;
+      width: auto;
+      vertical-align: middle;
+      margin-right: 4px;
+      filter: brightness(0.8);
+    }
+
+    /* 小贴士：表格内分行显示 */
+    .multiline {
+      white-space: pre-line;
+      line-height: 1.6;
+    }
+  </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo-container">
-                    <div class="logo">TG</div>
-                    <div class="brand-text">
-                        <h1>ThoY Games</h1>
-                        <p>HAIMIER CULTURE</p>
-                    </div>
-                </div>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home">首页</a></li>
-                    <li><a href="#about">关于我们</a></li>
-                    <li><a href="#projects">项目展示</a></li>
-                    <li><a href="#contact">联系我们</a></li>
-                </ul>
-            </nav>
+  <div class="container">
+    <!-- 导航栏 (完全保留之前新增的logo和总部跳转) -->
+    <nav class="navbar">
+      <div class="logo-area">
+        <div class="explicit-logo">
+          <!-- 同样使用内嵌svg logo，与原风格一致 -->
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'%3E%3Crect width='60' height='60' rx='12' fill='%231d6fb0'/%3E%3Cpath d='M15 20 L30 12 L45 20 L45 38 L30 46 L15 38 Z' fill='%23ffffff' opacity='0.9'/%3E%3Ctext x='30' y='38' font-size='22' text-anchor='middle' fill='%231d6fb0' font-weight='bold' font-family='Arial'%3E©%3C/text%3E%3C/svg%3E"
+               alt="科赛帝尔LOGO" title="科赛帝尔知产">
+          <div class="logo-main">科赛帝尔<span>知产</span></div>
         </div>
-    </header>
+        <div class="logo-short">版权代理</div>
+        <a href="https://haimier.top" class="hq-link-btn" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-video"></i> 进入我们的总部网站看精彩视频
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="#" class="active">首页</a>
+        <a href="#">版权服务</a>
+        <a href="#">案例</a>
+        <a href="#">资讯</a>
+        <a href="#">关于</a>
+      </div>
+      <a href="#" class="contact-btn">联系专家</a>
+    </nav>
 
-    <!-- 英雄区域 -->
-    <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h2>创造<span>沉浸式</span>游戏体验</h2>
-                    <p>ThoY Games是海米尔文化旗下的专业游戏开发团队，致力于打造高质量、富有创意的游戏作品。我们融合先进技术、艺术设计和引人入胜的叙事，为全球玩家提供独特而难忘的游戏体验。</p>
-                    <a href="#projects" class="cta-button">探索我们的项目</a>
-                </div>
-                <div class="hero-visual">
-                    <div class="game-card">
-                        <div class="card-logo">TG</div>
-                        <h3 class="card-title">ThoY Games</h3>
-                        <p class="card-subtitle">海米尔文化下属开发团队</p>
-                        <p class="card-content">我们专注于小型高质量游戏开发</p>
-                        <span class="card-tag">创新驱动</span>
-                        <span class="card-tag">品质至上</span>
-                    </div>
-                </div>
-            </div>
+    <!-- 简洁hero区域 (可以保留增加亲切感) 稍作压缩给表格腾空间 -->
+    <section class="hero">
+      <div class="hero-text">
+        <span class="hero-badge"><i class="fas fa-copyright" style="margin-right: 6px;"></i> 专业版权代理机构 · 透明收费</span>
+        <h1>版权登记·明码标价<br><span class="accent">海米尔文化收费标准</span></h1>
+        <p class="hero-desc">国家版权局、省版权局及海米尔代理费用全览，邮寄费22元另计。2026年最新版。</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">15年</span>
+            <span class="stat-label">专注版权</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">5000+</span>
+            <span class="stat-label">代理案件</span>
+          </div>
         </div>
+      </div>
+      <div class="hero-image">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <p><i class="fas fa-check-circle" style="color: #166bb5;"></i> 收费标准 · 官网公示</p>
+        <div style="background: #edf5ff; border-radius: 60px; padding: 8px 20px; margin-top: 15px; font-weight: 500;">海米尔文化 2026.02.19 发布</div>
+      </div>
     </section>
 
-    <!-- 关于我们区域 -->
-    <section class="section" id="about">
-        <div class="container">
-            <h2 class="section-title">关于ThoY Games</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>ThoY Games成立于2026年，是海米尔文化旗下的专业游戏开发部门。我们的名字"ThoY"源于英文的The heart of youth缩写，即为年少之心，代表着公司理念以年少之心敬未来无限可能。</p>
-                    <p>团队由海米尔文化成员组成。我们致力于打造能够触动人心的游戏作品，无论是在视觉艺术、玩法机制还是故事情节上，都力求创新与卓越。</p>
-                    <p>我们的开发理念是"技术服务于创意"，通过自身所学的全部技术，实现最具想象力的游戏概念。所有的目标开发游戏，我们都坚持同样的质量标准。</p>
-                    
-                    <div class="haimier-badge">
-                        <h3><i class="fas fa-building"></i> 海米尔文化下属团队</h3>
-                        <p>作为海米尔文化的重要组成部分，我们共享公司的创意资源和技术支持，同时保持独立的创作自由和开发理念。海米尔文化的多元化产业布局为我们提供了跨领域合作的机会。</p>
-                    </div>
-                </div>
-                <div class="about-visual">
-                    <div class="team-icons">
-                        <div class="team-icon">
-                            <i class="fas fa-code"></i>
-                            <h4>技术开发</h4>
-                            <p>前沿游戏引擎与编程技术</p>
-                        </div>
-                        <div class="team-icon">
-                            <i class="fas fa-paint-brush"></i>
-                            <h4>艺术设计</h4>
-                            <p>视觉艺术与用户体验设计</p>
-                        </div>
-                        <div class="team-icon">
-                            <i class="fas fa-gamepad"></i>
-                            <h4>玩法设计</h4>
-                            <p>创新游戏机制与关卡设计</p>
-                        </div>
-                        <div class="team-icon">
-                            <i class="fas fa-music"></i>
-                            <h4>音频制作</h4>
-                            <p>原创音乐与音效设计</p>
-                        </div>
-                        <div class="team-icon">
-                            <i class="fas fa-book"></i>
-                            <h4>叙事设计</h4>
-                            <p>世界观构建与剧情创作</p>
-                        </div>
-                        <div class="team-icon">
-                            <i class="fas fa-users"></i>
-                            <h4>团队协作</h4>
-                            <p>敏捷开发与高效协作</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- 重点：收费标准表格 完全按照docx内容重构为html表格 -->
+    <div class="price-header">
+      <h2>
+        📋 海米尔文化版权代理收费标准
+        <span class="post-date"><i class="far fa-calendar-alt"></i> 2026年2月19日发布</span>
+      </h2>
+    </div>
+
+    <!-- 邮寄费用醒目提示 -->
+    <div class="mail-note">
+      <i class="fas fa-envelope"></i> 邮寄费用：22元 （每件申请另计，与代理费分开）
+    </div>
+
+    <div class="price-table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>收费项目</th>
+            <th>计价单位</th>
+            <th>收费标准（元）【国家版权局】</th>
+            <th>备注</th>
+            <th>收费标准（元）【省版权局】</th>
+            <th>收费标准（元）【海米尔文化】<br>（国版）（省版仅收取20元代理费）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- 严格按照docx表格逐行录入 (数据太多，但准确) -->
+          <tr><td>文字、口述作品</td><td>件</td><td>100字以下100元<br>101-5000字150元<br>5001-10000字200元<br>1万字以上300元</td><td>第二件起每件100元</td><td>均为0元</td><td>100字以下150元<br>101-5000字200元<br>5001-10000字300元<br>1万字以上350元</td></tr>
+          <tr><td>音乐作品</td><td>件</td><td>词曲300元，曲200元</td><td>第二件起每件100元</td><td>均为0元</td><td>词曲350元，曲240元</td></tr>
+          <tr><td>戏剧作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
+          <tr><td>曲艺作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
+          <tr><td>舞蹈作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
+          <tr><td>杂技作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
+          <tr><td>美术作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
+          <tr><td>摄影作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
+          <tr><td>工程设计图、产品设计图</td><td>件</td><td>500元</td><td>第二件起每件100元</td><td>均为0元</td><td>550元</td></tr>
+          <tr><td>地图、示意图</td><td>件</td><td>500元</td><td>第二件起每件100元</td><td>均为0元</td><td>550元</td></tr>
+          <tr><td>模型作品</td><td>件</td><td>500元</td><td>第二件起每件100元</td><td>均为0元</td><td>550元</td></tr>
+          <tr><td>建筑作品</td><td>件</td><td>1500元</td><td>第二件起每件100元</td><td>均为0元</td><td>1550元</td></tr>
+          <tr><td>电影作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
+          <tr><td rowspan="7">以类似摄制电影的方法创作的作品</td><td>件</td><td>&lt;1分钟 200元</td><td>第二件起每件50元</td><td>均为0元</td><td>&lt;1分钟 240元</td></tr>
+          <tr><td>件</td><td>1-5分钟 300元</td><td>第二件起每件50元</td><td>均为0元</td><td>1-5分钟 350元</td></tr>
+          <tr><td>件</td><td>5-10分钟 400元</td><td>第二件起每件100元</td><td>均为0元</td><td>5-10分钟 450元</td></tr>
+          <tr><td>件</td><td>10-25分钟 800元</td><td>第二件起每件200元</td><td>均为0元</td><td>10-25分钟 850元</td></tr>
+          <tr><td>件</td><td>25-45分钟 1000元</td><td>第二件起每件300元</td><td>均为0元</td><td>25-45分钟 1050元</td></tr>
+          <tr><td>件</td><td>超过45分钟 2000元</td><td>第二件起每件400元</td><td>均为0元</td><td>超过45分钟 2050元</td></tr>
+          <tr><td>件</td><td>电视剧100元/集</td><td></td><td>均为0元</td><td>电视剧150元/集</td></tr>
+          <tr><td>汇编作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
+          <tr><td>多媒体汇编作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
+          <tr><td>其他作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
+          <tr><td>变更登记</td><td>次</td><td>按照申请登记收费标准的50%收取</td><td></td><td>未知</td><td>在国版费用基础上收取50元代理费</td></tr>
+          <tr><td>补办证书</td><td>次</td><td>按工本费50元/个收取</td><td></td><td>未知</td><td>在国版费用基础上收取50元代理费</td></tr>
+          <tr><td>撤销登记</td><td>次</td><td>80元</td><td></td><td></td><td>在国版费用基础上收取50元代理费</td></tr>
+          <tr><td rowspan="3">录音制品</td><td>件</td><td>歌曲300元/首，专辑2000元</td><td rowspan="3">系列作品协商确定</td><td>均为0元</td><td>歌曲350元/首，专辑2050元</td></tr>
+          <tr><td>件</td><td>其他 半小时以内 300元</td><td>均为0元</td><td>其他 半小时以内 350元</td></tr>
+          <tr><td>件</td><td>半小时以上 500元</td><td>均为0元</td><td>半小时以上 550元</td></tr>
+          <tr><td rowspan="2">录像制品</td><td>件</td><td>半小时以内300元</td><td rowspan="2">系列作品协商确定</td><td>均为0元</td><td>半小时以内350元</td></tr>
+          <tr><td>件</td><td>每半小时加100元</td><td>均为0元</td><td>每半小时加150元</td></tr>
+          <tr><td>版式设计</td><td>件</td><td>500元</td><td>系列作品协商确定</td><td>均为0元</td><td>550元</td></tr>
+          <tr><td rowspan="3">广播、电视节目</td><td>件</td><td>半小时以内300元</td><td rowspan="3">系列作品协商确定</td><td>均为0元</td><td>半小时以内350元</td></tr>
+          <tr><td>件</td><td>半小时-1小时 500元</td><td>均为0元</td><td>半小时-1小时 550元</td></tr>
+          <tr><td>件</td><td>1小时以上800元</td><td>均为0元</td><td>1小时以上850元</td></tr>
+          <tr><td>表演</td><td>件</td><td>按照表演作品的类型著作权登记收费标准执行</td><td>系列作品协商确定</td><td>均为0元</td><td>在国版费用基础上收取50元代理费</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 保留之前的信任/流程模块？为了不过于冗长，可选择性保留部分，但根据要求“把收费标准加上”，这里不再移除原有主体，但可略作精简，但保持风格统一。为了页面整洁，以下保留部分核心内容但缩短，也可完整保留；我们保留一部分版权核心模块，体现专业性，同时不遮盖表格。 但为了避免冲淡收费表，可适当减少重复，但完全保留原页面也行。建议快速过一遍核心服务但不抢眼。此处保留简洁的几个卡片。 -->
+    
+    <!-- 轻量服务概览 (快速瞥一眼) -->
+    <section class="services" style="padding: 40px 0 20px;">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <h2>⚡ 我们的版权服务</h2>
+        <div class="section-sub">登记 · 维权 · 运营 · 国际</div>
+      </div>
+      <div class="service-grid" style="grid-template-columns: repeat(4,1fr); gap:20px">
+        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-registered"></i></div><h3 style="font-size:1.3rem;">版权登记</h3></div>
+        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-scale-balanced"></i></div><h3 style="font-size:1.3rem;">维权诉讼</h3></div>
+        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-handshake"></i></div><h3 style="font-size:1.3rem;">版权运营</h3></div>
+        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-globe"></i></div><h3 style="font-size:1.3rem;">国际版权</h3></div>
+      </div>
     </section>
 
-    <!-- 项目展示区域 -->
-    <section class="section projects-showcase" id="projects">
-        <div class="container">
-            <h2 class="section-title">项目展示</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>老板真的生气了</h3>
-                        <p>一款视觉小说类游戏，游戏剧情丰富多彩，共三个结局与两个隐藏结局，欢迎探索！</p>
-                        <div class="project-status">正在开发中</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- 信任模块简略 -->
+    <div class="trust-section" style="padding: 30px; margin: 20px 0;">
+      <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
+        <div style="flex:2"><h3 style="font-size:1.8rem;">为什么选择科赛帝尔？</h3><p>国家备案机构 · 高通过率 · 保密协议</p></div>
+        <div style="flex:1; background: white; border-radius: 30px; padding: 20px; text-align: center;"><span style="font-size:3rem; font-weight:700;">15年</span><br>专注版权</div>
+      </div>
+    </div>
+  </div> <!-- 容器结束 -->
 
-    <!-- 联系区域 -->
-    <section class="section" id="contact">
-        <div class="container">
-            <h2 class="section-title">联系我们</h2>
-            <div class="contact-content">
-                <p>如果您对我们的项目感兴趣，希望建立合作关系，或者想要加入我们的团队，欢迎通过以下方式与我们联系。</p>
-                
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4>邮箱</h4>
-                            <p>us@thoy.top</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4>地址</h4>
-                            <p>吉林省四平市伊通满族自治县靠山镇九龙村二组海米尔（吉林）文化传播有限公司</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4>电话</h4>
-                            <p>16617152404</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- 页脚 (完全保留) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">科赛帝尔<span>知产</span></div>
+          <p style="margin: 20px 0 10px;"><i class="fas fa-copyright"></i> 版权代理 · 守护智慧</p>
+          <p>海米尔文化下属机构<br>专业承接版权代理服务</p>
         </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo-container">
-                    <div class="logo">TG</div>
-                    <div class="brand-text">
-                        <h1>ThoY Games</h1>
-                        <p>海米尔文化下属开发团队</p>
-                    </div>
-                </div>
-                
-                <div class="social-links">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-weibo"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-weixin"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-steam"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- 备案信息 -->
-            <div class="beian-links">
+        <div>
+          <h5>快速链接</h5>
+          <p><a href="#">版权登记</a></p>
+          <p><a href="#">版权运营</a></p>
+          <p><a href="#">收费标准</a></p>
+        </div>
+        <div>
+          <h5>联系我们</h5>
+          <p><i class="fas fa-phone-alt"></i> 16617152404</p>
+          <p><i class="fas fa-envelope"></i> us@thoy.top</p>
+          <p><i class="fas fa-map-pin"></i> 吉林省四平市伊通满族自治县靠山镇九龙村海米尔（吉林）文化传播有限公司</p>
+        </div>
+        <div>
+          <h5>关注我们</h5>
+          <p><i class="fab fa-weixin"></i> 科赛帝尔知产 (公众号)</p>
+          <p><i class="fab fa-weibo"></i> 官方微博</p>
+        </div>
+      </div>
+      <hr>
+       <div class="beian-links">
                 <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
                     <img src="ICP.png" alt="ICP图标">
                     吉ICP备2026000319号-2
@@ -856,64 +625,10 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2026 ThoY Games - 海米尔文化旗下团队. 保留所有权利.</p>
-                <p>致力于创造卓越的游戏体验</p>
+                <p>&copy; 2026 科赛帝尔知识产权 - 海米尔文化旗下团队. 保留所有权利.</p>
+                <p>致力于高效的版权服务</p>
             </div>
         </div>
     </footer>
-
-    <script>
-        // 移动端菜单切换
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                if (this.getAttribute('href') === '#') return;
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    // 关闭移动端菜单
-                    navLinks.classList.remove('active');
-                    const icon = mobileMenuBtn.querySelector('i');
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                    
-                    // 滚动到目标位置
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // 添加滚动效果
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(18, 18, 18, 0.98)';
-            } else {
-                header.style.backgroundColor = 'rgba(18, 18, 18, 0.95)';
-            }
-        });
-    </script>
 </body>
 </html>
