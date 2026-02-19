@@ -12,6 +12,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script>
+// 阻止所有点击 # 链接时在网址后添加 #
+document.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
+        e.preventDefault();
+    }
+});
+</script>
   <style>
     * {
       margin: 0;
@@ -473,7 +481,6 @@
         <a href="#">资讯</a>
         <a href="#">关于</a>
       </div>
-      <a href="#" class="contact-btn">联系专家</a>
     </nav>
 
     <!-- 简洁hero区域 (可以保留增加亲切感) 稍作压缩给表格腾空间 -->
@@ -567,28 +574,7 @@
       </table>
     </div>
 
-    <!-- 轻量服务概览 (快速瞥一眼) -->
-    <section class="services" style="padding: 40px 0 20px;">
-      <div class="section-header" style="margin-bottom: 30px;">
-        <h2>⚡ 我们的版权服务</h2>
-        <div class="section-sub">登记 · 维权 · 运营 · 国际</div>
-      </div>
-      <div class="service-grid" style="grid-template-columns: repeat(4,1fr); gap:20px">
-        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-registered"></i></div><h3 style="font-size:1.3rem;">版权登记</h3></div>
-        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-scale-balanced"></i></div><h3 style="font-size:1.3rem;">维权诉讼</h3></div>
-        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-handshake"></i></div><h3 style="font-size:1.3rem;">版权运营</h3></div>
-        <div class="service-card" style="padding:20px;"><div class="service-icon"><i class="fas fa-globe"></i></div><h3 style="font-size:1.3rem;">国际版权</h3></div>
-      </div>
-    </section>
-
-    <!-- 信任模块简略 -->
-    <div class="trust-section" style="padding: 30px; margin: 20px 0;">
-      <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
-        <div style="flex:2"><h3 style="font-size:1.8rem;">为什么选择科赛帝尔？</h3><p>国家备案机构 · 高通过率 · 保密协议</p></div>
-        <div style="flex:1; background: white; border-radius: 30px; padding: 20px; text-align: center;"><span style="font-size:3rem; font-weight:700;">15年</span><br>专注版权</div>
-      </div>
-    </div>
-  </div> <!-- 容器结束 -->
+   
 
   <!-- 页脚 (完全按照要求保留备案号代码) -->
   <footer class="footer">
