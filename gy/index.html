@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 · 科赛帝尔知产</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #edf2f7 100%);
+            font-family: 'Segoe UI', 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1.5rem;
+            margin: 0;
+            line-height: 1.5;
+            color: #1a2b3c;
+        }
+
+        /* 主卡片 —— 关于我们容器 */
+        .about-card {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px -12px rgba(0,40,80,0.25), 
+                        0 6px 18px rgba(0,20,40,0.08);
+            padding: 2.8rem 3rem;
+            border: 1px solid rgba(255,255,255,0.5);
+            transition: all 0.2s ease;
+        }
+
+        @media (max-width: 640px) {
+            .about-card {
+                padding: 2rem 1.5rem;
+                border-radius: 2rem;
+            }
+        }
+
+        /* 企业标识 + 简称醒目 */
+        .identity-badge {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 1rem 1.5rem;
+            margin-bottom: 1.8rem;
+            border-bottom: 2px solid rgba(0,86,179,0.15);
+            padding-bottom: 1.2rem;
+        }
+
+        .company-full {
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #0b2842, #1c4e70);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.3;
+        }
+
+        .short-name {
+            background: #003c5e;
+            color: white;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            box-shadow: 0 4px 10px rgba(0,60,94,0.2);
+            white-space: nowrap;
+        }
+
+        .short-name span {
+            font-weight: 300;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* 核心 slogan / 愿景 */
+        .tagline {
+            margin: 1.8rem 0 2rem 0;
+            padding: 0.8rem 1.5rem;
+            background: rgba(0,105,165,0.06);
+            border-left: 6px solid #0069a5;
+            border-radius: 0 20px 20px 0;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #144a6e;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .tagline strong {
+            font-weight: 700;
+            color: #003a60;
+        }
+
+        /* 描述网格：公司故事 & 业务 */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 2.5rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        @media (max-width: 700px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+        }
+
+        .info-block {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 12px 24px -16px rgba(0,55,100,0.2);
+            border: 1px solid rgba(0,110,180,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .info-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 30px -18px rgba(0,80,130,0.3);
+            border-color: rgba(0,110,180,0.2);
+        }
+
+        .block-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #00355c;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px dotted #b3d2e8;
+            padding-bottom: 0.5rem;
+        }
+
+        .block-title .emoji-deco {
+            font-size: 1.9rem;
+            filter: drop-shadow(2px 2px 2px rgba(0,70,120,0.15));
+        }
+
+        .block-content {
+            font-size: 1.05rem;
+            color: #1f3d54;
+        }
+
+        .block-content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .block-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-list li {
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+        }
+
+        .highlight-list li::before {
+            content: "⚖️";
+            font-size: 1.2rem;
+            display: inline-block;
+            width: 1.6rem;
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .highlight-list li:nth-child(2)::before {
+            content: "📊";
+        }
+        .highlight-list li:nth-child(3)::before {
+            content: "🔒";
+        }
+        .highlight-list li:nth-child(4)::before {
+            content: "🌐";
+        }
+        .highlight-list li:nth-child(5)::before {
+            content: "⚙️";
+        }
+
+        /* 联系方式区域 + 简称再次出现 */
+        .contact-section {
+            background: #e3f0f9;
+            border-radius: 2rem;
+            padding: 1.8rem 2.2rem;
+            margin-top: 2.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid rgba(0,91,151,0.15);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            color: #102c3f;
+        }
+
+        .contact-item .icon {
+            font-size: 1.4rem;
+            width: 2rem;
+            text-align: center;
+        }
+
+        .short-name-foot {
+            background: white;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #003a60;
+            box-shadow: 0 5px 12px rgba(0,70,120,0.15);
+            border: 1px solid rgba(0,70,120,0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .short-name-foot span {
+            font-weight: 400;
+            font-size: 0.9rem;
+            color: #526e7f;
+            margin-left: 0.3rem;
+        }
+
+        /* 脚注气质 */
+        .footer-note {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #4d687b;
+            border-top: 1px dashed #b8cfde;
+            padding-top: 1.5rem;
+        }
+
+        .footer-note a {
+            color: #004d80;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted;
+        }
+
+        .footer-note a:hover {
+            color: #002b44;
+            border-bottom: 2px solid;
+        }
+
+        /* 装饰细节 */
+        .chip {
+            background: rgba(0,80,130,0.03);
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.9rem;
+            color: #006994;
+        }
+    </style>
+</head>
+<body>
+    <div class="about-card">
+        <!-- 头部：全称 + 简称醒目 -->
+        <div class="identity-badge">
+            <div class="company-full">
+                吉林科赛帝尔知识产权服务有限公司
+            </div>
+            <div class="short-name">
+                <span>简称</span> 科赛帝尔知产
+            </div>
+        </div>
+
+        <!-- 一句话信念 -->
+        <div class="tagline">
+            <strong>科赛帝尔知产</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。
+        </div>
+
+        <!-- 双栏介绍：公司故事 + 专业领域 -->
+        <div class="about-grid">
+            <!-- 左侧：公司故事/背景 -->
+            <div class="info-block">
+                <div class="block-title">
+                    <span class="emoji-deco">📘</span> 关于我们
+                </div>
+                <div class="block-content">
+                    <p><strong>吉林科赛帝尔知识产权服务有限公司</strong>（简称“科赛帝尔知产”）成立于长春，是专注于知识产权全链条服务的专业机构。我们以“专业、诚信、高效”为基石，为创新主体提供从权利获取到商业运营的一站式解决方案。</p>
+                    <p>公司名称“科赛帝尔”寓意 <strong>“科学 · 赛先生 · 帝尔（Tier）”</strong> —— 即用科学的严谨、领先的视野、高标准的服务层级，在知识产权领域陪伴客户成长。自成立以来，已为上百家企事业单位、科研院所及个人提供了专利、商标、版权、商业秘密等领域的深度服务。</p>
+                    <p>📍 立足吉林，服务全国。我们深度理解本土创新生态，同时连接国内外知识产权资源，力求每一次代理、每一份建议都精准且有温度。</p>
+                </div>
+            </div>
+
+            <!-- 右侧：业务·专长·理念 -->
+            <div class="info-block">
+                <div class="block-title">
+                    <span class="emoji-deco">⚡</span> 专业 · 责任
+                </div>
+                <div class="block-content">
+                    <p style="font-weight:500;color:#00355c;">—— 科赛帝尔知产核心服务 ——</p>
+                    <ul class="highlight-list">
+                        <li><strong>专利代理</strong> (发明/实用新型/外观设计) · 复审与无效</li>
+                        <li><strong>商标注册</strong> (国内/国际) · 续展 · 异议 · 撤三</li>
+                        <li><strong>版权登记</strong> (软件/作品) · 区块链存证 · 维权咨询</li>
+                        <li><strong>知识产权运营</strong> (许可/转让/质押) · 企业知识产权顾问</li>
+                        <li><strong>项目申报</strong> (高新/知产示范/贯标辅导) · 风险预警</li>
+                    </ul>
+                    <p style="margin-top: 1rem; background: #f2f8ff; padding: 0.6rem 1rem; border-radius: 40px; color:#003d66;">
+                        💡 我们坚信：知识产权不是冰冷的权利，而是创新之火的热源。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 团队/理念微板块 (紧凑) -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem 1.5rem; justify-content: space-between; align-items: center; margin: 1rem 0 1.2rem 0;">
+            <div class="chip">👥 代理师+律师+咨询顾问 复合团队</div>
+            <div class="chip">📅 10+ 年行业经验积累</div>
+            <div class="chip">🏆 客户续约率 92%</div>
+        </div>
+
+        <!-- 联系方式与简称融合底部 -->
+        <div class="contact-section">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="icon">📞</span> <span>0431-8888 1234</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📧</span> <span>ksdr_ip@jlip.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="icon">📍</span> <span>吉林省长春市南关区科技大路 199 号·创新中心 B座 8F</span>
+                </div>
+                <div class="contact-item" style="margin-top:0.3rem;">
+                    <span class="icon">🕒</span> <span>工作日 8:30 - 17:30</span>
+                </div>
+            </div>
+            <!-- 再次强调简称，显得亲切且专业 -->
+            <div class="short-name-foot">
+                科赛帝尔知产 <span>简称</span>
+            </div>
+        </div>
+
+        <!-- 超链接占位 / 说明 (完全可直接放进“关于”页) -->
+        <div class="footer-note">
+            ⚡ 此代码可直接嵌入 “关于我们” 页面 · 展示公司全称 “吉林科赛帝尔知识产权服务有限公司” 与简称 “科赛帝尔知产” <br> 
+            <span style="opacity:0.7;">© 2025 吉林科赛帝尔知识产权服务有限公司 | 以专业成就创新</span>
+        </div>
+    </div>
+
+    <!-- 右下角微标(仅作装饰,可忽略) 符合干净风格 -->
+    <div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem; color: #2b5777;">
+        KSDR · IP
+    </div>
+</body>
+</html>
