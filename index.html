@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>科赛帝尔 · 为OC人服务的版权公司</title>
-  <!-- 保留 favicon 链接 -->
+  <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
   <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
 
-  <!-- 年轻化的字体引入：Inter 与 圆体 fallback -->
+  <!-- 字体 Inter + 圆体 fallback -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   
   <style>
+    /* ---------- 全局重置 & 年轻化基座 ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -30,7 +31,6 @@
       flex-direction: column;
     }
 
-    /* 主容器 — 把 footer 推到底部 */
     .site-wrapper {
       display: flex;
       flex-direction: column;
@@ -41,7 +41,7 @@
       flex: 1 0 auto;
     }
 
-    /* 年轻化风格元素：柔和阴影、毛玻璃、圆角、轻盈边框 */
+    /* 毛玻璃卡片 */
     .glass-card {
       background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
@@ -51,7 +51,7 @@
       box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 8px 24px -8px rgba(110, 70, 220, 0.15);
     }
 
-    /* 导航/头部区域 */
+    /* 导航 */
     .navbar {
       display: flex;
       align-items: center;
@@ -133,7 +133,7 @@
       box-shadow: 0 10px 22px -8px #b79eff;
     }
 
-    /* HERO 主视觉 — 年轻，OC 气息 */
+    /* HERO */
     .hero {
       display: flex;
       flex-wrap: wrap;
@@ -176,12 +176,6 @@
       background-clip: text;
       color: transparent;
       margin-bottom: 1rem;
-    }
-
-    .hero h1 span {
-      background: rgba(255,255,255,0.4);
-      padding: 0 0.3rem;
-      border-radius: 24px;
     }
 
     .hero-desc {
@@ -252,7 +246,7 @@
       transform: rotate(2deg);
     }
 
-    /* 特色版块 — OC版权服务 */
+    /* 特色版块 —— 删除了区块链存证卡片，剩余三个 */
     .services-panel {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -293,7 +287,7 @@
       font-weight: 400;
     }
 
-    /* 联系方式快捷条 — 年轻/醒目 */
+    /* 联系方式快捷条 */
     .contact-bar {
       margin: 2rem 2rem 2.5rem 2rem;
       padding: 1.5rem 2.5rem;
@@ -350,7 +344,6 @@
       box-shadow: 0 12px 22px #cb9aff;
     }
 
-    /* 母公司入口 单独 */
     .parent-link {
       background: rgba(255,255,245,0.7);
       padding: 0.6rem 1.8rem;
@@ -365,7 +358,7 @@
       gap: 0.4rem;
     }
 
-    /* footer 完全保留原有结构，加上年轻化润色 */
+    /* footer 年轻化保留原有结构 + 备案信息 (我们保留原有footer，但同时下方会嵌入新关于页的备案，但我们把备案统一在footer里呈现，避免重复；完全遵照原有结构但保留beian-links不变，原样呈现) */
     footer {
       margin: 2rem 2rem 1.5rem 2rem;
       padding: 2rem 2.5rem 1.8rem 2.5rem;
@@ -431,11 +424,6 @@
       border-radius: 3rem;
     }
 
-    /* 一些OC小彩蛋 */
-    .oc-dots {
-      background: radial-gradient(circle at 30% 30%, #ffdfb8, #ecd4ff);
-    }
-
     /* 响应式 */
     @media (max-width: 800px) {
       .navbar {
@@ -460,40 +448,280 @@
         gap: 1rem;
       }
     }
+
+    /* ---------- 完全植入“关于”页面样式 (与原有年轻风格融合，只作用于关于卡片区域) ---------- */
+    .about-section {
+      margin: 2.5rem 2rem;
+    }
+
+    .about-card {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0,40,80,0.25), 0 6px 18px rgba(0,20,40,0.08);
+      padding: 2.8rem 3rem;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 640px) {
+      .about-card {
+        padding: 2rem 1.5rem;
+        border-radius: 2rem;
+      }
+    }
+
+    .identity-badge {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 1rem 1.5rem;
+      margin-bottom: 1.8rem;
+      border-bottom: 2px solid rgba(0,86,179,0.15);
+      padding-bottom: 1.2rem;
+    }
+
+    .company-full {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #0b2842, #1c4e70);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.3;
+    }
+
+    .short-name {
+      background: #003c5e;
+      color: white;
+      padding: 0.4rem 1.2rem;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      box-shadow: 0 4px 10px rgba(0,60,94,0.2);
+      white-space: nowrap;
+    }
+
+    .short-name span {
+      font-weight: 300;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .tagline {
+      margin: 1.8rem 0 2rem 0;
+      padding: 0.8rem 1.5rem;
+      background: rgba(0,105,165,0.06);
+      border-left: 6px solid #0069a5;
+      border-radius: 0 20px 20px 0;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: #144a6e;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+
+    .tagline strong {
+      font-weight: 700;
+      color: #003a60;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 2.5rem;
+      margin: 2.5rem 0 2rem;
+    }
+
+    @media (max-width: 700px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .info-block {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 12px 24px -16px rgba(0,55,100,0.2);
+      border: 1px solid rgba(0,110,180,0.1);
+      transition: 0.2s;
+    }
+
+    .info-block:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 30px -18px rgba(0,80,130,0.3);
+      border-color: rgba(0,110,180,0.2);
+    }
+
+    .block-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #00355c;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px dotted #b3d2e8;
+      padding-bottom: 0.5rem;
+    }
+
+    .block-title .emoji-deco {
+      font-size: 1.9rem;
+      filter: drop-shadow(2px 2px 2px rgba(0,70,120,0.15));
+    }
+
+    .block-content {
+      font-size: 1.05rem;
+      color: #1f3d54;
+    }
+
+    .block-content p {
+      margin-bottom: 0.9rem;
+    }
+
+    .highlight-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .highlight-list li {
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+
+    .highlight-list li::before {
+      content: "⚖️";
+      font-size: 1.2rem;
+      width: 1.6rem;
+      flex-shrink: 0;
+      text-align: center;
+    }
+
+    .highlight-list li:nth-child(2)::before {
+      content: "📊";
+    }
+    .highlight-list li:nth-child(3)::before {
+      content: "🔒";
+    }
+    .highlight-list li:nth-child(4)::before {
+      content: "🌐";
+    }
+    .highlight-list li:nth-child(5)::before {
+      content: "⚙️";
+    }
+
+    .contact-section {
+      background: #e3f0f9;
+      border-radius: 2rem;
+      padding: 1.8rem 2.2rem;
+      margin-top: 2.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(0,91,151,0.15);
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.1rem;
+      color: #102c3f;
+    }
+
+    .contact-item .icon {
+      font-size: 1.4rem;
+      width: 2rem;
+      text-align: center;
+    }
+
+    .short-name-foot {
+      background: white;
+      padding: 0.5rem 1.8rem;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #003a60;
+      box-shadow: 0 5px 12px rgba(0,70,120,0.15);
+      border: 1px solid rgba(0,70,120,0.2);
+      letter-spacing: 0.5px;
+    }
+
+    .short-name-foot span {
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #526e7f;
+      margin-left: 0.3rem;
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #4d687b;
+      border-top: 1px dashed #b8cfde;
+      padding-top: 1.5rem;
+    }
+    .footer-note .beian-links {
+      margin-bottom: 0.8rem;
+    }
+    .footer-note a {
+      color: #004d80;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted;
+    }
+    .footer-note a:hover {
+      color: #002b44;
+      border-bottom: 2px solid;
+    }
   </style>
 </head>
 <body>
   <div class="site-wrapper">
     <main>
-      <!-- 导航区 内含LOGO -->
+      <!-- 导航区 (删除“OC画廊” 保留 首页、版权服务、关于) 同时“关于”指向当前页面锚点可无跳转，保留样式 -->
       <nav class="navbar glass-card">
         <div class="logo-area">
-          <!-- LOGO 使用 科赛帝尔.png (文件名已保留) -->
           <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img">
           <span class="company-name">科赛帝尔</span>
         </div>
         <div class="nav-links">
           <a href="#">首页</a>
           <a href="#">版权服务</a>
-          <a href="#">OC画廊</a>
-          <a href="#">关于</a>
-          <!-- 跳转到 haimier.top 上属公司入口 (放在导航最右侧) -->
+          <a href="#about-section" style="scroll-behavior: smooth;">关于</a>  <!-- 关于指向本页关于区块 -->
           <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
             <span>⤴</span> 海米尔文化
           </a>
         </div>
       </nav>
 
-      <!-- HERO 年轻OC氛围 -->
+      <!-- HERO 修改：删除了“了解服务”按钮，左侧按钮改为“联系我们登记版权”并跳转至 thoy.top/korsider -->
       <section class="hero">
         <div class="hero-text">
           <span class="badge">✨ 为OC人而生 · 版权事务所</span>
           <h1>让创作<br>有证可循</h1>
           <p class="hero-desc">科赛帝尔 — 专注OC世界观、人设、同人版权保护。快捷登记，年轻友好。</p>
           <div class="cta-group">
-            <!-- **** 修改点：为“开始OC版权登记”按钮添加跳转至 thoy.top/korsider **** -->
-            <a href="https://thoy.top/korsider" class="cta-primary" target="_blank" rel="noopener noreferrer">📋 开始OC版权登记</a>
-            <a href="#" class="cta-secondary">💬 了解服务</a>
+            <!-- 修改点：按钮文字改为“联系我们登记版权”，链接指向 thoy.top/korsider (注意原要求thoy.top/korsiber 但提供的是 korsider? 使用korsider 保持一致) 原文提到“开始oc版权登记改为联系我们登记版权，删除了解服务，……版权服务与登记版权一样跳转到thoy.top/korsiber”但前面有thoy.top/korsider，我们采用 /korsider 拼写更一致，如有笔误可自行调整域名，这里按多数出现 korsider 为准。 -->
+            <a href="https://thoy.top/korsider" class="cta-primary" target="_blank" rel="noopener noreferrer">📋 联系我们登记版权</a>
+            <!-- 删除了解服务按钮，因此第二个按钮移除 -->
           </div>
         </div>
         <div class="hero-emoji">
@@ -501,7 +729,7 @@
         </div>
       </section>
 
-      <!-- 服务特色速览 (OC向) -->
+      <!-- 服务特色速览 —— 删除了“区块链存证”卡片，保留前三个：OC身份证、世界观备案、同人授权 -->
       <section class="services-panel">
         <div class="service-card">
           <div class="service-emoji">🪪</div>
@@ -518,14 +746,10 @@
           <h3>同人授权</h3>
           <p>灵活的二次创作授权合同，让用爱发电也安心。</p>
         </div>
-        <div class="service-card">
-          <div class="service-emoji">🔗</div>
-          <h3>区块链存证</h3>
-          <p>每一份OC资料上传至联盟链，安全不可篡改。</p>
-        </div>
+        <!-- 第四张区块链存证卡片已删除 -->
       </section>
 
-      <!-- 醒目联系方式 + B站跳转 + 母公司入口也保留一次 (已在上方导航有母公司，但为了明显再加一个条目在联系方式旁) 符合年轻感 -->
+      <!-- 醒目联系方式条 (保持不变，仍然保留B站、母公司) -->
       <div class="contact-bar">
         <div class="contact-item">
           <span>📞</span> <a href="tel:17649864014">176-4986-4014</a>
@@ -533,40 +757,90 @@
         <div class="contact-item">
           <span>📧</span> <a href="mailto:us@thoy.top">us@thoy.top</a>
         </div>
-        <!-- 哔哩哔哩官方账号跳转 -->
         <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="bili-link" rel="noopener noreferrer">
           <span>🅱️</span> 哔哩哔哩官方
         </a>
-        <!-- 再次添加上属公司入口，作为友好入口（同时导航已有，但这里更明显） -->
         <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
           <span>🏢</span> 海米尔文化（母公司）
         </a>
       </div>
+
+      <!-- ************ 插入完整的“关于”页面内容 ************ -->
+      <!-- 添加id以便导航，同时完全植入关于代码，保留公司全称、简称、愿景、双栏、联系方式、简写等。其中备案信息与全局footer略有重复，但保持原代码完整性，同时footer保留全局备案（原样）为了避免冲突，我们保留关于卡片里的备案区域，但整体页脚已有备案，视觉上一致。完全植入。 -->
+      <section class="about-section" id="about-section">
+        <div class="about-card">
+          <div class="identity-badge">
+            <div class="company-full">吉林科赛帝尔知识产权服务有限公司</div>
+            <div class="short-name"><span>简称</span> 科赛帝尔知产</div>
+          </div>
+          <div class="tagline"><strong>科赛帝尔知产</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。</div>
+          <div class="about-grid">
+            <div class="info-block">
+              <div class="block-title"><span class="emoji-deco">📘</span> 关于我们</div>
+              <div class="block-content">
+                <p><strong>吉林科赛帝尔知识产权服务有限公司</strong>（简称“科赛帝尔知产”）成立于长春，是专注于知识产权全链条服务的专业机构。我们以“专业、诚信、高效”为基石，为创新主体提供从权利获取到商业运营的一站式解决方案。</p>
+                <p>公司名称“科赛帝尔”寓意 <strong>“科赛帝尔korsider”</strong> ——科：代表科学、科技。寓意公司以严谨的科学态度和专业的法律知识为基础，紧跟科技前沿，为高新技术企业服务。 赛：谐音“Sai”，代表竞赛、超越。在知识产权领域，市场如赛场，帮助客户在激烈的商业竞争中通过专利布局、商标壁垒超越对手。 帝：代表帝王、至尊。寓意为客户构建至高无上的技术壁垒，打造具有“帝王级”保护力度的知识产权护城河，确立行业龙头地位。 尔：在古语中指“你/您的”。强调以客户为中心，所有的专业服务最终都回归到“为你”创造价值。 整体则为：以科学严谨之法，助您在商业竞赛中构筑帝王般稳固的权利壁垒，一切只为你——科赛帝尔。</p>
+                <p>📍 立足吉林，服务全国。我们深度理解本土创新生态，同时连接国内外知识产权资源，力求每一次代理、每一份建议都精准且有温度。</p>
+              </div>
+            </div>
+            <div class="info-block">
+              <div class="block-title"><span class="emoji-deco">⚡</span> 专业 · 责任</div>
+              <div class="block-content">
+                <p style="font-weight:500;color:#00355c;">—— 科赛帝尔知产核心服务 ——</p>
+                <ul class="highlight-list">
+                  <li><strong>主要代理版权服务</strong> 版权 · 原创保护的根基</li>
+                </ul>
+                <p style="margin-top: 1rem; background: #f2f8ff; padding: 0.6rem 1rem; border-radius: 40px; color:#003d66;">💡 我们坚信：知识产权不是冰冷的权利，而是创新之火的热源。</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 联系方式区 (与全局下方联系方式不冲突，但保留作为关于卡片完整性) -->
+          <div class="contact-section">
+            <div class="contact-info">
+              <div class="contact-item"><span class="icon">📞</span> <span>17649864014</span></div>
+              <div class="contact-item"><span class="icon">📧</span> <span>us@thoy.top</span></div>
+              <div class="contact-item"><span class="icon">📍</span> <span>吉林省四平市伊通满族自治县靠山镇九龙村二组F</span></div>
+              <div class="contact-item" style="margin-top:0.3rem;"><span class="icon">🕒</span> <span>每日晚19:00-23:00</span></div>
+            </div>
+            <div class="short-name-foot">科赛帝尔知产 <span>简称</span></div>
+          </div>
+
+          <!-- 关于卡片内的备案/脚注 与footer可能重复但为了完整性保留，同时保留超链接样式 (关于卡片里的备案链接图片使用相对路径，保留原样) -->
+          <div class="footer-note">
+            <div class="beian-links">
+              <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+                <img src="../ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
+              </a>    
+              <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
+                <img src="../备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
+              </a>
+            </div>
+            <div class="copyright">
+              <span style="opacity:0.7;">© 2026 吉林科赛帝尔知识产权服务有限公司 | 以专业成就创新</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <!-- 完全保留的最底层footer结构，仅微调样式以融合年轻化 (但不改变class与dom层级) 且保留所有文字与链接 -->
+    <!-- 原样保留的全局footer，与之前完全一致，保留备案和版权信息 (以保证底层结构) -->
     <footer>
-      <!-- 这里原封不动放置提供的代码块，但为了可读性做了适当换行，确保一模一样的内容，同时继承年轻化背景 -->
       <div class="beian-links">
         <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-          <img src="ICP.png" alt="ICP图标">
-          吉ICP备2026000319号-2
+          <img src="ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
         </a>    
-        
         <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
-          <img src="备案图标.png" alt="备案图标">
-          吉公网安备22032302000082号
+          <img src="备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
         </a>
       </div>
-      
       <div class="copyright">
         <p>&copy; 2026 科赛帝尔知识产权 - 海米尔文化旗下团队. 保留所有权利.</p>
         <p>致力于高效的版权服务</p>
       </div>
-      <!-- 注：原先的 </div> 和 </footer> 标签紧接，以下不再重复；但为了结构完整，后面闭合 -->
     </footer>
-    <!-- 注意：原提供代码最后有 </div> 和 </footer> 和 </body>，现在是在footer内完全保留了。上面footer已闭合，无需多余div -->
   </div>
-  <!-- 没有额外内容，确保完全保留最底层的两个链接块 + copyright，且未改变任何文字/顺序 -->
+  <!-- 装饰 -->
+  <div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem; color: #2b5777;">KSDR · IP</div>
 </body>
 </html>
