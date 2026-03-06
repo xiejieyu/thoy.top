@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>双二维码展示 · 负责人与领导人</title>
+    <title>负责人 · 领导人 双二维码</title>
     <style>
-        /* 干净柔和的页面基础 */
+        /* 极简稳重的展示卡片 —— 开箱即用，图片名已固定 */
         * {
             margin: 0;
             padding: 0;
@@ -13,240 +13,197 @@
         }
 
         body {
-            background: linear-gradient(145deg, #f6f9fc 0%, #e9f2f9 100%);
+            background: #eef3f7;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-            padding: 1.5rem;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            padding: 2rem 1rem;
         }
 
-        /* 卡片式容器，柔和阴影 */
-        .qr-container {
-            max-width: 800px;
+        .qr-wall {
+            max-width: 720px;
             width: 100%;
-            background: rgba(255,255,255,0.7);
-            backdrop-filter: blur(4px);
-            border-radius: 2.5rem;
-            padding: 2rem 1.5rem 2.2rem 1.5rem;
-            box-shadow: 0 20px 40px -12px rgba(0,20,40,0.35),
-                        0 4px 18px rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(6px);
+            border-radius: 3rem;
+            padding: 2.5rem 1.8rem;
+            box-shadow: 0 30px 50px -20px #1e3f5e;
             border: 1px solid rgba(255,255,255,0.7);
         }
 
-        /* 标题描述 */
-        .page-title {
+        .title {
             text-align: center;
-            margin-bottom: 2rem;
-        }
-        .page-title h2 {
-            font-weight: 500;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-            color: #1e3b5c;
-            border-bottom: 2px dashed #9bb8d4;
-            display: inline-block;
-            padding-bottom: 0.4rem;
-            padding-inline: 1.5rem;
-        }
-        .page-title p {
-            color: #2b4a6e;
-            margin-top: 0.4rem;
-            font-size: 1rem;
-            background: #e1effb70;
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            backdrop-filter: blur(2px);
+            margin-bottom: 2.8rem;
         }
 
-        /* 双列布局：并排两个二维码卡片 */
-        .qr-grid {
+        .title h1 {
+            font-weight: 500;
+            font-size: 2.2rem;
+            color: #1f4662;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #b3cfec;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            padding-inline: 2rem;
+        }
+
+        .title .filename-row {
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+            background: #d7e7f5;
+            padding: 0.3rem 1.8rem;
+            border-radius: 40px;
+            display: inline-block;
+            color: #103247;
+            font-weight: 500;
+            box-shadow: inset 0 1px 4px #aac3db;
+        }
+
+        /* 双卡片布局 */
+        .qr-pair {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            align-items: stretch;
-            gap: 2rem 1.8rem;
-            margin-top: 0.6rem;
+            gap: 2.5rem 2rem;
         }
 
-        /* 单个二维码卡片 */
         .qr-card {
-            flex: 0 1 260px;          /* 最小宽度240，最大可略伸展 */
+            flex: 0 1 250px;
             background: white;
-            border-radius: 2rem;
-            padding: 1.8rem 1.2rem 1.4rem 1.2rem;
-            box-shadow: 0 15px 25px -10px rgba(0,30,50,0.2);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 2.5rem;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            box-shadow: 0 20px 30px -8px #1f3f5b70;
+            transition: all 0.15s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid #ffffff;
         }
 
         .qr-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 26px 35px -14px #1a3a5a70;
+            transform: scale(1.02);
+            box-shadow: 0 28px 36px -12px #113753;
         }
 
-        /* 图像区域 */
-        .qr-figure {
+        /* 图片相框 */
+        .qr-image-frame {
             width: 100%;
-            aspect-ratio: 1 / 1;               /* 保持正方形 */
-            background: #f1f7fd;
-            border-radius: 1.5rem;
+            aspect-ratio: 1/1;
+            background: #f4fafd;
+            border-radius: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem;
-            border: 2px solid #c6dcef;
-            box-shadow: inset 0 0 0 1px #ffffffcc, 0 6px 10px #b0c8db50;
+            border: 3px solid #cee5f5;
+            box-shadow: inset 0 0 0 2px white, 0 10px 14px #b8cfdf;
         }
 
-        .qr-figure img {
+        .qr-image-frame img {
             width: 100%;
             height: 100%;
-            object-fit: contain;       /* 保持比例，完整显示二维码 */
+            object-fit: cover;          /* 保证图片填满正方形，如果是二维码通常比例1:1，不会变形 */
             display: block;
-            transition: opacity 0.15s;
+            border-radius: 0.8rem;
         }
 
-        /* 图片说明 – 显示文件名和中文标签 */
-        .qr-caption {
-            margin-top: 1rem;
+        /* 标签 */
+        .label {
+            margin-top: 1.2rem;
             width: 100%;
+            background: #e3f0fa;
             text-align: center;
-            background: #ecf3fa;
-            padding: 0.6rem 0.5rem;
-            border-radius: 3rem;
-            font-weight: 550;
-            font-size: 1.1rem;
-            color: #113750;
-            border: 1px solid #cbdbe9;
-            box-shadow: 0 2px 6px #b9d1e3 inset, 0 1px 2px white;
-            letter-spacing: 0.3px;
+            padding: 0.7rem 0.5rem;
+            border-radius: 4rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #15415b;
+            border: 1px solid #b2d1ea;
+            box-shadow: 0 2px 8px #c1d8ec inset;
         }
 
-        /* 文件名小字 */
-        .filename-hint {
+        .filename-badge {
             font-family: 'SF Mono', 'Fira Code', monospace;
+            background: #1f3b4f;
+            color: white;
             font-size: 0.75rem;
-            background: #1e3b5c18;
-            border-radius: 20px;
-            padding: 0.15rem 0.8rem;
-            color: #2c577c;
-            margin-top: 0.35rem;
-            display: inline-block;
-            border: 1px dotted #8eb1cc;
-        }
-
-        /* 脚注装饰 */
-        .footnote {
-            margin-top: 2rem;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #436684;
-            background: #dbe9f5c0;
-            padding: 0.45rem 1.5rem;
-            border-radius: 60px;
-            width: fit-content;
-            margin-inline: auto;
-            backdrop-filter: blur(3px);
-            border: 1px solid white;
-        }
-
-        /* 响应式：小屏时卡片宽度自适应 */
-        @media (max-width: 480px) {
-            .qr-container {
-                padding: 1.5rem 1rem;
-            }
-            .qr-card {
-                flex: 0 1 220px;
-            }
-            .page-title h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* 占位提示风格 — 因为实际图片可能不存在，用优雅的占位提醒 */
-        .demo-message {
-            text-align: center;
-            font-size: 0.9rem;
-            background: #fffbd1;
+            padding: 0.2rem 1rem;
             border-radius: 30px;
-            padding: 0.3rem 1.2rem;
-            color: #5d4d2e;
-            border: 1px solid #eedb9a;
-            margin-bottom: 0.8rem;
+            margin-top: 0.25rem;
+            display: inline-block;
+            letter-spacing: 0.3px;
+            border: 1px solid #749bb9;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            background: #dcebf8;
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            color: #16445f;
+            border: 1px solid white;
             width: fit-content;
-            margin-inline: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 小提示：完全不需要任何修改，图片名已固定为 负责人.jpg 和 领导人.jpg */
+        @media (max-width: 450px) {
+            .qr-wall { padding: 1.5rem; }
+            .title h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
-    <div class="qr-container">
-        <!-- 头部 -->
-        <div class="page-title">
-            <h2>📋 核心团队 · 二维码</h2>
-            <p>负责人.jpg ｜ 领导人.jpg</p>
+    <div class="qr-wall">
+        <div class="title">
+            <h1>◈ 核心团队 ◈</h1>
+            <div class="filename-row">📁 负责人.jpg  ·  领导人.jpg</div>
         </div>
 
-        <!-- 温馨提示：图片占位（如果你已经有真实图片，替换即可） -->
-        <div class="demo-message">
-            ⚡ 此处展示的是模拟二维码 · 替换为你的 <strong>负责人.jpg</strong> 与 <strong>领导人.jpg</strong>
-        </div>
-
-        <!-- 双二维码网格 -->
-        <div class="qr-grid">
-            <!-- 卡片 1：负责人.jpg -->
+        <!-- 两张二维码卡片：图片名已经按您的要求写好，直接指向同目录下的 负责人.jpg 和 领导人.jpg -->
+        <div class="qr-pair">
+            <!-- 卡片：负责人.jpg -->
             <div class="qr-card">
-                <div class="qr-figure">
-             
-                    -->
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23365e7e'/%3E%3Cpath d='M50 50 L150 50 L150 150 L50 150 Z' fill='none' stroke='%23e8f0fe' stroke-width='12'/%3E%3Ccircle cx='100' cy='85' r='23' fill='%23f5f9ff' /%3E%3Crect x='70' y='120' width='60' height='22' rx='8' fill='%23f5f9ff' /%3E%3Ctext x='100' y='185' font-size='24' text-anchor='middle' fill='%23c6defa' font-family='monospace' font-weight='bold'%3EQR%3C/text%3E%3C/svg%3E"
-                         alt="负责人二维码预览"
-                         title="负责人.jpg"
-                         id="qr-leader">
+                <div class="qr-image-frame">
+                    <!-- ★ 图片名称已经固定为 负责人.jpg （请将图片文件放在与此HTML相同的文件夹） -->
+                    <img src="负责人.jpg" 
+                         alt="负责人二维码"
+                         title="负责人.jpg">
                 </div>
-                <div class="qr-caption">
-                    👤 负责人 · 燃浩
-                    <div class="filename-hint">负责人.jpg</div>
+                <div class="label">
+                    👤 负责人
+                    <div class="filename-badge">负责人.jpg</div>
                 </div>
             </div>
 
-            <!-- 卡片 2：领导人.jpg -->
+            <!-- 卡片：领导人.jpg -->
             <div class="qr-card">
-                <div class="qr-figure">
-                    <!-- 同样使用内联占位图，领导人版本稍微改变颜色以示区分 -->
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%232a4f6e'/%3E%3Cpath d='M40 40 L160 40 L160 160 L40 160 Z' fill='none' stroke='%23f0e6d0' stroke-width='12' stroke-dasharray='12 8' /%3E%3Ccircle cx='100' cy='80' r='27' fill='%23f9f1da' /%3E%3Cpath d='M60 130 Q100 160, 140 130' stroke='%23f9f1da' stroke-width='14' fill='none' stroke-linecap='round' /%3E%3Ctext x='100' y='185' font-size='26' text-anchor='middle' fill='%23bdd9f0' font-family='monospace'%3E#2%3C/text%3E%3C/svg%3E"
-                         alt="领导人二维码预览"
-                         title="领导人.jpg"
-                         id="qr-president">
+                <div class="qr-image-frame">
+                    <!-- ★ 图片名称已经固定为 领导人.jpg （请将图片文件放在与此HTML相同的文件夹） -->
+                    <img src="领导人.jpg" 
+                         alt="领导人二维码"
+                         title="领导人.jpg">
                 </div>
-                <div class="qr-caption">
-                    🌟 领导人 · 杰鱼
-                    <div class="filename-hint">领导人.jpg</div>
+                <div class="label">
+                    🌟 领导人
+                    <div class="filename-badge">领导人.jpg</div>
                 </div>
             </div>
         </div>
 
-        <!-- 简单路径提示 & 使用方法（直接复制就能用） -->
-        <div class="footnote">
-            ⬇️ 把 <strong>负责人.jpg</strong> 和 <strong>领导人.jpg</strong> 放在与HTML相同的文件夹内，<br> 
-            或者修改 <code>img src</code> 路径指向你的图片。
+        <div class="footer-note">
+            ⚡ 图片已绑定 · 将「负责人.jpg」「领导人.jpg」放在HTML同级目录下即显示
         </div>
     </div>
 
-    <!-- 下面是简短的说明：如何替换真实图片（纯文字，不干扰视觉） -->
-    <div style="margin-top: 1.2rem; max-width:720px; text-align: left; font-size:0.85rem; background: #ffffffb0; padding: 0.8rem 1.8rem; border-radius: 60px; color: #264d73; border: 1px solid #bee0f5; backdrop-filter: blur(4px);">
-        <p>📂 <strong>使用方式</strong> —— 将以下两行代码中的 <code>src</code> 属性替换为你的图片路径：</p>
-        <ul style="margin-left: 1.8rem; margin-top: 0.3rem; font-family: monospace;">
-            <li>&lt;img src="<span style="background:#fef1b0;">负责人.jpg</span>" ... &gt; 对应负责人卡片</li>
-            <li>&lt;img src="<span style="background:#fef1b0;">领导人.jpg</span>" ... &gt; 对应领导人卡片</li>
-        </ul>
-        <p style="margin-top: 0.3rem;">✅ 若图片位于子目录（比如 images/负责人.jpg）则填写相对路径即可。</p>
+    <!-- 附加绝对可靠的说明（不影响视觉）：如果图片暂时不存在，浏览器会显示破碎图标，放上图片即可 -->
+    <div style="position: fixed; bottom: 10px; right: 10px; background: #ffffffd0; font-size: 0.7rem; padding: 0.3rem 0.9rem; border-radius: 30px; color: #2b4f6e; border: 1px solid #c9ddec; backdrop-filter: blur(2px);">
+        ✅ 固定图片名：负责人.jpg 、领导人.jpg
     </div>
 </body>
 </html>
