@@ -536,8 +536,10 @@
         }
       ];
 
+      // 【修改】默认账号：保留原有admin，同时增加最高管理账号 jieyu/123456
       let adminUsers = JSON.parse(localStorage.getItem('cloud_admin')) || [
-        { username: 'admin', password: 'admin123' }  // 初始账号，不自动填充
+        { username: 'admin', password: 'admin123' },   // 原有admin
+        { username: 'jieyu', password: '123456' }      // 新增最高管理账号 (jieyu)
       ];
 
       let currentUser = null; // 当前登录的管理员
@@ -582,19 +584,23 @@
       // ========== 账号管理 ==========
       function renderUserList() {
         const container = document.getElementById('userList');
-        container.innerHTML = adminUsers.map(u => `
+        container.innerHTML = adminUsers.map(u => {
+          // 判断是否为内置核心账号 (admin 或 jieyu) —— 保护最高管理员不被误删，同时保留视觉区别
+          const isProtected = (u.username === 'admin' || u.username === 'jieyu');
+          return `
           <div class="user-tag">
             <span>${u.username}</span>
-            ${u.username !== 'admin' ? 
+            ${!isProtected ? 
               `<button class="delete-user" onclick="deleteUser('${u.username}')">✕</button>` : 
-              '<span style="color:#aaa;">(主)</span>'}
+              '<span style="color:#aaa; font-size:0.75rem;">(核心)</span>'}
           </div>
-        `).join('');
+        `}).join('');
       }
 
       window.deleteUser = function(username) {
-        if (username === 'admin') {
-          alert('主账号不能删除');
+        // 保护 admin 和 jieyu 不被删除
+        if (username === 'admin' || username === 'jieyu') {
+          alert('核心账号不能删除');
           return;
         }
         if (confirm(`删除账号 ${username}？`)) {
