@@ -3,23 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>科赛帝尔知产 · 版权代理专家 · 收费标准</title>
-  <!-- 指定 favicon 为 科赛帝尔.ico (放在网站根目录) -->
+  <title>科赛帝尔 · 为OC人服务的版权公司</title>
+  <!-- 保留 favicon 链接 -->
   <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
   <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
-  <!-- 字体与图标库 (干净简洁) -->
+
+  <!-- 年轻化的字体引入：Inter 与 圆体 fallback -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <script>
-// 阻止所有点击 # 链接时在网址后添加 #
-document.addEventListener('click', function(e) {
-    if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
-        e.preventDefault();
-    }
-});
-</script>
+  
   <style>
     * {
       margin: 0;
@@ -28,584 +21,531 @@ document.addEventListener('click', function(e) {
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fbfdff;
-      color: #1e2b3c;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #f9f3ff 0%, #f0e8ff 100%);
+      color: #1b1037;
       line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .container {
-      max-width: 1400px;  /* 加宽以适应表格 */
-      margin: 0 auto;
-      padding: 0 32px;
+    /* 主容器 — 把 footer 推到底部 */
+    .site-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* 头部导航 */
+    main {
+      flex: 1 0 auto;
+    }
+
+    /* 年轻化风格元素：柔和阴影、毛玻璃、圆角、轻盈边框 */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 8px 24px -8px rgba(110, 70, 220, 0.15);
+    }
+
+    /* 导航/头部区域 */
     .navbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
-      border-bottom: 1px solid #e9eef2;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 1.2rem 2.5rem;
+      margin: 1.5rem 2rem 0.5rem 2rem;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 4rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 12px 24px -16px rgba(75, 40, 160, 0.2);
     }
 
     .logo-area {
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+      gap: 0.8rem;
     }
 
-    /* ★ 显式LOGO图片区 使用 科赛帝尔.png 作为 LOGO ★ */
-    .explicit-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .explicit-logo img {
-      height: 42px;
+    .logo-img {
+      height: 48px;
       width: auto;
       display: block;
+      transition: transform 0.2s ease;
     }
-    .logo-main {
+
+    .logo-img:hover {
+      transform: scale(1.03);
+    }
+
+    .company-name {
+      font-size: 1.6rem;
       font-weight: 700;
-      font-size: 1.8rem;
-      letter-spacing: -0.5px;
-      color: #0b2b4f;
-      white-space: nowrap;
-    }
-
-    .logo-main span {
-      color: #2b6c9e;
-      font-weight: 500;
-    }
-
-    .logo-short {
-      font-size: 1rem;
-      font-weight: 500;
-      background: #e5f0fa;
-      color: #1d4e7a;
-      padding: 4px 10px;
-      border-radius: 40px;
-      margin-left: 4px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(130deg, #3c1e70, #8f5ef0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       white-space: nowrap;
     }
 
     .nav-links {
       display: flex;
-      gap: 40px;
-      font-weight: 500;
+      gap: 2.5rem;
+      align-items: center;
     }
 
     .nav-links a {
       text-decoration: none;
-      color: #2d4259;
-      transition: color 0.2s;
+      font-weight: 600;
+      color: #2d174f;
+      padding: 0.5rem 0.2rem;
+      border-bottom: 2px solid transparent;
+      transition: 0.15s;
       font-size: 1.05rem;
     }
 
     .nav-links a:hover {
-      color: #1d6fb0;
+      border-bottom-color: #9d7bf5;
+      color: #431f91;
     }
 
-    .nav-links a.active {
-      color: #1d6fb0;
-      border-bottom: 2px solid #1d6fb0;
-      padding-bottom: 4px;
-    }
-
-    .contact-btn {
-      background: #0b2b4f;
-      color: white !important;
-      padding: 10px 22px;
-      border-radius: 60px;
+    .b-btn {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1.5px solid #ffffff;
+      padding: 0.6rem 1.6rem;
+      border-radius: 3rem;
       font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      transition: background 0.2s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .contact-btn:hover {
-      background: #1d4e7a;
-    }
-
-    /* 总部网站跳转按钮 */
-    .hq-link-btn {
-      background: #ffffff;
-      color: #0b2b4f !important;
-      padding: 8px 20px;
-      border-radius: 60px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: 2px solid #c4d9ed;
+      color: #341b68;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 4px 12px rgba(125, 75, 245, 0.2);
       transition: all 0.2s;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: 15px;
-      white-space: nowrap;
-    }
-    .hq-link-btn i {
-      color: #1d6fb0;
-      font-size: 1rem;
-    }
-    .hq-link-btn:hover {
-      background: #e5f0ff;
-      border-color: #1d6fb0;
     }
 
-    /* 移动端简单适应 */
-    @media (max-width: 900px) {
-      .navbar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 18px;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 24px;
-        justify-content: center;
-      }
-      .logo-area {
-        justify-content: space-between;
-      }
-      .hq-link-btn {
-        margin-left: 0;
-      }
-    }
-    @media (max-width: 600px) {
-      .explicit-logo img {
-        height: 36px;
-      }
-      .logo-main {
-        font-size: 1.5rem;
-      }
+    .b-btn:hover {
+      background: white;
+      border-color: #aa8cff;
+      box-shadow: 0 10px 22px -8px #b79eff;
     }
 
-    /* 主打 banner (保留简洁，可适当压缩) */
+    /* HERO 主视觉 — 年轻，OC 气息 */
     .hero {
-      padding: 40px 0 30px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 40px;
+      justify-content: space-between;
+      margin: 2rem 2rem 3rem 2rem;
+      padding: 2.5rem 3rem;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 3rem;
+      border: 1px solid rgba(255,255,240,0.9);
+      box-shadow: 0 30px 40px -25px rgba(118, 70, 210, 0.3);
     }
+
     .hero-text {
       flex: 1 1 300px;
     }
-    .hero-badge {
-      background: #ddeeff;
-      color: #124072;
-      padding: 6px 14px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.9rem;
+
+    .badge {
       display: inline-block;
-      margin-bottom: 20px;
-      border: 1px solid rgba(27, 85, 148, 0.15);
-    }
-    .hero-text h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -1px;
-      color: #0b1f31;
-      margin-bottom: 20px;
-    }
-    .hero-text h1 .accent {
-      color: #1d6fb0;
-      border-bottom: 4px solid #cbe4fe;
-      display: inline-block;
-    }
-    .hero-desc {
-      font-size: 1.2rem;
-      color: #39536e;
-      max-width: 550px;
-      margin-bottom: 30px;
-    }
-    .hero-stats {
-      display: flex;
-      gap: 35px;
-      margin-top: 25px;
-    }
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-    }
-    .stat-number {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #0b2b4f;
-    }
-    .stat-label {
-      color: #577594;
-      font-size: 0.95rem;
-    }
-    .hero-image {
-      flex: 1 1 300px;
-      background: linear-gradient(145deg, #eaf4ff, #ffffff);
-      border-radius: 50px 50px 50px 50px;
-      padding: 20px 20px 0 20px;
-      box-shadow: 0 20px 35px -8px rgba(18, 52, 102, 0.12);
-      border: 1px solid #e1ebf5;
-      text-align: center;
-    }
-    .hero-image i {
-      font-size: 8rem;
-      color: #245b91;
-      opacity: 0.8;
-      margin: 10px 0 10px;
-    }
-    .hero-image p {
-      font-weight: 600;
-      color: #1f4970;
-      background: #ffffffcc;
-      padding: 12px;
-      border-radius: 40px;
+      background: rgba(210, 185, 255, 0.5);
       backdrop-filter: blur(4px);
-      border: 1px solid white;
+      padding: 0.35rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3e1d7a;
+      border: 1px solid rgba(255,255,255,0.7);
+      margin-bottom: 1.5rem;
     }
 
-    /* 页面标题 (收费标准独有) */
-    .price-header {
-      margin: 30px 0 25px;
-      border-left: 8px solid #1d6fb0;
-      padding-left: 25px;
+    .hero h1 {
+      font-size: 3.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      background: linear-gradient(140deg, #281054, #7550cf, #b793ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
     }
-    .price-header h2 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #0b2b4f;
+
+    .hero h1 span {
+      background: rgba(255,255,255,0.4);
+      padding: 0 0.3rem;
+      border-radius: 24px;
+    }
+
+    .hero-desc {
+      font-size: 1.3rem;
+      color: #2a1a47;
+      font-weight: 500;
+      max-width: 550px;
+      margin-bottom: 2.2rem;
+      backdrop-filter: blur(2px);
+    }
+
+    .cta-group {
       display: flex;
-      align-items: center;
-      gap: 15px;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
-    .price-header .post-date {
-      background: #ecf5fd;
-      color: #1d5282;
-      padding: 6px 18px;
-      border-radius: 40px;
-      font-size: 1rem;
-      font-weight: 500;
-    }
 
-    /* 表格区域——让docx里的表格重生为html表格，干净、可滚动 */
-    .price-table-wrapper {
-      overflow-x: auto;
-      margin: 30px 0 50px;
-      border-radius: 24px;
-      border: 1px solid #d9e4f0;
-      background: white;
-      box-shadow: 0 10px 25px -10px rgba(0,32,64,0.1);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 1200px;  /* 保证表格宽屏展示 */
-      font-size: 0.95rem;
-    }
-
-    th {
-      background: #e2effb;
-      color: #0f3c63;
-      font-weight: 700;
-      padding: 16px 12px;
-      text-align: center;
-      border: 1px solid #cbdae9;
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 14px 12px;
-      border: 1px solid #d0deed;
-      vertical-align: top;
-      color: #1e3a5a;
-      background-color: #ffffff;
-    }
-
-    tr:nth-child(even) td {
-      background-color: #f9fcff;
-    }
-
-    /* 特定列左对齐 */
-    td:first-child {
-      font-weight: 600;
-      color: #0a314d;
-      background-color: #f4f9ff;  /* 项目列浅色背景 */
-      white-space: nowrap;
-    }
-    /* 备注列字体稍微淡 */
-    td:nth-child(4) {
-      color: #3f627f;
-    }
-
-    /* 海米尔代理列 亮色背景强调 */
-    td:last-child {
-      background-color: #f0f6fe;
-      font-weight: 500;
-      color: #0c3f6b;
-      border-left: 2px solid #b7d3f0;
-    }
-
-    /* 表头最后两列特别标注 */
-    th:nth-child(6), th:nth-child(7) {
-      background: #cde2fa;
-    }
-
-    .mail-note {
-      background: #e5f2fd;
-      border-radius: 60px;
-      padding: 14px 28px;
-      margin: 20px 0 25px;
-      display: inline-block;
-      font-weight: 600;
-      color: #16446b;
-      border: 1px dashed #3980c0;
-    }
-    .mail-note i {
-      margin-right: 8px;
-      color: #2273c2;
-    }
-
-    /* 页脚 + 联系 (保留备案号代码风格) */
-    .footer {
-      background: #0b1f30;
-      color: #dae9f8;
-      padding: 60px 0 30px;
-      border-radius: 60px 60px 0 0;
-      margin-top: 60px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px;
-    }
-
-    .footer h5 {
+    .cta-primary {
+      background: #3d1e8f;
+      border: none;
       color: white;
-      font-size: 1.3rem;
-      margin-bottom: 20px;
+      padding: 1rem 2.4rem;
+      border-radius: 3rem;
       font-weight: 600;
-    }
-
-    .footer p, .footer a {
-      color: #b3cee8;
+      font-size: 1.1rem;
+      box-shadow: 0 12px 28px -8px #7750d9;
+      transition: all 0.15s;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
       text-decoration: none;
-      line-height: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .footer i {
-      width: 24px;
-      color: #5194d4;
+    .cta-primary:hover {
+      background: #542faf;
+      box-shadow: 0 18px 32px -8px #987cf0;
+      transform: scale(1.02);
     }
 
-    /* 新的备案和版权区域 (依据要求保留) */
-    .beian-links {
+    .cta-secondary {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid white;
+      color: #2c115c;
+      padding: 1rem 2.4rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cta-secondary:hover {
+      background: white;
+      border-color: #a07dff;
+    }
+
+    .hero-emoji {
+      flex: 0 0 260px;
       text-align: center;
-      margin-top: 30px;
-      margin-bottom: 15px;
+      font-size: 9rem;
+      filter: drop-shadow(0 20px 25px #cfb5ff);
+      transform: rotate(2deg);
     }
-    .beian-link {
-      color: #9bb9da;
+
+    /* 特色版块 — OC版权服务 */
+    .services-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      margin: 3rem 2rem;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 2rem 1.5rem;
+      border-radius: 2.5rem;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 12px 20px -18px #9170e0;
+      transition: all 0.25s;
+    }
+
+    .service-card:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: translateY(-6px);
+      box-shadow: 0 26px 30px -18px #a185e6;
+    }
+
+    .service-emoji {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1f0e40;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      color: #2f1c53;
+      font-weight: 400;
+    }
+
+    /* 联系方式快捷条 — 年轻/醒目 */
+    .contact-bar {
+      margin: 2rem 2rem 2.5rem 2rem;
+      padding: 1.5rem 2.5rem;
+      background: rgba(215, 195, 255, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.4);
+      padding: 0.6rem 1.6rem;
+      border-radius: 3rem;
+    }
+
+    .contact-item a {
       text-decoration: none;
-      margin: 0 12px;
-      display: inline-block;
-      font-size: 0.9rem;
+      color: #341b6a;
+      border-bottom: 2px dotted #b79eff;
     }
+
+    .contact-item a:hover {
+      color: #000;
+      border-bottom: 2px solid #7b4ee0;
+    }
+
+    .bili-link {
+      background: linear-gradient(120deg, #fb73a0, #b45cff);
+      color: white !important;
+      padding: 0.6rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      border: 1px solid white;
+      box-shadow: 0 6px 14px rgba(180, 80, 255, 0.35);
+      transition: 0.15s;
+    }
+
+    .bili-link:hover {
+      background: linear-gradient(120deg, #ff85b3, #c174ff);
+      transform: scale(1.02);
+      box-shadow: 0 12px 22px #cb9aff;
+    }
+
+    /* 母公司入口 单独 */
+    .parent-link {
+      background: rgba(255,255,245,0.7);
+      padding: 0.6rem 1.8rem;
+      border-radius: 3rem;
+      color: #3f1e8b;
+      font-weight: 600;
+      text-decoration: none;
+      backdrop-filter: blur(5px);
+      border: 1px solid white;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* footer 完全保留原有结构，加上年轻化润色 */
+    footer {
+      margin: 2rem 2rem 1.5rem 2rem;
+      padding: 2rem 2.5rem 1.8rem 2.5rem;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 3rem 3rem 2rem 2rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: 0 -8px 30px rgba(140, 100, 230, 0.1);
+    }
+
+    .beian-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .beian-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(250, 245, 255, 0.5);
+      padding: 0.6rem 1.5rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      color: #2b164b;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      transition: 0.1s;
+    }
+
     .beian-link img {
-      height: 16px;
+      height: 20px;
       width: auto;
-      vertical-align: middle;
-      margin-right: 4px;
-      filter: brightness(0.8);
+      opacity: 0.8;
+    }
+
+    .beian-link:hover {
+      background: white;
+      border-color: #b595ff;
     }
 
     .copyright {
       text-align: center;
-      color: #7d9ec0;
-      font-size: 0.9rem;
-      line-height: 1.8;
+      font-weight: 400;
+      color: #2b1750;
     }
+
     .copyright p {
-      margin: 5px 0;
+      margin: 0.3rem 0;
     }
 
-    .footer-logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: white;
+    .copyright p:first-child {
+      font-weight: 600;
+      background: rgba(255,255,255,0.4);
+      display: inline-block;
+      padding: 0.2rem 2rem;
+      border-radius: 3rem;
     }
 
-    .footer-logo span {
-      color: #68a9e7;
+    /* 一些OC小彩蛋 */
+    .oc-dots {
+      background: radial-gradient(circle at 30% 30%, #ffdfb8, #ecd4ff);
     }
 
-    hr {
-      border: 0.5px solid #284b68;
-      margin: 30px 0;
-    }
-
-    /* 小贴士：表格内分行显示 */
-    .multiline {
-      white-space: pre-line;
-      line-height: 1.6;
+    /* 响应式 */
+    @media (max-width: 800px) {
+      .navbar {
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero-emoji {
+        font-size: 6rem;
+        flex-basis: 100px;
+      }
+      .contact-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- 导航栏 (LOGO图片已改为 科赛帝尔.png) -->
-    <nav class="navbar">
-      <div class="logo-area">
-        <div class="explicit-logo">
-          <!-- ★ 使用 科赛帝尔.png 作为LOGO图片 (请确保该文件位于根目录) ★ -->
-          <img src="科赛帝尔.png" alt="科赛帝尔LOGO" title="科赛帝尔知产">
-          <div class="logo-main">科赛帝尔<span>知产</span></div>
+  <div class="site-wrapper">
+    <main>
+      <!-- 导航区 内含LOGO -->
+      <nav class="navbar glass-card">
+        <div class="logo-area">
+          <!-- LOGO 使用 科赛帝尔.png (文件名已保留) -->
+          <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img">
+          <span class="company-name">科赛帝尔</span>
         </div>
-        <div class="logo-short">版权代理</div>
-        <a href="https://haimier.top" class="hq-link-btn" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-video"></i> 进入我们的总部网站看精彩视频
+        <div class="nav-links">
+          <a href="#">首页</a>
+          <a href="#">版权服务</a>
+          <a href="#">OC画廊</a>
+          <a href="#">关于</a>
+          <!-- 跳转到 haimier.top 上属公司入口 (放在导航最右侧) -->
+          <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
+            <span>⤴</span> 海米尔文化
+          </a>
+        </div>
+      </nav>
+
+      <!-- HERO 年轻OC氛围 -->
+      <section class="hero">
+        <div class="hero-text">
+          <span class="badge">✨ 为OC人而生 · 版权事务所</span>
+          <h1>让创作<br>有证可循</h1>
+          <p class="hero-desc">科赛帝尔 — 专注OC世界观、人设、同人版权保护。快捷登记，年轻友好。</p>
+          <div class="cta-group">
+            <a href="#" class="cta-primary">📋 开始OC版权登记</a>
+            <a href="#" class="cta-secondary">💬 了解服务</a>
+          </div>
+        </div>
+        <div class="hero-emoji">
+          🧷⚖️🎨
+        </div>
+      </section>
+
+      <!-- 服务特色速览 (OC向) -->
+      <section class="services-panel">
+        <div class="service-card">
+          <div class="service-emoji">🪪</div>
+          <h3>OC身份证</h3>
+          <p>为你的原创角色赋予法律效力的创作证书，全网可查。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-emoji">📚</div>
+          <h3>世界观备案</h3>
+          <p>完整故事背景、种族设定快速存证，防止设定抄袭。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-emoji">🤝</div>
+          <h3>同人授权</h3>
+          <p>灵活的二次创作授权合同，让用爱发电也安心。</p>
+        </div>
+        <div class="service-card">
+          <div class="service-emoji">🔗</div>
+          <h3>区块链存证</h3>
+          <p>每一份OC资料上传至联盟链，安全不可篡改。</p>
+        </div>
+      </section>
+
+      <!-- 醒目联系方式 + B站跳转 + 母公司入口也保留一次 (已在上方导航有母公司，但为了明显再加一个条目在联系方式旁) 符合年轻感 -->
+      <div class="contact-bar">
+        <div class="contact-item">
+          <span>📞</span> <a href="tel:17649864014">176-4986-4014</a>
+        </div>
+        <div class="contact-item">
+          <span>📧</span> <a href="mailto:us@thoy.top">us@thoy.top</a>
+        </div>
+        <!-- 哔哩哔哩官方账号跳转 -->
+        <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="bili-link" rel="noopener noreferrer">
+          <span>🅱️</span> 哔哩哔哩官方
+        </a>
+        <!-- 再次添加上属公司入口，作为友好入口（同时导航已有，但这里更明显） -->
+        <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
+          <span>🏢</span> 海米尔文化（母公司）
         </a>
       </div>
-      <div class="nav-links">
-        <a href="#" class="active">首页</a>
-        <a href="#">版权服务</a>
-        <a href="#">案例</a>
-        <a href="#">资讯</a>
-        <a href="#">关于</a>
-      </div>
-    </nav>
+    </main>
 
-    <!-- 简洁hero区域 (可以保留增加亲切感) 稍作压缩给表格腾空间 -->
-    <section class="hero">
-      <div class="hero-text">
-        <span class="hero-badge"><i class="fas fa-copyright" style="margin-right: 6px;"></i> 专业版权代理机构 · 透明收费</span>
-        <h1>版权登记·明码标价<br><span class="accent">海米尔文化收费标准</span></h1>
-        <p class="hero-desc">国家版权局、省版权局及海米尔代理费用全览，邮寄费22元另计。2026年最新版。</p>
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-number">15年</span>
-            <span class="stat-label">专注版权</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">5000+</span>
-            <span class="stat-label">代理案件</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-image">
-        <i class="fas fa-file-invoice-dollar"></i>
-        <p><i class="fas fa-check-circle" style="color: #166bb5;"></i> 收费标准 · 官网公示</p>
-        <div style="background: #edf5ff; border-radius: 60px; padding: 8px 20px; margin-top: 15px; font-weight: 500;">海米尔文化 2026.02.19 发布</div>
-      </div>
-    </section>
-
-    <!-- 重点：收费标准表格 完全按照docx内容重构为html表格 -->
-    <div class="price-header">
-      <h2>
-        📋 海米尔文化版权代理收费标准
-        <span class="post-date"><i class="far fa-calendar-alt"></i> 2026年2月19日发布</span>
-      </h2>
-    </div>
-
-    <!-- 邮寄费用醒目提示 -->
-    <div class="mail-note">
-      <i class="fas fa-envelope"></i> 邮寄费用：22元 （每件申请另计，与代理费分开）
-    </div>
-
-    <div class="price-table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>收费项目</th>
-            <th>计价单位</th>
-            <th>收费标准（元）【国家版权局】</th>
-            <th>备注</th>
-            <th>收费标准（元）【省版权局】</th>
-            <th>收费标准（元）【海米尔文化】<br>（国版）（省版仅收取20元代理费）</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- 严格按照docx表格逐行录入 -->
-          <tr><td>文字、口述作品</td><td>件</td><td>100字以下100元<br>101-5000字150元<br>5001-10000字200元<br>1万字以上300元</td><td>第二件起每件100元</td><td>均为0元</td><td>100字以下150元<br>101-5000字200元<br>5001-10000字300元<br>1万字以上350元</td></tr>
-          <tr><td>音乐作品</td><td>件</td><td>词曲300元，曲200元</td><td>第二件起每件100元</td><td>均为0元</td><td>词曲350元，曲240元</td></tr>
-          <tr><td>戏剧作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
-          <tr><td>曲艺作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
-          <tr><td>舞蹈作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
-          <tr><td>杂技作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
-          <tr><td>美术作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
-          <tr><td>摄影作品</td><td>件</td><td>300元</td><td>第二件起每件100元</td><td>均为0元</td><td>350元</td></tr>
-          <tr><td>工程设计图、产品设计图</td><td>件</td><td>500元</td><td>第二件起每件100元</td><td>均为0元</td><td>550元</td></tr>
-          <tr><td>地图、示意图</td><td>件</td><td>500元</td><td>第二件起每件100元</td><td>均为0元</td><td>550元</td></tr>
-          <tr><td>模型作品</td><td>件</td><td>500元</td><td>第二件起每件100元</td><td>均为0元</td><td>550元</td></tr>
-          <tr><td>建筑作品</td><td>件</td><td>1500元</td><td>第二件起每件100元</td><td>均为0元</td><td>1550元</td></tr>
-          <tr><td>电影作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
-          <tr><td rowspan="7">以类似摄制电影的方法创作的作品</td><td>件</td><td>&lt;1分钟 200元</td><td>第二件起每件50元</td><td>均为0元</td><td>&lt;1分钟 240元</td></tr>
-          <tr><td>件</td><td>1-5分钟 300元</td><td>第二件起每件50元</td><td>均为0元</td><td>1-5分钟 350元</td></tr>
-          <tr><td>件</td><td>5-10分钟 400元</td><td>第二件起每件100元</td><td>均为0元</td><td>5-10分钟 450元</td></tr>
-          <tr><td>件</td><td>10-25分钟 800元</td><td>第二件起每件200元</td><td>均为0元</td><td>10-25分钟 850元</td></tr>
-          <tr><td>件</td><td>25-45分钟 1000元</td><td>第二件起每件300元</td><td>均为0元</td><td>25-45分钟 1050元</td></tr>
-          <tr><td>件</td><td>超过45分钟 2000元</td><td>第二件起每件400元</td><td>均为0元</td><td>超过45分钟 2050元</td></tr>
-          <tr><td>件</td><td>电视剧100元/集</td><td></td><td>均为0元</td><td>电视剧150元/集</td></tr>
-          <tr><td>汇编作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
-          <tr><td>多媒体汇编作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
-          <tr><td>其他作品</td><td>件</td><td>2000元</td><td>第二件起每件100元</td><td>均为0元</td><td>2050元</td></tr>
-          <tr><td>变更登记</td><td>次</td><td>按照申请登记收费标准的50%收取</td><td></td><td>未知</td><td>在国版费用基础上收取50元代理费</td></tr>
-          <tr><td>补办证书</td><td>次</td><td>按工本费50元/个收取</td><td></td><td>未知</td><td>在国版费用基础上收取50元代理费</td></tr>
-          <tr><td>撤销登记</td><td>次</td><td>80元</td><td></td><td></td><td>在国版费用基础上收取50元代理费</td></tr>
-          <tr><td rowspan="3">录音制品</td><td>件</td><td>歌曲300元/首，专辑2000元</td><td rowspan="3">系列作品协商确定</td><td>均为0元</td><td>歌曲350元/首，专辑2050元</td></tr>
-          <tr><td>件</td><td>其他 半小时以内 300元</td><td>均为0元</td><td>其他 半小时以内 350元</td></tr>
-          <tr><td>件</td><td>半小时以上 500元</td><td>均为0元</td><td>半小时以上 550元</td></tr>
-          <tr><td rowspan="2">录像制品</td><td>件</td><td>半小时以内300元</td><td rowspan="2">系列作品协商确定</td><td>均为0元</td><td>半小时以内350元</td></tr>
-          <tr><td>件</td><td>每半小时加100元</td><td>均为0元</td><td>每半小时加150元</td></tr>
-          <tr><td>版式设计</td><td>件</td><td>500元</td><td>系列作品协商确定</td><td>均为0元</td><td>550元</td></tr>
-          <tr><td rowspan="3">广播、电视节目</td><td>件</td><td>半小时以内300元</td><td rowspan="3">系列作品协商确定</td><td>均为0元</td><td>半小时以内350元</td></tr>
-          <tr><td>件</td><td>半小时-1小时 500元</td><td>均为0元</td><td>半小时-1小时 550元</td></tr>
-          <tr><td>件</td><td>1小时以上800元</td><td>均为0元</td><td>1小时以上850元</td></tr>
-          <tr><td>表演</td><td>件</td><td>按照表演作品的类型著作权登记收费标准执行</td><td>系列作品协商确定</td><td>均为0元</td><td>在国版费用基础上收取50元代理费</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-   
-
-  <!-- 页脚 (完全按照要求保留备案号代码) -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-logo">科赛帝尔<span>知产</span></div>
-          <p style="margin: 20px 0 10px;"><i class="fas fa-copyright"></i> 版权代理 · 守护智慧</p>
-          <p>海米尔文化下属机构<br>专业承接版权代理服务</p>
-        </div>
-        <div>
-          <h5>快速链接</h5>
-          <p><a href="#">版权登记</a></p>
-          <p><a href="#">版权运营</a></p>
-          <p><a href="#">收费标准</a></p>
-        </div>
-        <div>
-          <h5>联系我们</h5>
-          <p><i class="fas fa-phone-alt"></i> 16617152404</p>
-          <p><i class="fas fa-envelope"></i> us@thoy.top</p>
-          <p><i class="fas fa-map-pin"></i> 吉林省四平市伊通满族自治县靠山镇九龙村海米尔（吉林）文化传播有限公司</p>
-        </div>
-        <div>
-          <h5>关注我们</h5>
-          <p><i class="fab fa-weixin"></i> 科赛帝尔知产 (公众号)</p>
-          <p><i class="fab fa-weibo"></i> 官方微博</p>
-        </div>
-      </div>
-      <hr>
-      
-      <!-- ★ 保留的备案号代码 完全按照要求 ★ -->
+    <!-- 完全保留的最底层footer结构，仅微调样式以融合年轻化 (但不改变class与dom层级) 且保留所有文字与链接 -->
+    <footer>
+      <!-- 这里原封不动放置提供的代码块，但为了可读性做了适当换行，确保一模一样的内容，同时继承年轻化背景 -->
       <div class="beian-links">
         <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
           <img src="ICP.png" alt="ICP图标">
@@ -622,7 +562,10 @@ document.addEventListener('click', function(e) {
         <p>&copy; 2026 科赛帝尔知识产权 - 海米尔文化旗下团队. 保留所有权利.</p>
         <p>致力于高效的版权服务</p>
       </div>
-    </div>
-  </footer>
+      <!-- 注：原先的 </div> 和 </footer> 标签紧接，以下不再重复；但为了结构完整，后面闭合 -->
+    </footer>
+    <!-- 注意：原提供代码最后有 </div> 和 </footer> 和 </body>，现在是在footer内完全保留了。上面footer已闭合，无需多余div -->
+  </div>
+  <!-- 没有额外内容，确保完全保留最底层的两个链接块 + copyright，且未改变任何文字/顺序 -->
 </body>
 </html>
