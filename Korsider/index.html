@@ -3,31 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>版权登记系统 · 完整信息上传</title>
-  <!-- 保留 favicon 链接（与官网一致） -->
+  <title>科赛帝尔 · 完整版权系统</title>
+  <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
   <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
-
-  <!-- 年轻化字体 Inter -->
+  <!-- 字体 Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Inter', sans-serif;
       background: linear-gradient(145deg, #e9dfff 0%, #dacdff 100%);
       color: #1b0b3b;
       min-height: 100vh;
       padding: 2rem 1.5rem;
     }
-
     .glass-panel {
       background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(12px);
@@ -36,951 +28,436 @@
       border-radius: 2.5rem;
       box-shadow: 0 30px 50px -30px rgba(99, 60, 190, 0.4);
     }
+    .container { max-width: 1300px; margin: 0 auto; }
 
-    .container {
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    /* 头部导航 */
-    .reg-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      margin-bottom: 2rem;
-      background: rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(10px);
+    /* 导航/头部 */
+    .nav-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2rem; margin-bottom: 2rem;
+      background: rgba(255,255,255,0.35); backdrop-filter: blur(10px);
       border-radius: 4rem;
     }
+    .logo-area { display: flex; align-items: center; gap: 0.8rem; }
+    .logo-area img { height: 48px; width: auto; }
+    .logo-area span {
+      font-weight: 700; font-size: 1.6rem;
+      background: linear-gradient(130deg,#3f1b7b,#8d62f0); -webkit-background-clip: text;
+      background-clip: text; color: transparent;
+    }
+    .nav-links { display: flex; gap: 1rem; }
+    .nav-link {
+      background: rgba(255,255,255,0.5); padding: 0.6rem 1.8rem; border-radius: 3rem;
+      text-decoration: none; color: #2c0f5c; font-weight: 600; border:1px solid white;
+    }
+    .nav-link:hover { background: white; }
 
-    .logo-small {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+    /* 标题区 */
+    .page-header { text-align: center; margin: 1rem 0 3rem; }
+    .page-header h1 {
+      font-size: 3.2rem; font-weight: 800;
+      background: linear-gradient(145deg,#26114b,#7349cf,#b28eff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .page-header p {
+      background: rgba(255,255,240,0.5); display: inline-block;
+      padding: 0.3rem 2rem; border-radius: 3rem;
     }
 
-    .logo-small img {
-      height: 40px;
-      width: auto;
+    /* 前台卡片 */
+    .form-card { padding: 2.5rem; background: rgba(255,255,255,0.45); backdrop-filter: blur(16px); border-radius: 3rem; margin-bottom: 2.5rem; }
+    .section-title { font-size: 1.9rem; font-weight: 700; margin: 2rem 0 1.5rem; border-left: 8px solid #aa8aff; padding-left: 1.5rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-bottom: 2rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-weight: 600; color: #281552; margin-left: 0.5rem; display: flex; align-items: center; gap: 0.3rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      background: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.9);
+      border-radius: 2rem; padding: 0.9rem 1.5rem; font-size: 1rem; outline: none;
     }
-
-    .logo-small span {
-      font-weight: 700;
-      font-size: 1.4rem;
-      background: linear-gradient(130deg, #3f1b7b, #8d62f0);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .back-link {
-      text-decoration: none;
-      color: #2c0f5c;
-      font-weight: 600;
-      background: rgba(255,255,255,0.5);
-      padding: 0.5rem 1.8rem;
-      border-radius: 3rem;
-      border: 1px solid white;
-      transition: 0.1s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .back-link:hover {
-      background: white;
-      border-color: #b79eff;
-    }
-
-    .reg-header {
-      text-align: center;
-      margin: 1rem 0 3rem 0;
-    }
-
-    .reg-header h1 {
-      font-size: 3.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(145deg, #26114b, #7349cf, #b28eff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      margin-bottom: 0.5rem;
-    }
-
-    .reg-header p {
-      font-size: 1.3rem;
-      color: #38236d;
-      background: rgba(255,255,240,0.5);
-      display: inline-block;
-      padding: 0.3rem 2rem;
-      border-radius: 3rem;
-      backdrop-filter: blur(4px);
-    }
-
-    /* 双通道选项卡 */
-    .channel-tabs {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2.5rem;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      background: rgba(255,255,255,0.4);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.8);
-      padding: 1rem 3rem;
-      border-radius: 3rem;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #321d5e;
-      cursor: pointer;
-      transition: 0.15s;
-      box-shadow: 0 4px 12px rgba(139, 106, 235, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .tab-btn.active {
-      background: white;
-      border-color: #9c7af0;
-      box-shadow: 0 12px 22px -8px #b49bff;
-      color: #271151;
-    }
-
-    .tab-btn:hover {
-      background: rgba(255,255,255,0.8);
-    }
-
-    .reg-system {
-      padding: 2.5rem;
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(16px);
-      border-radius: 3rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .tab-content {
-      display: none;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    .type-badge {
-      display: inline-block;
-      background: #5636a8;
-      color: white;
-      padding: 0.3rem 1.8rem;
-      border-radius: 3rem;
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-right: 0.8rem;
-      letter-spacing: 0.3px;
-    }
-
-    .section-title {
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin: 2.5rem 0 1.5rem 0;
-      color: #1f0947;
-      border-left: 8px solid #aa8aff;
-      padding-left: 1.5rem;
-    }
-
-    /* 作品类型网格 */
-    .copyright-type-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0 2.5rem 0;
-    }
-
-    .type-card {
-      background: rgba(255,255,255,0.5);
-      border-radius: 2rem;
-      padding: 1.2rem 1rem;
-      border: 1px solid white;
-      text-align: center;
-      font-weight: 600;
-      color: #2d155b;
-      transition: 0.1s;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-    }
-
-    .type-card.selected {
-      background: #7d5fd3;
-      color: white;
-      border-color: #ffffff;
-      box-shadow: 0 8px 18px #aa8eff;
-    }
-
-    .type-card input[type="radio"] {
-      display: none;
-    }
-
-    /* 表单双列 */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.8rem;
-      margin-bottom: 2rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      color: #281552;
-      margin-left: 0.5rem;
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      border-radius: 2rem;
-      padding: 0.9rem 1.5rem;
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: 0.15s;
-      backdrop-filter: blur(4px);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: #aa86ff;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 0 0 4px rgba(170, 134, 255, 0.2);
-    }
-
-    .form-group textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    /* 上传区域样式 */
+    .form-group input:focus { border-color: #aa86ff; background: rgba(255,255,255,0.9); box-shadow: 0 0 0 4px rgba(170,134,255,0.2); }
     .upload-area {
-      background: rgba(255, 255, 255, 0.4);
-      border: 2px dashed #aa8aff;
-      border-radius: 2rem;
-      padding: 2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.1s;
-      margin-bottom: 1rem;
+      background: rgba(255,255,255,0.4); border: 2px dashed #aa8aff; border-radius: 2rem;
+      padding: 2rem; text-align: center; cursor: pointer; margin-bottom: 1rem;
     }
-
-    .upload-area:hover {
-      background: rgba(255, 255, 255, 0.7);
-      border-color: #7b4ee0;
-    }
-
-    .upload-area input[type="file"] {
-      display: none;
-    }
-
-    .file-list {
-      margin-top: 1rem;
-      font-size: 0.95rem;
-    }
-
+    .upload-area:hover { background: rgba(255,255,255,0.7); }
+    .upload-area input[type="file"] { display: none; }
+    .file-list { margin-top: 1rem; }
     .file-item {
-      background: rgba(255,255,255,0.5);
-      border-radius: 2rem;
-      padding: 0.5rem 1.5rem;
-      margin: 0.3rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: rgba(255,255,255,0.5); border-radius: 2rem; padding: 0.5rem 1.5rem;
+      margin: 0.3rem 0; display: flex; justify-content: space-between;
     }
-
-    /* 签名绘制区域 */
     .signature-pad {
-      background: white;
-      border-radius: 2rem;
-      padding: 1rem;
-      border: 2px solid #aa8aff;
-      margin: 1rem 0;
+      background: white; border-radius: 2rem; padding: 1rem; border: 2px solid #aa8aff;
     }
-
-    canvas {
-      width: 100%;
-      height: 150px;
-      background: white;
-      border-radius: 1rem;
-      cursor: crosshair;
-      touch-action: none;
-    }
-
-    .signature-actions {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
+    canvas { width: 100%; height: 150px; background: white; border-radius: 1rem; cursor: crosshair; touch-action: none; }
+    .signature-actions { display: flex; gap: 1rem; margin-top: 1rem; }
     .signature-actions button {
-      background: rgba(255,255,255,0.6);
-      border: 1px solid white;
-      padding: 0.5rem 2rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      font-weight: 600;
+      background: rgba(255,255,255,0.6); border: 1px solid white; padding: 0.5rem 2rem;
+      border-radius: 2rem; cursor: pointer; font-weight: 600;
     }
-
-    /* 预览面板 */
-    .preview-panel {
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 2rem;
-      padding: 2rem;
-      margin: 2.5rem 0;
-      border: 1px solid rgba(255,255,255,0.8);
-    }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-
-    .preview-item {
-      background: rgba(255,255,255,0.5);
-      border-radius: 1.5rem;
-      padding: 1.2rem;
-      border: 1px solid white;
-    }
-
-    .preview-label {
-      font-weight: 700;
-      color: #381d6b;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .preview-value {
-      word-break: break-word;
-      background: rgba(255,255,255,0.3);
-      padding: 0.8rem;
-      border-radius: 1rem;
-    }
-
-    .preview-file {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .file-tag {
-      background: #7b5fd3;
-      color: white;
-      padding: 0.2rem 1rem;
-      border-radius: 2rem;
-      font-size: 0.85rem;
-    }
-
-    .chain-box {
-      background: rgba(210, 190, 255, 0.25);
-      border-radius: 2rem;
-      padding: 1.5rem 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      margin: 2.5rem 0 2rem;
-      border: 1px solid rgba(255,255,255,0.7);
-    }
-
-    .chain-hash {
-      font-family: monospace;
-      background: rgba(0,0,0,0.05);
-      padding: 0.5rem 1rem;
-      border-radius: 2rem;
-      font-size: 0.9rem;
-      color: #2e1b52;
-      letter-spacing: 1px;
-    }
-
-    .badge-chain {
-      background: #6a3fc9;
-      color: white;
-      padding: 0.4rem 1.8rem;
-      border-radius: 3rem;
-      font-weight: 600;
-      box-shadow: 0 6px 14px #b597ff;
-    }
-
-    .action-buttons {
-      display: flex;
-      gap: 2rem;
-      justify-content: flex-end;
-      margin-top: 2.2rem;
-      flex-wrap: wrap;
-    }
-
     .btn-primary {
-      background: #3f1e8f;
-      border: none;
-      color: white;
-      padding: 1.1rem 3rem;
-      border-radius: 3rem;
-      font-weight: 700;
-      font-size: 1.2rem;
-      box-shadow: 0 14px 28px -10px #7e5de0;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.4);
-      transition: 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.8rem;
+      background: #3f1e8f; border: none; color: white; padding: 1.1rem 3rem;
+      border-radius: 3rem; font-weight: 700; font-size: 1.2rem;
+      box-shadow: 0 14px 28px -10px #7e5de0; cursor: pointer; display: inline-flex; align-items: center; gap:0.8rem;
     }
+    .btn-primary:hover { background: #5d35bb; transform: scale(1.02); }
+    .btn-danger {
+      background: #b44; border: none; color: white; padding: 0.6rem 1.5rem;
+      border-radius: 3rem; font-weight: 600; cursor: pointer;
+    }
+    .toast {
+      background: rgba(70,30,140,0.9); backdrop-filter: blur(10px); color: white;
+      padding: 1rem 2.5rem; border-radius: 4rem; width: fit-content; margin: 1rem auto 0; display: none;
+    }
+    .toast.show { display: block; }
 
-    .btn-primary:hover {
-      background: #5d35bb;
-      transform: scale(1.02);
-      box-shadow: 0 18px 32px -8px #aa8eff;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.6);
-      border: 1.5px solid white;
-      color: #2e135c;
-      padding: 1.1rem 3rem;
-      border-radius: 3rem;
-      font-weight: 600;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: 0.15s;
-      backdrop-filter: blur(4px);
-    }
-
-    .btn-secondary:hover {
-      background: white;
-      border-color: #aa8aff;
-    }
-
-    .toast-message {
-      background: rgba(70, 30, 140, 0.9);
-      backdrop-filter: blur(10px);
-      color: white;
-      padding: 1rem 2.5rem;
-      border-radius: 4rem;
-      font-weight: 600;
-      text-align: center;
-      width: fit-content;
-      margin: 1rem auto 0;
-      border: 1px solid rgba(255,255,255,0.6);
-      display: none;
-    }
-
-    .toast-message.show {
-      display: block;
-    }
-
-    .footer-note {
-      text-align: center;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-      color: #3a2570;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(4px);
-      padding: 1.2rem;
-      border-radius: 5rem;
-    }
-
-    hr {
-      border: 0.5px solid rgba(255,255,255,0.5);
-      margin: 2rem 0 1rem;
-    }
-
-    @media (max-width: 700px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-      .reg-system {
-        padding: 1.5rem;
-      }
-    }
+    /* 后台样式 (深色) */
+    .admin-body { background: linear-gradient(145deg, #1a1035 0%, #2e1b55 100%); color: #f0eaff; }
+    .admin-glass { background: rgba(30,20,50,0.6); backdrop-filter: blur(16px); border:1px solid rgba(255,255,255,0.15); }
+    .login-container { max-width: 420px; margin: 5rem auto; padding: 2.5rem; }
+    .admin-container { max-width: 1400px; margin: 2rem auto; display: none; }
+    .stats-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+    .stat-card { background: rgba(255,255,255,0.05); border-radius:2rem; padding:1.5rem; }
+    .stat-number { font-size:2.5rem; font-weight:800; color:white; }
+    .data-section { background: rgba(255,255,255,0.03); border-radius:2rem; padding:2rem; margin-bottom:2rem; }
+    table { width:100%; border-collapse: collapse; }
+    th { text-align: left; padding:1rem 0.5rem; color:#c3b0ff; border-bottom:1px solid rgba(255,255,255,0.1); }
+    td { padding:1rem 0.5rem; border-bottom:1px solid rgba(255,255,255,0.05); color:#ece5ff; }
+    .file-tag { background:rgba(170,138,255,0.2); border:1px solid rgba(255,255,255,0.2); padding:0.2rem 1rem; border-radius:2rem; font-size:0.85rem; }
+    .dot-signed { width:10px; height:10px; background:#62dd9a; border-radius:50%; display:inline-block; margin-right:0.3rem; }
+    .dot-unsigned { background:#ff7b7b; width:10px; height:10px; border-radius:50%; display:inline-block; margin-right:0.3rem; }
+    .view-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white; padding:0.3rem 1.2rem; border-radius:2rem; cursor:pointer; }
+    .modal-overlay { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); z-index:999; }
+    .detail-modal { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#251d3b; padding:2.5rem; border-radius:2.5rem; max-width:600px; width:90%; z-index:1000; }
+    .admin-row { display: flex; gap: 2rem; margin: 2rem 0; flex-wrap: wrap; }
+    .admin-card { background: rgba(255,255,255,0.05); border-radius: 2rem; padding: 1.8rem; flex: 1; }
+    .admin-card input { background: #332b4e; border: 1px solid #6655aa; color: white; padding: 0.8rem 1.5rem; border-radius: 3rem; width: 100%; margin: 0.5rem 0; }
+    .user-list { margin-top: 1rem; }
+    .user-item { display: flex; justify-content: space-between; align-items: center; background: #2a1f44; padding: 0.6rem 1.2rem; border-radius: 3rem; margin: 0.5rem 0; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- 头部导航 -->
-    <nav class="reg-nav glass-panel">
-      <div class="logo-small">
-        <img src="科赛帝尔.png" alt="科赛帝尔">
-        <span>科赛帝尔</span>
-      </div>
-      <a href="./" class="back-link">← 返回官网</a>
-    </nav>
-
-    <!-- 标题 -->
-    <div class="reg-header">
-      <h1>📚 版权登记系统</h1>
-      <p>上传身份信息 · 作品文件 · 签名确认</p>
-    </div>
-
-    <!-- 国家/地方 选项卡 -->
-    <div class="channel-tabs">
-      <div class="tab-btn active" id="tabNational" data-tab="national">🏛️ 国家版权登记</div>
-      <div class="tab-btn" id="tabLocal" data-tab="local">📍 地方版权登记</div>
-    </div>
-
-    <!-- 登记系统主卡 -->
-    <div class="reg-system glass-panel">
-      <!-- 国家版权内容 -->
-      <div id="nationalContent" class="tab-content active">
-        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-          <span class="type-badge">国家作品著作权登记</span>
-          <span style="color:#38236d;">国家版权局 · 全国通用</span>
+  <!-- 简单路由：前台 / 后台切换显示 -->
+  <div id="app">
+    <!-- 前台界面 (korsider) -->
+    <div id="frontend" class="container">
+      <nav class="nav-header glass-panel">
+        <div class="logo-area"><img src="科赛帝尔.png" alt=""><span>科赛帝尔</span></div>
+        <div class="nav-links">
+          <a class="nav-link" href="#" onclick="switchToAdmin()">后台管理</a>
         </div>
-
-        <!-- 作品类型选择 -->
-        <div class="section-title">📌 选择作品类型</div>
-        <div class="copyright-type-grid" id="nationalTypeGrid">
-          <label class="type-card"><input type="radio" name="nationalType" value="文字作品" checked> 📝 文字作品</label>
-          <label class="type-card"><input type="radio" name="nationalType" value="美术作品"> 🎨 美术作品</label>
-          <label class="type-card"><input type="radio" name="nationalType" value="摄影作品"> 📸 摄影作品</label>
-          <label class="type-card"><input type="radio" name="nationalType" value="音乐作品"> 🎵 音乐作品</label>
-          <label class="type-card"><input type="radio" name="nationalType" value="视听作品"> 🎬 视听作品</label>
-          <label class="type-card"><input type="radio" name="nationalType" value="计算机软件"> 💻 计算机软件</label>
-        </div>
-
-        <!-- 身份信息 + 地址 + 联系方式 + 邮箱 -->
+      </nav>
+      <div class="page-header"><h1>📚 版权登记系统</h1><p>thoy.top/korsider · 数据直传后台</p></div>
+      <div class="form-card glass-panel">
         <div class="section-title">👤 申请人信息</div>
         <div class="form-row">
-          <div class="form-group">
-            <label>姓名/名称</label>
-            <input type="text" id="nationalName" placeholder="" value="">
-          </div>
-          <div class="form-group">
-            <label>证件类型</label>
-            <select id="nationalIdType">
-              <option>身份证</option>
-              <option>营业执照</option>
-              <option>护照</option>
-            </select>
-          </div>
+          <div class="form-group"><label>姓名/名称</label><input id="name" value="李沐"></div>
+          <div class="form-group"><label>证件号码</label><input id="idNumber" value="110101199001011234"></div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label>证件号码</label>
-            <input type="text" id="nationalIdNumber" placeholder="" value="">
-          </div>
-          <div class="form-group">
-            <label>手机号码</label>
-            <input type="tel" id="nationalPhone" placeholder="" value="">
-          </div>
+          <div class="form-group"><label>手机号码</label><input id="phone" value="17649864014"></div>
+          <div class="form-group"><label>电子邮箱</label><input id="email" value="us@thoy.top"></div>
         </div>
+        <div class="form-group"><label>通讯地址</label><input id="address" value="吉林省长春市朝阳区前进大街2699号"></div>
+
+        <div class="section-title">🎨 作品信息</div>
         <div class="form-row">
-          <div class="form-group">
-            <label>电子邮箱</label>
-            <input type="email" id="nationalEmail" placeholder="" value="">
-          </div>
-          <div class="form-group">
-            <label>通讯地址</label>
-            <input type="text" id="nationalAddress" placeholder="" value="">
-          </div>
+          <div class="form-group"><label>作品名称</label><input id="workName" value="星穹纪元 世界观设定集"></div>
+          <div class="form-group"><label>创作日期</label><input type="date" id="completionDate" value="2025-08-15"></div>
         </div>
 
-        <!-- 作品信息 -->
-        <div class="section-title">✍️ 作品信息</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>作品名称</label>
-            <input type="text" id="nationalWorkName" value="">
-          </div>
-          <div class="form-group">
-            <label>创作完成日期</label>
-            <input type="date" id="nationalCompletionDate" value="">
-          </div>
-        </div>
-
-        <!-- 上传身份证明文件 + 作品文件 -->
         <div class="section-title">📎 上传材料</div>
         <div class="form-group">
-          <label>身份证明文件 (身份证/营业执照)</label>
-          <div class="upload-area" id="idUploadArea">
-            <input type="file" id="idFile" accept=".jpg,.png,.pdf">
-            <span>📎 点击上传或拖拽文件 (支持jpg、png、pdf)</span>
-            <div class="file-list" id="idFileList"></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>作品文件 (样本/源文件)</label>
-          <div class="upload-area" id="workUploadArea">
-            <input type="file" id="workFile" accept=".jpg,.png,.pdf,.doc,.docx,.txt,.zip" multiple>
-            <span>📁 点击上传作品文件 (可多选)</span>
-            <div class="file-list" id="workFileList"></div>
-          </div>
-        </div>
-
-        <!-- 签名板 -->
-        <div class="section-title">✍️ 电子签名</div>
-        <div class="signature-pad">
-          <canvas id="signatureCanvas" width="600" height="150"></canvas>
-          <div class="signature-actions">
-            <button type="button" id="clearSignature">清除签名</button>
-            <button type="button" id="saveSignature">保存签名</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 地方版权内容 (类似，但保持独立输入字段) -->
-      <div id="localContent" class="tab-content">
-        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
-          <span class="type-badge" style="background:#2f6b3b;">地方版权登记</span>
-          <span style="color:#38236d;">各省市版权局</span>
-        </div>
-
-        <!-- 省份选择 -->
-        <div class="form-row">
-          <div class="form-group">
-            <label>省份/直辖市</label>
-            <select id="localProvince">
-              <option>重庆市</option>
-              <option selected>吉林省</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>城市/区级</label>
-            <input type="text" id="localCity" value="长春市">
-          </div>
-        </div>
-
-        <div class="section-title">📌 作品类型</div>
-        <div class="copyright-type-grid">
-          <label class="type-card"><input type="radio" name="localType" value="文字作品" checked> 📝 文字作品</label>
-          <label class="type-card"><input type="radio" name="localType" value="美术作品"> 🎨 美术作品</label>
-          <label class="type-card"><input type="radio" name="localType" value="摄影作品"> 📸 摄影作品</label>
-          <label class="type-card"><input type="radio" name="localType" value="音乐作品"> 🎵 音乐作品</label>
-        </div>
-
-        <!-- 申请人信息 地方 -->
-        <div class="section-title">👤 申请人信息</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>姓名/名称</label>
-            <input type="text" id="localName" value="">
-          </div>
-          <div class="form-group">
-            <label>证件号码</label>
-            <input type="text" id="localIdNumber" value="">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>手机号码</label>
-            <input type="tel" id="localPhone" value="">
-          </div>
-          <div class="form-group">
-            <label>电子邮箱</label>
-            <input type="email" id="localEmail" value="">
-          </div>
-        </div>
-        <div class="form-group">
-          <label>通讯地址</label>
-          <input type="text" id="localAddress" value="">
-        </div>
-
-        <div class="section-title">✍️ 作品信息</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>作品名称</label>
-            <input type="text" id="localWorkName" value="">
-          </div>
-          <div class="form-group">
-            <label>创作日期</label>
-            <input type="date" id="localCompletionDate" value="">
-          </div>
-        </div>
-
-        <!-- 上传文件 地方简化但同样具备 -->
-        <div class="form-group">
           <label>身份证明文件</label>
-          <div class="upload-area" id="localIdUploadArea">
-            <input type="file" id="localIdFile" accept=".jpg,.png,.pdf">
-            <span>📎 点击上传</span>
-            <div class="file-list" id="localIdFileList"></div>
-          </div>
+          <div class="upload-area" id="idUploadArea"><input type="file" id="idFile" multiple accept=".jpg,.png,.pdf"><span>📎 点击上传身份证/营业执照</span><div class="file-list" id="idFileList"></div></div>
         </div>
         <div class="form-group">
           <label>作品文件</label>
-          <div class="upload-area" id="localWorkUploadArea">
-            <input type="file" id="localWorkFile" multiple>
-            <span>📁 上传作品</span>
-            <div class="file-list" id="localWorkFileList"></div>
-          </div>
+          <div class="upload-area" id="workUploadArea"><input type="file" id="workFile" multiple><span>📁 点击上传作品文件</span><div class="file-list" id="workFileList"></div></div>
         </div>
 
-        <!-- 签名板 (共用国家签名的数据展示，为了简化，两个tab共用同一个签名，或可分别绘制。我们这里让两个tab共用同一个canvas) 
-             但为了预览展示，我们可以把签名数据存储为全局-->
         <div class="section-title">✍️ 电子签名</div>
-        <div class="signature-pad">
-          <canvas id="signatureCanvasLocal" width="600" height="150"></canvas>
-          <div class="signature-actions">
-            <button type="button" id="clearSignatureLocal">清除签名</button>
-            <button type="button" id="saveSignatureLocal">保存签名</button>
-          </div>
+        <div class="signature-pad"><canvas id="signatureCanvas" width="600" height="150"></canvas><div class="signature-actions"><button id="clearSignature">清除</button><button id="saveSignature">保存</button></div></div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 2rem; margin-top: 2rem;">
+          <button class="btn-primary" id="submitFrontend">⛓️ 提交登记 · 自动短信通知</button>
         </div>
+        <div id="frontendToast" class="toast">✨ 已提交，短信发送至手机</div>
       </div>
-
-      <!-- ========= 预览面板：集中展示所有上传的信息 ========= -->
-      <div class="preview-panel">
-        <h2 style="font-size: 2rem; margin-bottom: 1rem; display: flex; gap: 0.5rem;">🔍 已上传信息预览 <span style="font-size: 1rem; background: #b79eff50; padding: 0.2rem 1rem; border-radius: 3rem;">实时更新</span></h2>
-        <div class="preview-grid" id="previewGrid">
-          <!-- 动态通过js填充 -->
-        </div>
-        <div style="margin-top: 1.5rem; text-align: right;">
-          <button class="btn-secondary" id="refreshPreview">🔄 刷新预览</button>
-        </div>
-      </div>
-
-      <!-- 区块链存证模拟 -->
-      <div class="chain-box">
-        <span class="badge-chain">⛓️ 版权存证链</span>
-        <span class="chain-hash" id="globalHash">0x8e3f...b22d (待存证)</span>
-        <span style="color:#3b1d7a;">⚡ 签名后自动存证</span>
-      </div>
-
-      <!-- 统一联系方式 & 操作按钮 -->
-      <div style="background: rgba(230, 215, 255, 0.3); border-radius: 2rem; padding: 1.2rem 2rem; margin: 2rem 0 1.5rem;">
-        <span style="font-weight:600;">📞 登记咨询 176-4986-4014 &nbsp; | &nbsp; 邮箱 us@thoy.top</span>
-      </div>
-
-      <div class="action-buttons">
-        <button class="btn-secondary" id="previewBtn">📋 预览申请</button>
-        <button class="btn-primary" id="submitBtn">⛓️ 提交登记</button>
-      </div>
-
-      <div id="toast" class="toast-message">✨ 登记已提交 (模拟)</div>
     </div>
 
-    <!-- 底部备案信息 -->
-    <div class="footer-note">
-      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-        <span>吉ICP备2026000319号-2</span>
-        <span>吉公网安备22032302000082号</span>
+    <!-- 后台界面 (admin) 初始隐藏 -->
+    <div id="backend" style="display: none;">
+      <!-- 登录页 -->
+      <div id="loginPanel" class="admin-glass login-container">
+        <div style="text-align:center; margin-bottom:2rem;"><img src="科赛帝尔.png" style="height:60px;"><h2 style="color:white;">后台管理</h2></div>
+        <div class="input-group"><label style="color:#d9ccff;">用户名</label><input id="adminUser" value="admin"></div>
+        <div class="input-group" style="margin-top:1rem;"><label style="color:#d9ccff;">密码</label><input type="password" id="adminPass" value="123456"></div>
+        <button class="btn-primary" style="width:100%; margin-top:2rem;" id="loginBtn">登录</button>
+        <div id="loginError" style="color:#ff9f9f; text-align:center; margin-top:1rem; display:none;">用户名或密码错误</div>
       </div>
-      <p style="margin-top: 0.5rem;">&copy; 2026 科赛帝尔 · 海米尔文化旗下 · 全类型版权登记</p>
+
+      <!-- 后台主界面 -->
+      <div id="adminPanel" class="admin-container">
+        <div class="admin-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+          <div class="logo-area"><img src="科赛帝尔.png" style="height:45px;"><span style="color:white;">版权后台 · thoy.top/admin</span></div>
+          <div><button class="view-btn" id="logoutBtn">退出</button></div>
+        </div>
+
+        <!-- 管理员工具条：添加账号 + 清空数据 + 账号列表（带删除） -->
+        <div class="admin-row">
+          <div class="admin-card">
+            <h3 style="color:#cbb5ff;">➕ 添加管理员账号</h3>
+            <input type="text" id="newUsername" placeholder="新用户名" value="operator">
+            <input type="password" id="newPassword" placeholder="密码" value="pass123">
+            <button class="btn-primary" id="addUserBtn" style="padding:0.8rem 2rem;">添加账号</button>
+            <span id="addUserMsg" style="color:#62dd9a; margin-left:1rem;"></span>
+          </div>
+          <div class="admin-card">
+            <h3 style="color:#cbb5ff;">🗑️ 清空全部登记数据</h3>
+            <p style="color:#b1a0e0; margin:1rem 0;">清空后不可恢复，请谨慎操作</p>
+            <button class="btn-primary" id="clearDataBtn" style="background:#b44; box-shadow:none;">清空所有数据</button>
+            <span id="clearMsg" style="color:#ffb8b8; margin-left:1rem;"></span>
+          </div>
+        </div>
+
+        <!-- 新增：现有账号列表 + 删除按钮 -->
+        <div class="admin-card" style="margin-top:1rem;">
+          <h3 style="color:#cbb5ff;">👥 现有管理员账号</h3>
+          <div id="userListContainer" class="user-list"></div>
+        </div>
+
+        <!-- 统计数据卡片 -->
+        <div class="stats-cards"><div class="stat-card"><h3>总登记</h3><div class="stat-number" id="totalCount">0</div></div><div class="stat-card"><h3>已签名</h3><div class="stat-number" id="signedCount">0</div></div></div>
+
+        <!-- 数据表格 (国家/地方简化合并为全部) -->
+        <div class="data-section">
+          <h2 style="color:white;">📋 所有登记数据</h2>
+          <table id="allDataTable"><thead><tr><th>姓名</th><th>手机</th><th>作品</th><th>文件</th><th>签名</th><th>操作</th></tr></thead><tbody id="dataTbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- 详情弹窗 -->
+      <div class="modal-overlay" id="modalOverlay"></div><div class="detail-modal" id="detailModal"><h2 style="color:white;">详情</h2><div id="modalContent"></div><button class="view-btn" id="closeModal" style="margin-top:1.5rem;">关闭</button></div>
     </div>
   </div>
 
   <script>
     (function() {
-      // 选项卡切换
-      const tabNational = document.getElementById('tabNational');
-      const tabLocal = document.getElementById('tabLocal');
-      const nationalContent = document.getElementById('nationalContent');
-      const localContent = document.getElementById('localContent');
+      // ---------- 全局数据存储 (模拟后端数据库) ----------
+      let submissions = JSON.parse(localStorage.getItem('korsider_submissions')) || [
+        { id: 'S001', name:'李沐', phone:'17649864014', idNumber:'110101199001011234', email:'us@thoy.top', address:'吉林省长春市...', workName:'星穹纪元', completionDate:'2025-08-15', idFiles:['身份证.jpg'], workFiles:['设定.docx'], signature: true, time: Date.now() },
+        { id: 'S002', name:'星尘工作室', phone:'13944112233', idNumber:'91220102MA17X5TQ7F', email:'xingchen@oc.com', address:'北京', workName:'人设图鉴', completionDate:'2026-01-20', idFiles:['执照.jpg'], workFiles:['图鉴.pdf'], signature: true, time: Date.now()-100000 },
+        { id: 'S003', name:'赵梦琪', phone:'15233448899', idNumber:'320105199503124567', email:'mengqi@foxmail.com', address:'上海', workName:'钢琴曲集', completionDate:'2025-12-10', idFiles:['身份证.jpg'], workFiles:['曲谱.pdf'], signature: false, time: Date.now()-200000 }
+      ];
+      let adminUsers = JSON.parse(localStorage.getItem('korsider_admin')) || [{ username: 'admin', password: '123456' }];
 
-      function setActiveTab(active) {
-        tabNational.classList.remove('active');
-        tabLocal.classList.remove('active');
-        nationalContent.classList.remove('active');
-        localContent.classList.remove('active');
-        if (active === 'national') {
-          tabNational.classList.add('active');
-          nationalContent.classList.add('active');
-        } else {
-          tabLocal.classList.add('active');
-          localContent.classList.add('active');
-        }
-        updatePreview(); // 切换时刷新预览
-      }
-      tabNational.addEventListener('click', () => setActiveTab('national'));
-      tabLocal.addEventListener('click', () => setActiveTab('local'));
+      function saveData() { localStorage.setItem('korsider_submissions', JSON.stringify(submissions)); }
+      function saveAdmin() { localStorage.setItem('korsider_admin', JSON.stringify(adminUsers)); }
 
-      // 签名画板初始化 (两个canvas)
-      const canvas = document.getElementById('signatureCanvas');
-      const canvasLocal = document.getElementById('signatureCanvasLocal');
-      let ctx = canvas?.getContext('2d');
-      let ctxLocal = canvasLocal?.getContext('2d');
-      
-      function initCanvas(canvasElement, ctx) {
-        if (!canvasElement || !ctx) return;
-        ctx.strokeStyle = '#1f0a47';
-        ctx.lineWidth = 2;
-        ctx.lineCap = 'round';
-        let drawing = false;
-
-        function start(e) {
-          drawing = true;
-          ctx.beginPath();
-          const rect = canvasElement.getBoundingClientRect();
-          const x = (e.clientX - rect.left) * (canvasElement.width / rect.width);
-          const y = (e.clientY - rect.top) * (canvasElement.height / rect.height);
-          ctx.moveTo(x, y);
-        }
-        function move(e) {
-          if (!drawing) return;
-          e.preventDefault();
-          const rect = canvasElement.getBoundingClientRect();
-          const x = (e.clientX - rect.left) * (canvasElement.width / rect.width);
-          const y = (e.clientY - rect.top) * (canvasElement.height / rect.height);
-          ctx.lineTo(x, y);
-          ctx.stroke();
-        }
-        function stop() { drawing = false; }
-
-        canvasElement.addEventListener('mousedown', start);
-        canvasElement.addEventListener('mousemove', move);
-        canvasElement.addEventListener('mouseup', stop);
-        canvasElement.addEventListener('mouseleave', stop);
-        // 触摸事件
-        canvasElement.addEventListener('touchstart', (e) => { e.preventDefault(); start(e.touches[0]); });
-        canvasElement.addEventListener('touchmove', (e) => { e.preventDefault(); move(e.touches[0]); });
-        canvasElement.addEventListener('touchend', stop);
-      }
-
-      if (canvas) initCanvas(canvas, ctx);
-      if (canvasLocal) initCanvas(canvasLocal, ctxLocal);
-
-      document.getElementById('clearSignature')?.addEventListener('click', () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-      });
-      document.getElementById('clearSignatureLocal')?.addEventListener('click', () => {
-        ctxLocal.clearRect(0, 0, canvasLocal.width, canvasLocal.height);
-      });
-
-      // 文件上传处理 (简单模拟显示文件名)
-      function setupUpload(triggerId, fileInputId, listId) {
-        const area = document.getElementById(triggerId);
-        const input = document.getElementById(fileInputId);
-        const list = document.getElementById(listId);
-        if (!area || !input || !list) return;
+      // ---------- 前台界面逻辑 ----------
+      // 上传文件展示
+      function setupUpload(triggerId, inputId, listId) {
+        const area = document.getElementById(triggerId); const input = document.getElementById(inputId); const list = document.getElementById(listId);
+        if (!area || !input) return;
         area.addEventListener('click', () => input.click());
         input.addEventListener('change', function() {
           list.innerHTML = '';
           for (let file of this.files) {
-            const div = document.createElement('div');
-            div.className = 'file-item';
+            const div = document.createElement('div'); div.className = 'file-item';
             div.innerHTML = `<span>📄 ${file.name}</span><span>${(file.size/1024).toFixed(1)} KB</span>`;
             list.appendChild(div);
           }
-          updatePreview();
         });
       }
+      setupUpload('idUploadArea','idFile','idFileList');
+      setupUpload('workUploadArea','workFile','workFileList');
 
-      setupUpload('idUploadArea', 'idFile', 'idFileList');
-      setupUpload('workUploadArea', 'workFile', 'workFileList');
-      setupUpload('localIdUploadArea', 'localIdFile', 'localIdFileList');
-      setupUpload('localWorkUploadArea', 'localWorkFile', 'localWorkFileList');
-
-      // 预览刷新函数：收集所有输入字段并显示
-      function updatePreview() {
-        const grid = document.getElementById('previewGrid');
-        if (!grid) return;
-        const activeTab = nationalContent.classList.contains('active') ? 'national' : 'local';
-        
-        let items = [];
-
-        if (activeTab === 'national') {
-          items = [
-            { label: '申请人姓名', value: document.getElementById('nationalName')?.value || '' },
-            { label: '证件号码', value: document.getElementById('nationalIdNumber')?.value || '' },
-            { label: '手机', value: document.getElementById('nationalPhone')?.value || '' },
-            { label: '邮箱', value: document.getElementById('nationalEmail')?.value || '' },
-            { label: '通讯地址', value: document.getElementById('nationalAddress')?.value || '' },
-            { label: '作品名称', value: document.getElementById('nationalWorkName')?.value || '' },
-            { label: '创作日期', value: document.getElementById('nationalCompletionDate')?.value || '' },
-            { label: '作品类型', value: document.querySelector('input[name="nationalType"]:checked')?.value || '未选' },
-            { label: '身份证明文件', value: getFileNames('idFile') },
-            { label: '作品文件', value: getFileNames('workFile') },
-          ];
-        } else {
-          items = [
-            { label: '省份/城市', value: (document.getElementById('localProvince')?.value || '') + ' ' + (document.getElementById('localCity')?.value || '') },
-            { label: '申请人姓名', value: document.getElementById('localName')?.value || '' },
-            { label: '证件号码', value: document.getElementById('localIdNumber')?.value || '' },
-            { label: '手机', value: document.getElementById('localPhone')?.value || '' },
-            { label: '邮箱', value: document.getElementById('localEmail')?.value || '' },
-            { label: '通讯地址', value: document.getElementById('localAddress')?.value || '' },
-            { label: '作品名称', value: document.getElementById('localWorkName')?.value || '' },
-            { label: '创作日期', value: document.getElementById('localCompletionDate')?.value || '' },
-            { label: '作品类型', value: document.querySelector('input[name="localType"]:checked')?.value || '未选' },
-            { label: '身份证明', value: getFileNames('localIdFile') },
-            { label: '作品文件', value: getFileNames('localWorkFile') },
-          ];
+      // 签名画板
+      const canvas = document.getElementById('signatureCanvas');
+      let ctx = canvas?.getContext('2d');
+      if (ctx) {
+        ctx.strokeStyle = '#1f0a47'; ctx.lineWidth = 2; ctx.lineCap = 'round';
+        let drawing = false;
+        function start(e) {
+          drawing = true; ctx.beginPath();
+          const rect = canvas.getBoundingClientRect();
+          const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+          const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+          ctx.moveTo(x, y);
         }
+        function move(e) { if (!drawing) return; e.preventDefault(); const rect = canvas.getBoundingClientRect(); const x = (e.clientX - rect.left) * (canvas.width / rect.width); const y = (e.clientY - rect.top) * (canvas.height / rect.height); ctx.lineTo(x, y); ctx.stroke(); }
+        function stop() { drawing = false; }
+        canvas.addEventListener('mousedown', start); canvas.addEventListener('mousemove', move); canvas.addEventListener('mouseup', stop); canvas.addEventListener('mouseleave', stop);
+        canvas.addEventListener('touchstart', (e) => { e.preventDefault(); start(e.touches[0]); }); canvas.addEventListener('touchmove', (e) => { e.preventDefault(); move(e.touches[0]); }); canvas.addEventListener('touchend', stop);
+      }
+      document.getElementById('clearSignature')?.addEventListener('click', () => ctx.clearRect(0,0,canvas.width,canvas.height));
 
-        // 签名预览 (从canvas获取base64简短展示)
-        let signatureStatus = '已绘制签名';
-        if (activeTab === 'national') {
-          signatureStatus = canvas && !ctx?.getImageData(0,0,1,1).data.some(v=>v!==0) ? '未签名' : '签名已绘制';
+      // 前台提交: 模拟发送到 thoy.top/admin + 自动短信
+      document.getElementById('submitFrontend').addEventListener('click', function() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const idNumber = document.getElementById('idNumber').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
+        const workName = document.getElementById('workName').value;
+        const completionDate = document.getElementById('completionDate').value;
+        const idFiles = document.getElementById('idFile').files; 
+        const workFiles = document.getElementById('workFile').files;
+        // 简单模拟文件列表名称
+        let idFileNames = []; for (let f of idFiles) idFileNames.push(f.name);
+        let workFileNames = []; for (let f of workFiles) workFileNames.push(f.name);
+        // 签名判断
+        const canvasEmpty = !ctx || ctx.getImageData(0,0,1,1).data.some(v=>v!==0) === false;
+        const signature = !canvasEmpty;
+
+        const newSub = {
+          id: 'S' + Math.floor(Math.random()*9000+1000),
+          name, phone, idNumber, email, address, workName, completionDate,
+          idFiles: idFileNames.length ? idFileNames : ['身份证待上传'],
+          workFiles: workFileNames.length ? workFileNames : ['作品待上传'],
+          signature: signature,
+          time: Date.now()
+        };
+        submissions.push(newSub);
+        saveData();
+
+        // 显示toast并模拟发送短信
+        const toast = document.getElementById('frontendToast');
+        toast.innerText = `✨ 已提交！短信已发送至 ${phone} (模拟)`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+
+        // 清空文件列表显示 (可选)
+        document.getElementById('idFileList').innerHTML = '';
+        document.getElementById('workFileList').innerHTML = '';
+        if (ctx) ctx.clearRect(0,0,canvas.width,canvas.height);
+      });
+
+      // ---------- 后台管理逻辑 ----------
+      function switchToAdmin() { document.getElementById('frontend').style.display = 'none'; document.getElementById('backend').style.display = 'block'; }
+      window.switchToAdmin = switchToAdmin;
+
+      const loginPanel = document.getElementById('loginPanel');
+      const adminPanel = document.getElementById('adminPanel');
+      document.getElementById('loginBtn').addEventListener('click', function() {
+        const user = document.getElementById('adminUser').value;
+        const pass = document.getElementById('adminPass').value;
+        const found = adminUsers.find(u => u.username === user && u.password === pass);
+        if (found) {
+          loginPanel.style.display = 'none';
+          adminPanel.style.display = 'block';
+          document.getElementById('loginError').style.display = 'none';
+          renderAdmin();
         } else {
-          signatureStatus = canvasLocal && !ctxLocal?.getImageData(0,0,1,1).data.some(v=>v!==0) ? '未签名' : '签名已绘制';
+          document.getElementById('loginError').style.display = 'block';
         }
-        items.push({ label: '电子签名', value: signatureStatus });
+      });
+      document.getElementById('logoutBtn').addEventListener('click', function() {
+        adminPanel.style.display = 'none';
+        loginPanel.style.display = 'block';
+      });
 
-        grid.innerHTML = items.map(item => `
-          <div class="preview-item">
-            <div class="preview-label">${item.label}</div>
-            <div class="preview-value">${item.value || '—'}</div>
+      // 添加账号
+      document.getElementById('addUserBtn').addEventListener('click', function() {
+        const newUser = document.getElementById('newUsername').value;
+        const newPass = document.getElementById('newPassword').value;
+        if (newUser && newPass) {
+          adminUsers.push({ username: newUser, password: newPass });
+          saveAdmin();
+          document.getElementById('addUserMsg').innerText = '账号已添加';
+          setTimeout(() => document.getElementById('addUserMsg').innerText = '', 2000);
+          renderAdmin(); // 刷新账号列表
+        }
+      });
+
+      // 清空数据
+      document.getElementById('clearDataBtn').addEventListener('click', function() {
+        if (confirm('确定清空所有登记数据？')) {
+          submissions = [];
+          saveData();
+          renderAdmin();
+          document.getElementById('clearMsg').innerText = '数据已清空';
+          setTimeout(() => document.getElementById('clearMsg').innerText = '', 2000);
+        }
+      });
+
+      // 渲染后台（包含账号列表 + 删除按钮）
+      function renderAdmin() {
+        document.getElementById('totalCount').innerText = submissions.length;
+        document.getElementById('signedCount').innerText = submissions.filter(s => s.signature).length;
+        const tbody = document.getElementById('dataTbody');
+        tbody.innerHTML = submissions.map(sub => `
+          <tr>
+            <td>${sub.name}</td>
+            <td>${sub.phone}</td>
+            <td>${sub.workName}</td>
+            <td>📎 ${sub.idFiles?.length || 0} / 📄 ${sub.workFiles?.length || 0}</td>
+            <td><span class="${sub.signature ? 'dot-signed' : 'dot-unsigned'}"></span>${sub.signature ? '已签名' : '未签名'}</td>
+            <td><button class="view-btn" data-id="${sub.id}">查看</button></td>
+          </tr>
+        `).join('');
+
+        // 绑定详情
+        document.querySelectorAll('.view-btn[data-id]').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            const data = submissions.find(s => s.id === id);
+            if (!data) return;
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+              <div style="background:#332b4e; border-radius:1.5rem; padding:1.5rem;">
+                <p><strong>📌 编号：</strong>${data.id}</p><p><strong>👤 姓名：</strong>${data.name}</p>
+                <p><strong>📞 手机：</strong>${data.phone}</p><p><strong>📧 邮箱：</strong>${data.email}</p>
+                <p><strong>🏠 地址：</strong>${data.address}</p><p><strong>🎨 作品：</strong>${data.workName}</p>
+                <p><strong>📅 创作日期：</strong>${data.completionDate}</p>
+                <p><strong>🪪 身份证明：</strong> ${data.idFiles?.join('、') || '无'}</p>
+                <p><strong>📁 作品文件：</strong> ${data.workFiles?.join('、') || '无'}</p>
+                <p><strong>✍️ 签名：</strong>${data.signature ? '✅ 已签名' : '❌ 未签名'}</p>
+              </div>
+            `;
+            document.getElementById('modalOverlay').style.display = 'block';
+            document.getElementById('detailModal').style.display = 'block';
+          });
+        });
+
+        // 渲染账号列表 + 删除按钮（不能删除自己admin）
+        const userListDiv = document.getElementById('userListContainer');
+        userListDiv.innerHTML = adminUsers.map((user, index) => `
+          <div class="user-item">
+            <span>👤 ${user.username}</span>
+            ${user.username !== 'admin' ? 
+              `<button class="btn-danger" onclick="deleteUser('${user.username}')">删除</button>` : 
+              '<span style="color:#aaa;">(主账号)</span>'}
           </div>
         `).join('');
       }
 
-      function getFileNames(inputId) {
-        const input = document.getElementById(inputId);
-        if (!input || !input.files.length) return '未上传';
-        return Array.from(input.files).map(f => f.name).join('; ');
-      }
+      // 删除账号函数（暴露到全局）
+      window.deleteUser = function(username) {
+        if (username === 'admin') {
+          alert('不能删除主账号 admin');
+          return;
+        }
+        if (confirm(`确定删除账号 ${username} 吗？`)) {
+          adminUsers = adminUsers.filter(u => u.username !== username);
+          saveAdmin();
+          renderAdmin();
+        }
+      };
 
-      document.getElementById('refreshPreview')?.addEventListener('click', updatePreview);
-      // 监听输入变化
-      document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', updatePreview));
-      
-      // 提交按钮
-      document.getElementById('submitBtn').addEventListener('click', function() {
-        document.getElementById('toast').classList.add('show');
-        document.getElementById('globalHash').innerText = '0x' + Math.random().toString(16).substring(2,10) + '...' + Math.random().toString(16).substring(2,6) + ' (已存证)';
-        setTimeout(() => document.getElementById('toast').classList.remove('show'), 3000);
-        updatePreview();
+      // 关闭弹窗
+      document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('modalOverlay').style.display = 'none';
+        document.getElementById('detailModal').style.display = 'none';
+      });
+      document.getElementById('modalOverlay').addEventListener('click', function() {
+        document.getElementById('modalOverlay').style.display = 'none';
+        document.getElementById('detailModal').style.display = 'none';
       });
 
-      document.getElementById('previewBtn').addEventListener('click', updatePreview);
-
-      // 初始化卡片选中样式
-      document.querySelectorAll('.type-card input[type="radio"]:checked').forEach(r => {
-        r.closest('.type-card')?.classList.add('selected');
-      });
-      document.querySelectorAll('.type-card').forEach(card => {
-        card.addEventListener('click', function() {
-          const radio = this.querySelector('input[type="radio"]');
-          if (radio) {
-            radio.checked = true;
-            document.querySelectorAll(`input[name="${radio.name}"]`).forEach(r => {
-              r.closest('.type-card')?.classList.remove('selected');
-            });
-            this.classList.add('selected');
-            updatePreview();
-          }
-        });
-      });
-
-      // 初始预览
-      updatePreview();
+      // 默认前台显示，后台隐藏
+      document.getElementById('frontend').style.display = 'block';
+      document.getElementById('backend').style.display = 'none';
     })();
   </script>
 </body>
