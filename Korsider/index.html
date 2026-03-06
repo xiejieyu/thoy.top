@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>双名片二维码 · 负责人 & 领导人</title>
+    <title>双二维码展示 · 负责人与领导人</title>
     <style>
+        /* 干净柔和的页面基础 */
         * {
             margin: 0;
             padding: 0;
@@ -12,362 +13,245 @@
         }
 
         body {
-            background: linear-gradient(155deg, #eef2f5 0%, #d9e0e8 100%);
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f2f9 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+            align-items: center;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
             padding: 1.5rem;
         }
 
-        .card {
-            max-width: 680px;
+        /* 卡片式容器，柔和阴影 */
+        .qr-container {
+            max-width: 800px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 3rem;
-            box-shadow: 0 30px 50px -20px rgba(20, 40, 55, 0.4),
-                        0 8px 18px rgba(0,0,0,0.05),
-                        inset 0 1px 2px rgba(255,255,255,0.8);
-            padding: 2.2rem 2rem 2.2rem 2rem;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(4px);
+            border-radius: 2.5rem;
+            padding: 2rem 1.5rem 2.2rem 1.5rem;
+            box-shadow: 0 20px 40px -12px rgba(0,20,40,0.35),
+                        0 4px 18px rgba(0,0,0,0.05);
             border: 1px solid rgba(255,255,255,0.7);
         }
 
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.8rem;
-            flex-wrap: wrap;
-            gap: 0.8rem;
+        /* 标题描述 */
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
         }
-
-        .header h1 {
-            font-size: 1.9rem;
-            font-weight: 520;
-            letter-spacing: -0.02em;
-            color: #1a2b37;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .page-title h2 {
+            font-weight: 500;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: #1e3b5c;
+            border-bottom: 2px dashed #9bb8d4;
+            display: inline-block;
+            padding-bottom: 0.4rem;
+            padding-inline: 1.5rem;
         }
-
-        .header h1 .badge {
-            background: #2a404f;
-            color: white;
+        .page-title p {
+            color: #2b4a6e;
+            margin-top: 0.4rem;
             font-size: 1rem;
-            font-weight: 400;
-            padding: 0.2rem 1.2rem;
+            background: #e1effb70;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
             border-radius: 40px;
-            border: 1px solid #ffffff60;
-        }
-
-        .note {
-            color: #3a4f5e;
-            font-size: 1rem;
-            background: #dce5edc0;
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            border: 1px solid white;
             backdrop-filter: blur(2px);
         }
 
-        /* 双二维码网格 */
+        /* 双列布局：并排两个二维码卡片 */
         .qr-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
             justify-content: center;
-            margin-bottom: 2rem;
+            align-items: stretch;
+            gap: 2rem 1.8rem;
+            margin-top: 0.6rem;
         }
 
-        .qr-item {
-            flex: 1 1 250px;
-            min-width: 230px;
+        /* 单个二维码卡片 */
+        .qr-card {
+            flex: 0 1 260px;          /* 最小宽度240，最大可略伸展 */
             background: white;
-            border-radius: 2.2rem;
-            padding: 1.6rem 1.2rem 1.2rem 1.2rem;
-            box-shadow: 0 18px 25px -16px rgba(0,20,40,0.3), 0 0 0 1px rgba(255,255,255,0.9) inset;
-            transition: transform 0.2s ease;
-            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 1.8rem 1.2rem 1.4rem 1.2rem;
+            box-shadow: 0 15px 25px -10px rgba(0,30,50,0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
-        .qr-item:hover {
-            transform: translateY(-4px);
+        .qr-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 26px 35px -14px #1a3a5a70;
         }
 
-        .label-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-bottom: 1.2rem;
-            background: #ecf2f7;
-            padding: 0.4rem 1.2rem;
-            border-radius: 60px;
-            border: 1px solid #ffffff;
-            width: fit-content;
-            align-self: center;
-        }
-
-        .label-icon {
-            font-size: 1.3rem;
-        }
-
-        .label-text {
-            font-weight: 550;
-            font-size: 1.2rem;
-            color: #1d2c38;
-            letter-spacing: 0.3px;
-        }
-
-        .label-text small {
-            font-weight: 350;
-            font-size: 0.85rem;
-            color: #3f5a6b;
-            margin-left: 5px;
-        }
-
-        .qr-wrapper {
-            background: #fafcff;
-            padding: 1.2rem;
-            border-radius: 2rem;
-            margin: 0.5rem 0 1rem 0;
-            box-shadow: inset 0 2px 5px #cbd5e1, 0 8px 12px -10px #2d3f4e;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* 图像区域 */
+        .qr-figure {
             width: 100%;
+            aspect-ratio: 1 / 1;               /* 保持正方形 */
+            background: #f1f7fd;
+            border-radius: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            border: 2px solid #c6dcef;
+            box-shadow: inset 0 0 0 1px #ffffffcc, 0 6px 10px #b0c8db50;
         }
 
-        canvas {
+        .qr-figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;       /* 保持比例，完整显示二维码 */
             display: block;
-            width: 100%;
-            max-width: 200px;
-            height: auto;
-            border-radius: 18px;
-            background: white;
-            image-rendering: crisp-edges; 
-            box-shadow: 0 0 0 1px #eef3f8;
+            transition: opacity 0.15s;
         }
 
-        .content-hint {
-            background: #eef5fa;
-            border-radius: 40px;
-            padding: 0.4rem 1rem;
-            font-size: 0.8rem;
-            color: #2e4657;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            border: 1px solid #cddde9;
-            margin-top: 0.2rem;
+        /* 图片说明 – 显示文件名和中文标签 */
+        .qr-caption {
+            margin-top: 1rem;
             width: 100%;
             text-align: center;
-            font-family: 'SF Mono', 'Fira Code', monospace;
-        }
-
-        .footer-meta {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 2px dashed #bacddc;
-            font-size: 0.9rem;
-            color: #2e4b5f;
-        }
-
-        .file-names {
-            background: #1f313d;
-            color: #ecf9ff;
-            padding: 0.3rem 1.4rem;
-            border-radius: 50px;
-            font-weight: 450;
-            font-size: 0.95rem;
+            background: #ecf3fa;
+            padding: 0.6rem 0.5rem;
+            border-radius: 3rem;
+            font-weight: 550;
+            font-size: 1.1rem;
+            color: #113750;
+            border: 1px solid #cbdbe9;
+            box-shadow: 0 2px 6px #b9d1e3 inset, 0 1px 2px white;
             letter-spacing: 0.3px;
         }
 
-        .file-names span {
-            color: #ffecaa;
-            font-weight: 500;
-        }
-
-        .hint {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: #214151;
-        }
-
-        .hint i {
-            font-style: normal;
-            font-size: 1.1rem;
-        }
-
-        /* 完全内联依赖提示 */
-        .lib-note {
+        /* 文件名小字 */
+        .filename-hint {
+            font-family: 'SF Mono', 'Fira Code', monospace;
             font-size: 0.75rem;
-            color: #607586;
-            text-align: right;
+            background: #1e3b5c18;
+            border-radius: 20px;
+            padding: 0.15rem 0.8rem;
+            color: #2c577c;
+            margin-top: 0.35rem;
+            display: inline-block;
+            border: 1px dotted #8eb1cc;
+        }
+
+        /* 脚注装饰 */
+        .footnote {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #436684;
+            background: #dbe9f5c0;
+            padding: 0.45rem 1.5rem;
+            border-radius: 60px;
+            width: fit-content;
+            margin-inline: auto;
+            backdrop-filter: blur(3px);
+            border: 1px solid white;
+        }
+
+        /* 响应式：小屏时卡片宽度自适应 */
+        @media (max-width: 480px) {
+            .qr-container {
+                padding: 1.5rem 1rem;
+            }
+            .qr-card {
+                flex: 0 1 220px;
+            }
+            .page-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* 占位提示风格 — 因为实际图片可能不存在，用优雅的占位提醒 */
+        .demo-message {
+            text-align: center;
+            font-size: 0.9rem;
+            background: #fffbd1;
+            border-radius: 30px;
+            padding: 0.3rem 1.2rem;
+            color: #5d4d2e;
+            border: 1px solid #eedb9a;
+            margin-bottom: 0.8rem;
+            width: fit-content;
+            margin-inline: auto;
         }
     </style>
-    <!-- 轻量二维码库 (MIT) -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 </head>
 <body>
-    <div class="card">
-        <div class="header">
-            <h1>
-                ⬛ 双名片码
-                <span class="badge">负责人 · 领导人</span>
-            </h1>
-            <div class="note">直接展示 · 即扫即用</div>
+    <div class="qr-container">
+        <!-- 头部 -->
+        <div class="page-title">
+            <h2>📋 核心团队 · 二维码</h2>
+            <p>负责人.jpg ｜ 领导人.jpg</p>
         </div>
 
-        <!-- 两个二维码网格：负责人.jpg / 领导人.jpg -->
+        <!-- 温馨提示：图片占位（如果你已经有真实图片，替换即可） -->
+        <div class="demo-message">
+            ⚡ 此处展示的是模拟二维码 · 替换为你的 <strong>负责人.jpg</strong> 与 <strong>领导人.jpg</strong>
+        </div>
+
+        <!-- 双二维码网格 -->
         <div class="qr-grid">
-            <!-- 负责人.jpg 二维码区块 -->
-            <div class="qr-item">
-                <div class="label-container">
-                    <span class="label-icon">👤</span>
-                    <span class="label-text">负责人 <small>.jpg</small></span>
+            <!-- 卡片 1：负责人.jpg -->
+            <div class="qr-card">
+                <div class="qr-figure">
+                    <!-- 
+                        重要：将下面的图片路径替换为你实际的图片位置。
+                        如果图片位于同目录，直接写 负责人.jpg
+                        如果放在 images 子目录，写 images/负责人.jpg 
+                        这里使用 data:image 内联占位，让视觉效果更直观。
+                        实际使用时，替换 src 属性即可。
+                    -->
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23365e7e'/%3E%3Cpath d='M50 50 L150 50 L150 150 L50 150 Z' fill='none' stroke='%23e8f0fe' stroke-width='12'/%3E%3Ccircle cx='100' cy='85' r='23' fill='%23f5f9ff' /%3E%3Crect x='70' y='120' width='60' height='22' rx='8' fill='%23f5f9ff' /%3E%3Ctext x='100' y='185' font-size='24' text-anchor='middle' fill='%23c6defa' font-family='monospace' font-weight='bold'%3EQR%3C/text%3E%3C/svg%3E"
+                         alt="负责人二维码预览"
+                         title="负责人.jpg (实际二维码)"
+                         id="qr-leader">
                 </div>
-                <div class="qr-wrapper">
-                    <canvas id="qrCanvasLeader" width="240" height="240"></canvas>
+                <div class="qr-caption">
+                    👤 负责人 · 张
+                    <div class="filename-hint">负责人.jpg</div>
                 </div>
-                <div class="content-hint" id="leaderHint">负责人联系信息</div>
             </div>
 
-            <!-- 领导人.jpg 二维码区块 -->
-            <div class="qr-item">
-                <div class="label-container">
-                    <span class="label-icon">⭐</span>
-                    <span class="label-text">领导人 <small>.jpg</small></span>
+            <!-- 卡片 2：领导人.jpg -->
+            <div class="qr-card">
+                <div class="qr-figure">
+                    <!-- 同样使用内联占位图，领导人版本稍微改变颜色以示区分 -->
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%232a4f6e'/%3E%3Cpath d='M40 40 L160 40 L160 160 L40 160 Z' fill='none' stroke='%23f0e6d0' stroke-width='12' stroke-dasharray='12 8' /%3E%3Ccircle cx='100' cy='80' r='27' fill='%23f9f1da' /%3E%3Cpath d='M60 130 Q100 160, 140 130' stroke='%23f9f1da' stroke-width='14' fill='none' stroke-linecap='round' /%3E%3Ctext x='100' y='185' font-size='26' text-anchor='middle' fill='%23bdd9f0' font-family='monospace'%3E#2%3C/text%3E%3C/svg%3E"
+                         alt="领导人二维码预览"
+                         title="领导人.jpg (实际二维码)"
+                         id="qr-president">
                 </div>
-                <div class="qr-wrapper">
-                    <canvas id="qrCanvasChief" width="240" height="240"></canvas>
+                <div class="qr-caption">
+                    🌟 领导人 · 李
+                    <div class="filename-hint">领导人.jpg</div>
                 </div>
-                <div class="content-hint" id="chiefHint">领导人专属名片</div>
             </div>
         </div>
 
-        <!-- 底部明确显示两个文件名 -->
-        <div class="footer-meta">
-            <div class="file-names">
-                <span>📁 负责人.jpg</span>  ·  <span>📁 领导人.jpg</span>
-            </div>
-            <div class="hint">
-                <i>⬇️</i> 每个二维码代表对应名片
-            </div>
-        </div>
-        <div class="lib-note">
-            canvas + qrcode-generator · 完全前端生成
+        <!-- 简单路径提示 & 使用方法（直接复制就能用） -->
+        <div class="footnote">
+            ⬇️ 把 <strong>负责人.jpg</strong> 和 <strong>领导人.jpg</strong> 放在与HTML相同的文件夹内，<br> 
+            或者修改 <code>img src</code> 路径指向你的图片。
         </div>
     </div>
 
-    <script>
-        (function() {
-            // 确保库已加载
-            if (typeof qrcode === 'undefined') {
-                // 降级提示（极少发生）
-                const canvases = document.querySelectorAll('canvas');
-                canvases.forEach(can => {
-                    const ctx = can.getContext('2d');
-                    ctx.fillStyle = '#f0f3f7';
-                    ctx.fillRect(0, 0, can.width, can.height);
-                    ctx.fillStyle = '#a03a2b';
-                    ctx.font = '13px monospace';
-                    ctx.fillText('lib error', 30, 120);
-                });
-                document.getElementById('leaderHint').innerText = '加载失败，刷新试试';
-                document.getElementById('chiefHint').innerText = '加载失败，刷新试试';
-                return;
-            }
-
-            // ---------- 定义两个二维码的内容 ----------
-            // 负责人.jpg 可包含姓名、职位、联系方式等（示例用文本，你可以改成真实vCard或链接）
-            const leaderText = 'BEGIN:VCARD\nVERSION:3.0\nFN:陈志远\nTITLE:项目负责人\nTEL;TYPE=WORK,VOICE:+86 138 0001 1234\nEMAIL:zhiyuan.chen@company.cn\nNOTE:负责人.jpg 专属二维码\nEND:VCARD';
-            
-            // 领导人.jpg 内容 (可以是个人名片或官网链接等)
-            const chiefText = 'BEGIN:VCARD\nVERSION:3.0\nFN:张华清\nTITLE:高级领导人\nTEL;TYPE=CELL:+86 139 8888 6666\nEMAIL:huaqing.zhang@leadership.org\nNOTE:领导人.jpg 内部联系\nEND:VCARD';
-
-            // 也可使用纯文本/网址演示，为了体现“名字.jpg”的概念，上方用了vCard。如果想用简单网址可替换：
-            // const leaderText = 'https://company.cn/负责人';
-            // const chiefText = 'https://leadership.org/领导人';
-            // 但保留vCard更有名片感。下方展示的hint会截取前一部分。
-
-            // 更新提示框内容 (简短展示)
-            document.getElementById('leaderHint').innerText = leaderText.substring(0, 38) + '…';
-            document.getElementById('chiefHint').innerText = chiefText.substring(0, 38) + '…';
-
-            // 通用二维码绘制函数 (画布ID, 编码文本)
-            function drawQrToCanvas(canvasId, text) {
-                const canvas = document.getElementById(canvasId);
-                if (!canvas) return;
-                
-                // 使用qrcode库 (版本0自动选择，纠错M)
-                const qr = qrcode(0, 'M');
-                qr.addData(text);
-                qr.make();
-
-                const moduleCount = qr.getModuleCount();
-                const ctx = canvas.getContext('2d');
-                
-                // 清空白底
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                // 计算边距和格子尺寸 (让二维码在画布内居中且留白)
-                const padding = 16;               // 留白像素
-                const availableSize = canvas.width - padding * 2;
-                const cellSize = Math.floor(availableSize / moduleCount);
-                const qrSize = cellSize * moduleCount;
-                const offsetX = padding + Math.floor((availableSize - qrSize) / 2);
-                const offsetY = padding + Math.floor((availableSize - qrSize) / 2);
-
-                // 绘制黑色模块
-                ctx.fillStyle = '#1e2b38';        // 深灰黑
-                for (let row = 0; row < moduleCount; row++) {
-                    for (let col = 0; col < moduleCount; col++) {
-                        if (qr.isDark(row, col)) {
-                            ctx.fillRect(
-                                offsetX + col * cellSize,
-                                offsetY + row * cellSize,
-                                cellSize,
-                                cellSize
-                            );
-                        }
-                    }
-                }
-
-                // 可选极淡边框 (装饰)
-                ctx.strokeStyle = '#b1c6d6';
-                ctx.lineWidth = 1.2;
-                ctx.strokeRect(offsetX-0.8, offsetY-0.8, qrSize+1.5, qrSize+1.5);
-            }
-
-            // 绘制两个二维码
-            drawQrToCanvas('qrCanvasLeader', leaderText);
-            drawQrToCanvas('qrCanvasChief', chiefText);
-
-            // 控制台输出确认
-            console.log('✅ 负责人.jpg / 领导人.jpg 二维码已生成');
-        })();
-    </script>
-
-    <!-- 极简降级提示，无js时显示 -->
-    <noscript>
-        <div style="background:#ffddd6; padding:1rem; border-radius:99px; text-align:center; margin-top:1rem;">
-            ⚠️ 您的浏览器未启用 JavaScript，无法显示二维码。
-        </div>
-    </noscript>
+    <!-- 下面是简短的说明：如何替换真实图片（纯文字，不干扰视觉） -->
+    <div style="margin-top: 1.2rem; max-width:720px; text-align: left; font-size:0.85rem; background: #ffffffb0; padding: 0.8rem 1.8rem; border-radius: 60px; color: #264d73; border: 1px solid #bee0f5; backdrop-filter: blur(4px);">
+        <p>📂 <strong>使用方式</strong> —— 将以下两行代码中的 <code>src</code> 属性替换为你的图片路径：</p>
+        <ul style="margin-left: 1.8rem; margin-top: 0.3rem; font-family: monospace;">
+            <li>&lt;img src="<span style="background:#fef1b0;">负责人.jpg</span>" ... &gt; 对应负责人卡片</li>
+            <li>&lt;img src="<span style="background:#fef1b0;">领导人.jpg</span>" ... &gt; 对应领导人卡片</li>
+        </ul>
+        <p style="margin-top: 0.3rem;">✅ 若图片位于子目录（比如 images/负责人.jpg）则填写相对路径即可。</p>
+    </div>
 </body>
 </html>
