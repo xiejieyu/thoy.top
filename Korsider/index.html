@@ -1,1 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>版权登记系统 · 完整信息上传</title>
+  <!-- 保留 favicon 链接（与官网一致） -->
+  <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
+  <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
 
+  <!-- 年轻化字体 Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(145deg, #e9dfff 0%, #dacdff 100%);
+      color: #1b0b3b;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 50px -30px rgba(99, 60, 190, 0.4);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    /* 头部导航 */
+    .reg-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      margin-bottom: 2rem;
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(10px);
+      border-radius: 4rem;
+    }
+
+    .logo-small {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-small img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-small span {
+      font-weight: 700;
+      font-size: 1.4rem;
+      background: linear-gradient(130deg, #3f1b7b, #8d62f0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: #2c0f5c;
+      font-weight: 600;
+      background: rgba(255,255,255,0.5);
+      padding: 0.5rem 1.8rem;
+      border-radius: 3rem;
+      border: 1px solid white;
+      transition: 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .back-link:hover {
+      background: white;
+      border-color: #b79eff;
+    }
+
+    .reg-header {
+      text-align: center;
+      margin: 1rem 0 3rem 0;
+    }
+
+    .reg-header h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(145deg, #26114b, #7349cf, #b28eff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .reg-header p {
+      font-size: 1.3rem;
+      color: #38236d;
+      background: rgba(255,255,240,0.5);
+      display: inline-block;
+      padding: 0.3rem 2rem;
+      border-radius: 3rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* 双通道选项卡 */
+    .channel-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: rgba(255,255,255,0.4);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.8);
+      padding: 1rem 3rem;
+      border-radius: 3rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #321d5e;
+      cursor: pointer;
+      transition: 0.15s;
+      box-shadow: 0 4px 12px rgba(139, 106, 235, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .tab-btn.active {
+      background: white;
+      border-color: #9c7af0;
+      box-shadow: 0 12px 22px -8px #b49bff;
+      color: #271151;
+    }
+
+    .tab-btn:hover {
+      background: rgba(255,255,255,0.8);
+    }
+
+    .reg-system {
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(16px);
+      border-radius: 3rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .type-badge {
+      display: inline-block;
+      background: #5636a8;
+      color: white;
+      padding: 0.3rem 1.8rem;
+      border-radius: 3rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-right: 0.8rem;
+      letter-spacing: 0.3px;
+    }
+
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1.5rem 0;
+      color: #1f0947;
+      border-left: 8px solid #aa8aff;
+      padding-left: 1.5rem;
+    }
+
+    /* 作品类型网格 */
+    .copyright-type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2.5rem 0;
+    }
+
+    .type-card {
+      background: rgba(255,255,255,0.5);
+      border-radius: 2rem;
+      padding: 1.2rem 1rem;
+      border: 1px solid white;
+      text-align: center;
+      font-weight: 600;
+      color: #2d155b;
+      transition: 0.1s;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .type-card.selected {
+      background: #7d5fd3;
+      color: white;
+      border-color: #ffffff;
+      box-shadow: 0 8px 18px #aa8eff;
+    }
+
+    .type-card input[type="radio"] {
+      display: none;
+    }
+
+    /* 表单双列 */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: #281552;
+      margin-left: 0.5rem;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      border-radius: 2rem;
+      padding: 0.9rem 1.5rem;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: 0.15s;
+      backdrop-filter: blur(4px);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #aa86ff;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 0 0 4px rgba(170, 134, 255, 0.2);
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* 上传区域样式 */
+    .upload-area {
+      background: rgba(255, 255, 255, 0.4);
+      border: 2px dashed #aa8aff;
+      border-radius: 2rem;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.1s;
+      margin-bottom: 1rem;
+    }
+
+    .upload-area:hover {
+      background: rgba(255, 255, 255, 0.7);
+      border-color: #7b4ee0;
+    }
+
+    .upload-area input[type="file"] {
+      display: none;
+    }
+
+    .file-list {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .file-item {
+      background: rgba(255,255,255,0.5);
+      border-radius: 2rem;
+      padding: 0.5rem 1.5rem;
+      margin: 0.3rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 签名绘制区域 */
+    .signature-pad {
+      background: white;
+      border-radius: 2rem;
+      padding: 1rem;
+      border: 2px solid #aa8aff;
+      margin: 1rem 0;
+    }
+
+    canvas {
+      width: 100%;
+      height: 150px;
+      background: white;
+      border-radius: 1rem;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .signature-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .signature-actions button {
+      background: rgba(255,255,255,0.6);
+      border: 1px solid white;
+      padding: 0.5rem 2rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* 预览面板 */
+    .preview-panel {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 2rem;
+      padding: 2rem;
+      margin: 2.5rem 0;
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .preview-item {
+      background: rgba(255,255,255,0.5);
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      border: 1px solid white;
+    }
+
+    .preview-label {
+      font-weight: 700;
+      color: #381d6b;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .preview-value {
+      word-break: break-word;
+      background: rgba(255,255,255,0.3);
+      padding: 0.8rem;
+      border-radius: 1rem;
+    }
+
+    .preview-file {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .file-tag {
+      background: #7b5fd3;
+      color: white;
+      padding: 0.2rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.85rem;
+    }
+
+    .chain-box {
+      background: rgba(210, 190, 255, 0.25);
+      border-radius: 2rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin: 2.5rem 0 2rem;
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+
+    .chain-hash {
+      font-family: monospace;
+      background: rgba(0,0,0,0.05);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      color: #2e1b52;
+      letter-spacing: 1px;
+    }
+
+    .badge-chain {
+      background: #6a3fc9;
+      color: white;
+      padding: 0.4rem 1.8rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      box-shadow: 0 6px 14px #b597ff;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-end;
+      margin-top: 2.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: #3f1e8f;
+      border: none;
+      color: white;
+      padding: 1.1rem 3rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: 0 14px 28px -10px #7e5de0;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.4);
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-primary:hover {
+      background: #5d35bb;
+      transform: scale(1.02);
+      box-shadow: 0 18px 32px -8px #aa8eff;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.6);
+      border: 1.5px solid white;
+      color: #2e135c;
+      padding: 1.1rem 3rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.15s;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      border-color: #aa8aff;
+    }
+
+    .toast-message {
+      background: rgba(70, 30, 140, 0.9);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 4rem;
+      font-weight: 600;
+      text-align: center;
+      width: fit-content;
+      margin: 1rem auto 0;
+      border: 1px solid rgba(255,255,255,0.6);
+      display: none;
+    }
+
+    .toast-message.show {
+      display: block;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #3a2570;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      padding: 1.2rem;
+      border-radius: 5rem;
+    }
+
+    hr {
+      border: 0.5px solid rgba(255,255,255,0.5);
+      margin: 2rem 0 1rem;
+    }
+
+    @media (max-width: 700px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      .reg-system {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 头部导航 -->
+    <nav class="reg-nav glass-panel">
+      <div class="logo-small">
+        <img src="科赛帝尔.png" alt="科赛帝尔">
+        <span>科赛帝尔</span>
+      </div>
+      <a href="./" class="back-link">← 返回官网</a>
+    </nav>
+
+    <!-- 标题 -->
+    <div class="reg-header">
+      <h1>📚 版权登记系统</h1>
+      <p>上传身份信息 · 作品文件 · 签名确认</p>
+    </div>
+
+    <!-- 国家/地方 选项卡 -->
+    <div class="channel-tabs">
+      <div class="tab-btn active" id="tabNational" data-tab="national">🏛️ 国家版权登记</div>
+      <div class="tab-btn" id="tabLocal" data-tab="local">📍 地方版权登记</div>
+    </div>
+
+    <!-- 登记系统主卡 -->
+    <div class="reg-system glass-panel">
+      <!-- 国家版权内容 -->
+      <div id="nationalContent" class="tab-content active">
+        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+          <span class="type-badge">国家作品著作权登记</span>
+          <span style="color:#38236d;">国家版权局 · 全国通用</span>
+        </div>
+
+        <!-- 作品类型选择 -->
+        <div class="section-title">📌 选择作品类型</div>
+        <div class="copyright-type-grid" id="nationalTypeGrid">
+          <label class="type-card"><input type="radio" name="nationalType" value="文字作品" checked> 📝 文字作品</label>
+          <label class="type-card"><input type="radio" name="nationalType" value="美术作品"> 🎨 美术作品</label>
+          <label class="type-card"><input type="radio" name="nationalType" value="摄影作品"> 📸 摄影作品</label>
+          <label class="type-card"><input type="radio" name="nationalType" value="音乐作品"> 🎵 音乐作品</label>
+          <label class="type-card"><input type="radio" name="nationalType" value="视听作品"> 🎬 视听作品</label>
+          <label class="type-card"><input type="radio" name="nationalType" value="计算机软件"> 💻 计算机软件</label>
+        </div>
+
+        <!-- 身份信息 + 地址 + 联系方式 + 邮箱 -->
+        <div class="section-title">👤 申请人信息</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>姓名/名称</label>
+            <input type="text" id="nationalName" placeholder="" value="">
+          </div>
+          <div class="form-group">
+            <label>证件类型</label>
+            <select id="nationalIdType">
+              <option>身份证</option>
+              <option>营业执照</option>
+              <option>护照</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>证件号码</label>
+            <input type="text" id="nationalIdNumber" placeholder="" value="">
+          </div>
+          <div class="form-group">
+            <label>手机号码</label>
+            <input type="tel" id="nationalPhone" placeholder="" value="">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>电子邮箱</label>
+            <input type="email" id="nationalEmail" placeholder="" value="">
+          </div>
+          <div class="form-group">
+            <label>通讯地址</label>
+            <input type="text" id="nationalAddress" placeholder="" value="">
+          </div>
+        </div>
+
+        <!-- 作品信息 -->
+        <div class="section-title">✍️ 作品信息</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>作品名称</label>
+            <input type="text" id="nationalWorkName" value="">
+          </div>
+          <div class="form-group">
+            <label>创作完成日期</label>
+            <input type="date" id="nationalCompletionDate" value="">
+          </div>
+        </div>
+
+        <!-- 上传身份证明文件 + 作品文件 -->
+        <div class="section-title">📎 上传材料</div>
+        <div class="form-group">
+          <label>身份证明文件 (身份证/营业执照)</label>
+          <div class="upload-area" id="idUploadArea">
+            <input type="file" id="idFile" accept=".jpg,.png,.pdf">
+            <span>📎 点击上传或拖拽文件 (支持jpg、png、pdf)</span>
+            <div class="file-list" id="idFileList"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>作品文件 (样本/源文件)</label>
+          <div class="upload-area" id="workUploadArea">
+            <input type="file" id="workFile" accept=".jpg,.png,.pdf,.doc,.docx,.txt,.zip" multiple>
+            <span>📁 点击上传作品文件 (可多选)</span>
+            <div class="file-list" id="workFileList"></div>
+          </div>
+        </div>
+
+        <!-- 签名板 -->
+        <div class="section-title">✍️ 电子签名</div>
+        <div class="signature-pad">
+          <canvas id="signatureCanvas" width="600" height="150"></canvas>
+          <div class="signature-actions">
+            <button type="button" id="clearSignature">清除签名</button>
+            <button type="button" id="saveSignature">保存签名</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 地方版权内容 (类似，但保持独立输入字段) -->
+      <div id="localContent" class="tab-content">
+        <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+          <span class="type-badge" style="background:#2f6b3b;">地方版权登记</span>
+          <span style="color:#38236d;">各省市版权局</span>
+        </div>
+
+        <!-- 省份选择 -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>省份/直辖市</label>
+            <select id="localProvince">
+              <option>重庆市</option>
+              <option selected>吉林省</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>城市/区级</label>
+            <input type="text" id="localCity" value="长春市">
+          </div>
+        </div>
+
+        <div class="section-title">📌 作品类型</div>
+        <div class="copyright-type-grid">
+          <label class="type-card"><input type="radio" name="localType" value="文字作品" checked> 📝 文字作品</label>
+          <label class="type-card"><input type="radio" name="localType" value="美术作品"> 🎨 美术作品</label>
+          <label class="type-card"><input type="radio" name="localType" value="摄影作品"> 📸 摄影作品</label>
+          <label class="type-card"><input type="radio" name="localType" value="音乐作品"> 🎵 音乐作品</label>
+        </div>
+
+        <!-- 申请人信息 地方 -->
+        <div class="section-title">👤 申请人信息</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>姓名/名称</label>
+            <input type="text" id="localName" value="">
+          </div>
+          <div class="form-group">
+            <label>证件号码</label>
+            <input type="text" id="localIdNumber" value="">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>手机号码</label>
+            <input type="tel" id="localPhone" value="">
+          </div>
+          <div class="form-group">
+            <label>电子邮箱</label>
+            <input type="email" id="localEmail" value="">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>通讯地址</label>
+          <input type="text" id="localAddress" value="">
+        </div>
+
+        <div class="section-title">✍️ 作品信息</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>作品名称</label>
+            <input type="text" id="localWorkName" value="">
+          </div>
+          <div class="form-group">
+            <label>创作日期</label>
+            <input type="date" id="localCompletionDate" value="">
+          </div>
+        </div>
+
+        <!-- 上传文件 地方简化但同样具备 -->
+        <div class="form-group">
+          <label>身份证明文件</label>
+          <div class="upload-area" id="localIdUploadArea">
+            <input type="file" id="localIdFile" accept=".jpg,.png,.pdf">
+            <span>📎 点击上传</span>
+            <div class="file-list" id="localIdFileList"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>作品文件</label>
+          <div class="upload-area" id="localWorkUploadArea">
+            <input type="file" id="localWorkFile" multiple>
+            <span>📁 上传作品</span>
+            <div class="file-list" id="localWorkFileList"></div>
+          </div>
+        </div>
+
+        <!-- 签名板 (共用国家签名的数据展示，为了简化，两个tab共用同一个签名，或可分别绘制。我们这里让两个tab共用同一个canvas) 
+             但为了预览展示，我们可以把签名数据存储为全局-->
+        <div class="section-title">✍️ 电子签名</div>
+        <div class="signature-pad">
+          <canvas id="signatureCanvasLocal" width="600" height="150"></canvas>
+          <div class="signature-actions">
+            <button type="button" id="clearSignatureLocal">清除签名</button>
+            <button type="button" id="saveSignatureLocal">保存签名</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========= 预览面板：集中展示所有上传的信息 ========= -->
+      <div class="preview-panel">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem; display: flex; gap: 0.5rem;">🔍 已上传信息预览 <span style="font-size: 1rem; background: #b79eff50; padding: 0.2rem 1rem; border-radius: 3rem;">实时更新</span></h2>
+        <div class="preview-grid" id="previewGrid">
+          <!-- 动态通过js填充 -->
+        </div>
+        <div style="margin-top: 1.5rem; text-align: right;">
+          <button class="btn-secondary" id="refreshPreview">🔄 刷新预览</button>
+        </div>
+      </div>
+
+      <!-- 区块链存证模拟 -->
+      <div class="chain-box">
+        <span class="badge-chain">⛓️ 版权存证链</span>
+        <span class="chain-hash" id="globalHash">0x8e3f...b22d (待存证)</span>
+        <span style="color:#3b1d7a;">⚡ 签名后自动存证</span>
+      </div>
+
+      <!-- 统一联系方式 & 操作按钮 -->
+      <div style="background: rgba(230, 215, 255, 0.3); border-radius: 2rem; padding: 1.2rem 2rem; margin: 2rem 0 1.5rem;">
+        <span style="font-weight:600;">📞 登记咨询 176-4986-4014 &nbsp; | &nbsp; 邮箱 us@thoy.top</span>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn-secondary" id="previewBtn">📋 预览申请</button>
+        <button class="btn-primary" id="submitBtn">⛓️ 提交登记</button>
+      </div>
+
+      <div id="toast" class="toast-message">✨ 登记已提交 (模拟)</div>
+    </div>
+
+    <!-- 底部备案信息 -->
+    <div class="footer-note">
+      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <span>吉ICP备2026000319号-2</span>
+        <span>吉公网安备22032302000082号</span>
+      </div>
+      <p style="margin-top: 0.5rem;">&copy; 2026 科赛帝尔 · 海米尔文化旗下 · 全类型版权登记</p>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // 选项卡切换
+      const tabNational = document.getElementById('tabNational');
+      const tabLocal = document.getElementById('tabLocal');
+      const nationalContent = document.getElementById('nationalContent');
+      const localContent = document.getElementById('localContent');
+
+      function setActiveTab(active) {
+        tabNational.classList.remove('active');
+        tabLocal.classList.remove('active');
+        nationalContent.classList.remove('active');
+        localContent.classList.remove('active');
+        if (active === 'national') {
+          tabNational.classList.add('active');
+          nationalContent.classList.add('active');
+        } else {
+          tabLocal.classList.add('active');
+          localContent.classList.add('active');
+        }
+        updatePreview(); // 切换时刷新预览
+      }
+      tabNational.addEventListener('click', () => setActiveTab('national'));
+      tabLocal.addEventListener('click', () => setActiveTab('local'));
+
+      // 签名画板初始化 (两个canvas)
+      const canvas = document.getElementById('signatureCanvas');
+      const canvasLocal = document.getElementById('signatureCanvasLocal');
+      let ctx = canvas?.getContext('2d');
+      let ctxLocal = canvasLocal?.getContext('2d');
+      
+      function initCanvas(canvasElement, ctx) {
+        if (!canvasElement || !ctx) return;
+        ctx.strokeStyle = '#1f0a47';
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        let drawing = false;
+
+        function start(e) {
+          drawing = true;
+          ctx.beginPath();
+          const rect = canvasElement.getBoundingClientRect();
+          const x = (e.clientX - rect.left) * (canvasElement.width / rect.width);
+          const y = (e.clientY - rect.top) * (canvasElement.height / rect.height);
+          ctx.moveTo(x, y);
+        }
+        function move(e) {
+          if (!drawing) return;
+          e.preventDefault();
+          const rect = canvasElement.getBoundingClientRect();
+          const x = (e.clientX - rect.left) * (canvasElement.width / rect.width);
+          const y = (e.clientY - rect.top) * (canvasElement.height / rect.height);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+        }
+        function stop() { drawing = false; }
+
+        canvasElement.addEventListener('mousedown', start);
+        canvasElement.addEventListener('mousemove', move);
+        canvasElement.addEventListener('mouseup', stop);
+        canvasElement.addEventListener('mouseleave', stop);
+        // 触摸事件
+        canvasElement.addEventListener('touchstart', (e) => { e.preventDefault(); start(e.touches[0]); });
+        canvasElement.addEventListener('touchmove', (e) => { e.preventDefault(); move(e.touches[0]); });
+        canvasElement.addEventListener('touchend', stop);
+      }
+
+      if (canvas) initCanvas(canvas, ctx);
+      if (canvasLocal) initCanvas(canvasLocal, ctxLocal);
+
+      document.getElementById('clearSignature')?.addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      });
+      document.getElementById('clearSignatureLocal')?.addEventListener('click', () => {
+        ctxLocal.clearRect(0, 0, canvasLocal.width, canvasLocal.height);
+      });
+
+      // 文件上传处理 (简单模拟显示文件名)
+      function setupUpload(triggerId, fileInputId, listId) {
+        const area = document.getElementById(triggerId);
+        const input = document.getElementById(fileInputId);
+        const list = document.getElementById(listId);
+        if (!area || !input || !list) return;
+        area.addEventListener('click', () => input.click());
+        input.addEventListener('change', function() {
+          list.innerHTML = '';
+          for (let file of this.files) {
+            const div = document.createElement('div');
+            div.className = 'file-item';
+            div.innerHTML = `<span>📄 ${file.name}</span><span>${(file.size/1024).toFixed(1)} KB</span>`;
+            list.appendChild(div);
+          }
+          updatePreview();
+        });
+      }
+
+      setupUpload('idUploadArea', 'idFile', 'idFileList');
+      setupUpload('workUploadArea', 'workFile', 'workFileList');
+      setupUpload('localIdUploadArea', 'localIdFile', 'localIdFileList');
+      setupUpload('localWorkUploadArea', 'localWorkFile', 'localWorkFileList');
+
+      // 预览刷新函数：收集所有输入字段并显示
+      function updatePreview() {
+        const grid = document.getElementById('previewGrid');
+        if (!grid) return;
+        const activeTab = nationalContent.classList.contains('active') ? 'national' : 'local';
+        
+        let items = [];
+
+        if (activeTab === 'national') {
+          items = [
+            { label: '申请人姓名', value: document.getElementById('nationalName')?.value || '' },
+            { label: '证件号码', value: document.getElementById('nationalIdNumber')?.value || '' },
+            { label: '手机', value: document.getElementById('nationalPhone')?.value || '' },
+            { label: '邮箱', value: document.getElementById('nationalEmail')?.value || '' },
+            { label: '通讯地址', value: document.getElementById('nationalAddress')?.value || '' },
+            { label: '作品名称', value: document.getElementById('nationalWorkName')?.value || '' },
+            { label: '创作日期', value: document.getElementById('nationalCompletionDate')?.value || '' },
+            { label: '作品类型', value: document.querySelector('input[name="nationalType"]:checked')?.value || '未选' },
+            { label: '身份证明文件', value: getFileNames('idFile') },
+            { label: '作品文件', value: getFileNames('workFile') },
+          ];
+        } else {
+          items = [
+            { label: '省份/城市', value: (document.getElementById('localProvince')?.value || '') + ' ' + (document.getElementById('localCity')?.value || '') },
+            { label: '申请人姓名', value: document.getElementById('localName')?.value || '' },
+            { label: '证件号码', value: document.getElementById('localIdNumber')?.value || '' },
+            { label: '手机', value: document.getElementById('localPhone')?.value || '' },
+            { label: '邮箱', value: document.getElementById('localEmail')?.value || '' },
+            { label: '通讯地址', value: document.getElementById('localAddress')?.value || '' },
+            { label: '作品名称', value: document.getElementById('localWorkName')?.value || '' },
+            { label: '创作日期', value: document.getElementById('localCompletionDate')?.value || '' },
+            { label: '作品类型', value: document.querySelector('input[name="localType"]:checked')?.value || '未选' },
+            { label: '身份证明', value: getFileNames('localIdFile') },
+            { label: '作品文件', value: getFileNames('localWorkFile') },
+          ];
+        }
+
+        // 签名预览 (从canvas获取base64简短展示)
+        let signatureStatus = '已绘制签名';
+        if (activeTab === 'national') {
+          signatureStatus = canvas && !ctx?.getImageData(0,0,1,1).data.some(v=>v!==0) ? '未签名' : '签名已绘制';
+        } else {
+          signatureStatus = canvasLocal && !ctxLocal?.getImageData(0,0,1,1).data.some(v=>v!==0) ? '未签名' : '签名已绘制';
+        }
+        items.push({ label: '电子签名', value: signatureStatus });
+
+        grid.innerHTML = items.map(item => `
+          <div class="preview-item">
+            <div class="preview-label">${item.label}</div>
+            <div class="preview-value">${item.value || '—'}</div>
+          </div>
+        `).join('');
+      }
+
+      function getFileNames(inputId) {
+        const input = document.getElementById(inputId);
+        if (!input || !input.files.length) return '未上传';
+        return Array.from(input.files).map(f => f.name).join('; ');
+      }
+
+      document.getElementById('refreshPreview')?.addEventListener('click', updatePreview);
+      // 监听输入变化
+      document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', updatePreview));
+      
+      // 提交按钮
+      document.getElementById('submitBtn').addEventListener('click', function() {
+        document.getElementById('toast').classList.add('show');
+        document.getElementById('globalHash').innerText = '0x' + Math.random().toString(16).substring(2,10) + '...' + Math.random().toString(16).substring(2,6) + ' (已存证)';
+        setTimeout(() => document.getElementById('toast').classList.remove('show'), 3000);
+        updatePreview();
+      });
+
+      document.getElementById('previewBtn').addEventListener('click', updatePreview);
+
+      // 初始化卡片选中样式
+      document.querySelectorAll('.type-card input[type="radio"]:checked').forEach(r => {
+        r.closest('.type-card')?.classList.add('selected');
+      });
+      document.querySelectorAll('.type-card').forEach(card => {
+        card.addEventListener('click', function() {
+          const radio = this.querySelector('input[type="radio"]');
+          if (radio) {
+            radio.checked = true;
+            document.querySelectorAll(`input[name="${radio.name}"]`).forEach(r => {
+              r.closest('.type-card')?.classList.remove('selected');
+            });
+            this.classList.add('selected');
+            updatePreview();
+          }
+        });
+      });
+
+      // 初始预览
+      updatePreview();
+    })();
+  </script>
+</body>
+</html>
