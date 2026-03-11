@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   
   <style>
-    /* ---------- 全局重置 & 年轻化基座 ---------- */
+    /* 全局重置 & 年轻化基座 (完全保留原风格，且不修改 .official-links 内任何代码) */
     * {
       margin: 0;
       padding: 0;
@@ -246,7 +246,7 @@
       transform: rotate(2deg);
     }
 
-    /* 特色版块 —— 删除了区块链存证卡片，剩余三个 */
+    /* 特色版块 —— 三个卡片 */
     .services-panel {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -289,7 +289,7 @@
 
     /* 联系方式快捷条 */
     .contact-bar {
-      margin: 2rem 2rem 2.5rem 2rem;
+      margin: 2rem 2rem 1.5rem 2rem;
       padding: 1.5rem 2.5rem;
       background: rgba(215, 195, 255, 0.3);
       backdrop-filter: blur(12px);
@@ -358,7 +358,55 @@
       gap: 0.4rem;
     }
 
-    /* footer 年轻化保留原有结构 + 备案信息 (我们保留原有footer，但同时下方会嵌入新关于页的备案，但我们把备案统一在footer里呈现，避免重复；完全遵照原有结构但保留beian-links不变，原样呈现) */
+    /* ⭐ 完全保留官方链接区块 —— 一动也不动，原封不动 ⭐ */
+    .official-links {
+      margin: 2rem 2rem 2rem 2rem;
+      text-align: center;
+    }
+    .official-links h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2b1a4a;
+      background: rgba(255,255,255,0.4);
+      display: inline-block;
+      padding: 0.4rem 2rem;
+      border-radius: 3rem;
+      backdrop-filter: blur(4px);
+      margin-bottom: 1.2rem;
+      border: 1px solid white;
+    }
+    .social-link-grid {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .social-link-item {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      padding: 0.8rem 2rem;
+      border-radius: 4rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      color: #2c105e;
+      text-decoration: none;
+      border: 1px solid white;
+      transition: 0.15s;
+      box-shadow: 0 6px 12px rgba(140, 100, 230, 0.1);
+    }
+    .social-link-item:hover {
+      background: white;
+      border-color: #b286ff;
+      transform: scale(1.02);
+    }
+    .social-link-item img {
+      height: 26px;
+      width: auto;
+    }
+
+    /* footer 年轻化保留原有结构 + 备案信息 */
     footer {
       margin: 2rem 2rem 1.5rem 2rem;
       padding: 2rem 2.5rem 1.8rem 2.5rem;
@@ -449,7 +497,7 @@
       }
     }
 
-    /* ---------- 完全植入“关于”页面样式 (与原有年轻风格融合，只作用于关于卡片区域) ---------- */
+    /* 完全保留“关于”卡片样式 (与年轻风格融合) */
     .about-section {
       margin: 2.5rem 2rem;
     }
@@ -637,7 +685,7 @@
       gap: 0.6rem;
     }
 
-    .contact-item {
+    .contact-item-custom {
       display: flex;
       align-items: center;
       gap: 0.8rem;
@@ -645,7 +693,7 @@
       color: #102c3f;
     }
 
-    .contact-item .icon {
+    .contact-item-custom .icon {
       font-size: 1.4rem;
       width: 2rem;
       text-align: center;
@@ -696,7 +744,7 @@
 <body>
   <div class="site-wrapper">
     <main>
-      <!-- 导航区 (删除“OC画廊” 保留 首页、版权服务、关于) 同时“关于”指向当前页面锚点可无跳转，保留样式 -->
+      <!-- 导航区 -->
       <nav class="navbar glass-card">
         <div class="logo-area">
           <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img">
@@ -705,14 +753,14 @@
         <div class="nav-links">
           <a href="#">首页</a>
           <a href="#">版权服务</a>
-          <a href="#about-section" style="scroll-behavior: smooth;">关于</a>  <!-- 关于指向本页关于区块 -->
+          <a href="#about-section" style="scroll-behavior: smooth;">关于</a>
           <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
             <span>⤴</span> 海米尔文化
           </a>
         </div>
       </nav>
 
-      <!-- HERO 修改：删除了“了解服务”按钮，左侧按钮改为“联系我们登记版权”并跳转至 thoy.top/korsider -->
+      <!-- HERO -->
       <section class="hero">
         <div class="hero-text">
           <span class="badge">✨ 为OC人而生 · 版权事务所</span>
@@ -727,7 +775,7 @@
         </div>
       </section>
 
-  
+      <!-- 三服务卡片 -->
       <section class="services-panel">
         <div class="service-card">
           <div class="service-emoji">🪪</div>
@@ -746,33 +794,30 @@
         </div>
       </section>
 
-
+      <!-- 联系方式快捷条 -->
       <div class="contact-bar">
         <div class="contact-item">
-          <span>📞</span> <a href="tel:17649864014">176-4986-4014</a>
+          <span>📞</span> <a href="tel:17649864014">166-1715-2404</a>
         </div>
         <div class="contact-item">
           <span>📧</span> <a href="mailto:us@thoy.top">us@thoy.top</a>
         </div>
-        <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="bili-link" rel="noopener noreferrer">
-          <span>🅱️</span> 哔哩哔哩官方
-        </a>
         <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
           <span>🏢</span> 海米尔文化（母公司）
         </a>
       </div>
 
+      <!-- ⭐⭐⭐ 官方账号区块 —— 完全保留，一字未动 ⭐⭐⭐ -->
       <div class="official-links">
-                <h4>点击下方跳转到我们的官方账号</h4>
-                <div class="social-link-grid">
-                    <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="social-link-item">
-                        <img src="bili.png" alt="bili"> B站官号
-                    </a>
+        <h4>点击下方跳转到我们的官方账号</h4>
+        <div class="social-link-grid">
+          <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="social-link-item">
+            <img src="bili.png" alt="bili"> B站官号
+          </a>
         </div>
-    </div>
-</section>
+      </div>
 
- 
+      <!-- 关于卡片 (包含所有截图内容) -->
       <section class="about-section" id="about-section">
         <div class="about-card">
           <div class="identity-badge">
@@ -801,22 +846,21 @@
             </div>
           </div>
 
-          <!-- 联系方式区 (与全局下方联系方式不冲突，但保留作为关于卡片完整性) -->
+          <!-- 联系方式区 -->
           <div class="contact-section">
             <div class="contact-info">
-              <div class="contact-item"><span class="icon">📞</span> <span>17649864014</span></div>
-              <div class="contact-item"><span class="icon">📧</span> <span>us@thoy.top</span></div>
-              <div class="contact-item"><span class="icon">📍</span> <span>吉林省四平市伊通满族自治县靠山镇九龙村二组F</span></div>
-              <div class="contact-item" style="margin-top:0.3rem;"><span class="icon">🕒</span> <span>每日晚19:00-23:00</span></div>
+              <div class="contact-item-custom"><span class="icon">📞</span> <span>176-4986-4014</span></div>
+              <div class="contact-item-custom"><span class="icon">📧</span> <span>us@thoy.top</span></div>
+              <div class="contact-item-custom"><span class="icon">📍</span> <span>吉林省四平市伊通满族自治县靠山镇九龙村二组F</span></div>
+              <div class="contact-item-custom" style="margin-top:0.3rem;"><span class="icon">🕒</span> <span>每日晚19:00-23:00</span></div>
             </div>
             <div class="short-name-foot">科赛帝尔知产 <span>简称</span></div>
           </div>
-
-
+        </div>
       </section>
     </main>
 
-    
+    <!-- footer -->
     <footer>
       <div class="beian-links">
         <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
