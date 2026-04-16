@@ -1,9 +1,462 @@
-<div class="about-grid">
-            <div class="info-block">
-              <div class="block-title"><span class="emoji-deco">📘</span> 关于我们</div>
-              <div class="block-content">
-                <p><strong>科赛帝尔</strong>（隶属于海米尔文化）成立于四平，是专注于版权代理的服务机构。我们以“专业、诚信、高效”为基石，为你提供最优质的版权代理服务，满足你的情绪价值。</p>
-                <p>团队名称“科赛帝尔”寓意 <strong>“科赛帝尔korsider”</strong> 科：代表科学、科技。寓意公司以严谨的科学态度和专业的代理知识为基础，为客户做出最好的服务。 赛：谐音“Sai”，代表竞赛、超越。在知识产权领域，市场如赛场，帮助客户在激烈的商业竞争中率先通过版权拿下最基础的保障。 帝：代表帝王、至尊。寓意为客户构建至高无上的技术壁垒，打造具有“帝王级”保护力度的知识产权护城河。 尔：在古语中指“你/您的”。强调以客户为中心，所有的专业服务最终都回归到“为你”创造价值。 整体则为：以科学严谨之法，助您在商业竞赛中构筑帝王般稳固的权利壁垒，一切只为你——科赛帝尔。（其实都是乱编的，杰鱼非让我们编这个）</p>
-                <p>📍 立足吉林，服务全国。我们深度理解本土创新生态，同时连接国内外知识产权资源，力求每一次代理、每一份建议都精准且有温度。</p>
-              </div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>科赛帝尔 | 版权代理专家 · 深色浅色切换</title>
+    <!-- 使用Inter字体，现代风格 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS 变量 — 浅色模式（默认） */
+        :root {
+            --bg-gradient-start: #f7f9fc;
+            --bg-gradient-end: #eef2f5;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-border: rgba(255,255,255,0.6);
+            --text-primary: #1a2c3e;
+            --text-secondary: #2a4055;
+            --title-color: #1f4e6e;
+            --strong-color: #1f6e8c;
+            --block-title-border: #e2edf2;
+            --highlight-bg: #f0f6fa;
+            --highlight-border: #2c9baf;
+            --badge-bg: #eef2f0;
+            --badge-color: #2a6b4e;
+            --small-note-bg: rgba(110, 140, 160, 0.08);
+            --small-note-color: #6c8ba0;
+            --home-btn-bg: rgba(255,255,255,0.7);
+            --home-btn-border: rgba(72, 120, 168, 0.2);
+            --home-btn-hover-bg: #ffffff;
+            --home-btn-color: #1e4663;
+            --footer-color: #8ba2b6;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --shadow-hover: rgba(0, 32, 64, 0.12);
+            --hr-gradient: #cbdde6;
+            --emoji-deco-bg: #eef4fa;
+            --emoji-shadow: inset 0 0 0 1px rgba(0,0,0,0.02);
+        }
+
+        /* 深色模式变量 */
+        body.dark {
+            --bg-gradient-start: #121826;
+            --bg-gradient-end: #0f141f;
+            --card-bg: rgba(28, 35, 48, 0.96);
+            --card-border: rgba(70, 90, 110, 0.4);
+            --text-primary: #eef2f8;
+            --text-secondary: #cbd5e1;
+            --title-color: #aad0f0;
+            --strong-color: #7fc1db;
+            --block-title-border: #2a3a48;
+            --highlight-bg: #1e2a36;
+            --highlight-border: #3c8f9c;
+            --badge-bg: #1f3a2e;
+            --badge-color: #a6d0b5;
+            --small-note-bg: rgba(160, 180, 200, 0.12);
+            --small-note-color: #9aafc2;
+            --home-btn-bg: rgba(30, 40, 55, 0.8);
+            --home-btn-border: rgba(100, 140, 170, 0.4);
+            --home-btn-hover-bg: #2a3a48;
+            --home-btn-color: #d6e6f5;
+            --footer-color: #7e95ab;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(0, 0, 0, 0.5);
+            --hr-gradient: #2d4050;
+            --emoji-deco-bg: #1f2e3c;
+            --emoji-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.25s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background: linear-gradient(145deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            line-height: 1.5;
+            color: var(--text-primary);
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        .page-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* 头部区域: 返回主页按钮 + 模式切换器 */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--home-btn-bg);
+            backdrop-filter: blur(4px);
+            padding: 0.6rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--home-btn-color);
+            text-decoration: none;
+            border: 1px solid var(--home-btn-border);
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .home-btn:hover {
+            background: var(--home-btn-hover-bg);
+            border-color: #2c6e9e;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+            color: var(--strong-color);
+        }
+
+        /* 切换开关容器 */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--home-btn-bg);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1rem 0.4rem 1.2rem;
+            border-radius: 60px;
+            border: 1px solid var(--home-btn-border);
+        }
+
+        .theme-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--home-btn-color);
+        }
+
+        /* 切换按钮 (toggle) 自定义 */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 26px;
+        }
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #bdd4e2;
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "☀️";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            height: 22px;
+            width: 22px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        input:checked + .slider {
+            background-color: #2c5a74;
+        }
+        input:checked + .slider:before {
+            content: "🌙";
+            transform: translateX(26px);
+            background-color: #f5f2e6;
+        }
+        /* 适配深色时滑块文字微调 */
+        body.dark .slider:before {
+            background-color: #f0ede8;
+        }
+
+        /* 卡片样式 */
+        .about-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .info-block {
+            background: var(--card-bg);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px var(--shadow-color);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .info-block:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 28px 40px -16px var(--shadow-hover);
+        }
+
+        .block-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 1.6rem 2rem 0.8rem 2rem;
+            background: transparent;
+            border-bottom: 2px solid var(--block-title-border);
+            letter-spacing: -0.3px;
+            color: var(--title-color);
+        }
+
+        .emoji-deco {
+            font-size: 2rem;
+            background: var(--emoji-deco-bg);
+            width: 48px;
+            height: 48px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            box-shadow: var(--emoji-shadow);
+        }
+
+        .block-content {
+            padding: 1.8rem 2rem 2.2rem 2rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .block-content p {
+            margin-bottom: 1.4rem;
+        }
+
+        .block-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .block-content strong {
+            color: var(--strong-color);
+            font-weight: 600;
+        }
+
+        .meaning-highlight {
+            background: var(--highlight-bg);
+            padding: 1.2rem 1.5rem;
+            border-radius: 1.2rem;
+            margin: 1rem 0 1.4rem 0;
+            border-left: 4px solid var(--highlight-border);
+            transition: background 0.2s;
+        }
+
+        .meaning-highlight p {
+            margin-bottom: 0.6rem;
+        }
+
+        .meaning-highlight p:last-child {
+            margin-bottom: 0;
+        }
+
+        .small-note {
+            font-size: 0.85rem;
+            color: var(--small-note-color);
+            background: var(--small-note-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .location-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--badge-bg);
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--badge-color);
+            margin-right: 0.5rem;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, var(--hr-gradient), transparent);
+        }
+
+        .footer-deco {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.75rem;
+            color: var(--footer-color);
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 1.2rem;
+            }
+            .block-title {
+                font-size: 1.5rem;
+                padding: 1.2rem 1.2rem 0.6rem 1.2rem;
+            }
+            .block-content {
+                padding: 1.2rem 1.2rem 1.6rem;
+            }
+            .emoji-deco {
+                width: 40px;
+                height: 40px;
+                font-size: 1.6rem;
+            }
+            .meaning-highlight {
+                padding: 0.9rem 1rem;
+            }
+            .nav-header {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .block-content a {
+            color: var(--strong-color);
+            text-decoration: none;
+            border-bottom: 1px dashed #9bc2d4;
+        }
+        .block-content a:hover {
+            color: var(--title-color);
+            border-bottom-style: solid;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+    <div class="nav-header">
+        <!-- 返回主页，跳转至 thoy.top (新标签页) -->
+        <a href="https://thoy.top" class="home-btn" target="_blank" rel="noopener noreferrer">
+            <span></span> 返回主页 · 科赛帝尔
+        </a>
+        <!-- 深色/浅色切换模块 -->
+        <div class="theme-switch-wrapper">
+            <span class="theme-label">🌓 深色模式</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="darkmode-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="about-grid">
+        <div class="info-block">
+            <div class="block-title">
+                <span class="emoji-deco">📘</span> 
+                <span>关于我们</span>
             </div>
+            <div class="block-content">
+                <p><strong>科赛帝尔</strong>（隶属于海米尔文化）成立于四平，是专注于版权代理的服务机构。我们以“专业、诚信、高效”为基石，为你提供最优质的版权代理服务，满足你的情绪价值。</p>
+                
+                <!-- 寓意部分设计保留 -->
+                <div class="meaning-highlight">
+                    <p>团队名称“科赛帝尔”寓意 <strong>“科赛帝尔 Korsider”</strong> ：</p>
+                    <p>🔬 <strong>科</strong> — 代表科学、科技。寓意公司以严谨的科学态度和专业的代理知识为基础，为客户做出最好的服务。</p>
+                    <p>🏁 <strong>赛</strong> — 谐音“Sai”，代表竞赛、超越。在知识产权领域，市场如赛场，帮助客户在激烈的商业竞争中率先通过版权拿下最基础的保障。</p>
+                    <p>👑 <strong>帝</strong> — 代表帝王、至尊。寓意为客户构建至高无上的技术壁垒，打造具有“帝王级”保护力度的知识产权护城河。</p>
+                    <p>✨ <strong>尔</strong> — 在古语中指“你/您的”。强调以客户为中心，所有的专业服务最终都回归到“为你”创造价值。</p>
+                    <p>整体则为：<strong>以科学严谨之法，助您在商业竞赛中构筑帝王般稳固的权利壁垒，一切只为你——科赛帝尔。</strong></p>
+                    <div class="small-note">🎭 （其实都是乱编的，杰鱼非让我们编这个）</div>
+                </div>
+
+                <p><span class="location-badge">📍 立足吉林，服务全国</span> 我们深度理解本土创新生态，同时连接国内外知识产权资源，力求每一次代理、每一份建议都精准且有温度。</p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-deco">
+        <span>科赛帝尔 · 以专业守护创意 | 支持深色/浅色模式</span>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // 获取切换checkbox和body元素
+        const toggleCheckbox = document.getElementById('darkmode-toggle');
+        // 检测本地存储是否有主题偏好，同时也检测系统偏好
+        const storedTheme = localStorage.getItem('korsider-theme');
+        
+        // 设置主题函数
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                document.body.classList.add('dark');
+                if (toggleCheckbox) toggleCheckbox.checked = true;
+                localStorage.setItem('korsider-theme', 'dark');
+            } else {
+                document.body.classList.remove('dark');
+                if (toggleCheckbox) toggleCheckbox.checked = false;
+                localStorage.setItem('korsider-theme', 'light');
+            }
+        }
+        
+        // 初次加载逻辑
+        if (storedTheme) {
+            setTheme(storedTheme);
+        } else {
+            // 如果没有存储，检查系统配色方案
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                setTheme('dark');
+            } else {
+                setTheme('light');
+            }
+        }
+        
+        // 监听切换事件
+        if (toggleCheckbox) {
+            toggleCheckbox.addEventListener('change', function(e) {
+                if (e.target.checked) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+        }
+        
+        // 可选: 监听系统主题变化自动更新 (提升体验)
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleSystemChange = (e) => {
+            // 仅当用户没有手动设置过localstorage时才自动跟随系统 (避免覆盖用户选择)
+            const userSet = localStorage.getItem('korsider-theme');
+            if (!userSet) {
+                if (e.matches) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            }
+        };
+        // 添加监听，现代浏览器支持
+        if (darkModeMediaQuery.addEventListener) {
+            darkModeMediaQuery.addEventListener('change', handleSystemChange);
+        } else if (darkModeMediaQuery.addListener) {
+            darkModeMediaQuery.addListener(handleSystemChange);
+        }
+    })();
+</script>
+</body>
+</html>
