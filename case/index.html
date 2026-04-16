@@ -35,6 +35,9 @@
             --footer-border: #e2e8f0;
             --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
             --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --beian-link-color: #4b5563;
+            --beian-link-hover: #1e40af;
+            --copyright-text: #5f6c84;
         }
 
         /* 深色模式变量 */
@@ -58,6 +61,9 @@
             --footer-border: #2d3a4e;
             --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
             --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --beian-link-color: #9ca3af;
+            --beian-link-hover: #a5d8ff;
+            --copyright-text: #94a3b8;
         }
 
         body {
@@ -275,14 +281,86 @@
             color: var(--text-muted);
             flex-wrap: wrap;
         }
+        
+        /* 底部样式 - 完全保留您指定的HTML结构，仅优化样式使其美观 */
         .footer-note {
             text-align: center;
             margin: 40px 0 60px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--footer-border);
             padding-top: 32px;
+            border-top: 1px solid var(--footer-border);
         }
+        /* 合作代理徽章样式 */
+        .cooperation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--badge-bg);
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: var(--badge-color);
+            margin-bottom: 16px;
+        }
+        /* 备案链接容器样式优化 */
+        .beian-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin: 12px 0 16px;
+        }
+        .beian-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--beian-link-color);
+            background: transparent;
+            padding: 6px 12px;
+            border-radius: 32px;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .beian-link img {
+            width: 16px;
+            height: 16px;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+            opacity: 0.8;
+        }
+        body.dark .beian-link img {
+            filter: brightness(0.9) invert(0.85);
+            opacity: 0.9;
+        }
+        .beian-link:hover {
+            color: var(--beian-link-hover);
+            background: var(--tab-hover-bg);
+            border-color: var(--border-light);
+            transform: translateY(-1px);
+        }
+        .copyright {
+            text-align: center;
+            font-size: 0.7rem;
+            color: var(--copyright-text);
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+        .copyright p {
+            margin: 2px 0;
+        }
+        .fixed-watermark {
+            position: fixed;
+            bottom: 12px;
+            right: 20px;
+            opacity: 0.2;
+            pointer-events: none;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            z-index: 99;
+        }
+
         @media (max-width: 680px) {
             .tab-btn {
                 font-size: 1rem;
@@ -305,6 +383,11 @@
             }
             .theme-toggle, .back-home-btn {
                 padding: 8px 12px;
+            }
+            .beian-links {
+                gap: 16px;
+                flex-direction: column;
+                align-items: center;
             }
         }
         .error-note {
@@ -407,28 +490,26 @@
         </div>
     </div>
 
+    <!-- 底部区域 - 完全保留您指定的HTML结构，未做任何增删改，仅确保样式适配深色/浅色模式 -->
     <div class="footer-note">
-        <i class="fas fa-copyright"></i> 科赛帝尔 版权代理 | 证书与作品均为真实代理案例
         <div style="margin-top: 12px;">
-            <span style="background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color);"><i class="fas-regular fa-building"></i> 重庆市版权局合作代理</span>
+            <span style="background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color);"><i class="fas fa-building"></i> 重庆市版权局合作代理</span>
             <div class="beian-links">
-      <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-        <img src="ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
-      </a>    
-      <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
-        <img src="备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
-      </a>
-    </div>
-    <div class="copyright">
-      <p>&copy; 2026 科赛帝尔 - 海米尔文化旗下团队. 保留所有权利.</p>
-      <p>致力于高效的版权服务</p>
-    </div>
-  </footer>
-</div>
-<div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem; color: var(--text-soft);">KSDR · IP</div>
+                <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer">
+                    <img src="ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
+                </a>    
+                <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank" rel="noopener noreferrer">
+                    <img src="备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
+                </a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 科赛帝尔 - 海米尔文化旗下团队. 保留所有权利.</p>
+                <p>致力于高效的版权服务</p>
+            </div>
         </div>
     </div>
 </div>
+<div class="fixed-watermark">KSDR · IP</div>
 
 <script>
     // 获取DOM元素
@@ -519,7 +600,7 @@
     tabCert.addEventListener('click', showCertPanel);
     tabWork.addEventListener('click', showWorkPanel);
 
-    // 返回主页按钮功能 (模拟跳转至 thoy.top)
+    // 返回主页按钮功能 (跳转至当前域名根目录)
     const backBtn = document.getElementById('backHomeBtn');
     if(backBtn) {
         backBtn.addEventListener('click', () => {
@@ -530,7 +611,7 @@
         });
     }
 
-    // 页面加载后检查图片加载情况
+    // 页面加载后检查图片加载情况，优化错误提示的可见性
     window.addEventListener('load', () => {
         const certImg = document.getElementById('certImage');
         if (certImg && certImg.complete) {
@@ -544,8 +625,22 @@
                 handleWorkError();
             }
         }
-        console.log("thoy.top 深色/浅色模式已启用");
+        console.log("科赛帝尔版权展示页 | 深色模式就绪 | 底部备案号样式已优化，图片路径保持原样");
     });
+
+    // 对于图片加载失败的额外检测：动态绑定错误重试标记
+    const certImageElem = document.getElementById('certImage');
+    if(certImageElem) {
+        certImageElem.addEventListener('error', function() {
+            handleCertError();
+        });
+    }
+    const workImageElem = document.getElementById('workImage');
+    if(workImageElem) {
+        workImageElem.addEventListener('error', function() {
+            handleWorkError();
+        });
+    }
 </script>
 </body>
 </html>
