@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>科赛帝尔 · 版权证书 | 原创作品展示</title>
-    <!-- 极简风格，仅展示证书与作品各一张图片 -->
+    <title>科赛帝尔 · 版权证书 | 原创作品展示 (深色/浅色模式)</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -12,12 +11,59 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* 浅色模式变量 (默认) */
+        :root {
+            --bg-body: #f5f7fc;
+            --surface-card: #ffffff;
+            --border-light: #eef2ff;
+            --text-primary: #0a0f2c;
+            --text-secondary: #475569;
+            --text-muted: #5f6c84;
+            --tab-active-bg: #eef2ff;
+            --tab-active-color: #1e40af;
+            --tab-inactive-color: #5b6e8c;
+            --tab-hover-bg: #f1f5f9;
+            --btn-back-bg: #f1f5f9;
+            --btn-back-hover: #e2e8f0;
+            --badge-bg: #eef2ff;
+            --badge-color: #1e40af;
+            --error-bg: #fee2e2;
+            --error-color: #b91c1c;
+            --footer-border: #e2e8f0;
+            --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* 深色模式变量 */
+        body.dark {
+            --bg-body: #0f172a;
+            --surface-card: #1e293b;
+            --border-light: #2d3a4e;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --tab-active-bg: #334155;
+            --tab-active-color: #a5d8ff;
+            --tab-inactive-color: #94a3b8;
+            --tab-hover-bg: #2d3a4e;
+            --btn-back-bg: #334155;
+            --btn-back-hover: #475569;
+            --badge-bg: #2d3a5e;
+            --badge-color: #bbd7fb;
+            --error-bg: #451e1e;
+            --error-color: #fca5a5;
+            --footer-border: #2d3a4e;
+            --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.4);
+            --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f5f7fc;
-            color: #0a0f2c;
+            background: var(--bg-body);
+            color: var(--text-primary);
             line-height: 1.5;
         }
 
@@ -27,16 +73,16 @@
             padding: 0 24px;
         }
 
-        /* 顶部栏 + 返回主页 */
+        /* 顶部栏 + 返回主页 + 主题切换 */
         .top-bar {
-            background: #ffffff;
-            border-bottom: 1px solid #eef2ff;
+            background: var(--surface-card);
+            border-bottom: 1px solid var(--border-light);
             padding: 14px 0;
             position: sticky;
             top: 0;
             z-index: 20;
             backdrop-filter: blur(4px);
-            background: rgba(255,255,255,0.96);
+            background: var(--surface-card);
         }
         .bar-inner {
             display: flex;
@@ -54,14 +100,44 @@
             color: transparent;
             letter-spacing: -0.3px;
         }
+        body.dark .logo {
+            background: linear-gradient(135deg, #90b4f0, #6d8fcf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .right-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .theme-toggle {
+            background: var(--btn-back-bg);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+        .theme-toggle:hover {
+            background: var(--btn-back-hover);
+            transform: translateY(-1px);
+        }
         .back-home-btn {
-            background: #f1f5f9;
+            background: var(--btn-back-bg);
             border: none;
             padding: 8px 20px;
             border-radius: 40px;
             font-weight: 500;
             font-size: 0.9rem;
-            color: #1e293b;
+            color: var(--text-primary);
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
@@ -70,7 +146,7 @@
             font-family: inherit;
         }
         .back-home-btn:hover {
-            background: #e2e8f0;
+            background: var(--btn-back-hover);
             transform: translateY(-1px);
         }
 
@@ -80,7 +156,7 @@
             display: flex;
             justify-content: center;
             gap: 24px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-light);
             padding-bottom: 12px;
         }
         .tab-btn {
@@ -92,7 +168,7 @@
             border-radius: 48px;
             cursor: pointer;
             transition: all 0.2s;
-            color: #5b6e8c;
+            color: var(--tab-inactive-color);
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -102,13 +178,13 @@
             font-size: 1.2rem;
         }
         .tab-btn.active {
-            background: #eef2ff;
-            color: #1e40af;
+            background: var(--tab-active-bg);
+            color: var(--tab-active-color);
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
         .tab-btn:not(.active):hover {
-            background: #f1f5f9;
-            color: #334155;
+            background: var(--tab-hover-bg);
+            color: var(--text-primary);
         }
 
         /* 面板切换 */
@@ -128,53 +204,52 @@
         .single-card {
             max-width: 760px;
             margin: 20px auto 60px;
-            background: #ffffff;
+            background: var(--surface-card);
             border-radius: 36px;
             overflow: hidden;
-            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
-            border: 1px solid #eef2ff;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-light);
             transition: transform 0.2s;
         }
         .single-card:hover {
             transform: translateY(-4px);
         }
         .image-area {
-            background: #fefcf7;
+            background: var(--bg-body);
             padding: 32px 24px 24px 24px;
             text-align: center;
-            border-bottom: 1px solid #f0f2f8;
+            border-bottom: 1px solid var(--border-light);
         }
         .main-image {
             max-width: 100%;
             border-radius: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-            background: #fff;
+            box-shadow: var(--shadow-sm);
+            background: var(--surface-card);
             display: block;
             margin: 0 auto;
         }
-        /* 当图片尚未加载时占位样式 */
         .image-placeholder {
-            background: #f1f5f9;
+            background: var(--tab-hover-bg);
             border-radius: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 48px 20px;
-            color: #6c7a91;
+            color: var(--text-muted);
         }
         .info-area {
             padding: 28px 32px 36px;
-            background: white;
+            background: var(--surface-card);
         }
         .reg-number {
-            background: #eef2ff;
+            background: var(--badge-bg);
             display: inline-block;
             padding: 6px 18px;
             border-radius: 40px;
             font-size: 0.8rem;
             font-weight: 600;
-            color: #1e40af;
+            color: var(--badge-color);
             margin-bottom: 16px;
             font-family: monospace;
             letter-spacing: 0.3px;
@@ -183,29 +258,29 @@
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 12px;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .desc {
-            color: #475569;
+            color: var(--text-secondary);
             margin: 16px 0;
             line-height: 1.5;
         }
         .meta-line {
-            border-top: 1px solid #eef2ff;
+            border-top: 1px solid var(--border-light);
             margin-top: 20px;
             padding-top: 18px;
             display: flex;
             gap: 24px;
             font-size: 0.85rem;
-            color: #5f6c84;
+            color: var(--text-muted);
             flex-wrap: wrap;
         }
         .footer-note {
             text-align: center;
             margin: 40px 0 60px;
             font-size: 0.8rem;
-            color: #5f6c84;
-            border-top: 1px solid #e2e8f0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--footer-border);
             padding-top: 32px;
         }
         @media (max-width: 680px) {
@@ -219,10 +294,22 @@
             .info-area {
                 padding: 20px;
             }
+            .right-actions {
+                gap: 8px;
+            }
+            .theme-toggle span, .back-home-btn span {
+                display: none;
+            }
+            .theme-toggle i, .back-home-btn i {
+                margin: 0;
+            }
+            .theme-toggle, .back-home-btn {
+                padding: 8px 12px;
+            }
         }
         .error-note {
-            background: #fee2e2;
-            color: #b91c1c;
+            background: var(--error-bg);
+            color: var(--error-color);
             border-radius: 20px;
             padding: 12px;
             margin-top: 12px;
@@ -234,10 +321,15 @@
 
 <div class="top-bar">
     <div class="container bar-inner">
-        <div class="logo">thoy<span style="background: none; color:#2c5f9a;">.top</span></div>
-        <button class="back-home-btn" id="backHomeBtn">
-            <i class="fas fa-home"></i> 返回主页
-        </button>
+        <div class="logo">thoy<span style="background: none;">.top</span></div>
+        <div class="right-actions">
+            <button class="theme-toggle" id="themeToggleBtn">
+                <i class="fas fa-moon"></i> <span>深色模式</span>
+            </button>
+            <button class="back-home-btn" id="backHomeBtn">
+                <i class="fas fa-home"></i> <span>返回主页</span>
+            </button>
+        </div>
     </div>
 </div>
 
@@ -290,7 +382,7 @@
             <div class="image-area">
                 <!-- 作品图片: 服务器内名字 26F00841168.png -->
                 <img id="workImage" class="main-image" 
-                     src="星狩.jpg" 
+                     src="26F00841168.png" 
                      alt="原创美术作品 - 登记号 渝作登字-2026-F-00841168"
                      onerror="handleWorkError()"
                      style="max-width: 100%; height: auto;">
@@ -319,18 +411,62 @@
     <div class="footer-note">
         <i class="fas fa-copyright"></i> thoy.top 版权代理 | 证书与作品均为真实代理案例，登记号：渝作登字-2026-F-00841168
         <div style="margin-top: 12px;">
-            <span style="background:#eef2ff; padding:4px 16px; border-radius:40px; font-size:0.7rem;"><i class="fas-regular fa-building"></i> 重庆市版权局合作代理</span>
-            <span style="margin-left: 12px; background:#eef2ff; padding:4px 16px; border-radius:40px; font-size:0.7rem;"><i class="fas fa-link"></i> 区块链存证同步</span>
+            <span style="background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color);"><i class="fas-regular fa-building"></i> 重庆市版权局合作代理</span>
+            <span style="margin-left: 12px; background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color);"><i class="fas fa-link"></i> 区块链存证同步</span>
         </div>
     </div>
 </div>
 
 <script>
-    // 获取选项卡元素
+    // 获取DOM元素
     const tabCert = document.getElementById('tabCertBtn');
     const tabWork = document.getElementById('tabWorkBtn');
     const certPanel = document.getElementById('certPanel');
     const workPanel = document.getElementById('workPanel');
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = themeBtn.querySelector('i');
+    const themeText = themeBtn.querySelector('span');
+
+    // 主题切换逻辑
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark');
+            localStorage.setItem('thoy_theme', 'dark');
+            if (themeIcon) themeIcon.className = 'fas fa-sun';
+            if (themeText) themeText.innerText = '浅色模式';
+        } else {
+            document.body.classList.remove('dark');
+            localStorage.setItem('thoy_theme', 'light');
+            if (themeIcon) themeIcon.className = 'fas fa-moon';
+            if (themeText) themeText.innerText = '深色模式';
+        }
+    }
+
+    function toggleTheme() {
+        if (document.body.classList.contains('dark')) {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    }
+
+    // 初始化主题
+    const savedTheme = localStorage.getItem('thoy_theme');
+    if (savedTheme === 'dark') {
+        setTheme('dark');
+    } else if (savedTheme === 'light') {
+        setTheme('light');
+    } else {
+        // 跟随系统偏好
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    }
+
+    themeBtn.addEventListener('click', toggleTheme);
 
     // 证书图片错误处理
     function handleCertError() {
@@ -376,18 +512,16 @@
         backBtn.addEventListener('click', () => {
             const confirmGo = confirm("即将返回 thoy.top 官方网站主页。");
             if(confirmGo) {
-                // 根据实际部署可替换为 https://thoy.top 或根路径
                 window.location.href = "/";
             }
         });
     }
 
-    // 可选: 预检查图片存在性，静默控制台提醒
+    // 页面加载后检查图片加载情况
     window.addEventListener('load', () => {
         const certImg = document.getElementById('certImage');
         if (certImg && certImg.complete) {
-            const naturalWidth = certImg.naturalWidth;
-            if (naturalWidth === 0) {
+            if (certImg.naturalWidth === 0) {
                 handleCertError();
             }
         }
@@ -397,7 +531,7 @@
                 handleWorkError();
             }
         }
-        console.log("thoy.top 版权案例页 | 证书: 渝作26F00841168.jpg , 作品: 26F00841168.png");
+        console.log("thoy.top 深色/浅色模式已启用 | 证书: 渝作26F00841168.jpg , 作品: 26F00841168.png");
     });
 </script>
 </body>
