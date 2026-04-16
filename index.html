@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>科赛帝尔（thoy） · 不太正经的版权代理团队</title>
+  <title>科赛帝尔（thoy）· 版权代理团队 | 浅色/暗色模式</title>
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
   <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
@@ -14,17 +14,86 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
   
   <style>
-    /* 全局重置 & 年轻化基座 (完全保留原风格，且不修改 .official-links 内任何代码) */
+    /* ---------- 全局 CSS 变量 (浅色模式 主题色 #2e3192) ---------- */
+    :root {
+      --primary: #2e3192;
+      --primary-dark: #232675;
+      --primary-soft: rgba(46, 49, 146, 0.15);
+      --primary-glow: rgba(46, 49, 146, 0.35);
+      --bg-start: #f9f3ff;
+      --bg-end: #f0e8ff;
+      --surface: rgba(255, 255, 255, 0.5);
+      --surface-hover: rgba(255, 255, 255, 0.8);
+      --card-bg: rgba(255, 255, 255, 0.55);
+      --text-primary: #1b1037;
+      --text-secondary: #2a1a47;
+      --text-soft: #2f1c53;
+      --border-light: rgba(255, 255, 255, 0.7);
+      --border-glow: rgba(46, 49, 146, 0.2);
+      --shadow-sm: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 12px 24px -16px rgba(46, 49, 146, 0.2);
+      --cta-bg: #2e3192;
+      --cta-hover: #3b3ea8;
+      --cta-shadow: 0 12px 28px -8px rgba(46, 49, 146, 0.4);
+      --badge-bg: rgba(46, 49, 146, 0.12);
+      --badge-text: #2e3192;
+      --footer-bg: rgba(255, 255, 255, 0.4);
+      --icon-filter: none;
+      --beian-bg: rgba(250, 245, 255, 0.6);
+      --about-card-bg: rgba(255, 255, 255, 0.85);
+      --contact-section-bg: #eef2fc;
+      --info-block-bg: white;
+      --info-block-shadow: 0 12px 24px -16px rgba(46, 49, 146, 0.2);
+      --border-left: #2e3192;
+      --tagline-border: rgba(46, 49, 146, 0.3);
+    }
+
+    /* 暗色模式变量 */
+    body.dark {
+      --primary: #6c6fdd;
+      --primary-dark: #7c7fe6;
+      --primary-soft: rgba(108, 111, 221, 0.25);
+      --primary-glow: rgba(108, 111, 221, 0.4);
+      --bg-start: #0b0b1a;
+      --bg-end: #12122b;
+      --surface: rgba(25, 25, 45, 0.6);
+      --surface-hover: rgba(40, 40, 70, 0.85);
+      --card-bg: rgba(30, 30, 55, 0.65);
+      --text-primary: #ececff;
+      --text-secondary: #ddd9ff;
+      --text-soft: #cdc9f0;
+      --border-light: rgba(108, 111, 221, 0.3);
+      --border-glow: rgba(108, 111, 221, 0.4);
+      --shadow-sm: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+      --shadow-md: 0 12px 20px -16px rgba(0, 0, 0, 0.5);
+      --cta-bg: #4e51b0;
+      --cta-hover: #6c6fdd;
+      --cta-shadow: 0 12px 28px -8px rgba(108, 111, 221, 0.5);
+      --badge-bg: rgba(108, 111, 221, 0.2);
+      --badge-text: #c2c6ff;
+      --footer-bg: rgba(20, 20, 40, 0.7);
+      --icon-filter: brightness(0) invert(1);
+      --beian-bg: rgba(35, 35, 60, 0.7);
+      --about-card-bg: rgba(30, 30, 55, 0.85);
+      --contact-section-bg: #1c1c36;
+      --info-block-bg: #252545;
+      --info-block-shadow: 0 12px 24px -16px rgba(0, 0, 0, 0.5);
+      --border-left: #6c6fdd;
+      --tagline-border: rgba(108, 111, 221, 0.5);
+    }
+
+    /* 全局重置 & 过渡 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: linear-gradient(145deg, #f9f3ff 0%, #f0e8ff 100%);
-      color: #1b1037;
+      background: linear-gradient(145deg, var(--bg-start) 0%, var(--bg-end) 100%);
+      color: var(--text-primary);
       line-height: 1.5;
       min-height: 100vh;
       display: flex;
@@ -41,14 +110,14 @@
       flex: 1 0 auto;
     }
 
-    /* 毛玻璃卡片 */
+    /* 毛玻璃卡片通用 */
     .glass-card {
-      background: rgba(255, 255, 255, 0.5);
+      background: var(--surface);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--border-light);
       border-radius: 2rem;
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1), 0 8px 24px -8px rgba(110, 70, 220, 0.15);
+      box-shadow: var(--shadow-sm);
     }
 
     /* 导航 */
@@ -58,12 +127,10 @@
       justify-content: space-between;
       padding: 1.2rem 2.5rem;
       margin: 1.5rem 2rem 0.5rem 2rem;
-      background: rgba(255, 255, 255, 0.4);
+      background: var(--surface);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-radius: 4rem;
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: 0 12px 24px -16px rgba(75, 40, 160, 0.2);
+      border: 1px solid var(--border-light);
     }
 
     .logo-area {
@@ -87,7 +154,7 @@
       font-size: 1.6rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      background: linear-gradient(130deg, #3c1e70, #8f5ef0);
+      background: linear-gradient(130deg, var(--primary), #8f7af0);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -103,7 +170,7 @@
     .nav-links a {
       text-decoration: none;
       font-weight: 600;
-      color: #2d174f;
+      color: var(--text-secondary);
       padding: 0.5rem 0.2rem;
       border-bottom: 2px solid transparent;
       transition: 0.15s;
@@ -111,26 +178,40 @@
     }
 
     .nav-links a:hover {
-      border-bottom-color: #9d7bf5;
-      color: #431f91;
+      border-bottom-color: var(--primary);
+      color: var(--primary);
     }
 
     .b-btn {
       background: rgba(255, 255, 255, 0.75);
-      border: 1.5px solid #ffffff;
+      border: 1.5px solid var(--border-light);
       padding: 0.6rem 1.6rem;
       border-radius: 3rem;
       font-weight: 600;
-      color: #341b68;
+      color: var(--primary-dark);
       backdrop-filter: blur(4px);
-      box-shadow: 0 4px 12px rgba(125, 75, 245, 0.2);
-      transition: all 0.2s;
     }
 
-    .b-btn:hover {
-      background: white;
-      border-color: #aa8cff;
-      box-shadow: 0 10px 22px -8px #b79eff;
+    /* 主题切换按钮 */
+    .theme-toggle {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 3rem;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      backdrop-filter: blur(4px);
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .theme-toggle:hover {
+      background: var(--surface-hover);
+      border-color: var(--primary);
+      transform: scale(0.97);
     }
 
     /* HERO */
@@ -141,12 +222,11 @@
       justify-content: space-between;
       margin: 2rem 2rem 3rem 2rem;
       padding: 2.5rem 3rem;
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--surface);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border-radius: 3rem;
-      border: 1px solid rgba(255,255,240,0.9);
-      box-shadow: 0 30px 40px -25px rgba(118, 70, 210, 0.3);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 30px 40px -25px var(--primary-glow);
     }
 
     .hero-text {
@@ -155,14 +235,14 @@
 
     .badge {
       display: inline-block;
-      background: rgba(210, 185, 255, 0.5);
+      background: var(--badge-bg);
       backdrop-filter: blur(4px);
       padding: 0.35rem 1.2rem;
       border-radius: 40px;
       font-size: 0.9rem;
       font-weight: 600;
-      color: #3e1d7a;
-      border: 1px solid rgba(255,255,255,0.7);
+      color: var(--badge-text);
+      border: 1px solid var(--border-light);
       margin-bottom: 1.5rem;
     }
 
@@ -171,7 +251,7 @@
       font-weight: 800;
       line-height: 1.1;
       letter-spacing: -0.03em;
-      background: linear-gradient(140deg, #281054, #7550cf, #b793ff);
+      background: linear-gradient(140deg, var(--primary), #7b5ad4, #b793ff);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -180,11 +260,10 @@
 
     .hero-desc {
       font-size: 1.3rem;
-      color: #2a1a47;
+      color: var(--text-secondary);
       font-weight: 500;
       max-width: 550px;
       margin-bottom: 2.2rem;
-      backdrop-filter: blur(2px);
     }
 
     .cta-group {
@@ -194,14 +273,14 @@
     }
 
     .cta-primary {
-      background: #3d1e8f;
+      background: var(--cta-bg);
       border: none;
       color: white;
       padding: 1rem 2.4rem;
       border-radius: 3rem;
       font-weight: 600;
       font-size: 1.1rem;
-      box-shadow: 0 12px 28px -8px #7750d9;
+      box-shadow: var(--cta-shadow);
       transition: all 0.15s;
       border: 1px solid rgba(255,255,255,0.3);
       cursor: pointer;
@@ -212,21 +291,20 @@
     }
 
     .cta-primary:hover {
-      background: #542faf;
-      box-shadow: 0 18px 32px -8px #987cf0;
+      background: var(--cta-hover);
+      box-shadow: 0 18px 32px -8px var(--primary-glow);
       transform: scale(1.02);
     }
 
     .cta-secondary {
       background: rgba(255,255,255,0.6);
       backdrop-filter: blur(6px);
-      border: 1.5px solid white;
-      color: #2c115c;
+      border: 1.5px solid var(--border-light);
+      color: var(--primary-dark);
       padding: 1rem 2.4rem;
       border-radius: 3rem;
       font-weight: 600;
       font-size: 1.1rem;
-      transition: all 0.15s;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -235,18 +313,18 @@
 
     .cta-secondary:hover {
       background: white;
-      border-color: #a07dff;
+      border-color: var(--primary);
     }
 
     .hero-emoji {
       flex: 0 0 260px;
       text-align: center;
       font-size: 9rem;
-      filter: drop-shadow(0 20px 25px #cfb5ff);
+      filter: drop-shadow(0 20px 25px var(--primary-glow));
       transform: rotate(2deg);
     }
 
-    /* 特色版块 —— 三个卡片 */
+    /* 卡片通用 */
     .services-panel {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -255,19 +333,19 @@
     }
 
     .service-card {
-      background: rgba(255, 255, 255, 0.5);
+      background: var(--card-bg);
       backdrop-filter: blur(8px);
       padding: 2rem 1.5rem;
       border-radius: 2.5rem;
-      border: 1px solid rgba(255,255,255,0.8);
-      box-shadow: 0 12px 20px -18px #9170e0;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-md);
       transition: all 0.25s;
     }
 
     .service-card:hover {
-      background: rgba(255, 255, 255, 0.8);
+      background: var(--surface-hover);
       transform: translateY(-6px);
-      box-shadow: 0 26px 30px -18px #a185e6;
+      box-shadow: 0 26px 30px -18px var(--primary-glow);
     }
 
     .service-emoji {
@@ -278,27 +356,26 @@
     .service-card h3 {
       font-size: 1.8rem;
       font-weight: 700;
-      color: #1f0e40;
+      color: var(--text-primary);
       margin-bottom: 0.5rem;
     }
 
     .service-card p {
-      color: #2f1c53;
-      font-weight: 400;
+      color: var(--text-soft);
     }
 
     /* 联系方式快捷条 */
     .contact-bar {
       margin: 2rem 2rem 1.5rem 2rem;
       padding: 1.5rem 2.5rem;
-      background: rgba(215, 195, 255, 0.3);
+      background: var(--surface);
       backdrop-filter: blur(12px);
       border-radius: 5rem;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--border-light);
     }
 
     .contact-item {
@@ -307,58 +384,44 @@
       gap: 0.8rem;
       font-size: 1.2rem;
       font-weight: 500;
-      background: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.2);
       padding: 0.6rem 1.6rem;
       border-radius: 3rem;
+    }
+    body.dark .contact-item {
+      background: rgba(0,0,0,0.3);
     }
 
     .contact-item a {
       text-decoration: none;
-      color: #341b6a;
-      border-bottom: 2px dotted #b79eff;
+      color: var(--primary);
+      border-bottom: 2px dotted var(--primary-glow);
     }
-
     .contact-item a:hover {
-      color: #000;
-      border-bottom: 2px solid #7b4ee0;
+      color: var(--primary-dark);
     }
 
-    .bili-link {
-      background: linear-gradient(120deg, #fb73a0, #b45cff);
-      color: white !important;
+    .bili-link, .parent-link {
+      background: var(--primary-soft);
       padding: 0.6rem 1.8rem;
       border-radius: 3rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      border: 1px solid white;
-      box-shadow: 0 6px 14px rgba(180, 80, 255, 0.35);
-      transition: 0.15s;
-    }
-
-    .bili-link:hover {
-      background: linear-gradient(120deg, #ff85b3, #c174ff);
-      transform: scale(1.02);
-      box-shadow: 0 12px 22px #cb9aff;
-    }
-
-    .parent-link {
-      background: rgba(255,255,245,0.7);
-      padding: 0.6rem 1.8rem;
-      border-radius: 3rem;
-      color: #3f1e8b;
+      color: var(--primary);
       font-weight: 600;
       text-decoration: none;
       backdrop-filter: blur(5px);
-      border: 1px solid white;
+      border: 1px solid var(--border-light);
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      transition: 0.15s;
+    }
+    .parent-link:hover, .bili-link:hover {
+      background: var(--surface-hover);
+      border-color: var(--primary);
+      transform: scale(1.02);
     }
 
-    /* ⭐ 完全保留官方链接区块 —— 一动也不动，原封不动 ⭐ */
+    /* 官方链接区块 (保持原结构，仅颜色适应) */
     .official-links {
       margin: 2rem 2rem 2rem 2rem;
       text-align: center;
@@ -366,14 +429,14 @@
     .official-links h4 {
       font-size: 1.2rem;
       font-weight: 600;
-      color: #2b1a4a;
-      background: rgba(255,255,255,0.4);
+      color: var(--text-secondary);
+      background: var(--surface);
       display: inline-block;
       padding: 0.4rem 2rem;
       border-radius: 3rem;
       backdrop-filter: blur(4px);
       margin-bottom: 1.2rem;
-      border: 1px solid white;
+      border: 1px solid var(--border-light);
     }
     .social-link-grid {
       display: flex;
@@ -382,7 +445,7 @@
       flex-wrap: wrap;
     }
     .social-link-item {
-      background: rgba(255, 255, 255, 0.65);
+      background: var(--card-bg);
       backdrop-filter: blur(8px);
       padding: 0.8rem 2rem;
       border-radius: 4rem;
@@ -390,285 +453,116 @@
       align-items: center;
       gap: 0.6rem;
       font-weight: 600;
-      color: #2c105e;
+      color: var(--primary);
       text-decoration: none;
-      border: 1px solid white;
+      border: 1px solid var(--border-light);
       transition: 0.15s;
-      box-shadow: 0 6px 12px rgba(140, 100, 230, 0.1);
     }
     .social-link-item:hover {
-      background: white;
-      border-color: #b286ff;
-      transform: scale(1.02);
+      background: var(--surface-hover);
+      border-color: var(--primary);
     }
     .social-link-item img {
       height: 26px;
       width: auto;
+      filter: var(--icon-filter);
     }
 
-    /* footer 年轻化保留原有结构 + 备案信息 */
-    footer {
-      margin: 2rem 2rem 1.5rem 2rem;
-      padding: 2rem 2.5rem 1.8rem 2.5rem;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 3rem 3rem 2rem 2rem;
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: 0 -8px 30px rgba(140, 100, 230, 0.1);
-    }
-
-    .beian-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .beian-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: rgba(250, 245, 255, 0.5);
-      padding: 0.6rem 1.5rem;
-      border-radius: 3rem;
-      text-decoration: none;
-      color: #2b164b;
-      font-size: 0.95rem;
-      font-weight: 500;
-      border: 1px solid rgba(255,255,255,0.8);
-      backdrop-filter: blur(4px);
-      transition: 0.1s;
-    }
-
-    .beian-link img {
-      height: 20px;
-      width: auto;
-      opacity: 0.8;
-    }
-
-    .beian-link:hover {
-      background: white;
-      border-color: #b595ff;
-    }
-
-    .copyright {
-      text-align: center;
-      font-weight: 400;
-      color: #2b1750;
-    }
-
-    .copyright p {
-      margin: 0.3rem 0;
-    }
-
-    .copyright p:first-child {
-      font-weight: 600;
-      background: rgba(255,255,255,0.4);
-      display: inline-block;
-      padding: 0.2rem 2rem;
-      border-radius: 3rem;
-    }
-
-    /* 响应式 */
-    @media (max-width: 800px) {
-      .navbar {
-        flex-direction: column;
-        align-items: start;
-        gap: 1rem;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-      .hero h1 {
-        font-size: 2.8rem;
-      }
-      .hero-emoji {
-        font-size: 6rem;
-        flex-basis: 100px;
-      }
-      .contact-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-    }
-
-    /* 完全保留“关于”卡片样式 (与年轻风格融合) */
+    /* 关于卡片 */
     .about-section {
       margin: 2.5rem 2rem;
     }
-
     .about-card {
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      background: rgba(255,255,255,0.85);
+      background: var(--about-card-bg);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       border-radius: 2.5rem;
-      box-shadow: 0 25px 45px -12px rgba(0,40,80,0.25), 0 6px 18px rgba(0,20,40,0.08);
+      box-shadow: var(--shadow-md);
       padding: 2.8rem 3rem;
-      border: 1px solid rgba(255,255,255,0.5);
+      border: 1px solid var(--border-light);
     }
-
     @media (max-width: 640px) {
-      .about-card {
-        padding: 2rem 1.5rem;
-        border-radius: 2rem;
-      }
+      .about-card { padding: 2rem 1.5rem; }
     }
-
     .identity-badge {
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
       gap: 1rem 1.5rem;
       margin-bottom: 1.8rem;
-      border-bottom: 2px solid rgba(0,86,179,0.15);
+      border-bottom: 2px solid var(--primary-soft);
       padding-bottom: 1.2rem;
     }
-
     .company-full {
       font-size: 1.9rem;
       font-weight: 700;
-      letter-spacing: 1px;
-      background: linear-gradient(135deg, #0b2842, #1c4e70);
+      background: linear-gradient(135deg, var(--primary), #5f6bc2);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      line-height: 1.3;
     }
-
     .short-name {
-      background: #003c5e;
+      background: var(--primary);
       color: white;
       padding: 0.4rem 1.2rem;
       border-radius: 60px;
       font-size: 1.3rem;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      box-shadow: 0 4px 10px rgba(0,60,94,0.2);
-      white-space: nowrap;
     }
-
-    .short-name span {
-      font-weight: 300;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
     .tagline {
       margin: 1.8rem 0 2rem 0;
       padding: 0.8rem 1.5rem;
-      background: rgba(0,105,165,0.06);
-      border-left: 6px solid #0069a5;
+      background: var(--primary-soft);
+      border-left: 6px solid var(--border-left);
       border-radius: 0 20px 20px 0;
       font-size: 1.3rem;
-      font-weight: 400;
-      color: #144a6e;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+      color: var(--text-secondary);
     }
-
-    .tagline strong {
-      font-weight: 700;
-      color: #003a60;
-    }
-
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem 2.5rem;
+      gap: 2rem;
       margin: 2.5rem 0 2rem;
     }
-
-    @media (max-width: 700px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
+    @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
     .info-block {
-      background: white;
+      background: var(--info-block-bg);
       border-radius: 1.8rem;
       padding: 1.8rem 2rem;
-      box-shadow: 0 12px 24px -16px rgba(0,55,100,0.2);
-      border: 1px solid rgba(0,110,180,0.1);
-      transition: 0.2s;
+      box-shadow: var(--info-block-shadow);
+      border: 1px solid var(--border-light);
     }
-
-    .info-block:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 22px 30px -18px rgba(0,80,130,0.3);
-      border-color: rgba(0,110,180,0.2);
-    }
-
     .block-title {
       display: flex;
       align-items: center;
       gap: 0.6rem;
       font-size: 1.6rem;
       font-weight: 600;
-      color: #00355c;
+      color: var(--primary);
       margin-bottom: 1.2rem;
-      border-bottom: 2px dotted #b3d2e8;
+      border-bottom: 2px dotted var(--border-glow);
       padding-bottom: 0.5rem;
     }
-
-    .block-title .emoji-deco {
-      font-size: 1.9rem;
-      filter: drop-shadow(2px 2px 2px rgba(0,70,120,0.15));
-    }
-
-    .block-content {
-      font-size: 1.05rem;
-      color: #1f3d54;
-    }
-
-    .block-content p {
-      margin-bottom: 0.9rem;
-    }
-
     .highlight-list {
       list-style: none;
       padding: 0;
     }
-
     .highlight-list li {
       margin-bottom: 0.7rem;
       display: flex;
       align-items: flex-start;
       gap: 0.7rem;
+      color: var(--text-soft);
     }
-
     .highlight-list li::before {
       content: "⚖️";
       font-size: 1.2rem;
       width: 1.6rem;
-      flex-shrink: 0;
-      text-align: center;
     }
-
-    .highlight-list li:nth-child(2)::before {
-      content: "📊";
-    }
-    .highlight-list li:nth-child(3)::before {
-      content: "🔒";
-    }
-    .highlight-list li:nth-child(4)::before {
-      content: "🌐";
-    }
-    .highlight-list li:nth-child(5)::before {
-      content: "⚙️";
-    }
-
     .contact-section {
-      background: #e3f0f9;
+      background: var(--contact-section-bg);
       border-radius: 2rem;
       padding: 1.8rem 2.2rem;
       margin-top: 2.2rem;
@@ -676,217 +570,228 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid rgba(0,91,151,0.15);
+      border: 1px solid var(--border-light);
     }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
     .contact-item-custom {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       font-size: 1.1rem;
-      color: #102c3f;
+      color: var(--text-secondary);
     }
-
-    .contact-item-custom .icon {
-      font-size: 1.4rem;
-      width: 2rem;
-      text-align: center;
-    }
-
     .short-name-foot {
-      background: white;
+      background: var(--primary);
+      color: white;
       padding: 0.5rem 1.8rem;
       border-radius: 60px;
       font-size: 1.4rem;
       font-weight: 700;
-      color: #003a60;
-      box-shadow: 0 5px 12px rgba(0,70,120,0.15);
-      border: 1px solid rgba(0,70,120,0.2);
-      letter-spacing: 0.5px;
     }
 
-    .short-name-foot span {
-      font-weight: 400;
-      font-size: 0.9rem;
-      color: #526e7f;
-      margin-left: 0.3rem;
+    /* footer */
+    footer {
+      margin: 2rem 2rem 1.5rem 2rem;
+      padding: 2rem 2.5rem 1.8rem 2.5rem;
+      background: var(--footer-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 3rem 3rem 2rem 2rem;
+      border: 1px solid var(--border-light);
     }
-
-    .footer-note {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #4d687b;
-      border-top: 1px dashed #b8cfde;
-      padding-top: 1.5rem;
+    .beian-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
     }
-    .footer-note .beian-links {
-      margin-bottom: 0.8rem;
-    }
-    .footer-note a {
-      color: #004d80;
+    .beian-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--beian-bg);
+      padding: 0.6rem 1.5rem;
+      border-radius: 3rem;
       text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
       font-weight: 500;
-      border-bottom: 1px dotted;
+      border: 1px solid var(--border-light);
     }
-    .footer-note a:hover {
-      color: #002b44;
-      border-bottom: 2px solid;
+    .beian-link img {
+      height: 20px;
+      filter: var(--icon-filter);
+    }
+    .copyright {
+      text-align: center;
+      color: var(--text-soft);
+    }
+    .copyright p:first-child {
+      font-weight: 600;
+      background: var(--surface);
+      display: inline-block;
+      padding: 0.2rem 2rem;
+      border-radius: 3rem;
+    }
+    @media (max-width: 800px) {
+      .navbar { flex-direction: column; align-items: start; gap: 1rem; }
+      .nav-links { flex-wrap: wrap; gap: 1rem; }
+      .hero h1 { font-size: 2.8rem; }
+      .hero-emoji { font-size: 6rem; flex-basis: 100px; }
+      .contact-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
     }
   </style>
 </head>
 <body>
-  <div class="site-wrapper">
-    <main>
-      <!-- 导航区 -->
-      <nav class="navbar glass-card">
-        <div class="logo-area">
-          <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img">
-          <span class="company-name">科赛帝尔</span>
-        </div>
+<div class="site-wrapper">
+  <main>
+    <!-- 导航区 + 主题切换按钮 -->
+    <nav class="navbar glass-card">
+      <div class="logo-area">
+        <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img">
+        <span class="company-name">科赛帝尔</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1.5rem;">
         <div class="nav-links">
           <a href="https://thoy.top">首页</a>
           <a href="https://thoy.top/korsider" target="_blank" rel="noopener noreferrer">版权服务</a>
           <a href="https://thoy.top/about" target="_blank" rel="noopener noreferrer">关于</a>
           <a href="https://thoy.top/case" target="_blank" rel="noopener noreferrer">代理案例</a>
-          <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
-            <span>⤴</span> 海米尔文化
-          </a>
+          <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer"><span>⤴</span> 海米尔文化</a>
         </div>
-      </nav>
+        <button id="darkmode-toggle" class="theme-toggle" aria-label="切换暗色/浅色模式">🌓 深色/浅色</button>
+      </div>
+    </nav>
 
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-text">
-          <span class="badge">✨ 为版权而生 · 版权事务所</span>
-          <h1>让创作<br>有证可循</h1>
-          <p class="hero-desc">科赛帝尔 — 专注OC世界观、人设、同人版权保护的同时服务大众，力做最好的版权代理服务。快捷登记，年轻友好。</p>
-          <div class="cta-group">
-            <a href="https://thoy.top/Korsider" class="cta-primary" target="_blank" rel="noopener noreferrer">📋 联系我们登记版权</a>
-          </div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-text">
+        <span class="badge">✨ 为版权而生 · 版权事务所</span>
+        <h1>让创作<br>有证可循</h1>
+        <p class="hero-desc">科赛帝尔 — 专注OC世界观、人设、同人版权保护的同时服务大众，力做最好的版权代理服务。快捷登记，年轻友好。</p>
+        <div class="cta-group">
+          <a href="https://thoy.top/Korsider" class="cta-primary" target="_blank" rel="noopener noreferrer">📋 联系我们登记版权</a>
         </div>
-        <div class="hero-emoji">
-          🧷⚖️🎨
-        </div>
-      </section>
+      </div>
+      <div class="hero-emoji">🧷⚖️🎨</div>
+    </section>
 
-      <!-- 三服务卡片 -->
-      <section class="services-panel">
-        <div class="service-card">
-          <div class="service-emoji">🪪</div>
-          <h3>OC身份证</h3>
-          <p>为你的原创角色赋予法律效力的创作证书，全网可查。</p>
-        </div>
-        <div class="service-card">
-          <div class="service-emoji">📚</div>
-          <h3>世界观备案</h3>
-          <p>完整故事背景、种族设定快速存证，防止设定抄袭。</p>
-        </div>
-        <div class="service-card">
-          <div class="service-emoji">🤝</div>
-          <h3>同人授权</h3>
-          <p>灵活的二次创作授权合同，让用爱发电也安心。</p>
-        </div>
-      </section>
+    <!-- 服务卡片 -->
+    <section class="services-panel">
+      <div class="service-card"><div class="service-emoji">🪪</div><h3>OC身份证</h3><p>为你的原创角色赋予法律效力的创作证书，全网可查。</p></div>
+      <div class="service-card"><div class="service-emoji">📚</div><h3>世界观备案</h3><p>完整故事背景、种族设定快速存证，防止设定抄袭。</p></div>
+      <div class="service-card"><div class="service-emoji">🤝</div><h3>同人授权</h3><p>灵活的二次创作授权合同，让用爱发电也安心。</p></div>
+    </section>
+    <section class="services-panel">
+      <div class="service-card"><div class="service-emoji">🧾</div><h3>作品的基础保障</h3><p>为你的原创作品赋予法律效力的创作证书，全网可查。</p></div>
+      <div class="service-card"><div class="service-emoji">💴</div><h3>价格透明</h3><p>不必担心价格多收乱收，透明公开价格明细。</p></div>
+      <div class="service-card"><div class="service-emoji">🤝</div><h3>精准转让</h3><p>版权出售卖给他人，精准转让更换著作权人。</p></div>
+    </section>
 
-      <section class="services-panel">
-        <div class="service-card">
-          <div class="service-emoji">🧾</div>
-          <h3>作品的基础保障</h3>
-          <p>为你的原创作品赋予法律效力的创作证书，全网可查。</p>
-        </div>
-        <div class="service-card">
-          <div class="service-emoji">💴</div>
-          <h3>价格透明</h3>
-          <p>不必担心价格多收乱收，透明公开价格明细。</p>
-        </div>
-        <div class="service-card">
-          <div class="service-emoji">🤝</div>
-          <h3>精准转让</h3>
-          <p>版权出售卖给他人，精准转让更换著作权人。</p>
-        </div>
-      </section>
+    <!-- 联系方式快捷条 -->
+    <div class="contact-bar">
+      <div class="contact-item"><span>📞</span> <a href="tel:17649864014">166-1715-2404</a></div>
+      <div class="contact-item"><span>📧</span> <a href="mailto:us@thoy.top">us@thoy.top</a></div>
+      <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer"><span>🏢</span> 海米尔文化（母公司）</a>
+    </div>
 
-      <!-- 联系方式快捷条 -->
-      <div class="contact-bar">
-        <div class="contact-item">
-          <span>📞</span> <a href="tel:17649864014">166-1715-2404</a>
-        </div>
-        <div class="contact-item">
-          <span>📧</span> <a href="mailto:us@thoy.top">us@thoy.top</a>
-        </div>
-        <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer">
-          <span>🏢</span> 海米尔文化（母公司）
+    <!-- 官方账号区块 -->
+    <div class="official-links">
+      <h4>点击下方跳转到我们的官方账号</h4>
+      <div class="social-link-grid">
+        <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="social-link-item">
+          <img src="bili.png" alt="bili"> B站官号
         </a>
       </div>
+    </div>
 
-      <!-- ⭐⭐⭐ 官方账号区块 —— 完全保留，一字未动 ⭐⭐⭐ -->
-      <div class="official-links">
-        <h4>点击下方跳转到我们的官方账号</h4>
-        <div class="social-link-grid">
-          <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="social-link-item">
-            <img src="bili.png" alt="bili"> B站官号
-          </a>
+    <!-- 关于卡片 -->
+    <section class="about-section" id="about-section">
+      <div class="about-card">
+        <div class="identity-badge">
+          <div class="company-full">科赛帝尔知识产权服务团队（隶属于海米尔文化旗下）</div>
+          <div class="short-name"><span>简称</span> 科赛帝尔知产</div>
         </div>
-      </div>
-
-      <!-- 关于卡片 (包含所有截图内容) -->
-      <section class="about-section" id="about-section">
-        <div class="about-card">
-          <div class="identity-badge">
-            <div class="company-full">科赛帝尔知识产权服务团队（隶属于海米尔文化旗下）</div>
-            <div class="short-name"><span>简称</span> 科赛帝尔知产</div>
-          </div>
-          <div class="tagline"><strong>科赛帝尔</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。</div>
-          
-            <div class="info-block">
-              <div class="block-title"><span class="emoji-deco">⚡</span> 专业 · 责任</div>
-              <div class="block-content">
-                <p style="font-weight:500;color:#00355c;">—— 科赛帝尔核心服务 ——</p>
-                <ul class="highlight-list">
-                  <li><strong>主要代理版权服务</strong> 版权 · 原创保护的根基</li>
-                </ul>
-                <p style="margin-top: 1rem; background: #f2f8ff; padding: 0.6rem 1rem; border-radius: 40px; color:#003d66;">💡 我们坚信：知识产权不是冰冷的权利，而是创新之火的热源。</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 联系方式区 -->
-          <div class="contact-section">
-            <div class="contact-info">
-              <div class="contact-item-custom"><span class="icon">📞</span> <span>166-1715-2404</span></div>
-              <div class="contact-item-custom"><span class="icon">📧</span> <span>us@thoy.top</span></div>
-              <div class="contact-item-custom" style="margin-top:0.3rem;"><span class="icon">🕒</span> <span>什么时候联系什么时候上班</span></div>
-            </div>
-            <div class="short-name-foot">科赛帝尔</div>
+        <div class="tagline"><strong>科赛帝尔</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。</div>
+        <div class="info-block">
+          <div class="block-title"><span class="emoji-deco">⚡</span> 专业 · 责任</div>
+          <div class="block-content">
+            <p style="font-weight:500;color:var(--primary);">—— 科赛帝尔核心服务 ——</p>
+            <ul class="highlight-list">
+              <li><strong>主要代理版权服务</strong> 版权 · 原创保护的根基</li>
+            </ul>
+            <p style="margin-top: 1rem; background: var(--primary-soft); padding: 0.6rem 1rem; border-radius: 40px; color:var(--text-primary);">💡 我们坚信：知识产权不是冰冷的权利，而是创新之火的热源。</p>
           </div>
         </div>
-      </section>
-    </main>
+        <div class="contact-section">
+          <div class="contact-info">
+            <div class="contact-item-custom"><span class="icon">📞</span> <span>166-1715-2404</span></div>
+            <div class="contact-item-custom"><span class="icon">📧</span> <span>us@thoy.top</span></div>
+            <div class="contact-item-custom"><span class="icon">🕒</span> <span>什么时候联系什么时候上班</span></div>
+          </div>
+          <div class="short-name-foot">科赛帝尔</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <!-- footer -->
-    <footer>
-      <div class="beian-links">
-        <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-          <img src="ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
-        </a>    
-        <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
-          <img src="备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
-        </a>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2026 科赛帝尔 - 海米尔文化旗下团队. 保留所有权利.</p>
-        <p>致力于高效的版权服务</p>
-      </div>
-    </footer>
-  </div>
-  <!-- 装饰 -->
-  <div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem; color: #2b5777;">KSDR · IP</div>
+  <!-- footer -->
+  <footer>
+    <div class="beian-links">
+      <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+        <img src="ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
+      </a>    
+      <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
+        <img src="备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
+      </a>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2026 科赛帝尔 - 海米尔文化旗下团队. 保留所有权利.</p>
+      <p>致力于高效的版权服务</p>
+    </div>
+  </footer>
+</div>
+<div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem; color: var(--text-soft);">KSDR · IP</div>
+
+<script>
+  (function() {
+    // 主题切换逻辑：深色/浅色模式自由切换
+    const STORAGE_KEY = 'korsider-theme';
+    const toggleBtn = document.getElementById('darkmode-toggle');
+    const root = document.documentElement; // 作用于 body class
+
+    // 获取当前主题 (优先存储，其次系统)
+    function getPreferredTheme() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'dark' || saved === 'light') return saved;
+      // 可选: 跟随系统，但默认浅色优雅
+      return 'light';
+    }
+
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+      localStorage.setItem(STORAGE_KEY, theme);
+    }
+
+    function toggleTheme() {
+      const isDark = document.body.classList.contains('dark');
+      if (isDark) {
+        setTheme('light');
+      } else {
+        setTheme('dark');
+      }
+    }
+
+    // 初始化
+    const initialTheme = getPreferredTheme();
+    setTheme(initialTheme);
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', toggleTheme);
+    }
+  })();
+</script>
 </body>
 </html>
