@@ -203,10 +203,10 @@
         .panel.active-panel {
             display: block;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
+       body.dark .beian-link img {
+    /* 保持原色，不应用任何反转滤镜 */
+    opacity: 0.9;
+}
 
         /* 单卡片大图展示区 */
         .single-card {
