@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>科赛帝尔 · 版权证书 | 原创作品展示</title>
-      <link rel="icon" type="image/x-icon" href="../科赛帝尔.ico">
-  <link rel="shortcut icon" href="../科赛帝尔.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="../科赛帝尔.ico">
+    <link rel="shortcut icon" href="../科赛帝尔.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -203,11 +203,10 @@
         .panel.active-panel {
             display: block;
         }
-        
-       body.dark .beian-link img {
-    /* 保持原色，不应用任何反转滤镜 */
-    opacity: 0.9;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
 
         /* 单卡片大图展示区 */
         .single-card {
@@ -285,7 +284,7 @@
             flex-wrap: wrap;
         }
         
-        /* 底部样式 - 完全保留您指定的HTML结构，仅优化样式使其美观 */
+        /* 底部样式 */
         .footer-note {
             text-align: center;
             margin: 40px 0 60px;
@@ -333,9 +332,11 @@
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
             opacity: 0.8;
         }
+        /* 🔧 修复：深色模式下图标保持原色，不反转不变白 */
         body.dark .beian-link img {
-            filter: brightness(0.9) invert(0.85);
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
             opacity: 0.9;
+            /* 移除 brightness 和 invert，保持图标原本颜色 */
         }
         .beian-link:hover {
             color: var(--beian-link-hover);
@@ -466,7 +467,7 @@
     <div id="workPanel" class="panel">
         <div class="single-card">
             <div class="image-area">
-                <!-- 作品图片: 服务器内名字 26F00841168.png -->
+                <!-- 作品图片: 服务器内名字 星狩.jpg -->
                 <img id="workImage" class="main-image" 
                      src="星狩.jpg" 
                      alt="原创美术作品 - 登记号 渝作登字-2026-F-00841168"
@@ -493,7 +494,7 @@
         </div>
     </div>
 
-    <!-- 底部区域 - 完全保留您指定的HTML结构，未做任何增删改，仅确保样式适配深色/浅色模式 -->
+    <!-- 底部区域 - 备案信息 -->
     <div class="footer-note">
         <div style="margin-top: 12px;">
             <span style="background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color);"><i class="fas fa-building"></i> 重庆市版权局合作代理</span>
@@ -614,7 +615,7 @@
         });
     }
 
-    // 页面加载后检查图片加载情况，优化错误提示的可见性
+    // 页面加载后检查图片加载情况
     window.addEventListener('load', () => {
         const certImg = document.getElementById('certImage');
         if (certImg && certImg.complete) {
@@ -628,10 +629,10 @@
                 handleWorkError();
             }
         }
-        console.log("科赛帝尔版权展示页 | 深色模式就绪 | 底部备案号样式已优化，图片路径保持原样");
+        console.log("科赛帝尔版权展示页 | 深色模式就绪 | 备案图标已修复保持原色");
     });
 
-    // 对于图片加载失败的额外检测：动态绑定错误重试标记
+    // 图片加载失败监听
     const certImageElem = document.getElementById('certImage');
     if(certImageElem) {
         certImageElem.addEventListener('error', function() {
