@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>科赛帝尔 | 版权代理专家 · 深色浅色切换</title>
+    <title>科赛帝尔 | 版权代理专家</title>
     <!-- 使用Inter字体，现代风格 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 (free) 用于 building 图标 -->
@@ -306,7 +306,7 @@
             background: linear-gradient(90deg, var(--hr-gradient), transparent);
         }
 
-        /* 备案区域样式 - 完全保留用户提供的结构，仅增强主题适配 */
+        /* 备案区域样式 - 修复深色模式图标异色BUG */
         .custom-footer-area {
             margin-top: 2.5rem;
         }
@@ -353,15 +353,20 @@
             color: var(--strong-color);
             border-bottom-color: var(--strong-color);
         }
+        /* 修复图标异色BUG：深色模式下图标不应强制反色，保持自然显示或轻微亮度调整 */
         .beian-link img {
             width: 18px;
             height: 18px;
             object-fit: contain;
-            opacity: 0.85;
+            opacity: 0.9;
             transition: opacity 0.2s;
+            /* 移除任何filter，避免深色模式下的颜色反转导致异色 */
+            filter: none !important;
         }
+        /* 深色模式下仅轻微降低亮度，保持图标原本色彩不失真 */
         body.dark .beian-link img {
-            filter: brightness(0.85) invert(0.9);
+            filter: brightness(0.9) !important;
+            opacity: 0.85;
         }
         .copyright {
             text-align: center;
@@ -475,19 +480,19 @@
         </div>
     </div>
     
-    <!-- 用户提供的完整备案+合作区域，代码完全保留且图标路径为 ICP.png / 备案图标.png (相对路径) -->
+    <!-- 备案+合作区域，图标路径保持不变，已修复深色模式下的异色BUG -->
     <div class="custom-footer-area">
-        <div style="margin-top: 12px; text-align: center;">
-            <span style="background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color); display: inline-flex; align-items: center; gap: 6px;">
+        <div class="cooperation-badge">
+            <span>
                 <i class="fas fa-building"></i> 重庆市版权局合作代理
             </span>
         </div>
         <div class="beian-links">
             <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer">
-                <img src="../ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
+                <img src="../ICP.png" alt="ICP图标" onerror="this.style.opacity='0.5'"> 吉ICP备2026000319号-2
             </a>    
             <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank" rel="noopener noreferrer">
-                <img src="../备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
+                <img src="../备案图标.png" alt="备案图标" onerror="this.style.opacity='0.5'"> 吉公网安备22032302000082号
             </a>
         </div>
         <div class="copyright">
@@ -563,15 +568,14 @@
             darkModeMediaQuery.addListener(handleSystemChange);
         }
         
-        // 优雅处理图标加载失败，避免显示裂图但保留原始路径结构（仅在控制台静默降级）
+        // 图片加载失败时的优雅降级：不改变原有路径，仅降低透明度提示但保留可读性
         const allImgs = document.querySelectorAll('.beian-link img');
         allImgs.forEach(img => {
             img.onerror = function() {
-                // 不删除img，只是降低可见度，仍然保留占位但保留原始路径含义
-                this.style.opacity = '0.3';
-                this.style.filter = 'grayscale(1)';
-                // 添加title提示不影响美观
-                this.setAttribute('title', '图标未加载，但备案信息有效');
+                // 不破坏布局，降低透明度并增加占位文本提示（不改变原始结构）
+                this.style.opacity = '0.4';
+                this.style.filter = 'none';
+                this.setAttribute('title', '图标加载中或不存在，备案信息有效');
             };
         });
     })();
