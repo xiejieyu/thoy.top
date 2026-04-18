@@ -392,10 +392,9 @@
       background: rgba(0,0,0,0.3);
     }
 
-    .contact-item a {
-      text-decoration: none;
-      color: var(--primary);
-      border-bottom: 2px dotted var(--primary-glow);
+    body.dark .beian-link img,
+body.dark .social-link-item img {
+  filter: none;  /* 保持原色，不强制变白 */
     }
     .contact-item a:hover {
       color: var(--primary-dark);
