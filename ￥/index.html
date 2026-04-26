@@ -35,7 +35,7 @@
             transition: all 0.2s ease;
         }
 
-        /* 头部区域: 修正LOGO显示错误，确保图片与文字垂直对齐 */
+        /* 头部区域 - 修正LOGO显示，无方块限制 */
         .brand-header {
             display: flex;
             flex-wrap: wrap;
@@ -46,34 +46,35 @@
             margin-bottom: 1.8rem;
             gap: 1rem;
         }
+        
         .logo-area {
             display: flex;
             align-items: center;
             gap: 14px;
             flex-wrap: wrap;
         }
-        /* 图片 LOGO 容器：圆润 + 正确尺寸，解决显示错位 */
-        .brand-logo-img {
-            width: 52px;
-            height: 52px;
-            border-radius: 16px;
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 6px 12px -6px rgba(46, 49, 146, 0.2);
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .brand-logo-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;  /* 保证LOGO完整，不变形 */
+        
+        /* LOGO 图片样式：无正方形框限制，保留原始比例，自然展示 */
+        .logo-image {
+            height: 56px;           /* 固定高度，宽度自适应保持比例 */
+            width: auto;
+            max-width: 200px;
             display: block;
+            object-fit: contain;
+            border-radius: 0;       /* 移除圆角，无方块感 */
+            box-shadow: none;       /* 移除阴影 */
+            background: transparent;
+            transition: transform 0.2s ease;
         }
+        
+        .logo-image:hover {
+            transform: scale(1.02);
+        }
+        
         .brand-text {
             line-height: 1.3;
         }
+        
         .brand-text h1 {
             font-size: 1.8rem;
             font-weight: 700;
@@ -84,11 +85,27 @@
             color: transparent;
             margin: 0;
         }
+        
         .brand-text p {
             font-size: 0.85rem;
             color: #5b6e8c;
             margin-top: 4px;
         }
+        
+        .shipping-notice {
+            background: #f8f9ff;
+            border-radius: 40px;
+            padding: 6px 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+        
+        .shipping-notice i {
+            color: #2E3192;
+            margin-right: 6px;
+        }
+        
         .publish-badge {
             background: #f0f3f9;
             padding: 0.5rem 1rem;
@@ -98,6 +115,7 @@
             color: #2E3192;
             white-space: nowrap;
         }
+        
         .publish-badge i {
             margin-right: 6px;
             font-size: 0.75rem;
@@ -107,7 +125,7 @@
         .price-table-wrapper {
             overflow-x: auto;
             border-radius: 20px;
-            margin-top: 0.5rem;
+            margin-top: 1.5rem;
         }
 
         .price-table {
@@ -164,47 +182,21 @@
             line-height: 1.3;
         }
 
-        .agent-fee {
-            font-size: 0.7rem;
-            background: #f0f2f9;
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 20px;
-            color: #2E3192;
-            font-weight: 500;
-            margin-top: 3px;
-        }
-
-        .money {
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
         /* 底部说明栏 */
         .info-bar {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            margin-top: 1.8rem;
-            padding-top: 0.8rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
             border-top: 1px solid #eef2f8;
             font-size: 0.8rem;
             color: #4b5a72;
         }
-
-        .shipping-notice {
-            background: #f8f9ff;
-            border-radius: 40px;
-            padding: 6px 16px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            display: inline-block;
-            margin-bottom: 1.2rem;
-        }
-        .shipping-notice i {
-            color: #2E3192;
-            margin-right: 6px;
+        
+        .info-bar:first-of-type {
+            margin-top: 1.8rem;
         }
 
         /* 移动端适配 */
@@ -216,41 +208,54 @@
                 padding: 1rem;
             }
             .brand-text h1 {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
-            .brand-logo-img {
-                width: 44px;
+            .logo-image {
                 height: 44px;
+                max-width: 150px;
             }
-            .publish-badge {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.75rem;
+            .brand-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .shipping-notice {
+                align-self: flex-start;
+            }
+        }
+        
+        /* 打印样式优化 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .price-container {
+                box-shadow: none;
+                padding: 0;
+            }
+            .price-table tr:hover td {
+                background-color: white;
             }
         }
     </style>
 </head>
 <body>
 <div class="price-container">
-    <!-- 头部区域：修正LOGO显示错误，保证图片和文字完美对齐 (UI修正) -->
+    <!-- 头部区域：LOGO + 文字（无方块限制，直接展示图片） -->
     <div class="brand-header">
         <div class="logo-area">
-            <div class="brand-logo-img">
-                <!-- 本地LOGO图片：“科赛帝尔.png”，根据需求正确显示，且无皇冠图标 -->
-                <img src="../科赛帝尔.png" alt="科赛帝尔知识产权 Logo" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2052%2052%22%3E%3Crect%20width%3D%2252%22%20height%3D%2252%22%20fill%3D%22%232E3192%22%2F%3E%3Ctext%20x%3D%2213%22%20y%3D%2234%22%20fill%3D%22white%22%20font-size%3D%2220%22%3EK%3C%2Ftext%3E%3C%2Fsvg%3E'; this.style.objectFit='cover';">
-            </div>
+            <!-- 直接展示图片，无正方形外框，保持原始比例 -->
+            <img src="科赛帝尔.png" alt="科赛帝尔知识产权 Logo" class="logo-image" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 60%22%3E%3Crect width=%22200%22 height=%2260%22 fill=%22%232E3192%22/%3E%3Ctext x=%2210%22 y=%2238%22 fill=%22white%22 font-size=%2220%22 font-family=%22Arial%22%3E科赛帝尔%3C/text%3E%3C/svg%3E';">
             <div class="brand-text">
                 <h1>科赛帝尔 · 版权代理</h1>
                 <p>知识产权保护 · 高效登记 · 透明收费</p>
             </div>
         </div>
-        <div class="publish-badge">
-            <i class="far fa-calendar-alt"></i> 2026年4月26日发布
+
+        <!-- 邮寄费用提示 -->
+        <div class="shipping-notice">
+            <i class="fas fa-envelope"></i> 全国统一邮寄服务费：<strong>22元</strong> <span style="font-weight:normal">（适用于所有登记类型）</span>
         </div>
-    </div>
-    
-    <!-- 邮寄费用提示 (完全符合文档规范) -->
-    <div class="shipping-notice">
-        <i class="fas fa-envelope"></i> 全国统一邮寄服务费：<strong>22元</strong> <span style="font-weight:normal">(适用于所有登记类型)</span>
     </div>
 
     <div class="price-table-wrapper">
@@ -266,7 +271,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- 文字、口述作品（严格遵循文档内容） -->
+                <!-- 文字、口述作品 -->
                 <tr><td>文字、口述作品</td><td>件</td><td>100字以下100元<br>101-5000字150元<br>5001-10000字200元<br>1万字以上300元</td><td>第二件起每件100元</td><td>均为0元</td><td>100字以下150元<br>101-5000字200元<br>5001-10000字300元<br>1万字以上350元</td></tr>
                 <!-- 音乐作品 -->
                 <tr><td>音乐作品</td><td>件</td><td>词曲300元，曲200元</td><td>第二件起每件100元</td><td>均为0元</td><td>词曲350元，曲240元</td></tr>
@@ -320,43 +325,27 @@
         </table>
     </div>
     
-    <!-- 底部说明信息（简洁，无任何注册商标符号或版权圈R，完全删除脚注带®的内容） -->
+    <!-- 底部说明信息（清晰完整，无多余注册商标符号） -->
     <div class="info-bar">
         <div><i class="fas fa-file-invoice-dollar"></i> 所有国家版权局官费严格参照标准，省版权局目前享受官费0元（仅收取10元/件代理费，已在表中注明）。</div>
         <div><i class="fas fa-handshake"></i> 系列作品/多件申请享阶梯优惠，具体请咨询客服。</div>
     </div>
-    <div class="info-bar" style="margin-top: 0.5rem; justify-content: flex-start; gap: 1rem; flex-wrap: wrap;">
+    <div class="info-bar" style="margin-top: 0.5rem; justify-content: flex-start; gap: 1.5rem; flex-wrap: wrap;">
         <span><i class="fas fa-stamp"></i> 变更/补证/撤销等代理服务费透明</span>
         <span><i class="fas fa-clock"></i> 公示日期：2026年4月26日生效</span>
         <span><i class="fas fa-globe"></i> 最终解释权归科赛帝尔知产所有</span>
-    </div>
-    <div class="info-bar" style="margin-top: 0.5rem; justify-content: flex-start; gap: 1rem; flex-wrap: wrap;">
-        <span><i class="fas fa-stamp"></i> ©2026 版权所有 吉林海米尔文化传播有限公司</span>
+        <span><i class="far fa-copyright"></i> 2026 吉林海米尔文化传播有限公司</span>
     </div>
 </div>
 
-<!-- 删除最下方脚注的®图案：完全移除之前的额外div，确保没有任何带有圈R或注册符号的内容 -->
-<!-- 不再显示任何类似“©”“®”等脚注，保持干净结尾 -->
 <script>
-    // 轻量级后备：确保任何可能意外生成的注册符号不被渲染，同时保障LOGO图片正确显示。
+    // 确保LOGO正常显示，若图片加载失败则后备方案已生效
     (function() {
-        const logoImg = document.querySelector('.brand-logo-img img');
-        if (logoImg && logoImg.complete) {
-            if (logoImg.naturalWidth === 0 && !logoImg.src.includes('data:image')) {
-                // 若本地图片未找到，占位符已由onerror处理
-                logoImg.onerror && logoImg.onerror();
-            }
+        const logoImg = document.querySelector('.logo-image');
+        if (logoImg && logoImg.complete && logoImg.naturalWidth === 0 && !logoImg.src.includes('data:image')) {
+            logoImg.onerror && logoImg.onerror();
         }
-        // 确保页面任何角落没有遗留的®文本（二次保险）
-        const allElements = document.querySelectorAll('*');
-        for(let el of allElements) {
-            if(el.childNodes && el.nodeType === Node.ELEMENT_NODE) {
-                if(el.innerHTML && (el.innerHTML.includes('®') || el.innerHTML.includes('&reg;'))) {
-                    // 仅针对可能是脚注的容器处理，避免误删，但本页面已确保无此内容
-                }
-            }
-        }
-        console.log('科赛帝尔价格公示表 | LOGO已修正UI显示，无脚注®图案，符合github部署规范');
+        console.log('科赛帝尔价格公示表 | LOGO已按无方块限制样式展示，适合GitHub部署');
     })();
 </script>
 </body>
