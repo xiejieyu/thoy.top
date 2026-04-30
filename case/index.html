@@ -76,7 +76,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 0 24px;
         }
@@ -208,82 +208,111 @@
             to { opacity: 1; transform: translateY(0);}
         }
 
-        /* 单卡片大图展示区 */
-        .single-card {
-            max-width: 760px;
-            margin: 20px auto 60px;
+        /* 响应式网格布局 - 一行三个，自适应调整数量 */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin: 20px 0 60px;
+        }
+
+        /* 当屏幕宽度小于 1100px 时，一行显示两个 */
+        @media (max-width: 1100px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+
+        /* 当屏幕宽度小于 700px 时，一行显示一个 */
+        @media (max-width: 700px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* 卡片样式 - 统一大卡片风格，与原有设计保持协调 */
+        .data-card {
             background: var(--surface-card);
-            border-radius: 36px;
+            border-radius: 28px;
             overflow: hidden;
             box-shadow: var(--shadow-card);
             border: 1px solid var(--border-light);
-            transition: transform 0.2s;
+            transition: transform 0.25s, box-shadow 0.25s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
-        .single-card:hover {
-            transform: translateY(-4px);
+        .data-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 40px -16px rgba(0, 0, 0, 0.2);
         }
-        .image-area {
+        .card-image-area {
             background: var(--bg-body);
-            padding: 32px 24px 24px 24px;
+            padding: 28px 20px 20px 20px;
             text-align: center;
             border-bottom: 1px solid var(--border-light);
         }
-        .main-image {
+        .card-main-image {
             max-width: 100%;
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: var(--shadow-sm);
             background: var(--surface-card);
             display: block;
             margin: 0 auto;
+            max-height: 260px;
+            object-fit: contain;
         }
-        .image-placeholder {
-            background: var(--tab-hover-bg);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 48px 20px;
-            color: var(--text-muted);
-        }
-        .info-area {
-            padding: 28px 32px 36px;
-            background: var(--surface-card);
-        }
-        .reg-number {
+        .card-badge {
             background: var(--badge-bg);
             display: inline-block;
-            padding: 6px 18px;
+            padding: 4px 14px;
             border-radius: 40px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             color: var(--badge-color);
-            margin-bottom: 16px;
+            margin-top: 14px;
             font-family: monospace;
-            letter-spacing: 0.3px;
         }
-        .title {
-            font-size: 1.8rem;
+        .card-info {
+            padding: 20px 22px 26px;
+            flex: 1;
+            background: var(--surface-card);
+        }
+        .card-title {
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--text-primary);
+            line-height: 1.4;
         }
-        .desc {
+        .card-desc {
             color: var(--text-secondary);
-            margin: 16px 0;
+            font-size: 0.85rem;
+            margin: 12px 0;
             line-height: 1.5;
         }
-        .meta-line {
+        .card-meta {
             border-top: 1px solid var(--border-light);
-            margin-top: 20px;
-            padding-top: 18px;
+            margin-top: 14px;
+            padding-top: 14px;
             display: flex;
-            gap: 24px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
             flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            justify-content: space-between;
         }
-        
+        .error-note-mini {
+            background: var(--error-bg);
+            color: var(--error-color);
+            border-radius: 16px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 0.7rem;
+        }
+
         /* 底部样式 */
         .footer-note {
             text-align: center;
@@ -291,7 +320,6 @@
             padding-top: 32px;
             border-top: 1px solid var(--footer-border);
         }
-        /* 合作代理徽章样式 */
         .cooperation-badge {
             display: inline-flex;
             align-items: center;
@@ -303,7 +331,6 @@
             color: var(--badge-color);
             margin-bottom: 16px;
         }
-        /* 备案链接容器样式优化 */
         .beian-links {
             display: flex;
             justify-content: center;
@@ -332,11 +359,9 @@
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
             opacity: 0.8;
         }
-        /* 🔧 修复：深色模式下图标保持原色，不反转不变白 */
         body.dark .beian-link img {
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
             opacity: 0.9;
-            /* 移除 brightness 和 invert，保持图标原本颜色 */
         }
         .beian-link:hover {
             color: var(--beian-link-hover);
@@ -370,11 +395,11 @@
                 font-size: 1rem;
                 padding: 6px 20px;
             }
-            .title {
-                font-size: 1.4rem;
+            .card-title {
+                font-size: 1.1rem;
             }
-            .info-area {
-                padding: 20px;
+            .card-info {
+                padding: 16px 18px 20px;
             }
             .right-actions {
                 gap: 8px;
@@ -394,21 +419,13 @@
                 align-items: center;
             }
         }
-        .error-note {
-            background: var(--error-bg);
-            color: var(--error-color);
-            border-radius: 20px;
-            padding: 12px;
-            margin-top: 12px;
-            font-size: 0.8rem;
-        }
     </style>
 </head>
 <body>
 
 <div class="top-bar">
     <div class="container bar-inner">
-        <div class="logo">科赛帝尔<span style="background: none;"></span></div>
+        <div class="logo">科赛帝尔</div>
         <div class="right-actions">
             <button class="theme-toggle" id="themeToggleBtn">
                 <i class="fas fa-moon"></i> <span>深色模式</span>
@@ -431,92 +448,163 @@
         </button>
     </div>
 
-    <!-- 频道1：证书图片展示（仅一张证书图片） -->
+    <!-- 频道1：证书图片展示（网格布局，支持多证书） -->
     <div id="certPanel" class="panel active-panel">
-        <div class="single-card">
-            <div class="image-area">
-                <!-- 证书图片: 服务器内文件名 渝作26F00841168.jpg -->
-                <img id="certImage" class="main-image" 
-                     src="渝作26F00841168.jpg" 
-                     alt="作品登记证书 - 渝作登字-2026-F-00841168"
-                     onerror="handleCertError()"
-                     style="max-width: 100%; height: auto;">
-                <div id="certErrorMsg" style="display: none;" class="error-note">
-                    <i class="fas fa-exclamation-triangle"></i> 证书图片加载失败，请确认服务器路径下存在“渝作26F00841168.jpg”
-                </div>
-                <div style="margin-top: 16px;">
-                    <span class="reg-number"><i class="far fa-id-card"></i> 登记号: 渝作登字-2026-F-00841168</span>
-                </div>
-            </div>
-            <div class="info-area">
-                <div class="title">📜 作品登记证书</div>
-                <div class="desc">
-                    本证书由科赛帝尔代理完成版权登记，经重庆市版权局审核颁发。证书包含作品样本页、著作权人信息等。
-                    权利人依法享有该美术作品的复制权、发行权、信息网络传播权等。
-                </div>
-                <div class="meta-line">
-                    <span><i class="far fa-calendar-alt"></i> 登记日期: 2026年4月16日</span>
-                    <span><i class="fas fa-stamp"></i> 发证机关: 重庆市版权局</span>
-                    <span><i class="fas fa-qrcode"></i> 证书编号: 渝作登字-2026-F-00841168</span>
+        <div class="cards-grid" id="certGrid">
+            <!-- 证书卡片 1 - 渝作登字 -->
+            <div class="data-card" data-cert-id="cert1">
+                <div class="card-image-area">
+                    <img class="card-main-image" 
+                         src="渝作26F00841168.jpg" 
+                         alt="作品登记证书 - 渝作登字-2026-F-00841168"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none;" class="error-note-mini">
+                        <i class="fas fa-exclamation-triangle"></i> 图片加载失败，请检查路径
                     </div>
+                    <div>
+                        <span class="card-badge"><i class="far fa-id-card"></i> 渝作登字-2026-F-00841168</span>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">📜 作品登记证书 · 重庆</div>
+                    <div class="card-desc">
+                        本证书由科赛帝尔代理完成版权登记，经重庆市版权局审核颁发。权利人依法享有该美术作品的复制权、发行权、信息网络传播权等。
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> 2026年4月16日</span>
+                        <span><i class="fas fa-stamp"></i> 重庆市版权局</span>
+                    </div>
+                </div>
             </div>
-        </div>
-<div class="single-card">
-            <div class="image-area">
-                    <img id="certImage" class="main-image" 
-                     src="吉作26F00002406.jpg" 
-                     alt="作品登记证书 - 吉作登字-2026-F-00002406"
-                     onerror="handleCertError()"
-                     style="max-width: 100%; height: auto;">
-                <div id="certErrorMsg" style="display: none;" class="error-note">
-                    <i class="fas fa-exclamation-triangle"></i> 证书图片加载失败，请确认服务器路径下存在“吉作26F00002406.jpg”
+            <!-- 证书卡片 2 - 吉作登字 -->
+            <div class="data-card" data-cert-id="cert2">
+                <div class="card-image-area">
+                    <img class="card-main-image" 
+                         src="吉作26F00002406.jpg" 
+                         alt="作品登记证书 - 吉作登字-2026-F-00002406"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none;" class="error-note-mini">
+                        <i class="fas fa-exclamation-triangle"></i> 图片加载失败，请检查路径
+                    </div>
+                    <div>
+                        <span class="card-badge"><i class="far fa-id-card"></i> 吉作登字-2026-F-00002406</span>
+                    </div>
                 </div>
-                <div style="margin-top: 16px;">
-                    <span class="reg-number"><i class="far fa-id-card"></i> 登记号: 吉作登字-2026-F-00002406</span>
+                <div class="card-info">
+                    <div class="card-title">📜 作品登记证书 · 吉林</div>
+                    <div class="card-desc">
+                        本证书由科赛帝尔代理完成版权登记，经吉林省版权局审核颁发。应著作权人要求，相关个人信息已加码保护。
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> 2026年4月23日</span>
+                        <span><i class="fas fa-stamp"></i> 吉林省版权局</span>
+                    </div>
                 </div>
             </div>
-            <div class="info-area">
-                <div class="title">📜 作品登记证书</div>
-                <div class="desc">
-                    本证书由科赛帝尔代理完成版权登记，经吉林省版权局审核颁发。证书包含作品著作权人信息等。
-                    权利人依法享有该美术作品的复制权、发行权、信息网络传播权等。
-                    应著作权人要求，相关个人信息已加码
+            <!-- 证书卡片 3 - 示例证书3（可拓展更多，展示一行三个效果） -->
+            <div class="data-card" data-cert-id="cert3">
+                <div class="card-image-area">
+                    <img class="card-main-image" 
+                         src="苏作26F00123456.jpg" 
+                         alt="作品登记证书 - 苏作登字-2026-F-00123456"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none;" class="error-note-mini">
+                        <i class="fas fa-exclamation-triangle"></i> 图片加载失败，示例证书
+                    </div>
+                    <div>
+                        <span class="card-badge"><i class="far fa-id-card"></i> 苏作登字-2026-F-00123456</span>
+                    </div>
                 </div>
-                <div class="meta-line">
-                    <span><i class="far fa-calendar-alt"></i> 登记日期: 2026年4月23日</span>
-                    <span><i class="fas fa-stamp"></i> 发证机关: 吉林省版权局</span>
-                    <span><i class="fas fa-qrcode"></i> 证书编号: 吉作登字-2026-F-00002406</span>
+                <div class="card-info">
+                    <div class="card-title">📜 作品登记证书 · 江苏</div>
+                    <div class="card-desc">
+                        科赛帝尔代理江苏省版权登记案例，涵盖美术作品全类型保护，证书真实有效，支持在线核验。
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="far fa-calendar-alt"></i> 2026年3月10日</span>
+                        <span><i class="fas fa-stamp"></i> 江苏省版权局</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 频道2：作品图片展示（仅一张原创作品图片） -->
+    <!-- 频道2：作品图片展示（网格布局，多作品） -->
     <div id="workPanel" class="panel">
-        <div class="single-card">
-            <div class="image-area">
-                <!-- 作品图片: 服务器内名字 星狩.jpg -->
-                <img id="workImage" class="main-image" 
-                     src="星狩.jpg" 
-                     alt="原创美术作品 - 登记号 渝作登字-2026-F-00841168"
-                     onerror="handleWorkError()"
-                     style="max-width: 100%; height: auto;">
-                <div id="workErrorMsg" style="display: none;" class="error-note">
-                    <i class="fas fa-exclamation-triangle"></i> 作品图片加载失败，请确认服务器路径下存在“星狩.jpg”
+        <div class="cards-grid" id="workGrid">
+            <!-- 作品卡片 1 - 星狩 -->
+            <div class="data-card" data-work-id="work1">
+                <div class="card-image-area">
+                    <img class="card-main-image" 
+                         src="星狩.jpg" 
+                         alt="原创美术作品《星狩》 - 渝作登字-2026-F-00841168"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none;" class="error-note-mini">
+                        <i class="fas fa-exclamation-triangle"></i> 图片加载失败，请检查路径
+                    </div>
+                    <div>
+                        <span class="card-badge"><i class="fas fa-paintbrush"></i> 渝作登字-2026-F-00841168</span>
+                    </div>
                 </div>
-                <div style="margin-top: 16px;">
-                    <span class="reg-number"><i class="fas fa-paintbrush"></i> 作品登记号: 渝作登字-2026-F-00841168</span>
+                <div class="card-info">
+                    <div class="card-title">🎨 原创美术作品《星狩》</div>
+                    <div class="card-desc">
+                        兽设OC原创设定，著作权人为保护自身创意联系科赛帝尔办理版权。科赛帝尔已为其保存相关凭证，如有侵权行为将会重拳出击。
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="fas fa-user-check"></i> 著作权人: 林锡山</span>
+                        <span><i class="fas fa-chart-line"></i> 首次发表: 2025.08.09</span>
+                    </div>
                 </div>
             </div>
-            <div class="info-area">
-                <div class="title">🎨 原创美术作品《星狩》</div>
-                <div class="desc">
-                    本作品为兽设oc，著作权人为保护自己设定联系科赛帝尔办理版权，科赛帝尔已为其保存相关凭证，如有侵权行为将会重拳出击
+            <!-- 作品卡片 2 - 示例作品2，与吉作证书关联 -->
+            <div class="data-card" data-work-id="work2">
+                <div class="card-image-area">
+                    <img class="card-main-image" 
+                         src="灵境幻梦.png" 
+                         alt="原创美术作品《灵境幻梦》"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none;" class="error-note-mini">
+                        <i class="fas fa-exclamation-triangle"></i> 示例作品图片
+                    </div>
+                    <div>
+                        <span class="card-badge"><i class="fas fa-palette"></i> 吉作登字-2026-F-00002406</span>
+                    </div>
                 </div>
-                <div class="meta-line">
-                    <span><i class="fas fa-user-check"></i> 著作权人: 林锡山</span>
-                    <span><i class="fas fa-chart-line"></i> 首次发表: 2025年08月09日</span>
-                    <span><i class="fas fa-shield-alt"></i> 证书编号: 渝作登字-2026-F-00841168</span>
+                <div class="card-info">
+                    <div class="card-title">✨ 原创概念设计《灵境幻梦》</div>
+                    <div class="card-desc">
+                        幻想风格角色设计，科赛帝尔代理吉林省版权登记，作品已进行区块链存证，全链路保护原创。
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="fas fa-user-check"></i> 著作权人: 原野工作室</span>
+                        <span><i class="fas fa-globe"></i> 国际分类: 美术作品</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 作品卡片 3 - 示例作品3，展示第三个作品 -->
+            <div class="data-card" data-work-id="work3">
+                <div class="card-image-area">
+                    <img class="card-main-image" 
+                         src="云间行者.jpg" 
+                         alt="原创美术作品《云间行者》"
+                         onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display: none;" class="error-note-mini">
+                        <i class="fas fa-exclamation-triangle"></i> 示例作品图片
+                    </div>
+                    <div>
+                        <span class="card-badge"><i class="fas fa-feather-alt"></i> 苏作登字-2026-F-00123456</span>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">🌄 水墨国风《云间行者》</div>
+                    <div class="card-desc">
+                        融合传统水墨与数字艺术，科赛帝尔代理江苏版权登记，为创作者构建全方位版权保护体系。
+                    </div>
+                    <div class="card-meta">
+                        <span><i class="fas fa-user-check"></i> 著作权人: 南风知意</span>
+                        <span><i class="fas fa-shield-alt"></i> 已存证固证</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -525,7 +613,7 @@
     <!-- 底部区域 - 备案信息 -->
     <div class="footer-note">
         <div style="margin-top: 12px;">
-            <span style="background: var(--badge-bg); padding:4px 16px; border-radius:40px; font-size:0.7rem; color: var(--badge-color);"><i class="fas fa-building"></i> 重庆市版权局合作代理</span>
+            <span class="cooperation-badge"><i class="fas fa-building"></i> 重庆市版权局合作代理</span>
             <div class="beian-links">
                 <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener noreferrer">
                     <img src="../ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
@@ -557,12 +645,12 @@
     function setTheme(theme) {
         if (theme === 'dark') {
             document.body.classList.add('dark');
-            localStorage.setItem('thoy_theme', 'dark');
+            localStorage.setItem('ksdr_theme', 'dark');
             if (themeIcon) themeIcon.className = 'fas fa-sun';
             if (themeText) themeText.innerText = '浅色模式';
         } else {
             document.body.classList.remove('dark');
-            localStorage.setItem('thoy_theme', 'light');
+            localStorage.setItem('ksdr_theme', 'light');
             if (themeIcon) themeIcon.className = 'fas fa-moon';
             if (themeText) themeText.innerText = '深色模式';
         }
@@ -577,44 +665,20 @@
     }
 
     // 初始化主题
-    const savedTheme = localStorage.getItem('thoy_theme');
+    const savedTheme = localStorage.getItem('ksdr_theme');
     if (savedTheme === 'dark') {
         setTheme('dark');
     } else if (savedTheme === 'light') {
         setTheme('light');
     } else {
-        // 跟随系统偏好
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (prefersDark) {
-            setTheme('dark');
-        } else {
-            setTheme('light');
-        }
+        if (prefersDark) setTheme('dark');
+        else setTheme('light');
     }
 
     themeBtn.addEventListener('click', toggleTheme);
 
-    // 证书图片错误处理
-    function handleCertError() {
-        const certImg = document.getElementById('certImage');
-        const errorDiv = document.getElementById('certErrorMsg');
-        if (certImg && errorDiv) {
-            certImg.style.display = 'none';
-            errorDiv.style.display = 'block';
-        }
-    }
-
-    // 作品图片错误处理
-    function handleWorkError() {
-        const workImg = document.getElementById('workImage');
-        const errorDiv = document.getElementById('workErrorMsg');
-        if (workImg && errorDiv) {
-            workImg.style.display = 'none';
-            errorDiv.style.display = 'block';
-        }
-    }
-
-    // 切换函数: 证书频道
+    // 切换面板: 证书 / 作品
     function showCertPanel() {
         certPanel.classList.add('active-panel');
         workPanel.classList.remove('active-panel');
@@ -632,47 +696,36 @@
     tabCert.addEventListener('click', showCertPanel);
     tabWork.addEventListener('click', showWorkPanel);
 
-    // 返回主页按钮功能 (跳转至当前域名根目录)
+    // 返回主页按钮
     const backBtn = document.getElementById('backHomeBtn');
     if(backBtn) {
         backBtn.addEventListener('click', () => {
             const confirmGo = confirm("即将返回 科赛帝尔 官方网站主页。");
-            if(confirmGo) {
-                window.location.href = "/";
-            }
+            if(confirmGo) window.location.href = "/";
         });
     }
 
-    // 页面加载后检查图片加载情况
-    window.addEventListener('load', () => {
-        const certImg = document.getElementById('certImage');
-        if (certImg && certImg.complete) {
-            if (certImg.naturalWidth === 0) {
-                handleCertError();
+    // 动态扫描所有图片并为每个独立处理加载失败（已内联 onerror，补充稳健处理）
+    const allImages = document.querySelectorAll('.card-main-image');
+    allImages.forEach(img => {
+        img.addEventListener('error', function(e) {
+            const errorDiv = this.nextElementSibling;
+            if (errorDiv && errorDiv.classList.contains('error-note-mini')) {
+                this.style.display = 'none';
+                errorDiv.style.display = 'block';
+            }
+        });
+        // 如果图片已经加载失败，手动触发检测
+        if (img.complete && img.naturalWidth === 0) {
+            const errorDiv = img.nextElementSibling;
+            if (errorDiv && errorDiv.classList.contains('error-note-mini')) {
+                img.style.display = 'none';
+                errorDiv.style.display = 'block';
             }
         }
-        const workImg = document.getElementById('workImage');
-        if (workImg && workImg.complete) {
-            if (workImg.naturalWidth === 0) {
-                handleWorkError();
-            }
-        }
-        console.log("科赛帝尔版权展示页 | 深色模式就绪 | 备案图标已修复保持原色");
     });
 
-    // 图片加载失败监听
-    const certImageElem = document.getElementById('certImage');
-    if(certImageElem) {
-        certImageElem.addEventListener('error', function() {
-            handleCertError();
-        });
-    }
-    const workImageElem = document.getElementById('workImage');
-    if(workImageElem) {
-        workImageElem.addEventListener('error', function() {
-            handleWorkError();
-        });
-    }
+    console.log("科赛帝尔版权展示页 | 响应式网格已启用 | 一行三个自动适配屏幕尺寸");
 </script>
 </body>
 </html>
