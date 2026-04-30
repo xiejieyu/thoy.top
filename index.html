@@ -38,7 +38,7 @@
       --badge-bg: rgba(46, 49, 146, 0.12);
       --badge-text: #2e3192;
       --footer-bg: rgba(255, 255, 255, 0.4);
-      --icon-filter: none;
+      --icon-filter: none;           /* 浅色模式默认无滤镜 */
       --beian-bg: rgba(250, 245, 255, 0.6);
       --about-card-bg: rgba(255, 255, 255, 0.85);
       --contact-section-bg: #eef2fc;
@@ -51,7 +51,7 @@
       --law-accent: #3d2f1f;
     }
 
-    /* 暗色模式变量 */
+    /* 暗色模式变量 - 优化图标滤镜，仅对特定简单icon应用柔和反色 */
     body.dark {
       --primary: #6c6fdd;
       --primary-dark: #7c7fe6;
@@ -75,7 +75,8 @@
       --badge-bg: rgba(108, 111, 221, 0.2);
       --badge-text: #c2c6ff;
       --footer-bg: rgba(20, 20, 40, 0.7);
-      --icon-filter: brightness(0) invert(1);
+      /* 关键修复：图标滤镜改为柔和半透明反色，避免纯白刺眼，同时保留辨识度 */
+      --icon-filter: brightness(0.8) invert(0.9) sepia(0.2) hue-rotate(180deg) saturate(0.8);
       --beian-bg: rgba(35, 35, 60, 0.7);
       --about-card-bg: rgba(30, 30, 55, 0.85);
       --contact-section-bg: #1c1c36;
@@ -150,6 +151,8 @@
       width: auto;
       display: block;
       transition: transform 0.2s ease;
+      /* logo 图片不应用全局滤镜，保持原样（避免反白怪异） */
+      filter: none !important;
     }
 
     .logo-img:hover {
@@ -398,8 +401,12 @@
       background: rgba(0,0,0,0.3);
     }
 
+    .contact-item a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
     .contact-item a:hover {
-      color: var(--primary-dark);
+      color: var(--primary);
     }
 
     .bili-link, .parent-link {
@@ -422,7 +429,7 @@
       transform: scale(1.02);
     }
 
-    /* 官方链接区块 */
+    /* 官方链接区块 - 图片修正：不应用强制反白滤镜 */
     .official-links {
       margin: 2rem 2rem 2rem 2rem;
       text-align: center;
@@ -463,10 +470,18 @@
       background: var(--surface-hover);
       border-color: var(--primary);
     }
+    /* 对于社交图标 (bili.png) 不应用滤镜，保持原始色彩漂亮 */
     .social-link-item img {
       height: 26px;
       width: auto;
+      filter: none !important;
+    }
+    /* 备案图标单独控制，使用柔和反色而非纯白 */
+    .beian-link img {
+      height: 20px;
+      width: auto;
       filter: var(--icon-filter);
+      transition: filter 0.2s;
     }
 
     /* 关于卡片 + 律所合作板块 (新) */
@@ -732,10 +747,6 @@
       font-weight: 500;
       border: 1px solid var(--border-light);
     }
-    .beian-link img {
-      height: 20px;
-      filter: var(--icon-filter);
-    }
     .copyright {
       text-align: center;
       color: var(--text-soft);
@@ -837,13 +848,6 @@
               <span class="partner-badge">⚡ 战略合作伙伴</span>
               <span class="law-firm-name">吉林吉天行（公主岭）律师事务所</span>
             </div>
-            <div class="official-links">
-      <h4>点击下方跳转到吉天行律所官网</h4>
-      <div class="social-link-grid">
-        <a href="http://www.jitianxinglaw.com/#" target="_blank" class="social-link-item">
-          <img src="logo.png" alt="bili"> 吉天行律所友情链接
-        </a>
-      </div>
             <div class="cooperation-desc">
               <div class="legal-offer">
                 <p>✅ <strong>全方位法律服务保障</strong> · 科赛帝尔与吉天行律所达成深度协同，为每一位创作者的版权登记、维权、授权及诉讼提供坚实法律后盾。</p>
@@ -859,7 +863,7 @@
               </div>
               <div class="law-firm-intro">
                 <h4>🏛️ 关于吉天行律所</h4>
-                <p>吉林吉天行（公主岭）律师事务所系吉林省内知名综合性法律服务机构，深耕知识产权、民商事争议解决领域多年。拥有资深律师团队，秉持“专业、勤勉、致远”理念，与海米尔文化、科赛帝尔联合打造「版权保护+法律诉讼」闭环服务，为个人创作者与企业IP提供一站式维权选项。</p>
+                <p>吉林吉天行（公主岭）律师事务所系吉林省内知名综合性法律服务机构，深耕知识产权、民商事争议解决领域多年。拥有资深律师团队，秉持“专业、勤勉、致远”理念，与科赛帝尔联合打造「版权保护+法律诉讼」闭环服务，为个人创作者与企业IP提供一站式维权选项。</p>
                 <a href="#" class="contact-law-btn" onclick="alert('如需对接律所专项法律支持，欢迎致电 166-1715-2404 或邮件 us@thoy.top，我们将安排专业律师对接。'); return false;">📞 获取法律支持 →</a>
               </div>
             </div>
@@ -883,7 +887,7 @@
           <div class="info-block">
             <div class="block-title"><span class="emoji-deco">⚖️</span> 律所联合保障</div>
             <div class="block-content">
-              <p>吉林吉天行（公主岭）律师事务所作为海米尔文化、科赛帝尔指定法律顾问合作单位，提供专业诉讼支持、版权确权意见书及争议解决方案。让您的每一次创作背后都有律师团队护航，从登记到维权全程无忧。</p>
+              <p>吉林吉天行（公主岭）律师事务所作为科赛帝尔指定法律顾问合作单位，提供专业诉讼支持、版权确权意见书及争议解决方案。让您的每一次创作背后都有律师团队护航，从登记到维权全程无忧。</p>
               <p style="margin-top: 0.8rem; font-weight:500;">合作范围涵盖：著作权侵权调查、仲裁诉讼、版权许可谈判等。</p>
             </div>
           </div>
