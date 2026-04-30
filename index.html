@@ -38,7 +38,6 @@
       --badge-bg: rgba(46, 49, 146, 0.12);
       --badge-text: #2e3192;
       --footer-bg: rgba(255, 255, 255, 0.4);
-      /* 备案图标滤镜：浅色模式下保持原样（轻微加深以便阅读） */
       --beian-icon-filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
       --beian-bg: rgba(250, 245, 255, 0.6);
       --about-card-bg: rgba(255, 255, 255, 0.85);
@@ -52,7 +51,7 @@
       --law-accent: #3d2f1f;
     }
 
-    /* 暗色模式变量 - 备案图标采用智能反色，保留识别性且不刺眼 */
+    /* 暗色模式变量 */
     body.dark {
       --primary: #6c6fdd;
       --primary-dark: #7c7fe6;
@@ -76,7 +75,6 @@
       --badge-bg: rgba(108, 111, 221, 0.2);
       --badge-text: #c2c6ff;
       --footer-bg: rgba(20, 20, 40, 0.7);
-      /* 备案图标滤镜修复：在深色背景下转为柔和高亮，避免纯白刺眼 */
       --beian-icon-filter: brightness(0) invert(1) opacity(0.85);
       --beian-bg: rgba(35, 35, 60, 0.7);
       --about-card-bg: rgba(30, 30, 55, 0.85);
@@ -529,7 +527,7 @@
       color: var(--text-secondary);
     }
 
-    /* 战略合作板块 */
+    /* 战略合作板块 - 律所LOGO与名称整合为可点击链接 */
     .legal-partner-section {
       margin: 2rem 0 2rem 0;
     }
@@ -563,11 +561,20 @@
       font-size: 0.9rem;
       letter-spacing: 1px;
     }
-    .law-firm-wrapper {
+    /* 律所标识区域 - 整个区域可点击跳转官网 */
+    .law-firm-link {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       flex-wrap: wrap;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      border-radius: 1rem;
+      padding: 0.2rem 0.5rem 0.2rem 0;
+    }
+    .law-firm-link:hover {
+      transform: scale(1.01);
+      background: rgba(255,255,255,0.1);
     }
     .law-firm-logo {
       height: 44px;
@@ -647,7 +654,7 @@
       gap: 0.8rem;
       margin-top: 0.6rem;
     }
-    .contact-law-btn, .law-website-btn {
+    .contact-law-btn {
       display: inline-block;
       background: rgba(46,49,146,0.85);
       padding: 0.5rem 1.2rem;
@@ -660,12 +667,13 @@
       border: 1px solid rgba(255,255,255,0.3);
       transition: 0.15s;
     }
-    .law-website-btn {
-      background: rgba(184, 134, 11, 0.85);
-    }
-    .contact-law-btn:hover, .law-website-btn:hover {
+    .contact-law-btn:hover {
       transform: translateY(-2px);
       filter: brightness(1.05);
+    }
+    /* 移除原来的独立官网按钮，因为LOGO和名称已整合为链接 */
+    .law-website-btn {
+      display: none;
     }
 
     .about-grid {
@@ -765,7 +773,6 @@
       font-weight: 500;
       border: 1px solid var(--border-light);
     }
-    /* 备案图标精准修复：使用专用滤镜变量，在深浅模式下均优雅 */
     .beian-link img {
       height: 20px;
       width: auto;
@@ -790,6 +797,8 @@
       .hero-emoji { font-size: 6rem; flex-basis: 100px; }
       .contact-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
       .cooperation-desc { flex-direction: column; }
+      .law-firm-name { font-size: 1.3rem; }
+      .law-firm-logo { height: 36px; }
     }
   </style>
 </head>
@@ -857,7 +866,7 @@
       </div>
     </div>
 
-    <!-- 关于卡片 + 律所战略合作专区 (新增律所官网链接 + logo) -->
+    <!-- 关于卡片 + 律所战略合作专区（LOGO与名称整合为可点击官网链接） -->
     <section class="about-section" id="about-section">
       <div class="about-card">
         <div class="identity-badge">
@@ -866,15 +875,15 @@
         </div>
         <div class="tagline"><strong>科赛帝尔</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。</div>
         
-        <!-- ★ 战略合作板块：吉林吉天行（公主岭）律师事务所 ★ -->
+        <!-- ★ 战略合作板块：吉林吉天行（公主岭）律师事务所 ★ 点击LOGO/名称跳转官网 -->
         <div class="legal-partner-section">
           <div class="partner-card">
             <div class="partner-header">
               <span class="partner-badge">⚡ 战略合作伙伴</span>
-              <div class="law-firm-wrapper">
+              <a href="http://www.jitianxinglaw.com/" target="_blank" rel="noopener noreferrer" class="law-firm-link">
                 <img src="logo.png" alt="吉天行律所logo" class="law-firm-logo" onerror="this.style.display='none'">
                 <span class="law-firm-name">吉林吉天行（公主岭）律师事务所</span>
-              </div>
+              </a>
             </div>
             <div class="cooperation-desc">
               <div class="legal-offer">
@@ -894,8 +903,8 @@
                 <p>吉林吉天行（公主岭）律师事务所系吉林省内知名综合性法律服务机构，深耕知识产权、民商事争议解决领域多年。拥有资深律师团队，秉持“专业、勤勉、致远”理念，与科赛帝尔联合打造「版权保护+法律诉讼」闭环服务，为个人创作者与企业IP提供一站式维权选项。</p>
                 <div class="btn-group-law">
                   <a href="#" class="contact-law-btn" onclick="alert('如需对接律所专项法律支持，欢迎致电 166-1715-2404 或邮件 us@thoy.top，我们将安排专业律师对接。'); return false;">📞 获取法律支持</a>
-                  <a href="http://www.jitianxinglaw.com/" target="_blank" rel="noopener noreferrer" class="law-website-btn">🏛️ 访问吉天行官网 →</a>
                 </div>
+                <p style="margin-top: 0.8rem; font-size:0.8rem; opacity:0.7;">👆 点击上方律所LOGO或名称访问官网</p>
               </div>
             </div>
             <div style="margin-top: 1.2rem; padding: 0.6rem 1rem; background: var(--primary-soft); border-radius: 1.5rem; text-align: center; font-size:0.9rem;">
