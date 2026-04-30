@@ -38,7 +38,8 @@
       --badge-bg: rgba(46, 49, 146, 0.12);
       --badge-text: #2e3192;
       --footer-bg: rgba(255, 255, 255, 0.4);
-      --icon-filter: none;           /* 浅色模式默认无滤镜 */
+      /* 备案图标滤镜：浅色模式下保持原样（轻微加深以便阅读） */
+      --beian-icon-filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));
       --beian-bg: rgba(250, 245, 255, 0.6);
       --about-card-bg: rgba(255, 255, 255, 0.85);
       --contact-section-bg: #eef2fc;
@@ -51,7 +52,7 @@
       --law-accent: #3d2f1f;
     }
 
-    /* 暗色模式变量 - 优化图标滤镜，仅对特定简单icon应用柔和反色 */
+    /* 暗色模式变量 - 备案图标采用智能反色，保留识别性且不刺眼 */
     body.dark {
       --primary: #6c6fdd;
       --primary-dark: #7c7fe6;
@@ -75,8 +76,8 @@
       --badge-bg: rgba(108, 111, 221, 0.2);
       --badge-text: #c2c6ff;
       --footer-bg: rgba(20, 20, 40, 0.7);
-      /* 关键修复：图标滤镜改为柔和半透明反色，避免纯白刺眼，同时保留辨识度 */
-      --icon-filter: brightness(0.8) invert(0.9) sepia(0.2) hue-rotate(180deg) saturate(0.8);
+      /* 备案图标滤镜修复：在深色背景下转为柔和高亮，避免纯白刺眼 */
+      --beian-icon-filter: brightness(0) invert(1) opacity(0.85);
       --beian-bg: rgba(35, 35, 60, 0.7);
       --about-card-bg: rgba(30, 30, 55, 0.85);
       --contact-section-bg: #1c1c36;
@@ -151,7 +152,6 @@
       width: auto;
       display: block;
       transition: transform 0.2s ease;
-      /* logo 图片不应用全局滤镜，保持原样（避免反白怪异） */
       filter: none !important;
     }
 
@@ -429,7 +429,7 @@
       transform: scale(1.02);
     }
 
-    /* 官方链接区块 - 图片修正：不应用强制反白滤镜 */
+    /* 官方链接区块 */
     .official-links {
       margin: 2rem 2rem 2rem 2rem;
       text-align: center;
@@ -470,21 +470,13 @@
       background: var(--surface-hover);
       border-color: var(--primary);
     }
-    /* 对于社交图标 (bili.png) 不应用滤镜，保持原始色彩漂亮 */
     .social-link-item img {
       height: 26px;
       width: auto;
       filter: none !important;
     }
-    /* 备案图标单独控制，使用柔和反色而非纯白 */
-    .beian-link img {
-      height: 20px;
-      width: auto;
-      filter: var(--icon-filter);
-      transition: filter 0.2s;
-    }
 
-    /* 关于卡片 + 律所合作板块 (新) */
+    /* 关于卡片 + 律所合作板块 */
     .about-section {
       margin: 2.5rem 2rem;
     }
@@ -537,7 +529,7 @@
       color: var(--text-secondary);
     }
 
-    /* 战略合作板块全新设计 */
+    /* 战略合作板块 */
     .legal-partner-section {
       margin: 2rem 0 2rem 0;
     }
@@ -570,6 +562,21 @@
       font-weight: 600;
       font-size: 0.9rem;
       letter-spacing: 1px;
+    }
+    .law-firm-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .law-firm-logo {
+      height: 44px;
+      width: auto;
+      filter: none;
+      background: rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 4px;
+      object-fit: contain;
     }
     .law-firm-name {
       font-size: 1.8rem;
@@ -632,22 +639,33 @@
     .law-firm-intro p {
       font-size: 0.95rem;
       opacity: 0.9;
+      margin-bottom: 1rem;
     }
-    .contact-law-btn {
-      margin-top: 1.2rem;
+    .btn-group-law {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+    .contact-law-btn, .law-website-btn {
       display: inline-block;
-      background: rgba(46,49,146,0.8);
-      padding: 0.5rem 1.4rem;
+      background: rgba(46,49,146,0.85);
+      padding: 0.5rem 1.2rem;
       border-radius: 2rem;
       color: white;
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
       backdrop-filter: blur(4px);
       border: 1px solid rgba(255,255,255,0.3);
+      transition: 0.15s;
     }
-    .contact-law-btn:hover {
-      background: var(--primary);
+    .law-website-btn {
+      background: rgba(184, 134, 11, 0.85);
+    }
+    .contact-law-btn:hover, .law-website-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
     }
 
     .about-grid {
@@ -718,7 +736,7 @@
       font-weight: 700;
     }
 
-    /* footer */
+    /* footer + 备案图标修复 */
     footer {
       margin: 2rem 2rem 1.5rem 2rem;
       padding: 2rem 2.5rem 1.8rem 2.5rem;
@@ -746,6 +764,13 @@
       font-size: 0.95rem;
       font-weight: 500;
       border: 1px solid var(--border-light);
+    }
+    /* 备案图标精准修复：使用专用滤镜变量，在深浅模式下均优雅 */
+    .beian-link img {
+      height: 20px;
+      width: auto;
+      filter: var(--beian-icon-filter);
+      transition: filter 0.2s;
     }
     .copyright {
       text-align: center;
@@ -832,7 +857,7 @@
       </div>
     </div>
 
-    <!-- 关于卡片 + 新增律所战略合作专区 -->
+    <!-- 关于卡片 + 律所战略合作专区 (新增律所官网链接 + logo) -->
     <section class="about-section" id="about-section">
       <div class="about-card">
         <div class="identity-badge">
@@ -841,12 +866,15 @@
         </div>
         <div class="tagline"><strong>科赛帝尔</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。</div>
         
-        <!-- ★ 全新板块：律所战略合作 ★ 吉林吉天行（公主岭）律师事务所 -->
+        <!-- ★ 战略合作板块：吉林吉天行（公主岭）律师事务所 ★ -->
         <div class="legal-partner-section">
           <div class="partner-card">
             <div class="partner-header">
               <span class="partner-badge">⚡ 战略合作伙伴</span>
-              <span class="law-firm-name">吉林吉天行（公主岭）律师事务所</span>
+              <div class="law-firm-wrapper">
+                <img src="logo.png" alt="吉天行律所logo" class="law-firm-logo" onerror="this.style.display='none'">
+                <span class="law-firm-name">吉林吉天行（公主岭）律师事务所</span>
+              </div>
             </div>
             <div class="cooperation-desc">
               <div class="legal-offer">
@@ -864,7 +892,10 @@
               <div class="law-firm-intro">
                 <h4>🏛️ 关于吉天行律所</h4>
                 <p>吉林吉天行（公主岭）律师事务所系吉林省内知名综合性法律服务机构，深耕知识产权、民商事争议解决领域多年。拥有资深律师团队，秉持“专业、勤勉、致远”理念，与科赛帝尔联合打造「版权保护+法律诉讼」闭环服务，为个人创作者与企业IP提供一站式维权选项。</p>
-                <a href="#" class="contact-law-btn" onclick="alert('如需对接律所专项法律支持，欢迎致电 166-1715-2404 或邮件 us@thoy.top，我们将安排专业律师对接。'); return false;">📞 获取法律支持 →</a>
+                <div class="btn-group-law">
+                  <a href="#" class="contact-law-btn" onclick="alert('如需对接律所专项法律支持，欢迎致电 166-1715-2404 或邮件 us@thoy.top，我们将安排专业律师对接。'); return false;">📞 获取法律支持</a>
+                  <a href="http://www.jitianxinglaw.com/" target="_blank" rel="noopener noreferrer" class="law-website-btn">🏛️ 访问吉天行官网 →</a>
+                </div>
               </div>
             </div>
             <div style="margin-top: 1.2rem; padding: 0.6rem 1rem; background: var(--primary-soft); border-radius: 1.5rem; text-align: center; font-size:0.9rem;">
@@ -905,7 +936,7 @@
     </section>
   </main>
 
-  <!-- footer -->
+  <!-- footer 备案图标修复 -->
   <footer>
     <div class="beian-links">
       <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
