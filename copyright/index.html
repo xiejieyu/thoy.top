@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>科赛帝尔 · 版权查询导航</title>
+    <!-- ico图标: ../科赛帝尔.ico -->
+    <link rel="icon" type="image/x-icon" href="../科赛帝尔.ico">
+    <link rel="shortcut icon" href="../科赛帝尔.ico">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f4fa 0%, #e6ecf3 100%);
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        /* 主卡片容器 */
+        .branch-container {
+            max-width: 780px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 48px;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.25), 0 8px 18px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,240,0.6);
+        }
+
+        /* 头部区域: LOGO + 主题 */
+        .brand-header {
+            background: #ffffff;
+            padding: 2rem 2rem 1.2rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid #eaeef4;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 0.9rem;
+        }
+
+        .logo-img {
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+            transition: transform 0.2s;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.01);
+        }
+
+        .site-tagline {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #5b6e8c;
+            background: #f0f4fa;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+        }
+
+        .intro-text {
+            margin-top: 1rem;
+            color: #2c3e4e;
+            font-weight: 400;
+            font-size: 0.95rem;
+        }
+
+        /* 链接列表区域 — 友情链接风格 */
+        .links-section {
+            padding: 2rem 2rem 2.5rem 2rem;
+            background: #fefefe;
+        }
+
+        .links-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1e2f3d;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .links-title:before {
+            content: "🔗";
+            font-size: 1.7rem;
+        }
+
+        .sub-line {
+            color: #62748c;
+            border-left: 3px solid #b9c8e8;
+            padding-left: 12px;
+            margin: 0.5rem 0 1.8rem 0;
+            font-size: 0.85rem;
+        }
+
+        /* 友情链接卡片组 */
+        .link-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .link-item {
+            background: #ffffff;
+            border-radius: 28px;
+            transition: all 0.25s ease;
+            border: 1px solid #e2e8f2;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .link-item:hover {
+            transform: translateY(-3px);
+            border-color: #cddae9;
+            box-shadow: 0 18px 30px -12px rgba(23, 55, 88, 0.2);
+            background: #fdfdfd;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            padding: 1.2rem 1.6rem;
+            text-decoration: none;
+            color: #1c2c3c;
+            gap: 1rem;
+        }
+
+        .link-icon {
+            font-size: 2.2rem;
+            min-width: 52px;
+            text-align: center;
+            background: #f2f6fc;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
+
+        .link-item:hover .link-icon {
+            background: #e9eff8;
+        }
+
+        .link-info {
+            flex: 1;
+        }
+
+        .link-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            display: inline-block;
+            letter-spacing: -0.2px;
+        }
+
+        .link-desc {
+            font-size: 0.8rem;
+            color: #6f7f97;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #eef3fc;
+            padding: 0.2rem 0.65rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #2c6280;
+        }
+
+        .arrow-symbol {
+            font-size: 1.3rem;
+            color: #829dbb;
+            margin-left: 6px;
+            transition: transform 0.2s;
+        }
+
+        .link-item:hover .arrow-symbol {
+            transform: translateX(5px);
+            color: #2f6b9a;
+        }
+
+        /* 针对第三个链接特别提示 “下滑到最下方” 辅助 */
+        .special-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background-color: #fff1e0;
+            border-radius: 40px;
+            padding: 0.2rem 0.65rem;
+            font-size: 0.7rem;
+            color: #b45f1b;
+        }
+
+        .special-note i {
+            font-style: normal;
+            font-size: 0.8rem;
+        }
+
+        /* 底部footer 分支归属 */
+        .footer-note {
+            background: #f8fafd;
+            border-top: 1px solid #e6ecf3;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #7f8d9f;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-note a {
+            color: #4f7092;
+            text-decoration: none;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 550px) {
+            body {
+                padding: 1rem;
+            }
+            .brand-header {
+                padding: 1.5rem 1.2rem 1rem;
+            }
+            .links-section {
+                padding: 1.5rem;
+            }
+            .link-card {
+                padding: 1rem 1.2rem;
+            }
+            .link-name {
+                font-size: 1rem;
+            }
+            .link-icon {
+                font-size: 1.7rem;
+                min-width: 44px;
+                width: 44px;
+                height: 44px;
+            }
+            .links-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* 简单加载效果 + 焦点样式 */
+        a:focus-visible {
+            outline: 3px solid #3b82f6;
+            outline-offset: 4px;
+            border-radius: 28px;
+        }
+
+        /* 点击卡片跳转新标签页 (均为外链) */
+        .link-card {
+            cursor: pointer;
+        }
+
+        hr {
+            opacity: 0.3;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="branch-container">
+    <div class="brand-header">
+        <div class="logo-wrapper">
+            <!-- LOGO: ../科赛帝尔.png -->
+            <img class="logo-img" src="../科赛帝尔.png" alt="科赛帝尔" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%2080%22%3E%3Ctext%20x%3D%2210%22%20y%3D%2245%22%20fill%3D%22%23333%22%3E%E7%A7%91%E8%B5%9B%E5%B8%9D%E5%B0%94%3C%2Ftext%3E%3C%2Fsvg%3E';">
+        </div>
+        <div class="site-tagline">thoy.top · 分支站点</div>
+        <div class="intro-text">
+            📚 版权保护 · 官方直通 · 便捷查询
+        </div>
+    </div>
+
+    <div class="links-section">
+        <div class="links-title">友情链接导航</div>
+        <div class="sub-line">权威版权登记信息查验入口 — 点击卡片立即跳转</div>
+
+        <div class="link-cards">
+            <!-- 1. 国家版权查询链接 -->
+            <div class="link-item">
+                <a class="link-card" href="https://register.ccopyright.com.cn/query.html" target="_blank" rel="noopener noreferrer" title="国家版权查询系统">
+                    <div class="link-icon">🇨🇳</div>
+                    <div class="link-info">
+                        <div class="link-name">国家版权查询链接</div>
+                        <div class="link-desc">
+                            <span class="badge">官方入口</span>
+                            <span>作品著作权/登记公告查询</span>
+                        </div>
+                    </div>
+                    <div class="arrow-symbol">↗</div>
+                </a>
+            </div>
+
+            <!-- 2. 重庆市版权查询链接 -->
+            <div class="link-item">
+                <a class="link-card" href="https://copyright.shuxiangcq.cn/user/register-notice/work-register-notice" target="_blank" rel="noopener noreferrer" title="重庆市版权查询">
+                    <div class="link-icon">🏙️</div>
+                    <div class="link-info">
+                        <div class="link-name">重庆市版权查询链接</div>
+                        <div class="link-desc">
+                            <span class="badge">重庆版权云端</span>
+                            <span>作品登记公告 · 一站式公示</span>
+                        </div>
+                    </div>
+                    <div class="arrow-symbol">↗</div>
+                </a>
+            </div>
+
+            <!-- 3. 吉林省版权查询链接（特别提示下滑到最下方）-->
+            <div class="link-item">
+                <a class="link-card" href="https://zwfw.jl.gov.cn/jlszwfw/cksx/?deptId=11220000013544672E&area=220000" target="_blank" rel="noopener noreferrer" title="吉林省版权相关查询 - 吉事办">
+                    <div class="link-icon">❄️</div>
+                    <div class="link-info">
+                        <div class="link-name">吉林省版权查询链接</div>
+                        <div class="link-desc">
+                            <span class="badge">吉事办·省级</span>
+                            <span class="special-note">
+                                <i>👇</i> 下滑至页面最下方查看详情
+                            </span>
+                        </div>
+                    </div>
+                    <div class="arrow-symbol">↗</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 附加辅助说明：让用户知道第三个链接需要下滑操作 -->
+        <div style="margin-top: 1.8rem; background: #f1f6fe; border-radius: 24px; padding: 0.8rem 1rem; font-size: 0.75rem; color: #3b5e7e; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span>💡</span> 
+            <span><strong>吉林省版权查询提示</strong>：点击进入“吉事办”办事页面后，请将页面滚动至<strong>最底部</strong>，即可查阅关联版权相关办事指南或结果公示区域。</span>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        © 2026 科赛帝尔 - 海米尔文化旗下团队. 保留所有权利.
+    </div>
+</div>
+
+<!-- 可选：对吉林省链接添加一个轻提示 (控制台不报错，且新标签页打开，尊重用户操作) 
+     无需额外动作，已经通过文案明确了“下滑到最下方” -->
+<script>
+    (function() {
+        // 确保所有外链都有安全的 rel 属性 (已通过html添加，再保险一遍)
+        const allLinks = document.querySelectorAll('.link-card');
+        allLinks.forEach(link => {
+            if(link.getAttribute('target') === '_blank') {
+                if(!link.getAttribute('rel')) {
+                    link.setAttribute('rel', 'noopener noreferrer');
+                }
+            }
+        });
+    })();
+</script>
+</body>
+</html>
