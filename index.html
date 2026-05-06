@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>科赛帝尔（thoy）· 版权代理团队 | 律所战略合作</title>
+  <title>科赛帝尔（thoy）· 版权代理团队 | 专业法律护航</title>
   <!-- favicon -->
   <link rel="icon" type="image/x-icon" href="科赛帝尔.ico">
   <link rel="shortcut icon" href="科赛帝尔.ico" type="image/x-icon">
 
-  <!-- 字体 Inter + 圆体 fallback -->
+  <!-- 字体 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   
   <style>
-    /* ---------- 全局 CSS 变量 (浅色模式 主题色 #2e3192) ---------- */
+    /* ---------- 全局变量 品牌色 #2e3192 ---------- */
     :root {
       --primary: #2e3192;
       --primary-dark: #232675;
@@ -49,9 +49,10 @@
       --partner-bg: #ffffffcc;
       --lawyer-gold: #b8860b;
       --law-accent: #3d2f1f;
+      --legal-block-bg: rgba(255, 255, 245, 0.7);
     }
 
-    /* 暗色模式变量 */
+    /* 暗色模式 */
     body.dark {
       --primary: #6c6fdd;
       --primary-dark: #7c7fe6;
@@ -86,9 +87,9 @@
       --partner-bg: #1e1e3a;
       --lawyer-gold: #e6b422;
       --law-accent: #cfcfef;
+      --legal-block-bg: #27274a;
     }
 
-    /* 全局重置 & 过渡 */
     * {
       margin: 0;
       padding: 0;
@@ -116,7 +117,6 @@
       flex: 1 0 auto;
     }
 
-    /* 毛玻璃卡片通用 */
     .glass-card {
       background: var(--surface);
       backdrop-filter: blur(10px);
@@ -137,6 +137,8 @@
       backdrop-filter: blur(12px);
       border-radius: 4rem;
       border: 1px solid var(--border-light);
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .logo-area {
@@ -170,8 +172,9 @@
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
@@ -181,7 +184,7 @@
       padding: 0.5rem 0.2rem;
       border-bottom: 2px solid transparent;
       transition: 0.15s;
-      font-size: 1.05rem;
+      font-size: 1rem;
     }
 
     .nav-links a:hover {
@@ -189,17 +192,20 @@
       color: var(--primary);
     }
 
-    .b-btn {
-      background: rgba(255, 255, 255, 0.75);
-      border: 1.5px solid var(--border-light);
-      padding: 0.6rem 1.6rem;
+    .parent-link {
+      background: var(--primary-soft);
+      padding: 0.4rem 1.2rem;
       border-radius: 3rem;
+      color: var(--primary);
       font-weight: 600;
-      color: var(--primary-dark);
-      backdrop-filter: blur(4px);
+      text-decoration: none;
+      backdrop-filter: blur(5px);
+      border: 1px solid var(--border-light);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
     }
 
-    /* 主题切换按钮 */
     .theme-toggle {
       background: var(--surface);
       border: 1px solid var(--border-light);
@@ -212,13 +218,12 @@
       align-items: center;
       gap: 0.5rem;
       backdrop-filter: blur(4px);
-      font-size: 1rem;
-      transition: all 0.2s;
+      font-size: 0.9rem;
     }
+
     .theme-toggle:hover {
       background: var(--surface-hover);
       border-color: var(--primary);
-      transform: scale(0.97);
     }
 
     /* HERO */
@@ -303,26 +308,6 @@
       transform: scale(1.02);
     }
 
-    .cta-secondary {
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(6px);
-      border: 1.5px solid var(--border-light);
-      color: var(--primary-dark);
-      padding: 1rem 2.4rem;
-      border-radius: 3rem;
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .cta-secondary:hover {
-      background: white;
-      border-color: var(--primary);
-    }
-
     .hero-emoji {
       flex: 0 0 260px;
       text-align: center;
@@ -331,7 +316,7 @@
       transform: rotate(2deg);
     }
 
-    /* 卡片通用 */
+    /* 卡片 */
     .services-panel {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -345,36 +330,21 @@
       padding: 2rem 1.5rem;
       border-radius: 2.5rem;
       border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-md);
       transition: all 0.25s;
     }
 
     .service-card:hover {
       background: var(--surface-hover);
       transform: translateY(-6px);
-      box-shadow: 0 26px 30px -18px var(--primary-glow);
     }
 
-    .service-emoji {
-      font-size: 3rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-    }
-
-    .service-card p {
-      color: var(--text-soft);
-    }
+    .service-emoji { font-size: 3rem; margin-bottom: 0.75rem; }
+    .service-card h3 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
 
     /* 联系方式快捷条 */
     .contact-bar {
       margin: 2rem 2rem 1.5rem 2rem;
-      padding: 1.5rem 2.5rem;
+      padding: 1rem 2rem;
       background: var(--surface);
       backdrop-filter: blur(12px);
       border-radius: 5rem;
@@ -382,52 +352,19 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid var(--border-light);
+      gap: 1rem;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
       gap: 0.8rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 500;
-      background: rgba(255,255,255,0.2);
-      padding: 0.6rem 1.6rem;
-      border-radius: 3rem;
     }
-    body.dark .contact-item {
-      background: rgba(0,0,0,0.3);
-    }
+    .contact-item a { color: var(--text-secondary); text-decoration: none; }
+    .contact-item a:hover { color: var(--primary); }
 
-    .contact-item a {
-      color: var(--text-secondary);
-      text-decoration: none;
-    }
-    .contact-item a:hover {
-      color: var(--primary);
-    }
-
-    .bili-link, .parent-link {
-      background: var(--primary-soft);
-      padding: 0.6rem 1.8rem;
-      border-radius: 3rem;
-      color: var(--primary);
-      font-weight: 600;
-      text-decoration: none;
-      backdrop-filter: blur(5px);
-      border: 1px solid var(--border-light);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: 0.15s;
-    }
-    .parent-link:hover, .bili-link:hover {
-      background: var(--surface-hover);
-      border-color: var(--primary);
-      transform: scale(1.02);
-    }
-
-    /* 官方链接区块 */
     .official-links {
       margin: 2rem 2rem 2rem 2rem;
       text-align: center;
@@ -435,14 +372,12 @@
     .official-links h4 {
       font-size: 1.2rem;
       font-weight: 600;
-      color: var(--text-secondary);
-      background: var(--surface);
       display: inline-block;
       padding: 0.4rem 2rem;
       border-radius: 3rem;
+      background: var(--surface);
       backdrop-filter: blur(4px);
       margin-bottom: 1.2rem;
-      border: 1px solid var(--border-light);
     }
     .social-link-grid {
       display: flex;
@@ -462,19 +397,10 @@
       color: var(--primary);
       text-decoration: none;
       border: 1px solid var(--border-light);
-      transition: 0.15s;
     }
-    .social-link-item:hover {
-      background: var(--surface-hover);
-      border-color: var(--primary);
-    }
-    .social-link-item img {
-      height: 26px;
-      width: auto;
-      filter: none !important;
-    }
+    .social-link-item img { height: 26px; width: auto; filter: none !important; }
 
-    /* 关于卡片 + 律所合作板块 */
+    /* 关于卡片 + 新版专业法律服务对接板块（移除吉天行元素） */
     .about-section {
       margin: 2.5rem 2rem;
     }
@@ -523,157 +449,125 @@
       background: var(--primary-soft);
       border-left: 6px solid var(--border-left);
       border-radius: 0 20px 20px 0;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: var(--text-secondary);
     }
 
-    /* 战略合作板块 - 律所LOGO与名称整合为可点击链接 */
-    .legal-partner-section {
+    /* 专业法律服务卡片 – 可对接专业律所资源 (无吉天行字样) */
+    .legal-service-section {
       margin: 2rem 0 2rem 0;
     }
-    .partner-card {
+    .legal-collab-card {
       background: var(--partner-bg);
       border-radius: 2rem;
       padding: 1.8rem 2rem;
       border: 1px solid var(--border-light);
       box-shadow: var(--shadow-md);
       backdrop-filter: blur(4px);
-      transition: transform 0.2s;
     }
-    .partner-card:hover {
-      transform: translateY(-4px);
-    }
-    .partner-header {
+    .legal-header {
       display: flex;
       align-items: center;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.8rem;
       border-bottom: 2px dashed var(--primary-soft);
       padding-bottom: 0.8rem;
     }
-    .partner-badge {
+    .legal-badge {
       background: var(--primary);
       color: white;
       border-radius: 60px;
-      padding: 0.3rem 1.2rem;
-      font-weight: 600;
-      font-size: 0.9rem;
+      padding: 0.3rem 1.4rem;
+      font-weight: 700;
       letter-spacing: 1px;
+      font-size: 0.9rem;
     }
-    /* 律所标识区域 - 整个区域可点击跳转官网 */
-    .law-firm-link {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      text-decoration: none;
-      transition: transform 0.2s ease;
-      border-radius: 1rem;
-      padding: 0.2rem 0.5rem 0.2rem 0;
-    }
-    .law-firm-link:hover {
-      transform: scale(1.01);
-      background: rgba(255,255,255,0.1);
-    }
-    .law-firm-logo {
-      height: 44px;
-      width: auto;
-      filter: none;
-      background: rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 4px;
-      object-fit: contain;
-    }
-    .law-firm-name {
+    .legal-title {
       font-size: 1.8rem;
       font-weight: 800;
-      color: var(--lawyer-gold);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      background: linear-gradient(135deg, var(--lawyer-gold), #8b6b42);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
-    .cooperation-desc {
+    .cooperation-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
-      justify-content: space-between;
     }
-    .legal-offer {
+    .legal-service-list {
       flex: 2;
     }
-    .legal-offer p {
+    .legal-service-list p {
+      font-weight: 600;
       margin-bottom: 1rem;
-      line-height: 1.6;
-      font-weight: 500;
     }
-    .legal-list {
+    .legal-features {
       list-style: none;
-      padding-left: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 0.8rem;
       margin-top: 1rem;
     }
-    .legal-list li {
+    .legal-features li {
       display: flex;
       align-items: center;
       gap: 0.6rem;
       background: var(--surface);
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       border-radius: 2rem;
       backdrop-filter: blur(4px);
       border: 1px solid var(--border-light);
-      font-size: 0.95rem;
       font-weight: 500;
     }
-    .legal-list li::before {
+    .legal-features li::before {
       content: "⚖️";
       font-size: 1.2rem;
     }
-    .law-firm-intro {
+    .legal-contact-panel {
       flex: 1.2;
-      background: var(--primary-soft);
-      border-radius: 1.5rem;
-      padding: 1.2rem 1.5rem;
+      background: var(--legal-block-bg);
+      border-radius: 1.6rem;
+      padding: 1.4rem 1.8rem;
       border-left: 5px solid var(--lawyer-gold);
     }
-    .law-firm-intro h4 {
-      font-size: 1.3rem;
+    .legal-contact-panel h4 {
+      font-size: 1.4rem;
       margin-bottom: 0.8rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    .law-firm-intro p {
-      font-size: 0.95rem;
+    .legal-contact-panel p {
+      margin-bottom: 1.2rem;
       opacity: 0.9;
-      margin-bottom: 1rem;
+      line-height: 1.5;
     }
-    .btn-group-law {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 0.6rem;
-    }
-    .contact-law-btn {
+    .btn-legal-support {
       display: inline-block;
-      background: rgba(46,49,146,0.85);
-      padding: 0.5rem 1.2rem;
-      border-radius: 2rem;
+      background: var(--cta-bg);
+      padding: 0.7rem 1.4rem;
+      border-radius: 2.5rem;
       color: white;
       text-decoration: none;
-      font-size: 0.85rem;
       font-weight: 600;
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
       transition: 0.15s;
+      margin-bottom: 0.5rem;
+      margin-right: 0.5rem;
     }
-    .contact-law-btn:hover {
+    .btn-legal-support:hover {
+      background: var(--cta-hover);
       transform: translateY(-2px);
-      filter: brightness(1.05);
     }
-    /* 移除原来的独立官网按钮，因为LOGO和名称已整合为链接 */
-    .law-website-btn {
-      display: none;
+    .legal-note {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      font-size: 0.85rem;
+      border-top: 1px dashed var(--border-light);
+      opacity: 0.7;
     }
 
     .about-grid {
@@ -703,19 +597,16 @@
     }
     .highlight-list {
       list-style: none;
-      padding: 0;
     }
     .highlight-list li {
       margin-bottom: 0.7rem;
       display: flex;
       align-items: flex-start;
       gap: 0.7rem;
-      color: var(--text-soft);
     }
     .highlight-list li::before {
       content: "⚖️";
       font-size: 1.2rem;
-      width: 1.6rem;
     }
     .contact-section {
       background: var(--contact-section-bg);
@@ -726,14 +617,7 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid var(--border-light);
-    }
-    .contact-item-custom {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      font-size: 1.1rem;
-      color: var(--text-secondary);
+      gap: 1rem;
     }
     .short-name-foot {
       background: var(--primary);
@@ -744,7 +628,6 @@
       font-weight: 700;
     }
 
-    /* footer + 备案图标修复 */
     footer {
       margin: 2rem 2rem 1.5rem 2rem;
       padding: 2rem 2.5rem 1.8rem 2.5rem;
@@ -769,7 +652,7 @@
       border-radius: 3rem;
       text-decoration: none;
       color: var(--text-secondary);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 500;
       border: 1px solid var(--border-light);
     }
@@ -777,167 +660,152 @@
       height: 20px;
       width: auto;
       filter: var(--beian-icon-filter);
-      transition: filter 0.2s;
     }
     .copyright {
       text-align: center;
       color: var(--text-soft);
     }
-    .copyright p:first-child {
-      font-weight: 600;
-      background: var(--surface);
-      display: inline-block;
-      padding: 0.2rem 2rem;
-      border-radius: 3rem;
-    }
+
     @media (max-width: 800px) {
-      .navbar { flex-direction: column; align-items: start; gap: 1rem; }
-      .nav-links { flex-wrap: wrap; gap: 1rem; }
+      .navbar { flex-direction: column; align-items: stretch; }
       .hero h1 { font-size: 2.8rem; }
-      .hero-emoji { font-size: 6rem; flex-basis: 100px; }
-      .contact-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .cooperation-desc { flex-direction: column; }
-      .law-firm-name { font-size: 1.3rem; }
-      .law-firm-logo { height: 36px; }
+      .hero-emoji { font-size: 5rem; flex-basis: auto; }
+      .contact-bar { flex-direction: column; align-items: flex-start; border-radius: 2rem; }
+      .legal-title { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
 <div class="site-wrapper">
   <main>
-    <!-- 导航区 + 主题切换按钮 -->
     <nav class="navbar glass-card">
       <div class="logo-area">
-        <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img">
+        <img src="科赛帝尔.png" alt="科赛帝尔 LOGO" class="logo-img" onerror="this.style.display='none'">
         <span class="company-name">科赛帝尔</span>
       </div>
-      <div style="display: flex; align-items: center; gap: 1.5rem;">
+      <div style="display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;">
         <div class="nav-links">
           <a href="https://thoy.top">首页</a>
-          <a href="https://thoy.top/￥" target="_blank" rel="noopener noreferrer">价格明细公开表</a>
-          <a href="https://thoy.top/copyright" target="_blank" rel="noopener noreferrer">友情链接</a>
-          <a href="https://thoy.top/about" target="_blank" rel="noopener noreferrer">关于</a>
-          <a href="https://thoy.top/case" target="_blank" rel="noopener noreferrer">代理案例</a>
+          <a href="https://thoy.top/￥" target="_blank" rel="noopener noreferrer">价格明细</a>
+          <a href="https://thoy.top/copyright" target="_blank">友情链接</a>
+          <a href="https://thoy.top/about" target="_blank">关于</a>
+          <a href="https://thoy.top/case" target="_blank">代理案例</a>
           <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer"><span>⤴</span> 海米尔文化</a>
         </div>
-        <button id="darkmode-toggle" class="theme-toggle" aria-label="切换暗色/浅色模式">🌓 深色/浅色</button>
+        <button id="darkmode-toggle" class="theme-toggle">🌓 深色/浅色</button>
       </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
       <div class="hero-text">
-        <span class="badge">✨ 为版权而生 · 版权事务所</span>
+        <span class="badge">✨ 版权保护+专业法律对接 · 一站式护航</span>
         <h1>让创作<br>有证可循</h1>
-        <p class="hero-desc">科赛帝尔 — 专注OC世界观、人设、同人版权保护的同时服务大众，力做最好的版权代理服务。快捷登记，年轻友好。</p>
+        <p class="hero-desc">科赛帝尔 — OC世界观、人设、同人版权保护，专业版权代理服务 + 深度法律支持，让每一位创作者安心。</p>
         <div class="cta-group">
-          <a href="https://thoy.top/Korsider" class="cta-primary" target="_blank" rel="noopener noreferrer">📋 联系我们登记版权</a>
+          <a href="https://thoy.top/Korsider" class="cta-primary" target="_blank" rel="noopener noreferrer">📋 版权登记咨询</a>
         </div>
       </div>
-      <div class="hero-emoji">🧷⚖️🎨</div>
+      <div class="hero-emoji">🧷⚖️🛡️</div>
     </section>
 
     <!-- 服务卡片 -->
     <section class="services-panel">
-      <div class="service-card"><div class="service-emoji">🪪</div><h3>OC身份证</h3><p>为你的原创角色赋予法律效力的创作证书，全网可查。</p></div>
-      <div class="service-card"><div class="service-emoji">📚</div><h3>世界观备案</h3><p>完整故事背景、种族设定快速存证，防止设定抄袭。</p></div>
-      <div class="service-card"><div class="service-emoji">🤝</div><h3>同人授权</h3><p>灵活的二次创作授权合同，让用爱发电也安心。</p></div>
+      <div class="service-card"><div class="service-emoji">🪪</div><h3>OC身份证</h3><p>为原创角色赋予法律效力的创作证书，全网存证。</p></div>
+      <div class="service-card"><div class="service-emoji">📚</div><h3>世界观备案</h3><p>故事背景、种族设定快速存证，防止创意抄袭。</p></div>
+      <div class="service-card"><div class="service-emoji">🤝</div><h3>同人授权</h3><p>二次创作授权合同，让创作圈安心共享。</p></div>
     </section>
     <section class="services-panel">
-      <div class="service-card"><div class="service-emoji">🧾</div><h3>作品的基础保障</h3><p>为你的原创作品赋予法律效力的创作证书，全网可查。</p></div>
-      <div class="service-card"><div class="service-emoji">💴</div><h3>价格透明</h3><p>不必担心价格多收乱收，透明公开价格明细。</p></div>
-      <div class="service-card"><div class="service-emoji">🤝</div><h3>精准转让</h3><p>版权出售卖给他人，精准转让更换著作权人。</p></div>
+      <div class="service-card"><div class="service-emoji">🧾</div><h3>作品基础保障</h3><p>作品版权登记，全网可查，法律效力加持。</p></div>
+      <div class="service-card"><div class="service-emoji">💴</div><h3>价格透明</h3><p>公开价格明细，无隐形收费，值得信赖。</p></div>
+      <div class="service-card"><div class="service-emoji">🔄</div><h3>精准转让</h3><p>版权出售/转让，合法变更著作权人。</p></div>
     </section>
 
     <!-- 联系方式快捷条 -->
     <div class="contact-bar">
-      <div class="contact-item"><span>📞</span> <a href="tel:17649864014">166-1715-2404</a></div>
+      <div class="contact-item"><span>📞</span> <a href="tel:16617152404">166-1715-2404</a></div>
       <div class="contact-item"><span>📧</span> <a href="mailto:us@thoy.top">us@thoy.top</a></div>
       <a href="https://haimier.top" target="_blank" class="parent-link" rel="noopener noreferrer"><span>🏢</span> 海米尔文化（母公司）</a>
     </div>
 
-    <!-- 官方账号区块 -->
+    <!-- 官方账号 -->
     <div class="official-links">
-      <h4>点击下方跳转到我们的官方账号</h4>
+      <h4>官方账号</h4>
       <div class="social-link-grid">
-        <a href="https://space.bilibili.com/3706944762153591?spm_id_from=333.40164.0.0" target="_blank" class="social-link-item">
+        <a href="https://space.bilibili.com/3706944762153591" target="_blank" class="social-link-item">
           <img src="bili.png" alt="bili"> B站官号
         </a>
       </div>
     </div>
 
-    <!-- 关于卡片 + 律所战略合作专区（LOGO与名称整合为可点击官网链接） -->
+    <!-- 关于卡片 + 专业法律服务对接（无吉天行任何元素） -->
     <section class="about-section" id="about-section">
       <div class="about-card">
         <div class="identity-badge">
-          <div class="company-full">科赛帝尔知识产权服务团队（隶属于海米尔文化旗下）</div>
-          <div class="short-name"><span>简称</span> 科赛帝尔知产</div>
+          <div class="company-full">科赛帝尔知识产权服务团队（海米尔文化旗下）</div>
+          <div class="short-name">科赛帝尔知产</div>
         </div>
-        <div class="tagline"><strong>科赛帝尔</strong> — 深耕吉林，守护创新，让每一个智慧成果都获得应有的价值。</div>
+        <div class="tagline"><strong>科赛帝尔</strong> — 立足创新保护，对接专业法律资源，让版权从确权到维权畅通无阻。</div>
         
-        <!-- ★ 战略合作板块：吉林吉天行（公主岭）律师事务所 ★ 点击LOGO/名称跳转官网 -->
-        <div class="legal-partner-section">
-          <div class="partner-card">
-            <div class="partner-header">
-              <span class="partner-badge">⚡ 战略合作伙伴</span>
-              <a href="http://www.jitianxinglaw.com/" target="_blank" rel="noopener noreferrer" class="law-firm-link">
-                <img src="logo.png" alt="吉天行律所logo" class="law-firm-logo" onerror="this.style.display='none'">
-                <span class="law-firm-name">吉林吉天行（公主岭）律师事务所</span>
-              </a>
+        <!-- ★ 专业法律服务对接模块 (替换原有律所合作，删除所有吉天行相关内容) ★ -->
+        <div class="legal-service-section">
+          <div class="legal-collab-card">
+            <div class="legal-header">
+              <span class="legal-badge">⚡ 专业法律护航</span>
+              <span class="legal-title">专属法律对接通道</span>
             </div>
-            <div class="cooperation-desc">
-              <div class="legal-offer">
-                <p>✅ <strong>全方位法律服务保障</strong> · 科赛帝尔与吉天行律所达成深度协同，为每一位创作者的版权登记、维权、授权及诉讼提供坚实法律后盾。</p>
-                <ul class="legal-list">
-                  <li>版权侵权诉讼代理</li>
-                  <li>著作权合同审核与起草</li>
+            <div class="cooperation-grid">
+              <div class="legal-service-list">
+                <p>✅ <strong>全方位法律服务支持</strong> · 科赛帝尔与资深法律顾问及合作律所网络建立深度协同，为创作者提供版权确权、维权诉讼、授权审核等一站式法律保障。</p>
+                <ul class="legal-features">
+                  <li>版权侵权诉讼维权</li>
+                  <li>著作权合同起草审查</li>
                   <li>知识产权法律咨询</li>
-                  <li>作品遭盗用快速响应</li>
-                  <li>版税纠纷及谈判支持</li>
-                  <li>电子取证及公证协助</li>
+                  <li>作品盗用快速响应</li>
+                  <li>版税纠纷谈判支持</li>
+                  <li>电子取证与公证协助</li>
                 </ul>
-                <p style="margin-top: 1rem; font-size:0.9rem;">🔒 专业律师团队全程对接，确保您的原创权益“证据链完整、法律防线坚固”。</p>
+                <p style="margin-top: 1rem; font-size:0.9rem;">🔒 联合专业律师团队，确保您的原创权益“证据链完整、维权高效”。</p>
               </div>
-              <div class="law-firm-intro">
-                <h4>🏛️ 关于吉天行律所</h4>
-                <p>吉林吉天行（公主岭）律师事务所系吉林省内知名综合性法律服务机构，深耕知识产权、民商事争议解决领域多年。拥有资深律师团队，秉持“专业、勤勉、致远”理念，与科赛帝尔联合打造「版权保护+法律诉讼」闭环服务，为个人创作者与企业IP提供一站式维权选项。</p>
-                <div class="btn-group-law">
-                  <a href="#" class="contact-law-btn" onclick="alert('如需对接律所专项法律支持，欢迎致电 166-1715-2404 或邮件 us@thoy.top，我们将安排专业律师对接。'); return false;">📞 获取法律支持</a>
+              <div class="legal-contact-panel">
+                <h4>🏛️ 对接专业法律服务</h4>
+                <p>科赛帝尔已与多家知名律所及资深知识产权律师建立合作通道，拥有丰富的著作权维权经验和诉讼资源。无论是日常合规咨询，还是侵权纠纷、仲裁诉讼，我们均可快速对接对口法律专家，提供定制化方案。</p>
+                <div>
+                  <a href="#" class="btn-legal-support" onclick="alert('如需对接专业法律支持，欢迎致电 166-1715-2404 或邮件 us@thoy.top，我们将为您推荐匹配的知识产权律师。'); return false;">📞 获取法律支持</a>
+                  <a href="mailto:us@thoy.top?subject=法律服务需求" class="btn-legal-support" style="background:#4b3b6e;">✉️ 邮件咨询</a>
                 </div>
-                <p style="margin-top: 0.8rem; font-size:0.8rem; opacity:0.7;">👆 点击上方律所LOGO或名称访问官网</p>
+                <div class="legal-note">
+                  💡 科赛帝尔所有版权登记/代理服务均经专业合规审查，保障法律有效性。我们为您连接可信赖的法律力量。
+                </div>
               </div>
-            </div>
-            <div style="margin-top: 1.2rem; padding: 0.6rem 1rem; background: var(--primary-soft); border-radius: 1.5rem; text-align: center; font-size:0.9rem;">
-              🤝 科赛帝尔所有版权登记/代理服务均获吉天行律所合规审查，确保法律有效性
             </div>
           </div>
         </div>
 
         <div class="about-grid">
           <div class="info-block">
-            <div class="block-title"><span class="emoji-deco">⚡</span> 专业 · 责任</div>
+            <div class="block-title"><span>⚡</span> 专业 · 责任</div>
             <div class="block-content">
-              <p style="font-weight:500;color:var(--primary);">—— 科赛帝尔核心服务 ——</p>
+              <p style="font-weight:500;color:var(--primary);">—— 科赛帝尔核心使命 ——</p>
               <ul class="highlight-list">
-                <li><strong>主要代理版权服务</strong> 版权 · 原创保护的根基</li>
+                <li><strong>版权代理 · 原创保护的根基</strong></li>
+                <li>高效登记 | 透明价格 | 快速响应</li>
               </ul>
-              <p style="margin-top: 1rem; background: var(--primary-soft); padding: 0.6rem 1rem; border-radius: 40px; color:var(--text-primary);">💡 我们坚信：知识产权不是冰冷的权利，而是创新之火的热源。</p>
+              <p style="margin-top: 1rem; background: var(--primary-soft); padding: 0.6rem 1rem; border-radius: 40px;">💡 我们坚信：知识产权是创新之火的热源，法律保护是最坚实的壁垒。</p>
             </div>
           </div>
           <div class="info-block">
-            <div class="block-title"><span class="emoji-deco">⚖️</span> 律所联合保障</div>
+            <div class="block-title"><span>⚖️</span> 法律资源网络</div>
             <div class="block-content">
-              <p>吉林吉天行（公主岭）律师事务所作为科赛帝尔指定法律顾问合作单位，提供专业诉讼支持、版权确权意见书及争议解决方案。让您的每一次创作背后都有律师团队护航，从登记到维权全程无忧。</p>
-              <p style="margin-top: 0.8rem; font-weight:500;">合作范围涵盖：著作权侵权调查、仲裁诉讼、版权许可谈判等。</p>
+              <p>科赛帝尔联合执业律师及战略合作法律机构，提供诉讼支持、版权确权意见书及争议解决方案。从版权登记到纠纷调解、诉讼代理，专业团队随时待命，让创作者无后顾之忧。</p>
+              <p style="margin-top: 0.8rem; font-weight:500;">合作范围：著作权侵权调查、仲裁诉讼、版权许可谈判、跨境维权对接。</p>
             </div>
           </div>
         </div>
 
         <div class="contact-section">
-          <div class="contact-info">
-            <div class="contact-item-custom"><span class="icon">📞</span> <span>166-1715-2404</span></div>
-            <div class="contact-item-custom"><span class="icon">📧</span> <span>us@thoy.top</span></div>
-            <div class="contact-item-custom"><span class="icon">🕒</span> <span>什么时候联系什么时候上班</span></div>
+          <div>
+            <div class="contact-item-custom" style="display:flex; gap:1.5rem; flex-wrap:wrap;"><span>📞 166-1715-2404</span><span>📧 us@thoy.top</span><span>🕒 随时联系我们</span></div>
           </div>
           <div class="short-name-foot">科赛帝尔</div>
         </div>
@@ -945,7 +813,6 @@
     </section>
   </main>
 
-  <!-- footer 备案图标修复 -->
   <footer>
     <div class="beian-links">
       <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
@@ -957,11 +824,11 @@
     </div>
     <div class="copyright">
       <p>&copy; 2026 科赛帝尔 - 海米尔文化旗下团队. 保留所有权利.</p>
-      <p>致力于高效的版权服务 · 战略合作律所：吉林吉天行（公主岭）律师事务所</p>
+      <p>专业版权代理 · 对接权威法律服务，为创作保驾护航</p>
     </div>
   </footer>
 </div>
-<div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem; color: var(--text-soft);">KSDR · IP</div>
+<div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem;">KSDR · IP</div>
 
 <script>
   (function() {
@@ -986,9 +853,7 @@
     }
     const initialTheme = getPreferredTheme();
     setTheme(initialTheme);
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', toggleTheme);
-    }
+    if (toggleBtn) toggleBtn.addEventListener('click', toggleTheme);
   })();
 </script>
 </body>
