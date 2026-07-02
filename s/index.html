@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>根目录视频 · 1.mp4 ~ 4.mp4</title>
+    <style>
+        /* 极简 · 聚焦视频网格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0b0d10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 2rem 1.5rem;
+        }
+        .page-title {
+            color: #d6dfed;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
+            background: #181c24;
+            padding: 0.5rem 1.8rem;
+            border-radius: 60px;
+            border: 1px solid #2a313d;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+        .page-title small {
+            font-weight: 300;
+            color: #7e8ba3;
+            margin-left: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.8rem;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .video-card {
+            background: #181a1f;
+            border-radius: 28px;
+            padding: 1rem 1rem 1.2rem;
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.03);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(2px);
+        }
+        .video-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 44px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.06);
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        video {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;    /* 完整可见，保持比例 */
+            background: #000;
+            outline: none;
+            cursor: pointer;
+        }
+        /* 自定义元信息 —— 简洁轻量 */
+        .video-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.8rem;
+            padding: 0 0.2rem 0 0.4rem;
+            color: #a8b2c9;
+            font-size: 0.85rem;
+        }
+        .file-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #252a33;
+            padding: 0.2rem 1rem 0.2rem 0.8rem;
+            border-radius: 40px;
+            border: 1px solid #313842;
+            color: #e8edf5;
+            font-weight: 450;
+            font-size: 0.8rem;
+            letter-spacing: 0.01em;
+        }
+        .file-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: #6c7a94;
+            flex-shrink: 0;
+        }
+        .file-badge span {
+            opacity: 0.7;
+            font-weight: 300;
+            margin: 0 0.1rem;
+            color: #9aabbf;
+        }
+        .hint {
+            color: #5f6b7e;
+            font-size: 0.7rem;
+            background: #1f242c;
+            padding: 0.15rem 0.9rem;
+            border-radius: 30px;
+            border: 1px solid #2b313b;
+        }
+        .footnote {
+            margin-top: 2.8rem;
+            color: #414b5a;
+            font-size: 0.8rem;
+            border-top: 1px solid #22282f;
+            padding-top: 1.4rem;
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            letter-spacing: 0.3px;
+        }
+        .footnote code {
+            background: #1a2028;
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            color: #9bb1d0;
+            font-size: 0.8rem;
+        }
+        .footnote a {
+            color: #5f7a9e;
+            text-decoration: none;
+            border-bottom: 1px dotted #2f3a47;
+        }
+        .footnote a:hover {
+            color: #8aa3c7;
+            border-bottom-color: #5f7a9e;
+        }
+
+        /* 移动端：单列 */
+        @media (max-width: 640px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+                gap: 1.6rem;
+            }
+            .page-title {
+                font-size: 1.1rem;
+                padding: 0.4rem 1.2rem;
+            }
+            .page-title small {
+                font-size: 0.75rem;
+                display: block;
+                margin-left: 0;
+                margin-top: 0.2rem;
+            }
+            .video-card {
+                padding: 0.8rem 0.8rem 1rem;
+                border-radius: 20px;
+            }
+            .file-badge {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.7rem 0.15rem 0.6rem;
+            }
+            .hint {
+                font-size: 0.6rem;
+                padding: 0.1rem 0.7rem;
+            }
+        }
+        /* 中等屏幕 (平板) 保持双列，但略缩小间距 */
+        @media (min-width: 641px) and (max-width: 900px) {
+            .video-grid {
+                gap: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-title">
+        📁 根目录视频 <small>1.mp4 · 2.mp4 · 3.mp4 · 4.mp4</small>
+    </div>
+
+    <div class="video-grid">
+        <!-- 1.mp4 -->
+        <div class="video-card">
+            <div class="video-wrapper">
+                <video 
+                    src="1.mp4" 
+                    controls 
+                    muted 
+                    playsinline 
+                    preload="metadata"
+                    type="video/mp4"
+                >
+                    您的浏览器不支持 HTML5 视频。
+                </video>
+            </div>
+            <div class="video-meta">
+                <div class="file-badge">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
+                    </svg>
+                    1.mp4
+                </div>
+                <div class="hint">▶️ 原生</div>
+            </div>
+        </div>
+
+        <!-- 2.mp4 -->
+        <div class="video-card">
+            <div class="video-wrapper">
+                <video 
+                    src="2.mp4" 
+                    controls 
+                    muted 
+                    playsinline 
+                    preload="metadata"
+                    type="video/mp4"
+                >
+                    您的浏览器不支持 HTML5 视频。
+                </video>
+            </div>
+            <div class="video-meta">
+                <div class="file-badge">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
+                    </svg>
+                    2.mp4
+                </div>
+                <div class="hint">▶️ 原生</div>
+            </div>
+        </div>
+
+        <!-- 3.mp4 -->
+        <div class="video-card">
+            <div class="video-wrapper">
+                <video 
+                    src="3.mp4" 
+                    controls 
+                    muted 
+                    playsinline 
+                    preload="metadata"
+                    type="video/mp4"
+                >
+                    您的浏览器不支持 HTML5 视频。
+                </video>
+            </div>
+            <div class="video-meta">
+                <div class="file-badge">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
+                    </svg>
+                    3.mp4
+                </div>
+                <div class="hint">▶️ 原生</div>
+            </div>
+        </div>
+
+        <!-- 4.mp4 -->
+        <div class="video-card">
+            <div class="video-wrapper">
+                <video 
+                    src="4.mp4" 
+                    controls 
+                    muted 
+                    playsinline 
+                    preload="metadata"
+                    type="video/mp4"
+                >
+                    您的浏览器不支持 HTML5 视频。
+                </video>
+            </div>
+            <div class="video-meta">
+                <div class="file-badge">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+                        <polyline points="13 2 13 9 20 9" />
+                    </svg>
+                    4.mp4
+                </div>
+                <div class="hint">▶️ 原生</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footnote">
+        🚀 部署于 GitHub Pages · 视频文件位于仓库根目录 
+        <code>/1.mp4</code> · <code>/2.mp4</code> · <code>/3.mp4</code> · <code>/4.mp4</code>
+        <br style="display: none;" />
+        <span style="display: inline-block; margin-top: 0.3rem; opacity: 0.6;">⏯️ 每个视频独立控制 · 自动静音防止干扰</span>
+    </div>
+</body>
+</html>
