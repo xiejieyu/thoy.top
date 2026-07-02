@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>根目录视频 · 1.mp4 ~ 4.mp4</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>视频 · thoy.top/s/</title>
     <style>
         /* 极简 · 聚焦视频网格 */
         * {
@@ -32,7 +32,8 @@
             border-radius: 60px;
             border: 1px solid #2a313d;
             backdrop-filter: blur(4px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
         .page-title small {
             font-weight: 300;
@@ -75,12 +76,11 @@
             display: block;
             width: 100%;
             height: 100%;
-            object-fit: contain;    /* 完整可见，保持比例 */
+            object-fit: contain;
             background: #000;
             outline: none;
             cursor: pointer;
         }
-        /* 自定义元信息 —— 简洁轻量 */
         .video-meta {
             display: flex;
             align-items: center;
@@ -151,7 +151,6 @@
             border-bottom-color: #5f7a9e;
         }
 
-        /* 移动端：单列 */
         @media (max-width: 640px) {
             .video-grid {
                 grid-template-columns: 1fr;
@@ -180,7 +179,6 @@
                 padding: 0.1rem 0.7rem;
             }
         }
-        /* 中等屏幕 (平板) 保持双列，但略缩小间距 */
         @media (min-width: 641px) and (max-width: 900px) {
             .video-grid {
                 gap: 1.2rem;
@@ -190,7 +188,7 @@
 </head>
 <body>
     <div class="page-title">
-        📁 根目录视频 <small>1.mp4 · 2.mp4 · 3.mp4 · 4.mp4</small>
+        📁 视频目录 <small>thoy.top/s/</small>
     </div>
 
     <div class="video-grid">
@@ -198,7 +196,7 @@
         <div class="video-card">
             <div class="video-wrapper">
                 <video 
-                    src="1.mp4" 
+                    src="https://thoy.top/s/1.mp4" 
                     controls 
                     muted 
                     playsinline 
@@ -224,7 +222,7 @@
         <div class="video-card">
             <div class="video-wrapper">
                 <video 
-                    src="2.mp4" 
+                    src="https://thoy.top/s/2.mp4" 
                     controls 
                     muted 
                     playsinline 
@@ -250,7 +248,7 @@
         <div class="video-card">
             <div class="video-wrapper">
                 <video 
-                    src="3.mp4" 
+                    src="https://thoy.top/s/3.mp4" 
                     controls 
                     muted 
                     playsinline 
@@ -276,7 +274,7 @@
         <div class="video-card">
             <div class="video-wrapper">
                 <video 
-                    src="4.mp4" 
+                    src="https://thoy.top/s/4.mp4" 
                     controls 
                     muted 
                     playsinline 
@@ -300,7 +298,7 @@
     </div>
 
     <div class="footnote">
-        🚀 部署于 GitHub Pages · 视频文件位于仓库根目录 
+        🚀 视频来源：<a href="https://thoy.top/s/" target="_blank" rel="noopener">thoy.top/s/</a> 
         <code>/1.mp4</code> · <code>/2.mp4</code> · <code>/3.mp4</code> · <code>/4.mp4</code>
         <br style="display: none;" />
         <span style="display: inline-block; margin-top: 0.3rem; opacity: 0.6;">⏯️ 每个视频独立控制 · 自动静音防止干扰</span>
