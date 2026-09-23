@@ -41,7 +41,6 @@
       color: var(--text-dark);
     }
 
-    /* 顶部公司门头图片 */
     .banner {
       width: 100%;
       max-width: 420px;
@@ -62,7 +61,6 @@
       max-height: 200px;
     }
 
-    /* 主卡片 */
     .main-card {
       background: var(--white);
       width: 100%;
@@ -94,7 +92,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* 表格样式 */
     .cert-table {
       width: 100%;
       border-collapse: collapse;
@@ -136,7 +133,6 @@
       word-break: break-all;
     }
 
-    /* 证书图片预览区 */
     .preview-section {
       margin-bottom: 22px;
     }
@@ -233,7 +229,6 @@
       color: var(--text-mid);
     }
 
-    /* 下载区域 */
     .download-section {
       display: flex;
       flex-direction: column;
@@ -281,7 +276,7 @@
     }
 
     .format-options.show {
-      max-height: 100px;
+      max-height: 120px;
       opacity: 1;
       margin-top: 2px;
     }
@@ -347,7 +342,6 @@
       transition: opacity 0.3s;
     }
 
-    /* 图片放大查看遮罩 */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -414,7 +408,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* 底部备案信息 */
     .footer {
       width: 100%;
       max-width: 420px;
@@ -488,64 +481,25 @@
   </style>
 </head>
 <body>
-  <!-- 顶部公司门头图片 -->
   <div class="banner">
-    <img src="thoy.top/check/公司门头.png" alt="公司门头" onerror="this.style.display='none'; this.parentElement.style.display='none';">
+    <img src="https://thoy.top/check/公司门头.png" alt="公司门头" onerror="this.style.display='none'; this.parentElement.style.display='none';">
   </div>
 
-  <!-- 主卡片：证书信息 -->
   <div class="main-card">
     <div class="card-heading">
       <h1>版权证书</h1>
       <p>Copyright Certificate</p>
     </div>
 
-    <!-- 证书信息表格 -->
-    <table class="cert-table">
-      <tr>
-        <td class="label">证书编号</td>
-        <td class="value">渝作登字-2026-F-00044014</td>
-      </tr>
-      <tr>
-        <td class="label">著作权人</td>
-        <td class="value">吕健泽</td>
-      </tr>
-      <tr>
-        <td class="label">证书作品名</td>
-        <td class="value">炽烈</td>
-      </tr>
-      <tr>
-        <td class="label">作品类别</td>
-        <td class="value">美术</td>
-      </tr>
-      <tr>
-        <td class="label">作者</td>
-        <td class="value">吕健泽</td>
-      </tr>
-      <tr>
-        <td class="label">创作完成日期</td>
-        <td class="value">2026年7月21日</td>
-      </tr>
-      <tr>
-        <td class="label">发表日期</td>
-        <td class="value">2026年7月21日</td>
-      </tr>
-      <tr>
-        <td class="label">登记日期</td>
-        <td class="value">2026年9月21日</td>
-      </tr>
+    <table class="cert-table" id="certTable">
+      <!-- 由JS动态渲染 -->
     </table>
 
-    <!-- 证书图片预览 -->
     <div class="preview-section">
       <div class="preview-title">证书预览</div>
       <div class="preview-grid">
-        <!-- 证书主页 -->
-        <div class="preview-item" data-src="thoy.top/check/lvjianze/渝作26F44014.jpg" data-label="证书主页">
-          <img src="thoy.top/check/lvjianze/渝作26F44014.jpg" alt="证书主页" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="display:none;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-          </svg>
+        <div class="preview-item" id="previewMain">
+          <img src="" alt="证书主页" id="previewMainImg">
           <div class="zoom-hint">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
@@ -554,12 +508,8 @@
           <div class="preview-label">证书主页</div>
         </div>
 
-        <!-- 证书样本页 -->
-        <div class="preview-item" data-src="thoy.top/check/lvjianze/渝作26F44014样.jpg" data-label="证书样本页">
-          <img src="thoy.top/check/lvjianze/渝作26F44014样.jpg" alt="证书样本页" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-          <svg class="placeholder-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="display:none;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-          </svg>
+        <div class="preview-item" id="previewSample">
+          <img src="" alt="证书样本页" id="previewSampleImg">
           <div class="zoom-hint">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
@@ -570,7 +520,6 @@
       </div>
     </div>
 
-    <!-- 下载区域 -->
     <div class="download-section">
       <button class="btn-download" id="downloadBtn">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -601,7 +550,6 @@
     </div>
   </div>
 
-  <!-- 底部备案信息 -->
   <div class="footer">
     <div class="footer-row">
       <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
@@ -620,7 +568,6 @@
     </div>
   </div>
 
-  <!-- 图片放大查看遮罩 -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightboxClose">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -635,9 +582,10 @@
     (function() {
       // ============================================================
       // 证书数据配置区
-      // 如需增加证书，复制一份 CERTIFICATES 数组中的对象即可。
-      // 数组第一个对象为默认展示的证书。
+      // 增加证书时：复制一个对象追加到数组中即可
       // ============================================================
+      const BASE_URL = 'https://thoy.top/check/lvjianze/'; // 文件基础路径，统一管理
+
       const CERTIFICATES = [
         {
           certNumber: '渝作登字-2026-F-00044014',
@@ -648,17 +596,12 @@
           createDate: '2026年7月21日',
           publishDate: '2026年7月21日',
           registerDate: '2026年9月21日',
-          // 证书图片地址（主页与样本页）
-          mainImage: 'thoy.top/check/lvjianze/渝作26F44014.jpg',
-          sampleImage: 'thoy.top/check/lvjianze/渝作26F44014样.jpg',
-          // 下载地址
-          downloadJpg: [
-            'thoy.top/check/lvjianze/渝作26F44014.jpg',
-            'thoy.top/check/lvjianze/渝作26F44014样.jpg'
-          ],
-          downloadPdf: 'thoy.top/check/lvjianze/渝作26F44014.pdf'
+          // 文件名（不含路径），统一拼接 BASE_URL
+          mainImageFile: '渝作26F44014.jpg',
+          sampleImageFile: '渝作26F44014样.jpg',
+          pdfFile: '渝作26F44014.pdf'
         }
-        // 如需增加第二个证书，按以下格式复制并修改内容即可：
+        // 增加第二个证书时，复制以下模板并修改内容：
         // ,
         // {
         //   certNumber: '渝作登字-2026-F-00044015',
@@ -669,20 +612,26 @@
         //   createDate: '2026年1月1日',
         //   publishDate: '2026年1月2日',
         //   registerDate: '2026年2月1日',
-        //   mainImage: 'thoy.top/check/zhangsan/渝作26F44015.jpg',
-        //   sampleImage: 'thoy.top/check/zhangsan/渝作26F44015样.jpg',
-        //   downloadJpg: [
-        //     'thoy.top/check/zhangsan/渝作26F44015.jpg',
-        //     'thoy.top/check/zhangsan/渝作26F44015样.jpg'
-        //   ],
-        //   downloadPdf: 'thoy.top/check/zhangsan/渝作26F44015.pdf'
+        //   mainImageFile: '渝作26F44015.jpg',
+        //   sampleImageFile: '渝作26F44015样.jpg',
+        //   pdfFile: '渝作26F44015.pdf'
         // }
       ];
 
-      // 当前展示的证书（默认第一份）
       const cert = CERTIFICATES[0];
 
+      // 拼接完整URL
+      const mainImageUrl = BASE_URL + encodeURIComponent(cert.mainImageFile);
+      const sampleImageUrl = BASE_URL + encodeURIComponent(cert.sampleImageFile);
+      const pdfUrl = BASE_URL + encodeURIComponent(cert.pdfFile);
+
       // DOM 元素
+      const certTable = document.getElementById('certTable');
+      const previewMainImg = document.getElementById('previewMainImg');
+      const previewSampleImg = document.getElementById('previewSampleImg');
+      const previewMain = document.getElementById('previewMain');
+      const previewSample = document.getElementById('previewSample');
+
       const downloadBtn = document.getElementById('downloadBtn');
       const formatOptions = document.getElementById('formatOptions');
       const downloadJpgBtn = document.getElementById('downloadJpgBtn');
@@ -694,121 +643,40 @@
       const lightboxCaption = document.getElementById('lightboxCaption');
       const lightboxClose = document.getElementById('lightboxClose');
 
-      // 根据当前证书数据更新页面信息
-      function renderCertInfo() {
-        const table = document.querySelector('.cert-table');
-        table.innerHTML = `
-          <tr><td class="label">证书编号</td><td class="value">${cert.certNumber}</td></tr>
-          <tr><td class="label">著作权人</td><td class="value">${cert.owner}</td></tr>
-          <tr><td class="label">证书作品名</td><td class="value">${cert.workName}</td></tr>
-          <tr><td class="label">作品类别</td><td class="value">${cert.category}</td></tr>
-          <tr><td class="label">作者</td><td class="value">${cert.author}</td></tr>
-          <tr><td class="label">创作完成日期</td><td class="value">${cert.createDate}</td></tr>
-          <tr><td class="label">发表日期</td><td class="value">${cert.publishDate}</td></tr>
-          <tr><td class="label">登记日期</td><td class="value">${cert.registerDate}</td></tr>
-        `;
+      // 渲染表格
+      certTable.innerHTML = `
+        <tr><td class="label">证书编号</td><td class="value">${cert.certNumber}</td></tr>
+        <tr><td class="label">著作权人</td><td class="value">${cert.owner}</td></tr>
+        <tr><td class="label">证书作品名</td><td class="value">${cert.workName}</td></tr>
+        <tr><td class="label">作品类别</td><td class="value">${cert.category}</td></tr>
+        <tr><td class="label">作者</td><td class="value">${cert.author}</td></tr>
+        <tr><td class="label">创作完成日期</td><td class="value">${cert.createDate}</td></tr>
+        <tr><td class="label">发表日期</td><td class="value">${cert.publishDate}</td></tr>
+        <tr><td class="label">登记日期</td><td class="value">${cert.registerDate}</td></tr>
+      `;
 
-        // 更新预览图
-        const previewItems = document.querySelectorAll('.preview-item');
-        if (previewItems[0]) {
-          previewItems[0].dataset.src = cert.mainImage;
-          previewItems[0].dataset.label = '证书主页';
-          const img = previewItems[0].querySelector('img');
-          img.src = cert.mainImage;
-          img.alt = '证书主页';
-          img.style.display = '';
-          const placeholder = previewItems[0].querySelector('.placeholder-icon');
-          if (placeholder) placeholder.style.display = 'none';
-        }
-        if (previewItems[1]) {
-          previewItems[1].dataset.src = cert.sampleImage;
-          previewItems[1].dataset.label = '证书样本页';
-          const img = previewItems[1].querySelector('img');
-          img.src = cert.sampleImage;
-          img.alt = '证书样本页';
-          img.style.display = '';
-          const placeholder = previewItems[1].querySelector('.placeholder-icon');
-          if (placeholder) placeholder.style.display = 'none';
-        }
-      }
+      // 设置预览图
+      previewMainImg.src = mainImageUrl;
+      previewMainImg.alt = '证书主页';
+      previewSampleImg.src = sampleImageUrl;
+      previewSampleImg.alt = '证书样本页';
 
-      // 初始化渲染
-      renderCertInfo();
-
-      // 下载按钮：展开格式选项
-      downloadBtn.addEventListener('click', function() {
-        formatOptions.classList.toggle('show');
-        downloadStatus.textContent = '';
+      // 预览图点击放大
+      previewMain.addEventListener('click', function() {
+        lightboxImg.src = mainImageUrl;
+        lightboxCaption.textContent = '证书主页';
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
       });
 
-      // 触发浏览器下载
-      function triggerDownload(url, filename) {
-        return new Promise((resolve) => {
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = filename || '';
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          resolve();
-        });
-      }
-
-      // 下载JPG图片（主页 + 样本页）
-      downloadJpgBtn.addEventListener('click', async function() {
-        try {
-          downloadStatus.textContent = '正在下载图片...';
-          const files = cert.downloadJpg;
-          for (let i = 0; i < files.length; i++) {
-            const url = files[i];
-            const name = url.split('/').pop();
-            await triggerDownload(url, name);
-            // 多文件下载间隔，避免被浏览器拦截
-            if (i < files.length - 1) {
-              await new Promise(r => setTimeout(r, 600));
-            }
-          }
-          downloadStatus.textContent = '✅ JPG 图片下载完成';
-          formatOptions.classList.remove('show');
-          setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
-        } catch (err) {
-          downloadStatus.textContent = '❌ 下载失败，请重试';
-          setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
-        }
+      previewSample.addEventListener('click', function() {
+        lightboxImg.src = sampleImageUrl;
+        lightboxCaption.textContent = '证书样本页';
+        lightbox.classList.add('show');
+        document.body.style.overflow = 'hidden';
       });
 
-      // 下载PDF
-      downloadPdfBtn.addEventListener('click', async function() {
-        try {
-          downloadStatus.textContent = '正在下载PDF...';
-          const url = cert.downloadPdf;
-          const name = url.split('/').pop();
-          await triggerDownload(url, name);
-          downloadStatus.textContent = '✅ PDF 文件下载完成';
-          formatOptions.classList.remove('show');
-          setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
-        } catch (err) {
-          downloadStatus.textContent = '❌ 下载失败，请重试';
-          setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
-        }
-      });
-
-      // 图片放大预览
-      document.querySelectorAll('.preview-item').forEach(item => {
-        item.addEventListener('click', function() {
-          const src = this.dataset.src;
-          const label = this.dataset.label || '证书';
-          if (!src) return;
-          lightboxImg.src = src;
-          lightboxCaption.textContent = label;
-          lightbox.classList.add('show');
-          document.body.style.overflow = 'hidden';
-        });
-      });
-
-      // 关闭放大预览
+      // 关闭放大
       function closeLightbox() {
         lightbox.classList.remove('show');
         document.body.style.overflow = '';
@@ -820,10 +688,91 @@
         if (e.target === lightbox) closeLightbox();
       });
 
-      // 按ESC关闭
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && lightbox.classList.contains('show')) {
           closeLightbox();
+        }
+      });
+
+      // 下载按钮：展开/收起格式选项
+      downloadBtn.addEventListener('click', function() {
+        formatOptions.classList.toggle('show');
+        downloadStatus.textContent = '';
+      });
+
+      /**
+       * 通过 fetch + blob 强制下载文件（解决跨域 download 属性失效的问题）
+       * @param {string} url 文件URL
+       * @param {string} filename 保存的文件名
+       */
+      async function downloadFile(url, filename) {
+        const response = await fetch(url, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'no-cache'
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status} - 文件不存在或无法访问`);
+        }
+
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+
+        // 延迟释放
+        setTimeout(() => {
+          document.body.removeChild(a);
+          URL.revokeObjectURL(blobUrl);
+        }, 200);
+      }
+
+      // 下载 JPG（主页 + 样本页）
+      downloadJpgBtn.addEventListener('click', async function() {
+        try {
+          downloadStatus.style.color = '#f59e0b';
+          downloadStatus.textContent = '正在下载图片...';
+
+          await downloadFile(mainImageUrl, cert.mainImageFile);
+          // 稍微延迟，避免浏览器拦截多个下载
+          await new Promise(r => setTimeout(r, 800));
+          await downloadFile(sampleImageUrl, cert.sampleImageFile);
+
+          downloadStatus.style.color = '#10b981';
+          downloadStatus.textContent = '✅ JPG 图片下载完成';
+          formatOptions.classList.remove('show');
+          setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
+        } catch (err) {
+          console.error('下载失败:', err);
+          downloadStatus.style.color = '#ef4444';
+          downloadStatus.textContent = '❌ 下载失败：' + (err.message || '请检查网络或文件路径');
+          setTimeout(() => { downloadStatus.textContent = ''; }, 4000);
+        }
+      });
+
+      // 下载 PDF
+      downloadPdfBtn.addEventListener('click', async function() {
+        try {
+          downloadStatus.style.color = '#f59e0b';
+          downloadStatus.textContent = '正在下载PDF...';
+
+          await downloadFile(pdfUrl, cert.pdfFile);
+
+          downloadStatus.style.color = '#10b981';
+          downloadStatus.textContent = '✅ PDF 文件下载完成';
+          formatOptions.classList.remove('show');
+          setTimeout(() => { downloadStatus.textContent = ''; }, 3000);
+        } catch (err) {
+          console.error('下载失败:', err);
+          downloadStatus.style.color = '#ef4444';
+          downloadStatus.textContent = '❌ 下载失败：' + (err.message || '请检查网络或文件路径');
+          setTimeout(() => { downloadStatus.textContent = ''; }, 4000);
         }
       });
     })();
