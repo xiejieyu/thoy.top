@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>版权证书查询</title>
+  <title>海米尔文化版权证书查询</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -234,21 +234,21 @@
       display: none !important;
     }
 
-    /* 底部备案信息 */
+    /* ===== 底部备案信息 —— 优化版本 ===== */
     .footer {
       width: 100%;
       max-width: 420px;
-      margin-top: 24px;
+      margin-top: 28px;
       text-align: center;
-      padding: 0 8px;
+      padding: 0 8px 8px;
     }
 
     .footer-row {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
       flex-wrap: wrap;
+      gap: 6px 2px;
       margin-bottom: 6px;
     }
 
@@ -256,27 +256,39 @@
       margin-bottom: 0;
     }
 
-    .footer a {
+    .footer .beian-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       color: var(--text-light);
       text-decoration: none;
       font-size: 12px;
       font-weight: 600;
       transition: color 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      line-height: 1.5;
+      padding: 2px 0;
+      white-space: nowrap;
     }
 
-    .footer a:hover {
+    .footer .beian-link:hover {
       color: var(--primary-dark);
     }
 
-    .footer img.beian-icon {
+    .footer .beian-icon {
       width: 14px;
       height: 14px;
       object-fit: contain;
-      vertical-align: middle;
       flex-shrink: 0;
+      display: block;
+    }
+
+    .footer .sep {
+      color: var(--text-light);
+      opacity: 0.45;
+      font-size: 12px;
+      font-weight: 400;
+      margin: 0 2px;
+      user-select: none;
     }
 
     .footer .copyright {
@@ -284,13 +296,34 @@
       color: var(--text-light);
       font-weight: 500;
       line-height: 1.7;
+      letter-spacing: 0.2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      margin-top: 4px;
     }
 
-    .footer .sep {
-      margin: 0 6px;
-      opacity: 0.5;
-      color: var(--text-light);
-      font-size: 12px;
+    .footer .copyright span {
+      display: inline-block;
+    }
+
+    @media (max-width: 400px) {
+      .footer .beian-link {
+        font-size: 11px;
+        gap: 3px;
+      }
+      .footer .beian-icon {
+        width: 12px;
+        height: 12px;
+      }
+      .footer .sep {
+        font-size: 11px;
+        margin: 0 1px;
+      }
+      .footer .copyright {
+        font-size: 11px;
+      }
     }
 
     @media (max-width: 380px) {
@@ -371,21 +404,23 @@
     </div>
   </div>
 
-   <footer>
-    <div class="beian-links">
-      <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-        <img src="../ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
-      </a>    
-      <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
-        <img src="../备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
+  <!-- ===== 底部备案信息 —— 优化版本 ===== -->
+  <footer class="footer">
+    <div class="footer-row beian-links">
+      <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">
+        <img src="../ICP.png" alt="ICP备案图标" class="beian-icon"> 吉ICP备2026000319号-2
+      </a>
+      <span class="sep">|</span>
+      <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank" rel="noopener">
+        <img src="../备案图标.png" alt="公安备案图标" class="beian-icon"> 吉公网安备22032302000082号
       </a>
     </div>
-    <div class="copyright">
-      <p>&copy; © 2026 吉林海米尔文化传播有限公司 版权所有</p>
+    <div class="footer-row copyright">
+      <span>© 2026 吉林海米尔文化传播有限公司 版权所有</span>
     </div>
   </footer>
-</div>
-<div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem;">HMIC</div>
+
+  <div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem;">HMIC</div>
 
   <script>
     (function() {
