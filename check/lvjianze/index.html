@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>版权证书详情</title>
+  <link rel="icon" href="https://haimier.top/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="https://haimier.top/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://haimier.top/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -92,7 +95,6 @@
       letter-spacing: 0.5px;
     }
 
-    /* ===== 证书切换标签 ===== */
     .cert-tabs {
       display: flex;
       gap: 8px;
@@ -146,7 +148,6 @@
       background: rgba(0, 0, 0, 0.12);
     }
 
-    /* ===== 证书内容区 ===== */
     .cert-panel {
       display: none;
     }
@@ -528,6 +529,40 @@
       line-height: 1.7;
     }
 
+    /* 浏览器内提示条 */
+    .browser-tip {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      background: #fff7e6;
+      border: 1.5px solid #ffcc66;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: #92400e;
+      font-weight: 600;
+      line-height: 1.5;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .browser-tip.show {
+      display: flex;
+    }
+
+    .browser-tip svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: #f59e0b;
+    }
+
+    .browser-tip strong {
+      color: #b45309;
+    }
+
     @media (max-width: 380px) {
       .main-card {
         padding: 22px 16px;
@@ -558,6 +593,14 @@
     <img src="https://thoy.top/check/公司门头.png" alt="公司门头" onerror="this.style.display='none'; this.parentElement.style.display='none';">
   </div>
 
+  <!-- 微信/QQ 环境提示 -->
+  <div class="browser-tip" id="browserTip">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span id="browserTipText"></span>
+  </div>
+
   <div class="main-card">
     <div class="card-heading">
       <h1>版权证书</h1>
@@ -565,14 +608,10 @@
     </div>
 
     <!-- 证书切换标签 -->
-    <div class="cert-tabs" id="certTabs">
-      <!-- 由JS动态生成 -->
-    </div>
+    <div class="cert-tabs" id="certTabs"></div>
 
     <!-- 证书内容区 -->
-    <div id="certPanels">
-      <!-- 由JS动态生成 -->
-    </div>
+    <div id="certPanels"></div>
   </div>
 
   <!-- 底部备案信息 -->
@@ -608,13 +647,10 @@
     (function() {
       // ============================================================
       // 证书数据配置区
-      // 增加证书时：复制一个对象追加到数组中即可
-      // sampleImageFiles 为数组，可放任意多张样本页
       // ============================================================
       const BASE_URL = 'https://thoy.top/check/lvjianze/';
 
       const CERTIFICATES = [
-        // 证书1：吕健泽 - 炽烈（1张样本页）
         {
           certNumber: '渝作登字-2026-F-00044014',
           owner: '吕健泽',
@@ -628,27 +664,9 @@
           sampleImageFiles: ['渝作26F44014样.jpg'],
           pdfFile: '渝作26F44014.pdf'
         }
-        // 增加第二个证书时，复制以下模板并修改内容：
-        // ,
-        // {
-        //   certNumber: '渝作登字-2026-F-00044015',
-        //   owner: '张三',
-        //   workName: '示例作品',
-        //   category: '摄影',
-        //   author: '张三',
-        //   createDate: '2026年1月1日',
-        //   publishDate: '2026年1月2日',
-        //   registerDate: '2026年2月1日',
-        //   mainImageFile: '渝作26F44015.jpg',
-        //   sampleImageFiles: [
-        //     '渝作26F44015样.jpg',
-        //     '渝作26F44015样2.jpg'
-        //   ],
-        //   pdfFile: '渝作26F44015.pdf'
-        // }
+        // 增加证书时，按上方格式复制
       ];
 
-      // DOM 元素
       const certTabs = document.getElementById('certTabs');
       const certPanels = document.getElementById('certPanels');
 
@@ -656,6 +674,24 @@
       const lightboxImg = document.getElementById('lightboxImg');
       const lightboxCaption = document.getElementById('lightboxCaption');
       const lightboxClose = document.getElementById('lightboxClose');
+
+      // ============================================================
+      // 检测浏览器环境（微信 / QQ）
+      // ============================================================
+      const ua = navigator.userAgent.toLowerCase();
+      const isWeChat = ua.indexOf('micromessenger') !== -1;
+      const isQQ = ua.indexOf('qq/') !== -1 || ua.indexOf('qqbrowser') !== -1 || ua.indexOf('mqqbrowser') !== -1;
+
+      const browserTip = document.getElementById('browserTip');
+      const browserTipText = document.getElementById('browserTipText');
+
+      if (isWeChat) {
+        browserTipText.innerHTML = '当前在微信中打开，下载可能被拦截。<strong>请点击右上角「···」→「在浏览器打开」</strong>后再下载。';
+        browserTip.classList.add('show');
+      } else if (isQQ) {
+        browserTipText.innerHTML = '当前在QQ中打开，下载可能被拦截。<strong>请点击右上角「···」→「在浏览器打开」</strong>后再下载。';
+        browserTip.classList.add('show');
+      }
 
       // ============================================================
       // 渲染标签按钮
@@ -670,7 +706,6 @@
       // 渲染每个证书的面板
       // ============================================================
       certPanels.innerHTML = CERTIFICATES.map((c, index) => {
-        // 构建预览列表
         const previewList = [
           { file: c.mainImageFile, label: '证书主页' },
           ...c.sampleImageFiles.map((file, i) => ({
@@ -800,40 +835,23 @@
       });
 
       // ============================================================
-      // 下载文件（fetch + blob）
+      // 同域下载 —— 用 <a download> 直接弹下载提示
       // ============================================================
-      async function downloadFile(url, filename) {
-        const response = await fetch(url, {
-          method: 'GET',
-          mode: 'cors',
-          cache: 'no-cache'
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status} - 文件不存在或无法访问`);
-        }
-
-        const blob = await response.blob();
-        const blobUrl = URL.createObjectURL(blob);
-
+      function downloadFile(url, filename) {
         const a = document.createElement('a');
-        a.href = blobUrl;
+        a.href = url;
         a.download = filename;
         a.style.display = 'none';
         document.body.appendChild(a);
         a.click();
-
-        setTimeout(() => {
-          document.body.removeChild(a);
-          URL.revokeObjectURL(blobUrl);
-        }, 200);
+        document.body.removeChild(a);
       }
 
       // ============================================================
       // 下载按钮点击（JPG / PDF）
       // ============================================================
       certPanels.querySelectorAll('.option-btn').forEach(btn => {
-        btn.addEventListener('click', async function() {
+        btn.addEventListener('click', function() {
           const index = parseInt(this.dataset.index, 10);
           const type = this.dataset.type;
           const cert = CERTIFICATES[index];
@@ -841,45 +859,943 @@
           const status = panel.querySelector('.status-message');
           const options = panel.querySelector('.format-options');
 
-          try {
-            if (type === 'jpg') {
-              status.style.color = '#f59e0b';
-              status.textContent = '正在下载图片...';
+          if (type === 'jpg') {
+            status.style.color = '#f59e0b';
+            status.textContent = '正在下载图片...';
 
-              // 主页
-              const mainUrl = BASE_URL + encodeURIComponent(cert.mainImageFile);
-              await downloadFile(mainUrl, cert.mainImageFile);
+            // 主页
+            downloadFile(BASE_URL + encodeURIComponent(cert.mainImageFile), cert.mainImageFile);
 
-              // 所有样本页
-              for (let i = 0; i < cert.sampleImageFiles.length; i++) {
-                const file = cert.sampleImageFiles[i];
-                await new Promise(r => setTimeout(r, 800));
-                const url = BASE_URL + encodeURIComponent(file);
-                await downloadFile(url, file);
-              }
+            // 所有样本页（依次触发，间隔 1 秒）
+            cert.sampleImageFiles.forEach((file, i) => {
+              setTimeout(() => {
+                downloadFile(BASE_URL + encodeURIComponent(file), file);
+              }, 1000 * (i + 1));
+            });
 
+            // 全部触发完后显示完成
+            const totalDelay = 1000 * (cert.sampleImageFiles.length + 1);
+            setTimeout(() => {
               status.style.color = '#10b981';
-              status.textContent = '✅ JPG 图片下载完成';
+              status.textContent = '✅ 图片下载完成';
               options.classList.remove('show');
               setTimeout(() => { status.textContent = ''; }, 3000);
+            }, totalDelay);
 
-            } else if (type === 'pdf') {
-              status.style.color = '#f59e0b';
-              status.textContent = '正在下载PDF...';
+          } else if (type === 'pdf') {
+            status.style.color = '#f59e0b';
+            status.textContent = '正在下载PDF...';
 
-              const pdfUrl = BASE_URL + encodeURIComponent(cert.pdfFile);
-              await downloadFile(pdfUrl, cert.pdfFile);
+            downloadFile(BASE_URL + encodeURIComponent(cert.pdfFile), cert.pdfFile);
 
+            setTimeout(() => {
               status.style.color = '#10b981';
-              status.textContent = '✅ PDF 文件下载完成';
+              status.textContent = '✅ PDF 下载完成';
               options.classList.remove('show');
               setTimeout(() => { status.textContent = ''; }, 3000);
-            }
-          } catch (err) {
-            console.error('下载失败:', err);
-            status.style.color = '#ef4444';
-            status.textContent = '❌ 下载失败：' + (err.message || '请检查网络或文件路径');
-            setTimeout(() => { status.textContent = ''; }, 4000);
+            }, 500);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>版权证书详情</title>
+  <link rel="icon" href="https://haimier.top/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="https://haimier.top/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="https://haimier.top/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #fbc500;
+      --primary-dark: #e0b000;
+      --primary-darker: #c99e00;
+      --primary-light: #ffd633;
+      --primary-bg: #fffbe6;
+      --text-dark: #1e293b;
+      --text-mid: #475569;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --shadow: rgba(251, 197, 0, 0.35);
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px 16px 12px;
+      margin: 0;
+      color: var(--text-dark);
+    }
+
+    .banner {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.15);
+      background: var(--white);
+      line-height: 0;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      max-height: 200px;
+    }
+
+    .main-card {
+      background: var(--white);
+      width: 100%;
+      max-width: 420px;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.12);
+      padding: 28px 22px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+    }
+
+    .card-heading {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .card-heading h1 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .card-heading p {
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .cert-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cert-tab {
+      flex-shrink: 0;
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--text-mid);
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .cert-tab:active {
+      transform: scale(0.96);
+    }
+
+    .cert-tab.active {
+      background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+      border-color: var(--primary-dark);
+      color: var(--text-dark);
+      box-shadow: 0 6px 14px -6px var(--shadow);
+    }
+
+    .cert-tab .tab-index {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.08);
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 12px;
+      margin-right: 4px;
+    }
+
+    .cert-tab.active .tab-index {
+      background: rgba(0, 0, 0, 0.12);
+    }
+
+    .cert-panel {
+      display: none;
+    }
+
+    .cert-panel.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .cert-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 16px;
+      overflow: hidden;
+      font-size: 14px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .cert-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cert-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .cert-table td {
+      padding: 13px 16px;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .cert-table td.label {
+      background: #fffbef;
+      color: var(--text-mid);
+      font-weight: 700;
+      width: 38%;
+      white-space: nowrap;
+      font-size: 13px;
+      letter-spacing: 0.2px;
+    }
+
+    .cert-table td.value {
+      background: var(--white);
+      color: var(--text-dark);
+      font-weight: 600;
+      word-break: break-all;
+    }
+
+    .preview-section {
+      margin-bottom: 22px;
+    }
+
+    .preview-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-title::before {
+      content: '';
+      width: 4px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+
+    .preview-item {
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      aspect-ratio: 3 / 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preview-item:active {
+      transform: scale(0.97);
+      border-color: var(--primary);
+    }
+
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-item .placeholder-icon {
+      width: 40px;
+      height: 40px;
+      color: var(--text-light);
+      opacity: 0.5;
+    }
+
+    .preview-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 16px 8px 8px;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    .preview-item .zoom-hint {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .preview-item .zoom-hint svg {
+      width: 14px;
+      height: 14px;
+      color: var(--text-mid);
+    }
+
+    .download-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-download {
+      width: 100%;
+      background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+      border: none;
+      border-radius: 16px;
+      padding: 17px;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-dark);
+      font-family: 'Nunito', sans-serif;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 10px 20px -8px var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-download:active {
+      transform: scale(0.97);
+      box-shadow: 0 6px 14px -6px var(--shadow);
+    }
+
+    .btn-download svg {
+      width: 20px;
+      height: 20px;
+      color: var(--text-dark);
+    }
+
+    .format-options {
+      display: flex;
+      gap: 10px;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .format-options.show {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 2px;
+    }
+
+    .option-btn {
+      flex: 1;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 15px 10px;
+      font-size: 15px;
+      font-weight: 800;
+      font-family: 'Nunito', sans-serif;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--white);
+      color: var(--text-dark);
+    }
+
+    .option-btn:active {
+      transform: scale(0.97);
+    }
+
+    .option-btn.jpg {
+      background: #fffbef;
+      border-color: var(--primary);
+    }
+
+    .option-btn.pdf {
+      background: #f1f5f9;
+      border-color: var(--border);
+    }
+
+    .option-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .option-btn.jpg svg {
+      color: var(--primary-dark);
+    }
+
+    .option-btn.pdf svg {
+      color: var(--text-mid);
+    }
+
+    .option-btn small {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .status-message {
+      font-size: 13px;
+      color: #10b981;
+      font-weight: 700;
+      text-align: center;
+      min-height: 20px;
+      transition: opacity 0.3s;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .lightbox.show {
+      display: flex;
+      opacity: 1;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lightbox-close:active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(0.92);
+    }
+
+    .lightbox-close svg {
+      width: 22px;
+      height: 22px;
+      color: white;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .footer {
+      width: 100%;
+      max-width: 420px;
+      margin-top: 8px;
+      text-align: center;
+      padding: 0 8px 20px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .footer-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer a:hover {
+      color: var(--primary-dark);
+    }
+
+    .footer img.beian-icon {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .footer .copyright {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 500;
+      line-height: 1.7;
+    }
+
+    /* 浏览器内提示条 */
+    .browser-tip {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      background: #fff7e6;
+      border: 1.5px solid #ffcc66;
+      border-radius: 14px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: #92400e;
+      font-weight: 600;
+      line-height: 1.5;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .browser-tip.show {
+      display: flex;
+    }
+
+    .browser-tip svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: #f59e0b;
+    }
+
+    .browser-tip strong {
+      color: #b45309;
+    }
+
+    @media (max-width: 380px) {
+      .main-card {
+        padding: 22px 16px;
+        border-radius: 24px;
+      }
+      .card-heading h1 {
+        font-size: 20px;
+      }
+      .banner {
+        border-radius: 16px;
+      }
+      .cert-table td {
+        padding: 11px 12px;
+        font-size: 13px;
+      }
+      .cert-table td.label {
+        font-size: 12px;
+      }
+      .cert-tab {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <img src="https://thoy.top/check/公司门头.png" alt="公司门头" onerror="this.style.display='none'; this.parentElement.style.display='none';">
+  </div>
+
+  <!-- 微信/QQ 环境提示 -->
+  <div class="browser-tip" id="browserTip">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+    </svg>
+    <span id="browserTipText"></span>
+  </div>
+
+  <div class="main-card">
+    <div class="card-heading">
+      <h1>版权证书</h1>
+      <p>Copyright Certificate</p>
+    </div>
+
+    <!-- 证书切换标签 -->
+    <div class="cert-tabs" id="certTabs"></div>
+
+    <!-- 证书内容区 -->
+    <div id="certPanels"></div>
+  </div>
+
+  <!-- 底部备案信息 -->
+  <div class="footer">
+    <div class="footer-row">
+      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+        <img src="../ICP图标" alt="ICP备案图标" class="beian-icon" onerror="this.style.display='none';">
+        吉ICP备2026000319-2号
+      </a>
+    </div>
+    <div class="footer-row">
+      <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener noreferrer">
+        <img src="../备案图标" alt="公网安备图标" class="beian-icon" onerror="this.style.display='none';">
+        吉公网安备22032302000082号
+      </a>
+    </div>
+    <div class="footer-row copyright">
+      © 2026 吉林海米尔文化传播有限公司 版权所有
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <img src="" alt="证书大图" id="lightboxImg">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+
+  <script>
+    (function() {
+      // ============================================================
+      // 证书数据配置区
+      // ============================================================
+      const BASE_URL = 'https://thoy.top/check/lvjianze/';
+
+      const CERTIFICATES = [
+        {
+          certNumber: '渝作登字-2026-F-00044014',
+          owner: '吕健泽',
+          workName: '炽烈',
+          category: '美术',
+          author: '吕健泽',
+          createDate: '2026年7月21日',
+          publishDate: '2026年7月21日',
+          registerDate: '2026年9月21日',
+          mainImageFile: '渝作26F44014.jpg',
+          sampleImageFiles: ['渝作26F44014样.jpg'],
+          pdfFile: '渝作26F44014.pdf'
+        }
+        // 增加证书时，按上方格式复制
+      ];
+
+      const certTabs = document.getElementById('certTabs');
+      const certPanels = document.getElementById('certPanels');
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+
+      // ============================================================
+      // 检测浏览器环境（微信 / QQ）
+      // ============================================================
+      const ua = navigator.userAgent.toLowerCase();
+      const isWeChat = ua.indexOf('micromessenger') !== -1;
+      const isQQ = ua.indexOf('qq/') !== -1 || ua.indexOf('qqbrowser') !== -1 || ua.indexOf('mqqbrowser') !== -1;
+
+      const browserTip = document.getElementById('browserTip');
+      const browserTipText = document.getElementById('browserTipText');
+
+      if (isWeChat) {
+        browserTipText.innerHTML = '当前在微信中打开，下载可能被拦截。<strong>请点击右上角「···」→「在浏览器打开」</strong>后再下载。';
+        browserTip.classList.add('show');
+      } else if (isQQ) {
+        browserTipText.innerHTML = '当前在QQ中打开，下载可能被拦截。<strong>请点击右上角「···」→「在浏览器打开」</strong>后再下载。';
+        browserTip.classList.add('show');
+      }
+
+      // ============================================================
+      // 渲染标签按钮
+      // ============================================================
+      certTabs.innerHTML = CERTIFICATES.map((c, index) => `
+        <button class="cert-tab${index === 0 ? ' active' : ''}" data-index="${index}">
+          <span class="tab-index">${index + 1}</span>${c.workName}
+        </button>
+      `).join('');
+
+      // ============================================================
+      // 渲染每个证书的面板
+      // ============================================================
+      certPanels.innerHTML = CERTIFICATES.map((c, index) => {
+        const previewList = [
+          { file: c.mainImageFile, label: '证书主页' },
+          ...c.sampleImageFiles.map((file, i) => ({
+            file: file,
+            label: `样本页 ${i + 1}`
+          }))
+        ];
+
+        const previewHTML = previewList.map(item => {
+          const url = BASE_URL + encodeURIComponent(item.file);
+          return `
+            <div class="preview-item" data-url="${url}" data-label="${item.label}">
+              <img src="${url}" alt="${item.label}" onerror="this.style.display='none';">
+              <div class="zoom-hint">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                </svg>
+              </div>
+              <div class="preview-label">${item.label}</div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="cert-panel${index === 0 ? ' active' : ''}" data-index="${index}">
+            <table class="cert-table">
+              <tr><td class="label">证书编号</td><td class="value">${c.certNumber}</td></tr>
+              <tr><td class="label">著作权人</td><td class="value">${c.owner}</td></tr>
+              <tr><td class="label">证书作品名</td><td class="value">${c.workName}</td></tr>
+              <tr><td class="label">作品类别</td><td class="value">${c.category}</td></tr>
+              <tr><td class="label">作者</td><td class="value">${c.author}</td></tr>
+              <tr><td class="label">创作完成日期</td><td class="value">${c.createDate}</td></tr>
+              <tr><td class="label">发表日期</td><td class="value">${c.publishDate}</td></tr>
+              <tr><td class="label">登记日期</td><td class="value">${c.registerDate}</td></tr>
+            </table>
+
+            <div class="preview-section">
+              <div class="preview-title">证书预览</div>
+              <div class="preview-grid">${previewHTML}</div>
+            </div>
+
+            <div class="download-section">
+              <button class="btn-download" data-index="${index}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                下载证书
+              </button>
+
+              <div class="format-options">
+                <button class="option-btn jpg" data-type="jpg" data-index="${index}">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  图片
+                  <small>JPG 格式</small>
+                </button>
+                <button class="option-btn pdf" data-type="pdf" data-index="${index}">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 11v6m-3-3h6" />
+                  </svg>
+                  PDF
+                  <small>源文件</small>
+                </button>
+              </div>
+
+              <div class="status-message"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // ============================================================
+      // 标签切换
+      // ============================================================
+      certTabs.querySelectorAll('.cert-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          const index = this.dataset.index;
+          certTabs.querySelectorAll('.cert-tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          certPanels.querySelectorAll('.cert-panel').forEach(p => p.classList.remove('active'));
+          certPanels.querySelector(`.cert-panel[data-index="${index}"]`).classList.add('active');
+        });
+      });
+
+      // ============================================================
+      // 预览图点击放大
+      // ============================================================
+      certPanels.querySelectorAll('.preview-item').forEach(item => {
+        item.addEventListener('click', function() {
+          lightboxImg.src = this.dataset.url;
+          lightboxCaption.textContent = this.dataset.label;
+          lightbox.classList.add('show');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('show');
+        document.body.style.overflow = '';
+        setTimeout(() => { lightboxImg.src = ''; }, 300);
+      }
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('show')) {
+          closeLightbox();
+        }
+      });
+
+      // ============================================================
+      // 下载按钮：展开/收起格式选项
+      // ============================================================
+      certPanels.querySelectorAll('.btn-download').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const panel = this.closest('.cert-panel');
+          const options = panel.querySelector('.format-options');
+          const status = panel.querySelector('.status-message');
+          options.classList.toggle('show');
+          status.textContent = '';
+        });
+      });
+
+      // ============================================================
+      // 同域下载 —— 用 <a download> 直接弹下载提示
+      // ============================================================
+      function downloadFile(url, filename) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      // ============================================================
+      // 下载按钮点击（JPG / PDF）
+      // ============================================================
+      certPanels.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const index = parseInt(this.dataset.index, 10);
+          const type = this.dataset.type;
+          const cert = CERTIFICATES[index];
+          const panel = this.closest('.cert-panel');
+          const status = panel.querySelector('.status-message');
+          const options = panel.querySelector('.format-options');
+
+          if (type === 'jpg') {
+            status.style.color = '#f59e0b';
+            status.textContent = '正在下载图片...';
+
+            // 主页
+            downloadFile(BASE_URL + encodeURIComponent(cert.mainImageFile), cert.mainImageFile);
+
+            // 所有样本页（依次触发，间隔 1 秒）
+            cert.sampleImageFiles.forEach((file, i) => {
+              setTimeout(() => {
+                downloadFile(BASE_URL + encodeURIComponent(file), file);
+              }, 1000 * (i + 1));
+            });
+
+            // 全部触发完后显示完成
+            const totalDelay = 1000 * (cert.sampleImageFiles.length + 1);
+            setTimeout(() => {
+              status.style.color = '#10b981';
+              status.textContent = '✅ 图片下载完成';
+              options.classList.remove('show');
+              setTimeout(() => { status.textContent = ''; }, 3000);
+            }, totalDelay);
+
+          } else if (type === 'pdf') {
+            status.style.color = '#f59e0b';
+            status.textContent = '正在下载PDF...';
+
+            downloadFile(BASE_URL + encodeURIComponent(cert.pdfFile), cert.pdfFile);
+
+            setTimeout(() => {
+              status.style.color = '#10b981';
+              status.textContent = '✅ PDF 下载完成';
+              options.classList.remove('show');
+              setTimeout(() => { status.textContent = ''; }, 3000);
+            }, 500);
           }
         });
       });
