@@ -371,24 +371,21 @@
     </div>
   </div>
 
-  <!-- 底部备案信息 -->
-  <div class="footer">
-    <div class="footer-row">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
-        <img src="../ICP图标" alt="ICP备案图标" class="beian-icon" onerror="this.style.display='none';">
-        吉ICP备2026000319-2号
+   <footer>
+    <div class="beian-links">
+      <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+        <img src="../ICP.png" alt="ICP图标"> 吉ICP备2026000319号-2
+      </a>    
+      <a class="beian-link" href="https://beian.mps.gov.cn/#/query/webSearch?code=22032302000082" target="_blank">
+        <img src="../备案图标.png" alt="备案图标"> 吉公网安备22032302000082号
       </a>
     </div>
-    <div class="footer-row">
-      <a href="http://www.beian.gov.cn/" target="_blank" rel="noopener noreferrer">
-        <img src="../备案图标" alt="公网安备图标" class="beian-icon" onerror="this.style.display='none';">
-        吉公网安备22032302000082号
-      </a>
+    <div class="copyright">
+      <p>&copy; © 2026 吉林海米尔文化传播有限公司 版权所有</p>
     </div>
-    <div class="footer-row copyright">
-      © 2026 吉林海米尔文化传播有限公司 版权所有
-    </div>
-  </div>
+  </footer>
+</div>
+<div style="position: fixed; bottom: 12px; right: 20px; opacity: 0.2; pointer-events: none; font-size: 0.8rem;">HMIC</div>
 
   <script>
     (function() {
@@ -495,7 +492,7 @@
         );
 
         if (matched) {
-          alert('✅ 信息校验通过，找到证书：' + matched.certNumber + '（跳转功能待接入）');
+          alert('信息校验通过，找到证书：' + matched.certNumber + '（跳转功能待接入）');
         } else {
           noCertAlert.classList.remove('hidden');
         }
