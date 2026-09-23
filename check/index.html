@@ -42,7 +42,6 @@
       color: var(--text-dark);
     }
 
-    /* 顶部公司门头图片 */
     .banner {
       width: 100%;
       max-width: 420px;
@@ -63,7 +62,6 @@
       max-height: 200px;
     }
 
-    /* 主卡片 */
     .main-card {
       background: var(--white);
       width: 100%;
@@ -234,7 +232,7 @@
       display: none !important;
     }
 
-    /* ===== 底部备案信息 —— 优化版本 ===== */
+    /* ===== 底部备案信息 ===== */
     .footer {
       width: 100%;
       max-width: 420px;
@@ -304,39 +302,17 @@
       margin-top: 4px;
     }
 
-    .footer .copyright span {
-      display: inline-block;
-    }
-
     @media (max-width: 400px) {
-      .footer .beian-link {
-        font-size: 11px;
-        gap: 3px;
-      }
-      .footer .beian-icon {
-        width: 12px;
-        height: 12px;
-      }
-      .footer .sep {
-        font-size: 11px;
-        margin: 0 1px;
-      }
-      .footer .copyright {
-        font-size: 11px;
-      }
+      .footer .beian-link { font-size: 11px; gap: 3px; }
+      .footer .beian-icon { width: 12px; height: 12px; }
+      .footer .sep { font-size: 11px; margin: 0 1px; }
+      .footer .copyright { font-size: 11px; }
     }
 
     @media (max-width: 380px) {
-      .main-card {
-        padding: 24px 18px;
-        border-radius: 24px;
-      }
-      .card-heading h1 {
-        font-size: 20px;
-      }
-      .banner {
-        border-radius: 16px;
-      }
+      .main-card { padding: 24px 18px; border-radius: 24px; }
+      .card-heading h1 { font-size: 20px; }
+      .banner { border-radius: 16px; }
     }
   </style>
 </head>
@@ -404,7 +380,7 @@
     </div>
   </div>
 
-  <!-- ===== 底部备案信息 —— 优化版本 ===== -->
+  <!-- 底部备案信息 -->
   <footer class="footer">
     <div class="footer-row beian-links">
       <a class="beian-link" href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noopener">
@@ -424,7 +400,11 @@
 
   <script>
     (function() {
-      // 默认数据库
+      // ============================================================
+      // 证书数据库
+      // 增加证书时：复制一个对象追加到数组中即可
+      // jumpUrl 为查询成功后跳转的页面地址
+      // ============================================================
       const CERT_DATABASE = [
         {
           idCard: '220323201004162414',
@@ -433,8 +413,31 @@
           certNumber: '渝作登字-2026-F-00044014',
           workName: '炽烈',
           owner: '吕健泽',
-          date: '2026-03-15',
+          date: '2026-09-21',
+          jumpUrl: 'https://thoy.top/check/lvjianze'  // 查询成功后跳转的页面
         }
+        {
+          idCard: '445121200812315914',
+          phone: '15113060704',
+          name: '林锡山',
+          certNumber: '渝作登字-2026-F-00841168、渝作登字-2026-F-00043454',
+          workName: '星狩、兽兽浩',
+          owner: '林锡山',
+          date: '2026-04-16、2026-09-20',
+          jumpUrl: 'https://thoy.top/check/linxishan'  // 查询成功后跳转的页面
+        }
+        // 增加第二个证书时，复制以下模板并修改内容：
+        // ,
+        // {
+        //   idCard: '身份证号',
+        //   phone: '手机号',
+        //   name: '姓名',
+        //   certNumber: '证书编号',
+        //   workName: '作品名',
+        //   owner: '著作权人',
+        //   date: '登记日期',
+        //   jumpUrl: 'https://thoy.top/check/其他用户路径'
+        // }
       ];
 
       const queryBtn = document.getElementById('queryBtn');
@@ -527,7 +530,13 @@
         );
 
         if (matched) {
-          alert('信息校验通过，找到证书：' + matched.certNumber + '（跳转功能待接入）');
+          // 查询成功，跳转到对应的证书页面
+          if (matched.jumpUrl) {
+            window.location.href = matched.jumpUrl;
+          } else {
+            // 如果没有配置跳转地址，给出提示
+            alert('信息校验通过，找到证书：' + matched.certNumber + '，但未配置跳转页面。');
+          }
         } else {
           noCertAlert.classList.remove('hidden');
         }
