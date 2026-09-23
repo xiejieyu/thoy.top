@@ -402,7 +402,7 @@
     (function() {
       // ============================================================
       // 证书数据库
-      // 增加证书时：复制一个对象追加到数组中即可
+      // 增加用户时：复制一个对象追加到数组中即可
       // jumpUrl 为查询成功后跳转的页面地址
       // ============================================================
       const CERT_DATABASE = [
@@ -414,8 +414,8 @@
           workName: '炽烈',
           owner: '吕健泽',
           date: '2026-09-21',
-          jumpUrl: 'https://thoy.top/check/lvjianze'  // 查询成功后跳转的页面
-        }
+          jumpUrl: 'https://thoy.top/check/lvjianze'
+        },
         {
           idCard: '445121200812315914',
           phone: '15113060704',
@@ -424,9 +424,9 @@
           workName: '星狩、兽兽浩',
           owner: '林锡山',
           date: '2026-04-16、2026-09-20',
-          jumpUrl: 'https://thoy.top/check/linxishan'  // 查询成功后跳转的页面
+          jumpUrl: 'https://thoy.top/check/linxishan'
         }
-        // 增加第二个证书时，复制以下模板并修改内容：
+        // 增加更多用户时，复制以下模板并修改内容：
         // ,
         // {
         //   idCard: '身份证号',
@@ -530,11 +530,9 @@
         );
 
         if (matched) {
-          // 查询成功，跳转到对应的证书页面
           if (matched.jumpUrl) {
             window.location.href = matched.jumpUrl;
           } else {
-            // 如果没有配置跳转地址，给出提示
             alert('信息校验通过，找到证书：' + matched.certNumber + '，但未配置跳转页面。');
           }
         } else {
