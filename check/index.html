@@ -94,6 +94,14 @@
       font-weight: 500;
     }
 
+    .card-heading .tip {
+      font-size: 12px;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
     /* ===== 查询类型切换标签 ===== */
     .query-tabs {
       display: flex;
@@ -391,7 +399,7 @@
     <div class="card-heading">
       <h1>版权证书查询</h1>
       <p>输入信息查验您的版权证书</p>
-      <p>如忘记自己留存手机号请前往小程序‘众杰合创’联系客服查询证书</p>
+      <p class="tip">如忘记自己留存的手机号，请前往小程序「众杰合创」联系客服查询证书</p>
     </div>
 
     <!-- 查询类型切换标签 -->
@@ -537,50 +545,50 @@
     (function() {
       // ============================================================
       // 数据库
-      // 个人：idCard / phone / name
-      // 企业：companyName / creditCode / phone
+      // 个人：idCard / phones（数组）/ name
+      // 企业：companyName / creditCodes（数组）/ phones（数组）
       // jumpUrl 为查询成功后跳转的页面
       // ============================================================
       const PERSON_DATABASE = [
         {
           idCard: '220323201004162414',
-          phone: '15543445525,18644198048',
+          phones: ['15543445525', '18644198048'],
           name: '吕健泽',
           jumpUrl: 'https://thoy.top/check/lvjianze'
         },
         {
           idCard: '341203201112064106',
-          phone: '17856582446,18644198048',
+          phones: ['17856582446', '18644198048'],
           name: '孙晨伊诺',
           jumpUrl: 'https://thoy.top/check/sunchenyinuo'
         },
         {
           idCard: '445121200812315914',
-          phone: '15113060704,18644198048',
+          phones: ['15113060704', '18644198048'],
           name: '林锡山',
           jumpUrl: 'https://thoy.top/check/linxishan'
         },
-         {
+        {
           idCard: '650104201011103359',
-          phone: '18699071968,18644198048',
+          phones: ['18699071968', '18644198048'],
           name: '崔熠城',
           jumpUrl: 'https://thoy.top/check/cuiyicheng'
-        },
+        }
       ];
 
       const COMPANY_DATABASE = [
         {
           companyName: '吉林海米尔文化传播有限公司',
-          creditCode: '91220323MAERY9NF6M,18644198048',
-          phone: '16617152404,18644198048',
+          creditCodes: ['91220323MAERY9NF6M'],
+          phones: ['16617152404', '18644198048'],
           jumpUrl: 'https://thoy.top/check/haimier'
         }
         // 增加企业时，按上方格式复制：
         // ,
         // {
         //   companyName: '企业全称',
-        //   creditCode: '18位统一社会信用代码',
-        //   phone: '11位手机号',
+        //   creditCodes: ['18位统一社会信用代码'],
+        //   phones: ['11位手机号1', '11位手机号2'],
         //   jumpUrl: 'https://thoy.top/check/企业路径'
         // }
       ];
@@ -642,7 +650,6 @@
       const phoneError = document.getElementById('phoneError');
       const fullNameError = document.getElementById('fullNameError');
 
-      // 输入时清除错误
       idCardInput.addEventListener('input', () => {
         clearFieldError(idCardWrapper, idCardError);
         personNoCertAlert.classList.add('hidden');
@@ -689,7 +696,7 @@
 
         const matched = PERSON_DATABASE.find(item =>
           item.idCard === idCard &&
-          item.phone === phone &&
+          item.phones.includes(phone) &&
           item.name === fullName
         );
 
@@ -718,7 +725,6 @@
       const creditCodeError = document.getElementById('creditCodeError');
       const companyPhoneError = document.getElementById('companyPhoneError');
 
-      // 输入时清除错误
       companyNameInput.addEventListener('input', () => {
         clearFieldError(companyNameWrapper, companyNameError);
         companyNoCertAlert.classList.add('hidden');
@@ -765,8 +771,8 @@
 
         const matched = COMPANY_DATABASE.find(item =>
           item.companyName === companyName &&
-          item.creditCode === creditCode &&
-          item.phone === phone
+          item.creditCodes.includes(creditCode) &&
+          item.phones.includes(phone)
         );
 
         if (matched && matched.jumpUrl) {
